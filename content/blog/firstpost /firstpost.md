@@ -36,9 +36,7 @@ Anyway, water may be the most miraculous substance we have here on earth. pure s
 <script async defer src="//assets.pinterest.com/js/pinit.js"></script>
 
 <!-- SoundCloud embed -->
-<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
-  src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/jane-bach-307884092/the-miracle&color=%23ff5500">
-</iframe>
+<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2134704477&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/jane-bach-307884092" title="Jane Bach" target="_blank" style="color: #cccccc; text-decoration: none;">Jane Bach</a> · <a href="https://soundcloud.com/jane-bach-307884092/the-miracle" title="the miracle" target="_blank" style="color: #cccccc; text-decoration: none;">the miracle</a></div>
 
 ## fibre arts
 baby’s first sweater! It smells like a sheep. I love the feeling of pure wool on my fingers. I love how the yarn dances like ribbons in the wind when I knit outside. I love opening my Merlin bird ID app and letting the birds serenade me as I knit.
