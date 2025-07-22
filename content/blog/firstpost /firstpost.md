@@ -4,6 +4,8 @@ tags: posts, knitting, swimming
 description: welcome to nightdogs
 date: 2025-07-22
 ---
+hi it’s Jane!! Orion helped me set up this blog today. can’t wait to share my every waking thought with the internet
+
 ## swimming
 I’ve had a couple fantastic swims with friends lately. I had the honour of showing Amelia around Blomidon for the first time. It was one of those days where the sky and sea fade into each other and you cannot tell where one ends and another begins. The water was almost completely still except for the wake from a little boat on the water. The Borden Brook waterfall was only a trickle, even though it had rained recently. The lack of water revealed all the moss, like a green rug hung from the treetops. Amelia is always the brightest colour in my field of vision - rival to even the songbirds, lilies, and bluest skies. Reminding me that ‘natural colours’ are not dull at all.
 
