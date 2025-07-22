@@ -1,0 +1,52 @@
+---js
+const eleventyNavigation = {
+	key: "Cat",
+	order: 4
+};
+---
+
+<main class="container">
+  <div id="cat-container" style="text-align: center">
+    <img
+      id="cat-img"
+      src=""
+      alt="Random cat"
+      style="
+        max-width: 400px;
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        display: none;
+      "
+    />
+    <div id="cat-loading">Loading...</div>
+    <div id="cat-error" style="color: red; display: none">
+      Could not load cat 😿
+    </div>
+    <br />
+    <button id="new-cat" class="contrast">Show Another Cat</button>
+  </div>
+  <script>
+    async function loadCat() {
+      document.getElementById("cat-img").style.display = "none";
+      document.getElementById("cat-loading").style.display = "block";
+      document.getElementById("cat-error").style.display = "none";
+      try {
+        const res = await fetch("https://api.thecatapi.com/v1/images/search");
+        if (!res.ok) throw new Error("Network error");
+        const data = await res.json();
+        const img = document.getElementById("cat-img");
+        img.src = data[0].url;
+        img.onload = () => {
+          img.style.display = "block";
+          document.getElementById("cat-loading").style.display = "none";
+        };
+      } catch (e) {
+        document.getElementById("cat-loading").style.display = "none";
+        document.getElementById("cat-error").style.display = "block";
+      }
+    }
+    document.getElementById("new-cat").onclick = loadCat;
+    loadCat();
+  </script>
+</main>
