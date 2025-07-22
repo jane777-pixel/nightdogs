@@ -37,7 +37,8 @@ Anyway, water may be the most miraculous substance we have here on earth. pure s
 
 <!-- SoundCloud embed -->
 <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
-  src="https://soundcloud.com/jane-bach-307884092/the-miracle"></iframe>
+  src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/jane-bach-307884092/the-miracle&color=%23ff5500">
+</iframe>
 
 ## fibre arts
 baby’s first sweater! It smells like a sheep. I love the feeling of pure wool on my fingers. I love how the yarn dances like ribbons in the wind when I knit outside. I love opening my Merlin bird ID app and letting the birds serenade me as I knit.
