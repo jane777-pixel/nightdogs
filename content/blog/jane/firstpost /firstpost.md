@@ -37,11 +37,7 @@ Anyway, water may be the most miraculous substance we have here on earth. pure s
   </div>
 </div>
 
-<!-- SoundCloud embed -->
-
-<audio controls src="./soundcloud-2134704477.mp3">Your browser does not support the audio element.</audio>
-
-<p style="margin-top: 0.5em; font-style: italic; text-align: center; font-size: 0.9em;">the miracle</p>
+![themiracle](soundcloud-2134704477.mp3)
 
 ## fibre arts
 
