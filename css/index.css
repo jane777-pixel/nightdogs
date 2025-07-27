@@ -12,7 +12,6 @@
 }
 
 /* Theme colors */
-:root,
 body {
 	--color-gray-20: #ffd6e0; /* soft pink (background) */
 	--color-gray-50: #ffb3c6; /* lighter pink */
@@ -28,7 +27,6 @@ body {
 }
 
 @media (prefers-color-scheme: dark) {
-	:root,
 	body {
 		--color-gray-20: #ffb3c6; /* lighter pink */
 		--color-gray-50: #ffd6e0; /* soft pink */
@@ -301,4 +299,52 @@ header {
 }
 .post-metadata time {
 	margin-right: 1em;
+}
+
+/* Author-specific color overrides */
+body[data-author="abby"] {
+	--background-color: #e6ffe6;
+	--text-color: #145214;
+	--text-color-link: #2ecc40;
+	--text-color-link-active: #27ae60;
+	--text-color-link-visited: #145214;
+	--color-gray-20: #e6ffe6;
+	--color-gray-50: #b2f7b2;
+	--color-gray-90: #145214;
+}
+
+body[data-author="orionlw"] {
+	--background-color: #e6d3b3;
+	--text-color: #6e4b1f;
+	--text-color-link: #a67c52;
+	--text-color-link-active: #8d6742;
+	--text-color-link-visited: #6e4b1f;
+	--color-gray-20: #e6d3b3;
+	--color-gray-50: #a67c52;
+	--color-gray-90: #6e4b1f;
+}
+
+/* Dark mode overrides for author colors */
+@media (prefers-color-scheme: dark) {
+	body[data-author="abby"] {
+		--background-color: #145214;
+		--text-color: #e6ffe6;
+		--text-color-link: #b2f7b2;
+		--text-color-link-active: #2ecc40;
+		--text-color-link-visited: #b2f7b2;
+		--color-gray-20: #b2f7b2;
+		--color-gray-50: #e6ffe6;
+		--color-gray-90: #2ecc40;
+	}
+
+	body[data-author="orionlw"] {
+		--background-color: #6e4b1f;
+		--text-color: #e6d3b3;
+		--text-color-link: #a67c52;
+		--text-color-link-active: #8d6742;
+		--text-color-link-visited: #a67c52;
+		--color-gray-20: #a67c52;
+		--color-gray-50: #e6d3b3;
+		--color-gray-90: #8d6742;
+	}
 }

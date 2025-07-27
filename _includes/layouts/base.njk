@@ -38,23 +38,9 @@
 
 		{#- Add the heading-anchors web component to the JavaScript bundle #}
 		<script type="module">{% include "node_modules/@zachleat/heading-anchors/heading-anchors.js" %}</script>
-		{% set authorData = authors[author] %} {% if authorData %}
-<style>
-	body {
-	  --color-gray-20: {{ authorData.colors.gray20 }};
-	  --color-gray-50: {{ authorData.colors.gray50 }};
-	  --color-gray-90: {{ authorData.colors.gray90 }};
-	  --background-color: {{ authorData.colors.background }};
-	  --text-color: {{ authorData.colors.text }};
-	  --text-color-link: {{ authorData.colors.link }};
-	  --text-color-link-active: {{ authorData.colors.linkActive }};
-	  --text-color-link-visited: {{ authorData.colors.linkVisited }};
-	}
-</style>
-{% endif %}
 	</head>
-	<body>
-		<a href="#main" id="skip-link" class="visually-hidden">Skip to main content</a>
+    <body{% if author %} data-author="{{ author }}"{% endif %}>
+        <a href="#main" id="skip-link" class="visually-hidden">Skip to main content</a>
 
 		<header>
 			<a href="/" class="home-link">{{ metadata.title }}</a>
