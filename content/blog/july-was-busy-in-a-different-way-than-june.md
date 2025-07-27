@@ -1,7 +1,7 @@
 ---
 title: july was busy in a different way than june
 date: 2025-07-27T17:55:00.000Z
-author: Adesse
+author: adesse
 tags:
   - posts
 ---
