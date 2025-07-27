@@ -42,7 +42,7 @@
 		<script type="module">{% include "node_modules/@zachleat/heading-anchors/heading-anchors.js" %}</script>
         <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     </head>
-    <body{% if author %} data-author="{{ author }}"{% endif %}>
+    <body{% if author or page.data.author %} data-author="{{ author or page.data.author }}"{% endif %}>
         <a href="#main" id="skip-link" class="visually-hidden">Skip to main content</a>
 
 		<header>

@@ -11,17 +11,17 @@
 		Courier, monospace;
 }
 
-/* Theme colors */
+/* Theme colors - Improved for accessibility */
 body {
 	--color-gray-20: #ffd6e0; /* soft pink (background) */
 	--color-gray-50: #ffb3c6; /* lighter pink */
-	--color-gray-90: #b8002e; /* deep red (text) */
+	--color-gray-90: #8b0020; /* darker red (improved contrast) */
 
 	--background-color: #ffd6e0; /* pink paper */
-	--text-color: #b8002e; /* red pen */
-	--text-color-link: #d72660; /* vivid red for links */
-	--text-color-link-active: #ff477e; /* hot pink for active links */
-	--text-color-link-visited: #a80038; /* darker red for visited */
+	--text-color: #8b0020; /* darker red pen (improved contrast) */
+	--text-color-link: #b8002e; /* vivid red for links */
+	--text-color-link-active: #d72660; /* hot pink for active links */
+	--text-color-link-visited: #6d0015; /* much darker red for visited */
 
 	--syntax-tab-size: 2;
 }
@@ -30,13 +30,13 @@ body {
 	body {
 		--color-gray-20: #ffb3c6; /* lighter pink */
 		--color-gray-50: #ffd6e0; /* soft pink */
-		--color-gray-90: #ff477e; /* hot pink (text) */
+		--color-gray-90: #fff0f3; /* almost white (improved contrast) */
 
-		--background-color: #a80038; /* deep red background */
-		--text-color: #ffd6e0; /* pink text */
+		--background-color: #8b0020; /* darker red background */
+		--text-color: #fff0f3; /* almost white text (improved contrast) */
 		--text-color-link: #ffb3c6; /* light pink links */
 		--text-color-link-active: #ff477e; /* hot pink for active links */
-		--text-color-link-visited: #ffb3c6; /* light pink for visited */
+		--text-color-link-visited: #ffd6e0; /* light pink for visited */
 	}
 }
 
@@ -311,50 +311,125 @@ header {
 	margin-right: 1em;
 }
 
-/* Author-specific color overrides */
+/* Author-specific color overrides - Force override Pico CSS */
 body[data-author="abby"] {
-	--background-color: #e6ffe6;
-	--text-color: #145214;
-	--text-color-link: #2ecc40;
-	--text-color-link-active: #27ae60;
-	--text-color-link-visited: #145214;
-	--color-gray-20: #e6ffe6;
-	--color-gray-50: #b2f7b2;
-	--color-gray-90: #145214;
+	--background-color: #e6ffe6 !important;
+	--text-color: #0d3a0d !important; /* darker green (improved contrast) */
+	--text-color-link: #1e7e1e !important; /* darker green for links */
+	--text-color-link-active: #27ae60 !important;
+	--text-color-link-visited: #0a2a0a !important; /* very dark green */
+	--color-gray-20: #e6ffe6 !important;
+	--color-gray-50: #b2f7b2 !important;
+	--color-gray-90: #0d3a0d !important; /* darker green */
 }
 
 body[data-author="orionlw"] {
-	--background-color: #e6d3b3;
-	--text-color: #6e4b1f;
-	--text-color-link: #a67c52;
-	--text-color-link-active: #8d6742;
-	--text-color-link-visited: #6e4b1f;
-	--color-gray-20: #e6d3b3;
-	--color-gray-50: #a67c52;
-	--color-gray-90: #6e4b1f;
+	--background-color: #e6d3b3 !important;
+	--text-color: #4a3018 !important; /* darker brown (improved contrast) */
+	--text-color-link: #6e4b1f !important;
+	--text-color-link-active: #8d6742 !important;
+	--text-color-link-visited: #3d2614 !important; /* darker brown */
+	--color-gray-20: #e6d3b3 !important;
+	--color-gray-50: #a67c52 !important;
+	--color-gray-90: #4a3018 !important; /* darker brown */
 }
 
-/* Dark mode overrides for author colors */
+body[data-author="adesse"] {
+	--background-color: #624f4c !important; /* wenge (brown) */
+	--text-color: #ffffff !important; /* pure white (maximum contrast) */
+	--text-color-link: #deb8c4 !important; /* lighter mountbatten pink */
+	--text-color-link-active: #b8a6a3 !important; /* rose quartz */
+	--text-color-link-visited: #f0e6e7 !important; /* very light rose */
+	--color-gray-20: #f0e6e7 !important; /* very light rose */
+	--color-gray-50: #deb8c4 !important; /* lighter mountbatten pink */
+	--color-gray-90: #ffffff !important; /* pure white */
+}
+
+/* Dark mode overrides for author colors - Force override Pico CSS */
 @media (prefers-color-scheme: dark) {
 	body[data-author="abby"] {
-		--background-color: #145214;
-		--text-color: #e6ffe6;
-		--text-color-link: #b2f7b2;
-		--text-color-link-active: #2ecc40;
-		--text-color-link-visited: #b2f7b2;
-		--color-gray-20: #b2f7b2;
-		--color-gray-50: #e6ffe6;
-		--color-gray-90: #2ecc40;
+		--background-color: #0d3a0d !important; /* darker green */
+		--text-color: #ffffff !important; /* pure white */
+		--text-color-link: #90ee90 !important; /* light green */
+		--text-color-link-active: #98fb98 !important; /* pale green */
+		--text-color-link-visited: #b2f7b2 !important;
+		--color-gray-20: #90ee90 !important;
+		--color-gray-50: #ffffff !important;
+		--color-gray-90: #98fb98 !important;
 	}
 
 	body[data-author="orionlw"] {
-		--background-color: #6e4b1f;
-		--text-color: #e6d3b3;
-		--text-color-link: #a67c52;
-		--text-color-link-active: #8d6742;
-		--text-color-link-visited: #a67c52;
-		--color-gray-20: #a67c52;
-		--color-gray-50: #e6d3b3;
-		--color-gray-90: #8d6742;
+		--background-color: #4a3018 !important; /* darker brown */
+		--text-color: #ffffff !important; /* pure white */
+		--text-color-link: #deb887 !important; /* burlywood */
+		--text-color-link-active: #f5deb3 !important; /* wheat */
+		--text-color-link-visited: #e6d3b3 !important;
+		--color-gray-20: #deb887 !important;
+		--color-gray-50: #ffffff !important;
+		--color-gray-90: #f5deb3 !important;
+	}
+
+	body[data-author="adesse"] {
+		--background-color: #2a201e !important; /* very dark brown */
+		--text-color: #ffffff !important; /* pure white */
+		--text-color-link: #deb8c4 !important; /* lighter mountbatten pink */
+		--text-color-link-active: #e6c7d0 !important; /* even lighter pink */
+		--text-color-link-visited: #f0e6e7 !important; /* very light rose */
+		--color-gray-20: #deb8c4 !important;
+		--color-gray-50: #ffffff !important;
+		--color-gray-90: #e6c7d0 !important;
+	}
+}
+
+/* Force override ALL Pico CSS styling for author themes */
+body[data-author="adesse"],
+body[data-author="adesse"] *:not(code):not(pre) {
+	background-color: #624f4c !important; /* wenge (brown) */
+	color: #ffffff !important; /* pure white */
+}
+
+body[data-author="adesse"] a,
+body[data-author="adesse"] a:link {
+	color: #deb8c4 !important; /* lighter mountbatten pink */
+}
+
+body[data-author="adesse"] a:visited {
+	color: #f0e6e7 !important; /* very light rose */
+}
+
+body[data-author="adesse"] a:hover,
+body[data-author="adesse"] a:active {
+	color: #b8a6a3 !important; /* rose quartz */
+}
+
+/* Similar for other authors */
+body[data-author="abby"],
+body[data-author="abby"] *:not(code):not(pre) {
+	background-color: #e6ffe6 !important;
+	color: #0d3a0d !important;
+}
+
+body[data-author="abby"] a,
+body[data-author="abby"] a:link {
+	color: #1e7e1e !important;
+}
+
+body[data-author="orionlw"],
+body[data-author="orionlw"] *:not(code):not(pre) {
+	background-color: #e6d3b3 !important;
+	color: #4a3018 !important;
+}
+
+body[data-author="orionlw"] a,
+body[data-author="orionlw"] a:link {
+	color: #6e4b1f !important;
+}
+
+/* Dark mode overrides */
+@media (prefers-color-scheme: dark) {
+	body[data-author="adesse"],
+	body[data-author="adesse"] *:not(code):not(pre) {
+		background-color: #2a201e !important;
+		color: #ffffff !important;
 	}
 }
