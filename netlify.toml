@@ -4,8 +4,3 @@
 
 [build.environment]
   NODE_VERSION = "20.19.4"
-
-[[plugins]]
-  package = "@netlify/plugin-cache"
-  [plugins.inputs]
-  paths = [ ".cache" ]
