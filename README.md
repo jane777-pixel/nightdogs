@@ -52,6 +52,10 @@ npx @11ty/eleventy
   - Client-side author filtering on the Archive page.
   - Styled with [Pico.css](https://picocss.com/), with custom theme overrides.
 
+## TODO
+
+- [ ] Make Nic an author
+
 ### Implementation Notes
 
 - `content/about/index.md` is an example of a content page.
