@@ -1,5 +1,8 @@
 backend:
-  name: git-gateway
+  name: auth0
+  client_id: HWhJanyHy8qhzR8OT57RnXtpURu88Qis
+  domain: dev-glr4j1mtdf0vf2ek.us.auth0.com
+  repo: jane777-pixel/nightdogs
   branch: main
 media_folder: "public/img"
 public_folder: "/img"
