@@ -165,15 +165,26 @@ header {
 	display: flex;
 	justify-content: space-between;
 	gap: 0.5em 1em;
-	list-style: "";
+	list-style: none !important; /* Force remove list style */
 	border-top: 1px dashed var(--color-gray-20);
 	padding: 1em 0;
 }
 .links-nextprev > * {
 	flex-grow: 1;
+	list-style: none !important; /* Remove dots from list items */
 }
 .links-nextprev-next {
 	text-align: right;
+}
+
+/* Also target the li elements specifically to override Pico */
+.links-nextprev li {
+	list-style: none !important;
+	list-style-type: none !important;
+}
+
+.links-nextprev li::before {
+	display: none !important; /* Remove any pseudo-element bullets */
 }
 
 table {
