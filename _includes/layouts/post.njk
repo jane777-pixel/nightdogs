@@ -19,33 +19,30 @@ base.njk #} {#
 </script>
 #}
 
-<h1>{{ title }}</h1>
+<article class="h-entry">
+	<h1 class="p-name">{{ title }}</h1>
 
-<ul class="post-metadata">
-	<li>
-		<time datetime="{{ page.date | htmlDateString }}">{{
-			page.date | readableDate
-		}}</time>
-	</li>
-	{% if authorData and authorData.name %}
-	<li class="post-author">
-		<strong>By {{ authorData.name }}</strong>
-	</li>
-	{% else %}
-	<li class="post-author">
-		<strong>By {{ author }}</strong>
-	</li>
-	{% endif %} {%- for tag in tags | filterTagList %} {%- set tagUrl %}/tags/{{
-		tag | slugify
-	}}/{% endset %}
-	<li>
-		<a href="{{ tagUrl }}" class="post-tag">{{ tag }}</a
-		>{%- if not loop.last %}, {% endif %}
-	</li>
-	{%- endfor %}
-</ul>
+	<ul class="post-metadata">
+		<li>
+			<time datetime="{{ date | dateToRfc3339 }}" class="dt-published">
+				{{ date | dateToFormat("dd LLL yyyy") }}
+			</time>
+		</li>
 
-{{ content | safe }}
+		<li class="post-author">
+			<strong
+				>By <span class="p-author h-card">{{ author }}</span></strong
+			>
+		</li>
+	</ul>
+
+	<div class="e-content">
+		{{ content | safe }}
+	</div>
+
+	<!-- Permalink for webmentions -->
+	<a href="{{ page.url }}" class="u-url" hidden>Permalink</a>
+</article>
 
 {%- if collections.posts %} {%- set previousPost = collections.posts |
 getPreviousCollectionItem %} {%- set nextPost = collections.posts |
