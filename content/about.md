@@ -14,58 +14,62 @@ Nightdogs is something
 <div class="h-card" data-author="jane">
     <h3 class="p-name">Jane Marie Bach</h3>
     
-    <p class="p-note">
-        Site owner and main author. Personal blog about cats, knitting, and other things.
-    </p>
+    <p class="p-note">{{ jane_note | safe }}</p>
     
     <ul>
-        <li><a href="mailto:haileebach@gmail.com" class="u-email">Email me</a></li>
-        <li><a href="https://github.com/jane777-pixel" rel="me" class="u-url">GitHub</a></li>
-        <li><a href="https://www.pinterest.com/janemariebach/" target="_blank" rel="noopener" class="u-url">Pinterest</a></li>
-        <li><a href="https://www.ravelry.com/people/jay777" target="_blank" rel="noopener" class="u-url">Ravelry</a></li>
-        <li><a href="https://listenbrainz.org/user/jay777marie" target="_blank" rel="noopener" class="u-url">ListenBrainz</a></li>
-        <li><a href="https://nightdogs.xyz" class="u-url">Website</a></li>
+        {% for link in jane_links %}
+        <li><a href="{{ link.url }}" {% if link.rel %}rel="{{ link.rel }}"{% endif %} {% if link.class %}class="{{ link.class }}"{% endif %} {% if link.target %}target="{{ link.target }}"{% endif %}>{{ link.label }}</a></li>
+        {% endfor %}
     </ul>
 </div>
 
 <div class="h-card" data-author="abby">
     <h3 class="p-name">Abby Rhynold</h3>
     
-    <p class="p-note">
-        
-    </p>
+    <p class="p-note">{{ abby_note | safe }}</p>
+
+    <ul>
+        {% for link in abby_links %}
+        <li><a href="{{ link.url }}" {% if link.rel %}rel="{{ link.rel }}"{% endif %} {% if link.class %}class="{{ link.class }}"{% endif %} {% if link.target %}target="{{ link.target }}"{% endif %}>{{ link.label }}</a></li>
+        {% endfor %}
+    </ul>
+
 </div>
 
 <div class="h-card" data-author="adesse">
     <h3 class="p-name">Adèsse Brown</h3>
     
-    <p class="p-note">
-        
-    </p>
+    <p class="p-note">{{ adesse_note | safe }}</p>
+
+    <ul>
+        {% for link in adesse_links %}
+        <li><a href="{{ link.url }}" {% if link.rel %}rel="{{ link.rel }}"{% endif %} {% if link.class %}class="{{ link.class }}"{% endif %} {% if link.target %}target="{{ link.target }}"{% endif %}>{{ link.label }}</a></li>
+        {% endfor %}
+    </ul>
+
 </div>
 
 <div class="h-card" data-author="orionlw">
     <h3 class="p-name">Orion Leidl Wilson</h3>
     
-    <p class="p-note">
-        Electric Bassist & Composer from Grand Pré, Nova Scotia. 
-    </p>
+    <p class="p-note">{{ orion_note | safe }}</p>
     
     <ul>
-        <li><a href="mailto:orionlw@pm.me" class="u-email">Email</a></li>
-        <li><a href="https://github.com/orionlw" rel="me" class="u-url">GitHub</a></li>
-        <li><a href="https://orionlw.me" rel="me" class="u-url">Personal Blog</a></li>
-        <li><a href="https://letterboxd.com/orionlw" rel="me" class="u-url">Letterboxd</a></li>
-        <li><a href="https://listenbrainz.org/user/orionlw" rel="me" class="u-url">ListenBrainz</a></li>
-        <li><a href="https://mastodon.social/@orionlw" rel="me" class="u-url">Mastodon</a></li>
-        <li><a href="https://pixelfed.social/orionlw" rel="me" class="u-url">Pixelfed</a></li>
+        {% for link in orion_links %}
+        <li><a href="{{ link.url }}" {% if link.rel %}rel="{{ link.rel }}"{% endif %} {% if link.class %}class="{{ link.class }}"{% endif %} {% if link.target %}target="{{ link.target }}"{% endif %}>{{ link.label }}</a></li>
+        {% endfor %}
     </ul>
 </div>
 
 <div class="h-card" data-author="amelia">
     <h3 class="p-name">Amelia Wheeler</h3>
     
-    <p class="p-note">
-       
-    </p>
+    <p class="p-note">{{ amelia_note | safe }}</p>
+
+    <ul>
+        {% for link in amelia_links %}
+        <li><a href="{{ link.url }}" {% if link.rel %}rel="{{ link.rel }}"{% endif %} {% if link.class %}class="{{ link.class }}"{% endif %} {% if link.target %}target="{{ link.target }}"{% endif %}>{{ link.label }}</a></li>
+        {% endfor %}
+    </ul>
+
 </div>
