@@ -1,22 +1,40 @@
 {
 	"jane": {
 		"name": "Jane Marie Bach",
-		"bio": "Site owner and main author."
+		"bio": "Site owner and main author.",
+		"note": "☭ ♻︎ ⛵︎.",
+		"links": [
+			{ "url": "https://listenbrainz.org/user/jay777marie/", "label": "listenbrainz" },
+			{ "url": "mailto:haileebach@gmail.com", "label": "email" },
+			{ "url": "https://ca.pinterest.com/janemariebach/", "label": "pinterest" },
+			{ "url": "https://www.ravelry.com/people/jay777", "label": "ravelry" }
+	
+		]
 	},
 	"abby": {
 		"name": "Abby Rhynold",
-		"bio": "Guest author with a green theme."
+		"bio": "author with a green theme.",
+		"note": "🪱🐑🎂.",
+		"links": [
+			
+		]
 	},
 	"adesse": {
 		"name": "Adèsse Brown",
-		"bio": "Author color scheme to be defined."
+		"bio": "Author color scheme to be defined.",
+		"note": "🐝🕯️🎹.",
+		"links": []
 	},
 	"orionlw": {
 		"name": "Orion Leidl Wilson",
-		"bio": "Guy."
+		"bio": "Guy.",
+		"note": "🎧📀🐈‍⬛.",
+		"links": []
 	},
 	"amelia": {
 		"name": "Amelia Wheeler",
-		"bio": "Colour scheme to be defined."
+		"bio": "Colour scheme to be defined.",
+		"note": "🎨🎤🧚‍♀️.",
+		"links": []
 	}
 }
