@@ -18,28 +18,30 @@ Anyway, water may be the most miraculous substance we have here on earth. pure s
 
 <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
   <div>
-    <a data-pin-do="embedPin" href="https://ca.pinterest.com/pin/602778731414961379/"></a>
+    <img src="./pinterest-602778731414961379.jpg" alt="Pinterest pin 602778731414961379" loading="lazy">
   </div>
   <div>
-    <a data-pin-do="embedPin" href="https://ca.pinterest.com/pin/602778731414961374/"></a>
+    <img src="./pinterest-602778731414961374.jpg" alt="Pinterest pin 602778731414961374" loading="lazy">
   </div>
   <div>
-    <a data-pin-do="embedPin" href="https://ca.pinterest.com/pin/602778731414961369/"></a>
+    <img src="./pinterest-602778731414961369.jpg" alt="Pinterest pin 602778731414961369" loading="lazy">
   </div>
   <div>
-    <a data-pin-do="embedPin" href="https://ca.pinterest.com/pin/602778731414961365/"></a>
+    <img src="./pinterest-602778731414961365.jpg" alt="Pinterest pin 602778731414961365" loading="lazy">
   </div>
   <div>
-    <a data-pin-do="embedPin" href="https://ca.pinterest.com/pin/602778731414961354/"></a>
+    <img src="./pinterest-602778731414961354.jpg" alt="Pinterest pin 602778731414961354" loading="lazy">
   </div>
   <div>
-    <a data-pin-do="embedPin" href="https://ca.pinterest.com/pin/602778731414961603/"></a>
+    <img src="./pinterest-602778731414961603.jpg" alt="Pinterest pin 602778731414961603" loading="lazy">
   </div>
 </div>
-<script async defer src="//assets.pinterest.com/js/pinit.js"></script>
 
 <!-- SoundCloud embed -->
-<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2134704477&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/jane-bach-307884092" title="Jane Bach" target="_blank" style="color: #cccccc; text-decoration: none;">Jane Bach</a> · <a href="https://soundcloud.com/jane-bach-307884092/the-miracle" title="the miracle" target="_blank" style="color: #cccccc; text-decoration: none;">the miracle</a></div>
+
+<audio controls src="./soundcloud-2134704477.mp3">Your browser does not support the audio element.</audio>
+
+<p style="margin-top: 0.5em; font-style: italic; text-align: center; font-size: 0.9em;">the miracle</p>
 
 ## fibre arts
 
@@ -52,19 +54,18 @@ PS Come see the _historic_ rug hooking exhibit at the Concrete Museum, it’ll m
 
 <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
   <div>
-    <a data-pin-do="embedPin" href="https://ca.pinterest.com/pin/602778731414961806/"></a>
+    <img src="./pinterest-602778731414961806.jpg" alt="Pinterest pin 602778731414961806" loading="lazy">
   </div>
   <div>
-    <a data-pin-do="embedPin" href="https://ca.pinterest.com/pin/602778731414961814/"></a>
+    <img src="./pinterest-602778731414961814.jpg" alt="Pinterest pin 602778731414961814" loading="lazy">
   </div>
   <div>
-    <a data-pin-do="embedPin" href="https://ca.pinterest.com/pin/602778731414961855/"></a>
+    <img src="./pinterest-602778731414961855.jpg" alt="Pinterest pin 602778731414961855" loading="lazy">
   </div>
   <div>
-    <a data-pin-do="embedPin" href="https://ca.pinterest.com/pin/602778731414961875/"></a>
+    <img src="./pinterest-602778731414961875.jpg" alt="Pinterest pin 602778731414961875" loading="lazy">
   </div>
 </div>
-<script async defer src="//assets.pinterest.com/js/pinit.js"></script>
 
 ## Gardening
 
@@ -72,7 +73,7 @@ The first lily in my garden bloomed this morning! I wasn’t sure if it would, s
 I’ve been growing a lot of edible flowers (marigolds, nasturtium, pansies, fuchsia) at home and I’m excited to put them on Nic’s birthday cake - nothing says made with love like growing flowers from seed.
 Luckily, pests haven’t been too bad this year but here’s a pic of Nic with some bugs.
 
-<a data-pin-do="embedPin" href="https://ca.pinterest.com/pin/602778731414962011/"></a>
+<img src="./pinterest-602778731414962011.jpg" alt="Pinterest pin 602778731414962011" loading="lazy">
 
 Gardens at the Concrete House are really shaping up. If anyone needs oregano, lemon balm, mint, or chives, I’ve got lots to share!
 

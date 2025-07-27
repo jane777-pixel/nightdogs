@@ -706,3 +706,38 @@ body[data-author] {
 	background-color: #ffd6e0 !important;
 	color: #8b0020 !important;
 }
+
+/* --- PINTEREST EMBED OVERRIDES --- */
+
+/*
+  Maximum specificity: override author theme for Pinterest embeds and all descendants.
+*/
+body[data-author] [data-pin-do="embedPin"],
+body[data-author] [data-pin-do="embedPin"] *,
+body[data-author] [data-pin-do="embedPin"] * *,
+body[data-author] [data-pin-do="embedPin"] * * *,
+body[data-author] [class*="pinterest-embed"],
+body[data-author] [class*="pinterest-embed"] *,
+body[data-author] [class*="pinterest-embed"] * *,
+body[data-author] [class*="pinterest-embed"] * * *,
+body[data-author] .pinit,
+body[data-author] .pinit *,
+body[data-author] .PinEmbed,
+body[data-author] .PinEmbed *,
+body[data-author] iframe[src*="pinterest.com"],
+body[data-author] iframe[src*="pinterest.com"] * {
+	background: transparent !important;
+	background-color: transparent !important;
+	color: initial !important;
+	border: none !important;
+}
+
+/* --- Custom Audio Player Styling --- */
+audio {
+	width: 100%;
+	margin-top: 1.5em;
+	margin-bottom: 1.5em;
+	border-radius: 5px;
+	border: 1px solid var(--text-color-link);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
