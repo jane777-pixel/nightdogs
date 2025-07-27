@@ -399,62 +399,45 @@ body[data-author="adesse"] {
 }
 
 /* Force override ALL Pico CSS styling for author themes */
+body[data-author="jane"],
+body[data-author="jane"] *:not(code):not(pre):not(.h-card):not(.h-card *) {
+	background-color: #ffd6e0 !important; /* pink paper */
+	color: #8b0020 !important; /* darker red pen */
+}
+
 body[data-author="adesse"],
-body[data-author="adesse"] *:not(code):not(pre) {
+body[data-author="adesse"] *:not(code):not(pre):not(.h-card):not(.h-card *) {
 	background-color: #624f4c !important; /* wenge (brown) */
 	color: #ffffff !important; /* pure white */
 }
 
-body[data-author="adesse"] a,
-body[data-author="adesse"] a:link {
-	color: #deb8c4 !important; /* lighter mountbatten pink */
-}
-
-body[data-author="adesse"] a:visited {
-	color: #f0e6e7 !important; /* very light rose */
-}
-
-body[data-author="adesse"] a:hover,
-body[data-author="adesse"] a:active {
-	color: #b8a6a3 !important; /* rose quartz */
-}
-
-/* Similar for other authors */
 body[data-author="abby"],
-body[data-author="abby"] *:not(code):not(pre) {
+body[data-author="abby"] *:not(code):not(pre):not(.h-card):not(.h-card *) {
 	background-color: #e6ffe6 !important;
 	color: #0d3a0d !important;
 }
 
-body[data-author="abby"] a,
-body[data-author="abby"] a:link {
-	color: #1e7e1e !important;
-}
-
 body[data-author="orionlw"],
-body[data-author="orionlw"] *:not(code):not(pre) {
+body[data-author="orionlw"] *:not(code):not(pre):not(.h-card):not(.h-card *) {
 	background-color: #e6d3b3 !important;
 	color: #4a3018 !important;
 	font-family: "IBM Plex Sans", "Segoe UI", "Roboto", "Helvetica Neue", Arial,
 		"Liberation Sans", sans-serif !important;
 }
 
-body[data-author="orionlw"] a,
-body[data-author="orionlw"] a:link {
-	color: #6e4b1f !important;
-}
-
-/* Add IBM Plex Mono for code in orionlw posts */
-body[data-author="orionlw"] code,
-body[data-author="orionlw"] pre {
-	font-family: "IBM Plex Mono", Consolas, Menlo, Monaco, "Andale Mono WT",
-		"Andale Mono", "Lucida Console", "Lucida Sans Typewriter",
-		"DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono",
-		"Nimbus Mono L", "Courier New", Courier, monospace !important;
-}
-
 /* Dark mode overrides */
 @media (prefers-color-scheme: dark) {
+	body[data-author="jane"],
+	body[data-author="jane"] *:not(code):not(pre) {
+		background-color: #8b0020 !important; /* darker red background */
+		color: #fff0f3 !important; /* almost white text */
+	}
+
+	body[data-author="jane"] a,
+	body[data-author="jane"] a:link {
+		color: #ffb3c6 !important; /* light pink links */
+	}
+
 	body[data-author="adesse"],
 	body[data-author="adesse"] *:not(code):not(pre) {
 		background-color: #2a201e !important;
@@ -478,111 +461,116 @@ body[data-author="orionlw"] pre {
 	}
 }
 
-/* Author cards styling */
+/* Default h-card styling for about page */
 .h-card {
+	display: block;
 	margin: 2em 0;
 	padding: 1.5em;
 	border-radius: 8px;
-	border: 2px solid var(--color-gray-50);
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+	transition: box-shadow 0.2s ease;
 }
 
+.h-card:hover {
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Remove h-card styling from inline author names in posts */
+.post-author .h-card,
+.post-metadata .h-card {
+	border: none !important;
+	background: none !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	border-radius: 0 !important;
+	box-shadow: none !important;
+	display: inline !important;
+}
+
+/* Author-specific styling for h-cards */
 .h-card[data-author="jane"] {
-	background-color: var(--background-color);
-	border-color: var(--color-gray-50);
+	background-color: #ffd6e0 !important;
+	color: #8b0020 !important;
+	border-color: rgba(139, 0, 32, 0.15) !important;
+	box-shadow: 0 1px 3px rgba(139, 0, 32, 0.05) !important;
+}
+
+.h-card[data-author="jane"] *,
+.h-card[data-author="jane"] *:not(code):not(pre) {
+	background-color: #ffd6e0 !important;
+	color: #8b0020 !important;
 }
 
 .h-card[data-author="abby"] {
 	background-color: #e6ffe6 !important;
 	color: #0d3a0d !important;
-	border-color: #b2f7b2;
+	border-color: rgba(13, 58, 13, 0.15) !important;
+	box-shadow: 0 1px 3px rgba(13, 58, 13, 0.05) !important;
+}
+
+.h-card[data-author="abby"] *,
+.h-card[data-author="abby"] *:not(code):not(pre) {
+	background-color: #e6ffe6 !important;
+	color: #0d3a0d !important;
 }
 
 .h-card[data-author="orionlw"] {
 	background-color: #e6d3b3 !important;
 	color: #4a3018 !important;
-	border-color: #a67c52;
+	border-color: rgba(74, 48, 24, 0.15) !important;
+	box-shadow: 0 1px 3px rgba(74, 48, 24, 0.05) !important;
+	font-family: "IBM Plex Sans", sans-serif !important;
+}
+
+.h-card[data-author="orionlw"] *,
+.h-card[data-author="orionlw"] *:not(code):not(pre) {
+	background-color: #e6d3b3 !important;
+	color: #4a3018 !important;
 	font-family: "IBM Plex Sans", sans-serif !important;
 }
 
 .h-card[data-author="adesse"] {
 	background-color: #624f4c !important;
 	color: #ffffff !important;
-	border-color: #deb8c4;
+	border-color: rgba(222, 184, 196, 0.2) !important;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
 }
 
-.h-card[data-author="amelia"] {
-	background-color: var(--background-color);
-	border-color: var(--color-gray-50);
-}
-
-.h-card .p-name {
-	margin-top: 0;
-	font-weight: bold;
-}
-
-.h-card .u-email,
-.h-card .u-url {
-	color: inherit !important;
-	text-decoration: underline;
-}
-
-.h-card ul {
-	list-style: none;
-	padding: 0;
-}
-
-.h-card li {
-	display: inline-block;
-	margin-right: 1em;
-}
-
-/* Force override Pico CSS for author cards */
-.h-card[data-author="orionlw"] * {
-	font-family: "IBM Plex Sans", sans-serif !important;
-	color: #4a3018 !important;
-}
-
-.h-card[data-author="orionlw"] a {
-	color: #6e4b1f !important;
-}
-
-.h-card[data-author="abby"] * {
-	color: #0d3a0d !important;
-}
-
-.h-card[data-author="abby"] a {
-	color: #1e7e1e !important;
-}
-
-.h-card[data-author="adesse"] * {
+.h-card[data-author="adesse"] *,
+.h-card[data-author="adesse"] *:not(code):not(pre) {
+	background-color: #624f4c !important;
 	color: #ffffff !important;
 }
 
-.h-card[data-author="adesse"] a {
-	color: #deb8c4 !important;
+.h-card[data-author="amelia"] {
+	background-color: #ffd6e0 !important;
+	color: #8b0020 !important;
+	border-color: rgba(139, 0, 32, 0.15) !important;
+	box-shadow: 0 1px 3px rgba(139, 0, 32, 0.05) !important;
 }
 
-/* Remove Pico CSS border around page */
-html,
-body {
-	border: none !important;
-	outline: none !important;
+.h-card[data-author="amelia"] *,
+.h-card[data-author="amelia"] *:not(code):not(pre) {
+	background-color: #ffd6e0 !important;
+	color: #8b0020 !important;
 }
 
-main {
-	border: none !important;
-	outline: none !important;
-}
+@media (prefers-color-scheme: dark) {
+	body[data-author="jane"] *:not(code):not(pre):not(.h-card):not(.h-card *) {
+		background-color: #8b0020 !important;
+		color: #fff0f3 !important;
+	}
 
-/* Also target any container elements Pico might be adding borders to */
-.container,
-[class*="container"] {
-	border: none !important;
-}
+	body[data-author="adesse"] *:not(code):not(pre):not(.h-card):not(.h-card *) {
+		background-color: #2a201e !important;
+		color: #ffffff !important;
+	}
 
-/* Remove any box-shadow that might look like a border */
-html,
-body,
-main {
-	box-shadow: none !important;
+	body[data-author="orionlw"] *:not(code):not(pre):not(.h-card):not(.h-card *) {
+		background-color: #4a3018 !important;
+		color: #ffffff !important;
+		font-family: "IBM Plex Sans", "Segoe UI", "Roboto", "Helvetica Neue", Arial,
+			"Liberation Sans", sans-serif !important;
+	}
 }
