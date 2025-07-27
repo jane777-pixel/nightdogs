@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/9b93ae7e-e489-4786-b348-7f45b2325627/deploy-status)](https://app.netlify.com/projects/nightdogs/deploys)
+
 # nightdogs.xyz
 
 The source code for the blog at nightdogs.xyz. Built with [Eleventy](https://www.11ty.dev/).
@@ -49,6 +51,10 @@ npx @11ty/eleventy
   - Per-author color themes, configurable in `_data/authors.json` and `css/index.css`.
   - Client-side author filtering on the Archive page.
   - Styled with [Pico.css](https://picocss.com/), with custom theme overrides.
+
+## TODO
+
+- [ ] Make Nic an author
 
 ### Implementation Notes
 

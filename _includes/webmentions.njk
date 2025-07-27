@@ -1,0 +1,150 @@
+<style>
+	.webmentions {
+		margin-top: 3em;
+		padding-top: 1em;
+		border-top: 1px dashed var(--color-gray-20);
+	}
+	.webmention-list {
+		padding-left: 0;
+		list-style: none;
+	}
+	.webmention {
+		margin-bottom: 1.5em;
+	}
+	.webmention-author {
+		display: flex;
+		align-items: center;
+		gap: 0.5em;
+		margin-bottom: 0.5em;
+	}
+	.webmention-author img {
+		width: 48px;
+		height: 48px;
+		border-radius: 50%;
+		border: 2px solid var(--text-color-link);
+	}
+	.webmention-author a {
+		text-decoration: none;
+		font-weight: bold;
+	}
+	.webmention-content {
+		padding-left: calc(48px + 0.5em);
+	}
+	.webmention-content blockquote {
+		margin-left: 0;
+		padding-left: 1em;
+		border-left: 3px solid var(--color-gray-50);
+	}
+	.facepile {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5em;
+		align-items: center;
+		margin-bottom: 1em;
+	}
+	.facepile img {
+		width: 48px;
+		height: 48px;
+		border-radius: 50%;
+		border: 2px solid var(--text-color-link);
+	}
+</style>
+
+{%- set mentionsForUrl = webmentions.mentions | mentionsForUrl(url) %} {%- set
+likes = mentionsForUrl | mentionType('like-of') %} {%- set reposts =
+mentionsForUrl | mentionType('repost-of') %} {%- set replies = mentionsForUrl |
+mentionType('in-reply-to') %} {%- set mentions = mentionsForUrl |
+mentionType('mention-of') %} {% if mentionsForUrl.length %}
+<div class="webmentions" id="webmentions">
+	<h3>Webmentions</h3>
+
+	{% if likes.length %}
+	<h4>Likes ({{ likes.length }})</h4>
+	<div class="facepile">
+		{% for like in likes %}
+		<a href="{{ like.author.url }}" title="{{ like.author.name }}">
+			<img
+				src="{{ like.author.photo }}"
+				alt="{{ like.author.name }}"
+				class="u-photo"
+				loading="lazy"
+				width="48"
+				height="48"
+			/>
+		</a>
+		{% endfor %}
+	</div>
+	{% endif %} {% if reposts.length %}
+	<h4>Reposts ({{ reposts.length }})</h4>
+	<div class="facepile">
+		{% for repost in reposts %}
+		<a href="{{ repost.author.url }}" title="{{ repost.author.name }}">
+			<img
+				src="{{ repost.author.photo }}"
+				alt="{{ repost.author.name }}"
+				class="u-photo"
+				loading="lazy"
+				width="48"
+				height="48"
+			/>
+		</a>
+		{% endfor %}
+	</div>
+	{% endif %} {% if replies.length %}
+	<h4>Replies & Mentions ({{ replies.length + mentions.length }})</h4>
+	{% endif %}
+
+	<ol class="webmention-list">
+		{% for mention in replies %}
+		<li class="webmention h-cite">
+			<div class="webmention-author">
+				<a href="{{ mention.author.url }}" class="u-author">
+					<img
+						src="{{ mention.author.photo }}"
+						alt="{{ mention.author.name }}"
+						class="u-photo"
+						loading="lazy"
+						width="48"
+						height="48"
+					/>
+					<strong class="p-name">{{ mention.author.name }}</strong>
+				</a>
+				<a href="{{ mention.url }}" class="u-url">
+					<time datetime="{{ mention.published | rfc822 }}">{{
+						mention.published | readableDate
+					}}</time>
+				</a>
+			</div>
+			<div class="webmention-content p-content">
+				{{ mention.content.html | safe }}
+			</div>
+		</li>
+		{% endfor %} {% for mention in mentions %}
+		<li class="webmention h-cite">
+			<div class="webmention-author">
+				<a href="{{ mention.author.url }}" class="u-author">
+					<img
+						src="{{ mention.author.photo }}"
+						alt="{{ mention.author.name }}"
+						class="u-photo"
+						loading="lazy"
+						width="48"
+						height="48"
+					/>
+					<strong class="p-name">{{ mention.author.name }}</strong>
+				</a>
+				<a href="{{ mention.url }}" class="u-url">
+					<time datetime="{{ mention.published | rfc822 }}">{{
+						mention.published | readableDate
+					}}</time>
+				</a>
+			</div>
+			<div class="webmention-content p-content">
+				Mentioned this post on <a href="{{ mention.url }}">{{ mention.url }}</a
+				>.
+			</div>
+		</li>
+		{% endfor %}
+	</ol>
+</div>
+{% endif %}
