@@ -1,4 +1,4 @@
----js
+---
 const eleventyNavigation = {
     key: "About",
     order: 3
@@ -7,7 +7,7 @@ const eleventyNavigation = {
 
 # About
 
-Nightdogs is something
+Nightdogs are hotdogs that you eat in the middle of the night
 
 ## Authors
 

@@ -2,7 +2,7 @@
 	"jane": {
 		"name": "Jane Marie Bach",
 		"bio": "Site owner and main author.",
-		"note": "☭ ♻︎ ⛵︎.",
+		"note": "♻︎ ⛵︎ ☭ ",
 		"links": [
 			{ "url": "https://listenbrainz.org/user/jay777marie/", "label": "listenbrainz" },
 			{ "url": "mailto:haileebach@gmail.com", "label": "email" },
@@ -14,7 +14,7 @@
 	"abby": {
 		"name": "Abby Rhynold",
 		"bio": "author with a green theme.",
-		"note": "🪱🐑🎂.",
+		"note": "🪱🐑🎂",
 		"links": [
 			
 		]
@@ -22,19 +22,19 @@
 	"adesse": {
 		"name": "Adèsse Brown",
 		"bio": "Author color scheme to be defined.",
-		"note": "🐝🕯️🎹.",
+		"note": "🐝🕯️🎹",
 		"links": []
 	},
 	"orionlw": {
 		"name": "Orion Leidl Wilson",
 		"bio": "Guy.",
-		"note": "🎧📀🐈‍⬛.",
+		"note": "🎧📀🐈‍⬛",
 		"links": []
 	},
 	"amelia": {
 		"name": "Amelia Wheeler",
 		"bio": "Colour scheme to be defined.",
-		"note": "🎨🎤🧚‍♀️.",
+		"note": "🎨🎤🧚‍♀️",
 		"links": []
 	}
 }
