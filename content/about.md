@@ -19,8 +19,11 @@ Nightdogs is something
     </p>
     
     <ul>
-        <li><a href="mailto:haileebach@gmail.com" class="u-email">Email</a></li>
+        <li><a href="mailto:haileebach@gmail.com" class="u-email">Email me</a></li>
         <li><a href="https://github.com/jane777-pixel" rel="me" class="u-url">GitHub</a></li>
+        <li><a href="https://www.pinterest.com/janemariebach/" target="_blank" rel="noopener" class="u-url">Pinterest</a></li>
+        <li><a href="https://www.ravelry.com/people/jay777" target="_blank" rel="noopener" class="u-url">Ravelry</a></li>
+        <li><a href="https://listenbrainz.org/user/jay777marie" target="_blank" rel="noopener" class="u-url">ListenBrainz</a></li>
         <li><a href="https://nightdogs.xyz" class="u-url">Website</a></li>
     </ul>
 </div>
