@@ -1,22 +1,24 @@
 import { DateTime } from "luxon";
 
-export default function(eleventyConfig) {
+export default function (eleventyConfig) {
 	eleventyConfig.addFilter("readableDate", (dateObj, format, zone) => {
 		// Formatting tokens for Luxon: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
-		return DateTime.fromJSDate(dateObj, { zone: zone || "utc" }).toFormat(format || "dd LLLL yyyy");
+		return DateTime.fromJSDate(dateObj, { zone: zone || "utc" }).toFormat(
+			format || "dd LLLL yyyy"
+		);
 	});
 
 	eleventyConfig.addFilter("htmlDateString", (dateObj) => {
 		// dateObj input: https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
-		return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat('yyyy-LL-dd');
+		return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("yyyy-LL-dd");
 	});
 
 	// Get the first `n` elements of a collection.
 	eleventyConfig.addFilter("head", (array, n) => {
-		if(!Array.isArray(array) || array.length === 0) {
+		if (!Array.isArray(array) || array.length === 0) {
 			return [];
 		}
-		if( n < 0 ) {
+		if (n < 0) {
 			return array.slice(n);
 		}
 
@@ -29,30 +31,30 @@ export default function(eleventyConfig) {
 	});
 
 	// Return the keys used in an object
-	eleventyConfig.addFilter("getKeys", target => {
+	eleventyConfig.addFilter("getKeys", (target) => {
 		return Object.keys(target);
 	});
 
 	eleventyConfig.addFilter("filterTagList", function filterTagList(tags) {
-		return (tags || []).filter(tag => ["all", "posts"].indexOf(tag) === -1);
+		return (tags || []).filter((tag) => ["all", "posts"].indexOf(tag) === -1);
 	});
 
-	eleventyConfig.addFilter("sortAlphabetically", strings =>
+	eleventyConfig.addFilter("sortAlphabetically", (strings) =>
 		(strings || []).sort((b, a) => b.localeCompare(a))
 	);
 
 	// Webmentions
 	eleventyConfig.addFilter("mentionsForUrl", (mentions, url) => {
 		if (!mentions || !url) return [];
-		return mentions.filter(mention => mention["wm-target"] === url);
+		return mentions.filter((mention) => mention["wm-target"] === url);
 	});
 
 	eleventyConfig.addFilter("mentionType", (mentions, type) => {
 		if (!mentions || !type) return [];
-		return mentions.filter(mention => mention["wm-property"] === type);
+		return mentions.filter((mention) => mention["wm-property"] === type);
 	});
 
 	eleventyConfig.addFilter("rfc822", (dateObj) => {
 		return new Date(dateObj).toUTCString();
 	});
-};
+}

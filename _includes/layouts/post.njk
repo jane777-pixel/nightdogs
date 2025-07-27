@@ -22,32 +22,36 @@ base.njk #} {#
 <article>
 	<h1 class="post-title">{{ title }}</h1>
 	<div class="post-meta">
-		<time datetime="{{ page.date | htmlDateString }}">{{ page.date | readableDate }}</time>
+		<time datetime="{{ page.date | htmlDateString }}">{{
+			page.date | readableDate
+		}}</time>
 		{%- if author -%}
-			<span class="post-author">by <a href="/about#{{ author | slugify }}" class="h-card p-author">{{ author }}</a></span>
+		<span class="post-author" style="margin-left: 1em">
+			by
+			<a href="/about#{{ author | slugify }}" class="h-card p-author">{{
+				author
+			}}</a>
+		</span>
 		{%- endif -%}
 	</div>
 
 	{{ content | safe }}
 
 	{%- if collections.posts %}
-		<ul class="links-nextprev">
-			{%- set nextPost = collections.posts | getNextCollectionItem(page) %}
-			{%- if nextPost %}
-				<li class="links-nextprev-next">
-					<strong>Next</strong>: 
-					<a href="{{ nextPost.url }}">{{ nextPost.data.title }}</a>
-				</li>
-			{% endif %}
-			{%- set previousPost = collections.posts | getPreviousCollectionItem(page) %}
-			{%- if previousPost %}
-				<li class="links-nextprev-previous">
-					<strong>Previous</strong>: 
-					<a href="{{ previousPost.url }}">{{ previousPost.data.title }}</a>
-				</li>
-			{% endif %}
-		</ul>
-	{%- endif %}
-
-	{% include "webmentions.njk" %}
+	<ul class="links-nextprev">
+		{%- set nextPost = collections.posts | getNextCollectionItem(page) %} {%- if
+		nextPost %}
+		<li class="links-nextprev-next">
+			<strong>Next</strong>:
+			<a href="{{ nextPost.url }}">{{ nextPost.data.title }}</a>
+		</li>
+		{% endif %} {%- set previousPost = collections.posts |
+		getPreviousCollectionItem(page) %} {%- if previousPost %}
+		<li class="links-nextprev-previous">
+			<strong>Previous</strong>:
+			<a href="{{ previousPost.url }}">{{ previousPost.data.title }}</a>
+		</li>
+		{% endif %}
+	</ul>
+	{%- endif %} {% include "webmentions.njk" %}
 </article>
