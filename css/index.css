@@ -1,5 +1,7 @@
 /* Import Bitcount Grid Single from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Bitcount+Grid+Single&display=swap");
+/* Import IBM Plex for orionlw author */
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
 
 /* Defaults */
 :root {
@@ -418,11 +420,22 @@ body[data-author="orionlw"],
 body[data-author="orionlw"] *:not(code):not(pre) {
 	background-color: #e6d3b3 !important;
 	color: #4a3018 !important;
+	font-family: "IBM Plex Sans", "Segoe UI", "Roboto", "Helvetica Neue", Arial,
+		"Liberation Sans", sans-serif !important;
 }
 
 body[data-author="orionlw"] a,
 body[data-author="orionlw"] a:link {
 	color: #6e4b1f !important;
+}
+
+/* Add IBM Plex Mono for code in orionlw posts */
+body[data-author="orionlw"] code,
+body[data-author="orionlw"] pre {
+	font-family: "IBM Plex Mono", Consolas, Menlo, Monaco, "Andale Mono WT",
+		"Andale Mono", "Lucida Console", "Lucida Sans Typewriter",
+		"DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono",
+		"Nimbus Mono L", "Courier New", Courier, monospace !important;
 }
 
 /* Dark mode overrides */
@@ -431,5 +444,21 @@ body[data-author="orionlw"] a:link {
 	body[data-author="adesse"] *:not(code):not(pre) {
 		background-color: #2a201e !important;
 		color: #ffffff !important;
+	}
+
+	body[data-author="orionlw"],
+	body[data-author="orionlw"] *:not(code):not(pre) {
+		background-color: #4a3018 !important;
+		color: #ffffff !important;
+		font-family: "IBM Plex Sans", "Segoe UI", "Roboto", "Helvetica Neue", Arial,
+			"Liberation Sans", sans-serif !important;
+	}
+
+	body[data-author="orionlw"] code,
+	body[data-author="orionlw"] pre {
+		font-family: "IBM Plex Mono", Consolas, Menlo, Monaco, "Andale Mono WT",
+			"Andale Mono", "Lucida Console", "Lucida Sans Typewriter",
+			"DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono",
+			"Nimbus Mono L", "Courier New", Courier, monospace !important;
 	}
 }
