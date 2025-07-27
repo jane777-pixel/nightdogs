@@ -1,0 +1,49 @@
+{
+	"jane": {
+		"name": "Jane Bach",
+		"colors": {
+			"background": "--background-color",
+			"text": "--text-color",
+			"link": "--text-color-link",
+			"linkActive": "--text-color-link-active",
+			"linkVisited": "--text-color-link-visited",
+			"gray20": "--color-gray-20",
+			"gray50": "--color-gray-50",
+			"gray90": "--color-gray-90"
+		},
+		"bio": "Site owner and main author."
+	},
+	"abby": {
+		"name": "Abby Rhynold",
+		"colors": {
+			"background": "#e6ffe6",
+			"text": "#145214",
+			"link": "#2ecc40",
+			"linkActive": "#27ae60",
+			"linkVisited": "#145214",
+			"gray20": "#e6ffe6",
+			"gray50": "#b2f7b2",
+			"gray90": "#145214"
+		},
+		"bio": "Guest author with a green theme."
+	},
+	"adesse": {
+		"name": "Adèsse Brown",
+		"colors": {},
+		"bio": "Author color scheme to be defined."
+	},
+	"orionlw": {
+		"name": "Orion Leidl Wilson",
+		"colors": {
+			"background": "#e6d3b3",
+			"text": "#6e4b1f",
+			"link": "#a67c52",
+			"linkActive": "#8d6742",
+			"linkVisited": "#6e4b1f",
+			"gray20": "#e6d3b3",
+			"gray50": "#a67c52",
+			"gray90": "#6e4b1f"
+		},
+		"bio": "Brown color scheme."
+	}
+}
