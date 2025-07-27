@@ -40,4 +40,19 @@ export default function(eleventyConfig) {
 	eleventyConfig.addFilter("sortAlphabetically", strings =>
 		(strings || []).sort((b, a) => b.localeCompare(a))
 	);
+
+	// Webmentions
+	eleventyConfig.addFilter("mentionsForUrl", (mentions, url) => {
+		if (!mentions || !url) return [];
+		return mentions.filter(mention => mention["wm-target"] === url);
+	});
+
+	eleventyConfig.addFilter("mentionType", (mentions, type) => {
+		if (!mentions || !type) return [];
+		return mentions.filter(mention => mention["wm-property"] === type);
+	});
+
+	eleventyConfig.addFilter("rfc822", (dateObj) => {
+		return new Date(dateObj).toUTCString();
+	});
 };
