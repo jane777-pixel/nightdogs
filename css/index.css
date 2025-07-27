@@ -345,6 +345,18 @@ body[data-author="adesse"] {
 	--color-gray-90: #ffffff !important; /* pure white */
 }
 
+/* Amelia author-specific color overrides */
+body[data-author="amelia"] {
+    --background-color: #DCED5A !important;      /* soft lime green */
+    --text-color: #2B59C4 !important;            /* deep blue */
+    --text-color-link: #2DB1B5 !important;       /* teal blue */
+    --text-color-link-active: #1e7e7e !important;/* darker teal */
+    --text-color-link-visited: #1a3a7c !important;/* muted blue */
+    --color-gray-20: #eaf7c5 !important;         /* very light lime */
+    --color-gray-50: #b6e37c !important;         /* lighter lime */
+    --color-gray-90: #2B59C4 !important;         /* deep blue */
+}
+
 /* Dark mode overrides for author colors - Force override Pico CSS */
 @media (prefers-color-scheme: dark) {
 	body[data-author="abby"] {
@@ -379,6 +391,17 @@ body[data-author="adesse"] {
 		--color-gray-50: #ffffff !important;
 		--color-gray-90: #e6c7d0 !important;
 	}
+
+	 body[data-author="amelia"] {
+        --background-color: #2B59C4 !important;      /* deep blue */
+        --text-color: #DCED5A !important;            /* lime green */
+        --text-color-link: #2DB1B5 !important;       /* teal blue */
+        --text-color-link-active: #DCED5A !important;/* lime green */
+        --text-color-link-visited: #b6e37c !important;/* lighter lime */
+        --color-gray-20: #2DB1B5 !important;
+        --color-gray-50: #2B59C4 !important;
+        --color-gray-90: #DCED5A !important;
+    }
 }
 
 /* Force override ALL Pico CSS styling for author themes */
@@ -425,6 +448,26 @@ body[data-author="orionlw"] a:link {
 	color: #6e4b1f !important;
 }
 
+body[data-author="amelia"],
+body[data-author="amelia"] *:not(code):not(pre) {
+    background-color: #ffe6fa !important;
+    color: #6c218a !important;
+}
+
+body[data-author="amelia"] a,
+body[data-author="amelia"] a:link {
+    color: #b800a6 !important;
+}
+
+body[data-author="amelia"] a:visited {
+    color: #a65fcf !important;
+}
+
+body[data-author="amelia"] a:hover,
+body[data-author="amelia"] a:active {
+    color: #ff7edb !important;
+}
+
 /* Dark mode overrides */
 @media (prefers-color-scheme: dark) {
 	body[data-author="adesse"],
@@ -432,4 +475,22 @@ body[data-author="orionlw"] a:link {
 		background-color: #2a201e !important;
 		color: #ffffff !important;
 	}
+
+	body[data-author="abby"],
+	body[data-author="abby"] *:not(code):not(pre) {
+		background-color: #e6ffe6 !important;
+		color: #0d3a0d !important;
+	}
+
+	body[data-author="orionlw"],
+	body[data-author="orionlw"] *:not(code):not(pre) {
+		background-color: #e6d3b3 !important;
+		color: #4a3018 !important;
+	}
+
+	body[data-author="amelia"],
+	body[data-author="amelia"] *:not(code):not(pre) {
+        background-color: #6c218a !important;
+        color: #ffe6fa !important;
+    }
 }
