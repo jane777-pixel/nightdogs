@@ -4,7 +4,35 @@ const eleventyNavigation = {
 	order: 2
 };
 ---
+
 <h1>Archive</h1>
 
-{% set postslist = collections.posts %}
-{% include "postslist.njk" %}
+<div class="author-selector">
+	<label for="author-filter">Filter by author:</label>
+	<select id="author-filter">
+		<option value="all">All Authors</option>
+		{% for authorKey, authorData in authors %}
+		<option value="{{ authorKey }}">{{ authorData.name }}</option>
+		{% endfor %}
+	</select>
+</div>
+
+{% set postslist = collections.posts %} {% include "postslist.njk" %}
+
+<script>
+	const authorFilter = document.getElementById("author-filter");
+	const postItems = document.querySelectorAll(".postlist-item");
+
+	authorFilter.addEventListener("change", (event) => {
+		const selectedAuthor = event.target.value;
+
+		postItems.forEach((item) => {
+			const itemAuthor = item.getAttribute("data-author");
+			if (selectedAuthor === "all" || selectedAuthor === itemAuthor) {
+				item.style.display = "";
+			} else {
+				item.style.display = "none";
+			}
+		});
+	});
+</script>

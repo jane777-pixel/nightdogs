@@ -1,0 +1,18 @@
+{
+	"jane": {
+		"name": "Jane Marie Bach",
+		"bio": "Site owner and main author."
+	},
+	"abby": {
+		"name": "Abby Rhynold",
+		"bio": "Guest author with a green theme."
+	},
+	"adesse": {
+		"name": "Adèsse Brown",
+		"bio": "Author color scheme to be defined."
+	},
+	"orionlw": {
+		"name": "Orion Leidl Wilson",
+		"bio": "Guy."
+	}
+}

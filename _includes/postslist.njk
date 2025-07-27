@@ -1,8 +1,37 @@
-<ol reversed class="postlist" style="--postlist-index: {{ (postslistCounter or postslist.length) + 1 }}">
-{%- for post in postslist | reverse %}
-	<li class="postlist-item{% if post.url == url %} postlist-item-active{% endif %}">
-		<a href="{{ post.url }}" class="postlist-link">{% if post.data.title %}{{ post.data.title }}{% else %}<code>{{ post.url }}</code>{% endif %}</a>
-		<time class="postlist-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate("LLLL yyyy") }}</time>
+<ol
+	reversed
+	class="postlist"
+	style="--postlist-index: {{ (postslistCounter or postslist.length) + 1 }}"
+>
+	{%- for post in postslist | reverse %}
+	<li
+		class="postlist-item{% if post.url == url %} postlist-item-active{% endif %}"
+		{%
+		if
+		post.data.author
+		%}data-author="{{ post.data.author }}"
+		{%
+		endif
+		%}
+	>
+		<a href="{{ post.url }}" class="postlist-link"
+			>{% if post.data.title %}{{ post.data.title }}{% else %}<code>{{
+				post.url
+			}}</code
+			>{% endif %}</a
+		>
+		<time
+			class="postlist-date"
+			datetime="{{ post.date | htmlDateString }}"
+			>{{ post.date | readableDate("LLLL yyyy") }}</time
+		>&nbsp; {%- if post.data.author -%} {%- set author =
+		authors[post.data.author] -%}
+		<span class="postlist-author">
+			by {% if author and author.name %}{{ author.name }}{% else %}{{
+				post.data.author
+			}}{% endif %}</span
+		>
+		{%- endif -%}
 	</li>
-{%- endfor %}
+	{%- endfor %}
 </ol>
