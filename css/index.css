@@ -487,7 +487,6 @@ body[data-author="orionlw"] *:not(code):not(pre):not(.h-card):not(.h-card *) {
 	box-shadow: none !important;
 	display: inline !important;
 }
-
 /* Author-specific styling for h-cards */
 .h-card[data-author="jane"] {
 	background-color: #ffd6e0 !important;
@@ -556,6 +555,28 @@ body[data-author="orionlw"] *:not(code):not(pre):not(.h-card):not(.h-card *) {
 	color: #8b0020 !important;
 }
 
+.h-card[data-author="jane"] .p-note {
+	background-color: #ffd6e0 !important;
+	color: #8b0020 !important;
+}
+.h-card[data-author="abby"] .p-note {
+	background-color: #e6ffe6 !important;
+	color: #0d3a0d !important;
+}
+.h-card[data-author="adesse"] .p-note {
+	background-color: #624f4c !important;
+	color: #ffffff !important;
+}
+.h-card[data-author="orionlw"] .p-note {
+	background-color: #e6d3b3 !important;
+	color: #4a3018 !important;
+	font-family: "IBM Plex Sans", sans-serif !important;
+}
+.h-card[data-author="amelia"] .p-note {
+	background-color: #ffd6e0 !important;
+	color: #8b0020 !important;
+}
+
 @media (prefers-color-scheme: dark) {
 	body[data-author="jane"] *:not(code):not(pre):not(.h-card):not(.h-card *) {
 		background-color: #8b0020 !important;
@@ -573,4 +594,92 @@ body[data-author="orionlw"] *:not(code):not(pre):not(.h-card):not(.h-card *) {
 		font-family: "IBM Plex Sans", "Segoe UI", "Roboto", "Helvetica Neue", Arial,
 			"Liberation Sans", sans-serif !important;
 	}
+}
+
+.h-card[data-author="jane"] .p-note,
+.h-card[data-author="jane"] .p-note * {
+	background-color: #ffd6e0 !important;
+	color: #8b0020 !important;
+	background: none !important;
+	box-shadow: none !important;
+	border: none !important;
+}
+.h-card[data-author="abby"] .p-note,
+.h-card[data-author="abby"] .p-note * {
+	background-color: #e6ffe6 !important;
+	color: #0d3a0d !important;
+	background: none !important;
+	box-shadow: none !important;
+	border: none !important;
+}
+.h-card[data-author="adesse"] .p-note,
+.h-card[data-author="adesse"] .p-note * {
+	background-color: #624f4c !important;
+	color: #ffffff !important;
+	background: none !important;
+	box-shadow: none !important;
+	border: none !important;
+}
+.h-card[data-author="orionlw"] .p-note,
+.h-card[data-author="orionlw"] .p-note * {
+	background-color: #e6d3b3 !important;
+	color: #4a3018 !important;
+	font-family: "IBM Plex Sans", sans-serif !important;
+	background: none !important;
+	box-shadow: none !important;
+	border: none !important;
+}
+.h-card[data-author="amelia"] .p-note,
+.h-card[data-author="amelia"] .p-note * {
+	background-color: #ffd6e0 !important;
+	color: #8b0020 !important;
+	background: none !important;
+	box-shadow: none !important;
+	border: none !important;
+}
+
+body,
+body.h-card,
+body[data-author] {
+	background-color: transparent !important;
+	background: none !important;
+}
+
+.h-card,
+.h-card * {
+	background: none !important;
+	background-color: inherit !important;
+	box-shadow: none !important;
+	border: none !important;
+}
+
+.main-content .h-card[data-author="jane"],
+.main-content .h-card[data-author="jane"] * {
+	background-color: #ffd6e0 !important;
+	color: #8b0020 !important;
+}
+
+.main-content .h-card[data-author="abby"],
+.main-content .h-card[data-author="abby"] * {
+	background-color: #e6ffe6 !important;
+	color: #0d3a0d !important;
+}
+
+.main-content .h-card[data-author="adesse"],
+.main-content .h-card[data-author="adesse"] * {
+	background-color: #624f4c !important;
+	color: #ffffff !important;
+}
+
+.main-content .h-card[data-author="orionlw"],
+.main-content .h-card[data-author="orionlw"] * {
+	background-color: #e6d3b3 !important;
+	color: #4a3018 !important;
+	font-family: "IBM Plex Sans", sans-serif !important;
+}
+
+.main-content .h-card[data-author="amelia"],
+.main-content .h-card[data-author="amelia"] * {
+	background-color: #ffd6e0 !important;
+	color: #8b0020 !important;
 }
