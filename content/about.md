@@ -48,13 +48,17 @@ Nightdogs is something
     <h3 class="p-name">Orion Leidl Wilson</h3>
     
     <p class="p-note">
-        Guy.
+        Electric Bassist & Composer from Grand Pré, Nova Scotia. 
     </p>
     
     <ul>
         <li><a href="mailto:orionlw@pm.me" class="u-email">Email</a></li>
         <li><a href="https://github.com/orionlw" rel="me" class="u-url">GitHub</a></li>
         <li><a href="https://orionlw.me" rel="me" class="u-url">Personal Blog</a></li>
+        <li><a href="https://letterboxd.com/orionlw" rel="me" class="u-url">Letterboxd</a></li>
+        <li><a href="https://listenbrainz.org/user/orionlw" rel="me" class="u-url">ListenBrainz</a></li>
+        <li><a href="https://mastodon.social/@orionlw" rel="me" class="u-url">Mastodon</a></li>
+        <li><a href="https://pixelfed.social/orionlw" rel="me" class="u-url">Pixelfed</a></li>
     </ul>
 </div>
 
