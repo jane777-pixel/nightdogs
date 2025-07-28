@@ -5,6 +5,24 @@ publish_mode: editorial_workflow
 media_folder: "content/blog"
 public_folder: "/blog"
 collections:
+  - name: "settings"
+    label: "Settings"
+    files:
+      - label: "Global Metadata"
+        name: "metadata"
+        file: "_data/metadata.json"
+        fields:
+          - { label: "Site Title", name: "title", widget: "string" }
+          - { label: "Site URL", name: "url", widget: "string" }
+          - { label: "Language", name: "language", widget: "string" }
+          - { label: "Description", name: "description", widget: "string" }
+          - label: "Author"
+            name: "author"
+            widget: "object"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Email", name: "email", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
   - name: "blog"
     label: "Blog Posts"
     folder: "content/blog"
@@ -17,7 +35,16 @@ collections:
       - { label: "Slug", name: "slug", widget: "string" }
       - { label: "Summary", name: "summary", widget: "text" }
       - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Author", name: "author", widget: "string" }
+      - {
+          label: "Author",
+          name: "author",
+          widget: "relation",
+          collection: "authors",
+          file: "authors",
+          searchFields: ["*.name"],
+          displayFields: ["*.name"],
+          valueField: "{{slug}}",
+        }
       - { label: "Tags", name: "tags", widget: "list", default: ["posts"] }
       - { label: "Body", name: "body", widget: "markdown" }
   - name: "authors"
