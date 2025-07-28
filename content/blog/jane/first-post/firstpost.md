@@ -4,6 +4,7 @@ tags: posts, knitting, swimming
 description: welcome to nightdogs
 date: 2025-07-22
 author: jane
+permalink: /blog/jane/first-post/
 ---
 
 hi it’s Jane!! Orion helped me set up this blog today. can’t wait to share my every waking thought with the internet
