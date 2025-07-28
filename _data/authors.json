@@ -57,8 +57,23 @@
   },
   "nic": {
     "name": "Nicholas Leighton",
-    "bio": "Author with a modern blue theme.",
-    "note": "💙🌊✨",
-    "links": []
+    "bio": "likes: movies, jane, snow, the blues, and family guy. <br> dislikes: mean people, sweating, being poisoned, haters, and skinny jeans.",
+    "note": "⛄︎♟🂻",
+    "links": [
+		{
+			"url": "https://www.youtube.com/watch?v=dj7PEpU54kY",
+			"label": "chihuahua jumping"
+		},
+		{
+			"url": "https://letterboxd.com/discofever/",
+			"label": "nic's movies"
+		},
+		{
+			"url": "https://listenbrainz.org/user/grub_eater/",
+			"label": "nic's music"
+		}
+	]
+  },
+	]
   }
 }
