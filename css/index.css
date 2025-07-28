@@ -148,7 +148,7 @@ body.author-selected-nic,
 .site-wrapper[data-author="nic"] {
 	--pico-background-color: #91cbff;
 	--pico-color: #1e3a8a;
-	--pico-primary: #4691ed;
+	--pico-primary: #8bbfff;
 	--pico-muted-color: #1e40af;
 	font-family: "Montserrat", sans-serif;
 }
@@ -156,7 +156,7 @@ body.author-selected-nic,
 .h-card[data-author="nic"] {
 	--pico-background-color: #91cbff;
 	--pico-color: #1e3a8a;
-	--pico-primary: #4691ed;
+	--pico-primary: #8bbfff;
 	--pico-muted-color: #1e40af;
 }
 
@@ -236,7 +236,7 @@ body.author-selected-nic,
 	.h-card[data-author="nic"] {
 		--pico-background-color: #1e3a8a;
 		--pico-color: #91cbff;
-		--pico-primary: #4691ed;
+		--pico-primary: #8bbfff;
 		--pico-muted-color: #dbeafe;
 	}
 }
