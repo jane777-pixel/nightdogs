@@ -4,6 +4,7 @@ date: 2025-07-27T17:55:00.000Z
 author: adesse
 tags:
   - posts
+slug: july-was-busy
 ---
 
 this july i ended up doing a lot of things i didn't want to do. it felt hard to do things i wanted.

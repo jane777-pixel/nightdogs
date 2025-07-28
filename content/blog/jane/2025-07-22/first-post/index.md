@@ -1,6 +1,9 @@
 ---
 title: first post! 🐠
-tags: posts, knitting, swimming
+tags:
+  - posts
+  - knitting
+  - swimming
 description: welcome to nightdogs
 date: 2025-07-22
 author: jane
