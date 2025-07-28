@@ -1,11 +1,12 @@
 ---
 title: full circle '25
+slug: adesse
 date: 2025-06-23T10:00:00.000Z
 author: adesse
 tags:
   - posts
 ---
-
+┌───────────────────────────────────────═━┈🐝┈━═──────────────────────────────────┐
 all of our hard work proved worth it and the festival was really successful. i got to enjoy some music that was on my wishlist to catch. i felt very removed from the friend group and i was never around. it is a hard thing to balance hanging out and doing my job. i am always excited to see kevin's art. i hope the volunteers thought i did okay. i didn't get any pictures of myself. i got very few of my friends. i caught night jiffy on camera but not #nightdogs. i hope people like the program, it took a long time to make but it was really fun. it will be strange not talking to kim every day, she's really great. i always feel at home when i'm in avondale.
 
 ![](img_3290.jpg)
@@ -33,3 +34,4 @@ this is mala, maria denicolas dog. i remember her from when i was a kid too. her
 just like last year, the rain held out until the very end of the festival. on my way home, there was a cow on the road.
 
 ![](img_3312.jpg)
+└──────────────────────────────────────═━┈🐝┈━═───────────────────────────────────┘
