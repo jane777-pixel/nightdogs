@@ -4,20 +4,23 @@
 		"bio": "Site owner and main author.",
 		"note": "♻︎ ⛵︎ ☭ ",
 		"links": [
-			{ "url": "https://listenbrainz.org/user/jay777marie/", "label": "listenbrainz" },
+			{
+				"url": "https://listenbrainz.org/user/jay777marie/",
+				"label": "listenbrainz"
+			},
 			{ "url": "mailto:haileebach@gmail.com", "label": "email" },
-			{ "url": "https://ca.pinterest.com/janemariebach/", "label": "pinterest" },
+			{
+				"url": "https://ca.pinterest.com/janemariebach/",
+				"label": "pinterest"
+			},
 			{ "url": "https://www.ravelry.com/people/jay777", "label": "ravelry" }
-	
 		]
 	},
 	"abby": {
 		"name": "Abby Rhynold",
 		"bio": "author with a green theme.",
 		"note": "🪱🐑🎂",
-		"links": [
-			
-		]
+		"links": []
 	},
 	"adesse": {
 		"name": "Adèsse Brown",
@@ -35,6 +38,12 @@
 		"name": "Amelia Wheeler",
 		"bio": "Colour scheme to be defined.",
 		"note": "🎨🎤🧚‍♀️",
+		"links": []
+	},
+	"nic": {
+		"name": "Nicholas Leighton",
+		"bio": "Author with a modern blue theme.",
+		"note": "💙🌊✨",
 		"links": []
 	}
 }

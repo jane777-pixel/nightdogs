@@ -364,6 +364,17 @@ body[data-author="adesse"] {
 	--color-gray-90: #ffffff !important; /* pure white */
 }
 
+body[data-author="nic"] {
+	--background-color: #f0f8ff !important; /* alice blue (very light blue) */
+	--text-color: #1e3a8a !important; /* deep blue */
+	--text-color-link: #3b82f6 !important; /* modern blue */
+	--text-color-link-active: #1d4ed8 !important; /* darker blue for active */
+	--text-color-link-visited: #1e40af !important; /* darker blue for visited */
+	--color-gray-20: #dbeafe !important; /* light blue */
+	--color-gray-50: #93c5fd !important; /* medium blue */
+	--color-gray-90: #1e3a8a !important; /* deep blue */
+}
+
 /* Dark mode overrides for author colors - Force override Pico CSS */
 @media (prefers-color-scheme: dark) {
 	body[data-author="abby"] {
@@ -408,6 +419,17 @@ body[data-author="adesse"] {
 		--color-gray-20: #2db1b5 !important;
 		--color-gray-50: #2b59c4 !important;
 		--color-gray-90: #dced5a !important;
+	}
+
+	body[data-author="nic"] {
+		--background-color: #1e3a8a !important; /* deep blue background */
+		--text-color: #f0f8ff !important; /* alice blue text */
+		--text-color-link: #60a5fa !important; /* light blue links */
+		--text-color-link-active: #93c5fd !important; /* lighter blue for active */
+		--text-color-link-visited: #dbeafe !important; /* very light blue for visited */
+		--color-gray-20: #60a5fa !important;
+		--color-gray-50: #f0f8ff !important;
+		--color-gray-90: #93c5fd !important;
 	}
 }
 
@@ -458,6 +480,12 @@ body[data-author="amelia"] a:active {
 	color: #ff7edb !important;
 }
 
+body[data-author="nic"],
+body[data-author="nic"] *:not(code):not(pre):not(.h-card):not(.h-card *) {
+	background-color: #f0f8ff !important; /* alice blue */
+	color: #1e3a8a !important; /* deep blue */
+}
+
 /* Dark mode overrides */
 @media (prefers-color-scheme: dark) {
 	body[data-author="jane"],
@@ -491,6 +519,17 @@ body[data-author="amelia"] a:active {
 			"Andale Mono", "Lucida Console", "Lucida Sans Typewriter",
 			"DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono",
 			"Nimbus Mono L", "Courier New", Courier, monospace !important;
+	}
+
+	body[data-author="nic"],
+	body[data-author="nic"] *:not(code):not(pre):not(.h-card):not(.h-card *) {
+		background-color: #1e3a8a !important; /* deep blue background */
+		color: #f0f8ff !important; /* alice blue text */
+	}
+
+	body[data-author="nic"] a,
+	body[data-author="nic"] a:link {
+		color: #60a5fa !important; /* light blue links */
 	}
 }
 
@@ -587,6 +626,19 @@ body[data-author="amelia"] a:active {
 	color: #8b0020 !important;
 }
 
+.h-card[data-author="nic"] {
+	background-color: #f0f8ff !important;
+	color: #1e3a8a !important;
+	border-color: rgba(30, 58, 138, 0.15) !important;
+	box-shadow: 0 1px 3px rgba(30, 58, 138, 0.05) !important;
+}
+
+.h-card[data-author="nic"] *,
+.h-card[data-author="nic"] *:not(code):not(pre) {
+	background-color: #f0f8ff !important;
+	color: #1e3a8a !important;
+}
+
 .h-card[data-author="jane"] .p-note {
 	background-color: #ffd6e0 !important;
 	color: #8b0020 !important;
@@ -607,6 +659,10 @@ body[data-author="amelia"] a:active {
 .h-card[data-author="amelia"] .p-note {
 	background-color: #ffd6e0 !important;
 	color: #8b0020 !important;
+}
+.h-card[data-author="nic"] .p-note {
+	background-color: #f0f8ff !important;
+	color: #1e3a8a !important;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -669,6 +725,14 @@ body[data-author="amelia"] a:active {
 	box-shadow: none !important;
 	border: none !important;
 }
+.h-card[data-author="nic"] .p-note,
+.h-card[data-author="nic"] .p-note * {
+	background-color: #f0f8ff !important;
+	color: #1e3a8a !important;
+	background: none !important;
+	box-shadow: none !important;
+	border: none !important;
+}
 
 body,
 body.h-card,
@@ -714,4 +778,10 @@ body[data-author] {
 .main-content .h-card[data-author="amelia"] * {
 	background-color: #ffd6e0 !important;
 	color: #8b0020 !important;
+}
+
+.main-content .h-card[data-author="nic"],
+.main-content .h-card[data-author="nic"] * {
+	background-color: #f0f8ff !important;
+	color: #1e3a8a !important;
 }
