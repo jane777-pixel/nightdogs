@@ -80,10 +80,45 @@
 		</main>
 
 		<footer class="p-note footer-site">
-            <p>
-                <em>Built with <a href="https://www.11ty.dev/">Eleventy v3.1.2</a></em>
-            </p>
-        </footer>
+  <p>
+    <em>Built with <a href="https://www.11ty.dev/">Eleventy v3.1.2</a></em>
+  </p>
+  <div style="display:flex;align-items:center;justify-content:flex-end;margin-top:0.5em;">
+    <div class="author-theme-selector" style="display:flex;align-items:center;gap:0.25em;font-size:0.92em;opacity:0.7;">
+      <span style="font-size:1em;opacity:0.5;" aria-hidden="true">🎨</span>
+      <select id="author-select" name="author-select" style="min-width:6em;font-size:0.92em;padding:0.1em 0.7em;border-radius:0.7em;">
+        <option value="jane">Jane</option>
+        <option value="orionlw">Orionlw</option>
+        <option value="adesse">Adesse</option>
+        <option value="nic">Nic</option>
+        <option value="amelia">Amelia</option>
+        <option value="abby">Abby</option>
+      </select>
+    </div>
+  </div>
+  <script>
+  (function() {
+    // Author theme selector
+    const select = document.getElementById('author-select');
+    const body = document.body;
+    const wrapper = document.querySelector('.site-wrapper');
+    if (body.dataset.author) select.value = body.dataset.author;
+    select.addEventListener('change', function() {
+      body.setAttribute('data-author', this.value);
+      if (wrapper) wrapper.setAttribute('data-author', this.value);
+      try { localStorage.setItem('author-theme', this.value); } catch(e){}
+    });
+    try {
+      const saved = localStorage.getItem('author-theme');
+      if (saved) {
+        select.value = saved;
+        body.setAttribute('data-author', saved);
+        if (wrapper) wrapper.setAttribute('data-author', saved);
+      }
+    } catch(e){}
+  })();
+  </script>
+</footer>
         </div>
 		<!-- This page `{{ page.url }}` was built on {% currentBuildDate %} -->
 		<script type="module" src="{% getBundleFileUrl "js" %}"></script>
