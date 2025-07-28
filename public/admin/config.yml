@@ -3,43 +3,25 @@ backend:
   branch: main
 media_folder: "public/img"
 public_folder: "/img"
+backend:
+  name: git-gateway
+  branch: main
+media_folder: "public/img"
+public_folder: "/img"
 collections:
   - name: "blog"
     label: "Blog Posts"
     folder: "content/blog"
     create: true
     slug: "{{author}}/{{date | date('YYYY-MM-DD')}}/{{slug}}/index"
+    path: "{{author}}/{{date | date('YYYY-MM-DD')}}/{{slug}}/index"
     media_folder: ""
     public_folder: ""
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Slug", name: "slug", widget: "string" }
       - { label: "Publish Date", name: "date", widget: "datetime" }
-      - {
-          label: "Author",
-          name: "author",
-          widget: "relation",
-          collection: "authors",
-          searchFields:
-            [
-              "jane.name",
-              "abby.name",
-              "adesse.name",
-              "orionlw.name",
-              "amelia.name",
-              "nic.name",
-            ],
-          valueField: "{{slug}}",
-          displayFields:
-            [
-              "jane.name",
-              "abby.name",
-              "adesse.name",
-              "orionlw.name",
-              "amelia.name",
-              "nic.name",
-            ],
-        }
+      - { label: "Author", name: "author", widget: "string" }
       - { label: "Tags", name: "tags", widget: "list", default: ["posts"] }
       - { label: "Body", name: "body", widget: "markdown" }
   - name: "authors"
