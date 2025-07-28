@@ -2,6 +2,8 @@ backend:
   name: github
   repo: jane777-pixel/nightdogs
   branch: main
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
 media_folder: "public/img"
 public_folder: "/img"
 collections:
