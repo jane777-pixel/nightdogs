@@ -11,7 +11,7 @@ Nightdogs are hotdogs that you eat in the middle of the night
 
 ## Authors
 
-<div class="h-card" data-author="jane">
+<div class="h-card" data-author="jane" id="jane">
     <h3 class="p-name">{{ authors.jane.name }}</h3>
     <p class="p-note">{{ authors.jane.note | safe }}</p>
     <ul>
@@ -21,7 +21,7 @@ Nightdogs are hotdogs that you eat in the middle of the night
     </ul>
 </div>
 
-<div class="h-card" data-author="abby">
+<div class="h-card" data-author="abby" id="abby">
     <h3 class="p-name">{{ authors.abby.name }}</h3>
     <p class="p-note">{{ authors.abby.note | safe }}</p>
     <ul>
@@ -31,7 +31,7 @@ Nightdogs are hotdogs that you eat in the middle of the night
     </ul>
 </div>
 
-<div class="h-card" data-author="adesse">
+<div class="h-card" data-author="adesse" id="adesse">
     <h3 class="p-name">{{ authors.adesse.name }}</h3>
     <p class="p-note">{{ authors.adesse.note | safe }}</p>
     <ul>
@@ -41,7 +41,7 @@ Nightdogs are hotdogs that you eat in the middle of the night
     </ul>
 </div>
 
-<div class="h-card" data-author="orionlw">
+<div class="h-card" data-author="orionlw" id="orionlw">
     <h3 class="p-name">{{ authors.orionlw.name }}</h3>
     <p class="p-note">{{ authors.orionlw.note | safe }}</p>
     <ul>
@@ -51,7 +51,7 @@ Nightdogs are hotdogs that you eat in the middle of the night
     </ul>
 </div>
 
-<div class="h-card" data-author="amelia">
+<div class="h-card" data-author="amelia" id="amelia">
     <h3 class="p-name">{{ authors.amelia.name }}</h3>
     <p class="p-note">{{ authors.amelia.note | safe }}</p>
     <ul>
@@ -61,7 +61,7 @@ Nightdogs are hotdogs that you eat in the middle of the night
     </ul>
 </div>
 
-<div class="h-card" data-author="nic">
+<div class="h-card" data-author="nic" id="nic">
     <h3 class="p-name">{{ authors.nic.name }}</h3>
     <p class="p-note">{{ authors.nic.note | safe }}</p>
     <ul>
