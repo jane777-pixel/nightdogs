@@ -23,8 +23,11 @@ collections:
           options:
             [
               { label: "Jane", value: "jane" },
+              { label: "Abby", value: "abby" },
               { label: "Adèsse", value: "adesse" },
               { label: "Orion", value: "orionlw" },
+              { label: "Amelia", value: "amelia" },
+              { label: "Nic", value: "nic" },
             ],
         }
       - { label: "Tags", name: "tags", widget: "list", default: ["posts"] }
