@@ -70,7 +70,7 @@ export default async function (eleventyConfig) {
 		templateData: {
 			eleventyNavigation: {
 				key: "Feed",
-				order: 4,
+				order: 5,
 			},
 		},
 		collection: {
@@ -79,11 +79,11 @@ export default async function (eleventyConfig) {
 		},
 		metadata: {
 			language: "en",
-			title: "Blog Title",
-			subtitle: "This is a longer description about your blog.",
-			base: "https://example.com/",
+			title: "nightdogs",
+			subtitle: "nightdogs",
+			base: "https://nightdogs.xyz/",
 			author: {
-				name: "Your Name",
+				name: "Jane Marie Bach",
 			},
 		},
 	});
