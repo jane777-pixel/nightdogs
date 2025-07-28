@@ -146,17 +146,17 @@ body.author-selected-amelia,
 body[data-author="nic"],
 body.author-selected-nic,
 .site-wrapper[data-author="nic"] {
-	--pico-background-color: #f0f8ff;
+	--pico-background-color: #91cbff;
 	--pico-color: #1e3a8a;
-	--pico-primary: #3b82f6;
+	--pico-primary: #4691ed;
 	--pico-muted-color: #1e40af;
 	font-family: "Montserrat", sans-serif;
 }
 
 .h-card[data-author="nic"] {
-	--pico-background-color: #f0f8ff;
+	--pico-background-color: #91cbff;
 	--pico-color: #1e3a8a;
-	--pico-primary: #3b82f6;
+	--pico-primary: #4691ed;
 	--pico-muted-color: #1e40af;
 }
 
@@ -235,8 +235,8 @@ body.author-selected-nic,
 	.site-wrapper[data-author="nic"],
 	.h-card[data-author="nic"] {
 		--pico-background-color: #1e3a8a;
-		--pico-color: #f0f8ff;
-		--pico-primary: #60a5fa;
+		--pico-color: #91cbff;
+		--pico-primary: #4691ed;
 		--pico-muted-color: #dbeafe;
 	}
 }
