@@ -1,12 +1,12 @@
 ---
 title: july was busy in a different way than june
+slug: july-was-busy
 date: 2025-07-27T17:55:00.000Z
 author: adesse
 tags:
   - posts
-slug: july-was-busy
 ---
-
+┌───────────────────────────────────────═━┈🐝┈━═──────────────────────────────────┐
 this july i ended up doing a lot of things i didn't want to do. it felt hard to do things i wanted.
 
 however, it started really nice with a trip to the blue cottage with my love. we got to do nothing together so that was really nice!
@@ -36,3 +36,4 @@ july isn't over yet and the next couple days are busy. d&d is tonight!
 i hope i can be cozy like iggy pop soon.
 
 ![](./img_3663.jpg)
+└──────────────────────────────────────═━┈🐝┈━═───────────────────────────────────┘
