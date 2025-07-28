@@ -9,7 +9,6 @@ collections:
     folder: "content/blog"
     create: true
     slug: "{{author}}/{{date | date('YYYY-MM-DD')}}/{{slug}}/index"
-    path: "{{author}}/{{date | date('YYYY-MM-DD')}}/{{slug}}/index"
     media_folder: ""
     public_folder: ""
     fields:
