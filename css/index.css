@@ -2,8 +2,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Bitcount+Grid+Single&display=swap");
 /* Import IBM Plex for orionlw author */
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
-/* Import Merriweather for adesse */
-@import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap");
 /* Import Jacquard 12 and Bellefair for adesse */
 @import url("https://fonts.googleapis.com/css2?family=Jacquard+12&family=Bellefair:wght@400&display=swap");
 /* Import Montserrat for nic */
@@ -166,6 +164,26 @@ footer a[href]:visited {
 footer a[href]:hover,
 footer a[href]:active {
 	color: var(--text-color-link-active);
+}
+
+@media (prefers-color-scheme: dark) {
+	footer {
+		color: var(--text-color) !important;
+		background-color: var(--background-color) !important;
+	}
+
+	footer a[href] {
+		color: var(--text-color-link) !important;
+	}
+
+	footer a[href]:visited {
+		color: var(--text-color-link-visited) !important;
+	}
+
+	footer a[href]:hover,
+	footer a[href]:active {
+		color: var(--text-color-link-active) !important;
+	}
 }
 main :first-child {
 	margin-top: 0;
