@@ -137,10 +137,10 @@ body.author-selected-amelia,
 }
 
 .h-card[data-author="amelia"] {
-	--pico-background-color: #ffe6fa;
-	--pico-color: #6c218a;
-	--pico-primary: #8b2d9e;
-	--pico-muted-color: #5a1a74;
+	--pico-background-color: #2b59c4;
+	--pico-color: #dced5a;
+	--pico-primary: #2db1b5;
+	--pico-muted-color: #b6e37c;
 }
 
 body[data-author="nic"],
