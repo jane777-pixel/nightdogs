@@ -19,132 +19,136 @@ collections:
       - { label: "Author", name: "author", widget: "string" }
       - { label: "Tags", name: "tags", widget: "list", default: ["posts"] }
       - { label: "Body", name: "body", widget: "markdown" }
-  - name: "pages"
-    label: "Pages"
+    - name: "authors"
+    label: "Authors"
     files:
-      - label: "About"
-        name: "about"
-        file: "content/about.md"
+      - label: "Author Data"
+        name: "authors"
+        file: "_data/authors.json"
         fields:
-          - { label: "Title", name: "title", widget: "string" }
-          - { label: "Body", name: "body", widget: "markdown" }
-          - label: "Jane's Note"
-            name: "jane_note"
-            widget: "markdown"
-          - label: "Jane's Links"
-            name: "jane_links"
-            widget: "list"
-            fields:
-              - { label: "Link Text", name: "label", widget: "string" }
-              - { label: "URL", name: "url", widget: "string" }
-              - label: "Link Type"
-                name: "type"
-                widget: "select"
-                options:
-                  - { label: "Website/Profile", value: "u-url" }
-                  - { label: "Email", value: "u-email" }
-                default: "u-url"
-              - label: "Is this a link to one of your own profiles?"
-                name: "is_me"
-                widget: "boolean"
-                default: false
-              - label: "Open link in a new tab?"
-                name: "new_tab"
-                widget: "boolean"
-                default: false
-          - label: "Abby's Note"
-            name: "abby_note"
-            widget: "markdown"
-          - label: "Abby's Links"
-            name: "abby_links"
-            widget: "list"
-            fields:
-              - { label: "Link Text", name: "label", widget: "string" }
-              - { label: "URL", name: "url", widget: "string" }
-              - label: "Link Type"
-                name: "type"
-                widget: "select"
-                options:
-                  - { label: "Website/Profile", value: "u-url" }
-                  - { label: "Email", value: "u-email" }
-                default: "u-url"
-              - label: "Is this a link to one of your own profiles?"
-                name: "is_me"
-                widget: "boolean"
-                default: false
-              - label: "Open link in a new tab?"
-                name: "new_tab"
-                widget: "boolean"
-                default: false
-          - label: "Adèsse's Note"
-            name: "adesse_note"
-            widget: "markdown"
-          - label: "Adèsse's Links"
-            name: "adesse_links"
-            widget: "list"
-            fields:
-              - { label: "Link Text", name: "label", widget: "string" }
-              - { label: "URL", name: "url", widget: "string" }
-              - label: "Link Type"
-                name: "type"
-                widget: "select"
-                options:
-                  - { label: "Website/Profile", value: "u-url" }
-                  - { label: "Email", value: "u-email" }
-                default: "u-url"
-              - label: "Is this a link to one of your own profiles?"
-                name: "is_me"
-                widget: "boolean"
-                default: false
-              - label: "Open link in a new tab?"
-                name: "new_tab"
-                widget: "boolean"
-                default: false
-          - label: "Orion's Note"
-            name: "orion_note"
-            widget: "markdown"
-          - label: "Orion's Links"
-            name: "orion_links"
-            widget: "list"
-            fields:
-              - { label: "Link Text", name: "label", widget: "string" }
-              - { label: "URL", name: "url", widget: "string" }
-              - label: "Link Type"
-                name: "type"
-                widget: "select"
-                options:
-                  - { label: "Website/Profile", value: "u-url" }
-                  - { label: "Email", value: "u-email" }
-                default: "u-url"
-              - label: "Is this a link to one of your own profiles?"
-                name: "is_me"
-                widget: "boolean"
-                default: false
-              - label: "Open link in a new tab?"
-                name: "new_tab"
-                widget: "boolean"
-                default: false
-          - label: "Amelia's Note"
-            name: "amelia_note"
-            widget: "markdown"
-          - label: "Amelia's Links"
-            name: "amelia_links"
-            widget: "list"
-            fields:
-              - { label: "Link Text", name: "label", widget: "string" }
-              - { label: "URL", name: "url", widget: "string" }
-              - label: "Link Type"
-                name: "type"
-                widget: "select"
-                options:
-                  - { label: "Website/Profile", value: "u-url" }
-                  - { label: "Email", value: "u-email" }
-                default: "u-url"
-              - label: "Is this a link to one of your own profiles?"
-                name: "is_me"
-                widget: "boolean"
-                default: false
-              - label: "Open link in a new tab?"
-                name: "new_tab"
-                widget: "boolean"
-                default: false
+          - {
+              label: "Jane",
+              name: "jane",
+              widget: "object",
+              fields:
+                [
+                  { label: "Name", name: "name", widget: "string" },
+                  { label: "Bio", name: "bio", widget: "string" },
+                  { label: "Note", name: "note", widget: "string" },
+                  {
+                    label: "Links",
+                    name: "links",
+                    widget: "list",
+                    fields:
+                      [
+                        { label: "URL", name: "url", widget: "string" },
+                        { label: "Label", name: "label", widget: "string" },
+                      ],
+                  },
+                ],
+            }
+          - {
+              label: "Abby",
+              name: "abby",
+              widget: "object",
+              fields:
+                [
+                  { label: "Name", name: "name", widget: "string" },
+                  { label: "Bio", name: "bio", widget: "string" },
+                  { label: "Note", name: "note", widget: "string" },
+                  {
+                    label: "Links",
+                    name: "links",
+                    widget: "list",
+                    fields:
+                      [
+                        { label: "URL", name: "url", widget: "string" },
+                        { label: "Label", name: "label", widget: "string" },
+                      ],
+                  },
+                ],
+            }
+          - {
+              label: "Adèsse",
+              name: "adesse",
+              widget: "object",
+              fields:
+                [
+                  { label: "Name", name: "name", widget: "string" },
+                  { label: "Bio", name: "bio", widget: "string" },
+                  { label: "Note", name: "note", widget: "string" },
+                  {
+                    label: "Links",
+                    name: "links",
+                    widget: "list",
+                    fields:
+                      [
+                        { label: "URL", name: "url", widget: "string" },
+                        { label: "Label", name: "label", widget: "string" },
+                      ],
+                  },
+                ],
+            }
+          - {
+              label: "Orion",
+              name: "orionlw",
+              widget: "object",
+              fields:
+                [
+                  { label: "Name", name: "name", widget: "string" },
+                  { label: "Bio", name: "bio", widget: "string" },
+                  { label: "Note", name: "note", widget: "string" },
+                  {
+                    label: "Links",
+                    name: "links",
+                    widget: "list",
+                    fields:
+                      [
+                        { label: "URL", name: "url", widget: "string" },
+                        { label: "Label", name: "label", widget: "string" },
+                      ],
+                  },
+                ],
+            }
+          - {
+              label: "Amelia",
+              name: "amelia",
+              widget: "object",
+              fields:
+                [
+                  { label: "Name", name: "name", widget: "string" },
+                  { label: "Bio", name: "bio", widget: "string" },
+                  { label: "Note", name: "note", widget: "string" },
+                  {
+                    label: "Links",
+                    name: "links",
+                    widget: "list",
+                    fields:
+                      [
+                        { label: "URL", name: "url", widget: "string" },
+                        { label: "Label", name: "label", widget: "string" },
+                      ],
+                  },
+                ],
+            }
+          - {
+              label: "Nic",
+              name: "nic",
+              widget: "object",
+              fields:
+                [
+                  { label: "Name", name: "name", widget: "string" },
+                  { label: "Bio", name: "bio", widget: "string" },
+                  { label: "Note", name: "note", widget: "string" },
+                  {
+                    label: "Links",
+                    name: "links",
+                    widget: "list",
+                    fields:
+                      [
+                        { label: "URL", name: "url", widget: "string" },
+                        { label: "Label", name: "label", widget: "string" },
+                      ],
+                  },
+                ],
+            }
