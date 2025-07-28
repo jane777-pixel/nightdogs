@@ -19,7 +19,7 @@ collections:
       - { label: "Author", name: "author", widget: "string" }
       - { label: "Tags", name: "tags", widget: "list", default: ["posts"] }
       - { label: "Body", name: "body", widget: "markdown" }
-    - name: "authors"
+  - name: "authors"
     label: "Authors"
     files:
       - label: "Author Data"
