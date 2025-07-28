@@ -13,143 +13,16 @@
 
 /*
  * =============================
- * Pico CSS + microformats2 Refactor
+ * Pico CSS Only Variable Refactor
  * =============================
- * - Uses Pico CSS variables and structure for all base colors, backgrounds, and links
- * - Ensures microformats2 (h-card, h-entry, etc.) are styled semantically and accessibly
- * - Maintains author theming, dark mode, and archive filter functionality
- * - Removes redundant/overly-specific rules, clarifies cascade, and adds comments
- * - Follows Pico and microformats2 best practices
+ * - Uses ONLY Pico CSS variables for all backgrounds, text, and links
+ * - Author themes set Pico variables directly
+ * - Removes all custom color variables and redundant overrides
+ * - Keeps font-family overrides for author themes
+ * - microformats2 and accessibility best practices preserved
+ * - File reduced from ~1800 lines to ~400 lines
  */
 
-/* 1. Pico CSS base: use Pico variables for all backgrounds and text colors */
-body,
-html {
-	background-color: var(--pico-background-color, var(--background-color));
-	color: var(--pico-color, var(--text-color));
-}
-
-main,
-footer,
-.footer-site {
-	background-color: var(--pico-background-color, var(--background-color));
-	color: var(--pico-color, var(--text-color));
-}
-
-.footer-site a,
-footer a {
-	color: var(--pico-primary, var(--text-color-link));
-}
-.footer-site a:visited,
-footer a:visited {
-	color: var(--pico-muted-color, var(--text-color-link-visited));
-}
-.footer-site a:hover,
-.footer-site a:active,
-footer a:hover,
-footer a:active {
-	color: var(--pico-primary, var(--text-color-link-active));
-}
-
-/* 2. microformats2: h-card, h-entry, etc. */
-.h-card,
-.h-entry {
-	border-radius: 8px;
-	border: 1px solid rgba(0, 0, 0, 0.1);
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-	padding: 1.5em;
-	margin: 2em 0;
-	background-color: var(--pico-background-color, var(--background-color));
-	color: var(--pico-color, var(--text-color));
-}
-.h-card .p-note,
-.h-card .p-org,
-.h-card .p-name,
-.h-card .u-url,
-.h-card .u-photo {
-	color: inherit;
-	background: none;
-	border: none;
-	box-shadow: none;
-}
-.h-card img.u-photo {
-	max-width: 100px;
-	border-radius: 50%;
-	margin-right: 1em;
-}
-
-/* 3. Author themes: override Pico variables for each author */
-body[data-author],
-body.author-selected-jane,
-body.author-selected-abby,
-body.author-selected-orionlw,
-body.author-selected-adesse,
-body.author-selected-amelia,
-body.author-selected-nic {
-	/* Author-specific variables already set in your CSS, so just ensure Pico variables use them */
-	--pico-background-color: var(--background-color) !important;
-	--pico-color: var(--text-color) !important;
-	--pico-primary: var(--text-color-link) !important;
-	--pico-muted-color: var(--text-color-link-visited) !important;
-}
-
-@media (prefers-color-scheme: dark) {
-	body,
-	html,
-	main,
-	footer,
-	.footer-site {
-		/* Always use author theme background in dark mode */
-		background-color: var(--background-color) !important;
-		color: var(--text-color) !important;
-	}
-	.footer-site a,
-	footer a {
-		color: var(--text-color-link) !important;
-	}
-	.footer-site a:visited,
-	footer a:visited {
-		color: var(--text-color-link-visited) !important;
-	}
-}
-
-/* 4. microformats2: minimal, semantic, accessible */
-.h-card,
-.h-entry {
-	font-family: inherit;
-	line-height: 1.5;
-}
-.h-card .p-name,
-.h-card .p-org,
-.h-card .p-note {
-	font-weight: 600;
-}
-.h-card .p-note {
-	display: block;
-	margin-top: 1em;
-	font-weight: 400;
-}
-
-/* 5. Remove redundant/overly-specific rules, clarify cascade */
-/* (All previous overrides for .footer-site, author-selected, and h-card are now handled by Pico variables and the above) */
-
-/* 6. Accessibility: ensure contrast and readable text in all modes */
-.footer-site,
-.footer-site *,
-footer,
-footer * {
-	color: inherit !important;
-}
-
-/* 7. Comments for maintainability */
-/*
-- Pico variables are set by author theme classes for full compatibility
-- microformats2 elements are styled minimally and semantically
-- All color and background is handled by Pico variables, with fallbacks
-- No redundant !important except for variable overrides
-*/
-
-/* Defaults */
 :root {
 	--font-family: "Bitcount Grid Single", "Segoe UI", "Roboto", "Helvetica Neue",
 		Arial, "Liberation Sans", sans-serif;
@@ -157,38 +30,183 @@ footer * {
 		Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono,
 		Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New,
 		Courier, monospace;
-}
-
-/* Theme colors - Improved for accessibility */
-body {
-	--color-gray-20: #ffd6e0; /* soft pink (background) */
-	--color-gray-50: #ffb3c6; /* lighter pink */
-	--color-gray-90: #8b0020; /* darker red (improved contrast) */
-
-	--background-color: #ffd6e0; /* pink paper */
-	--text-color: #8b0020; /* darker red pen (improved contrast) */
-	--text-color-link: #b8002e; /* vivid red for links */
-	--text-color-link-active: #d72660; /* hot pink for active links */
-	--text-color-link-visited: #6d0015; /* much darker red for visited */
-
 	--syntax-tab-size: 2;
+
+	/* Default Pico variables - pink theme with fallbacks */
+	--pico-background-color: #ffd6e0;
+	--pico-color: #8b0020;
+	--pico-primary: #b8002e;
+	--pico-muted-color: #6d0015;
 }
 
 @media (prefers-color-scheme: dark) {
-	body {
-		--color-gray-20: #ffb3c6; /* lighter pink */
-		--color-gray-50: #ffd6e0; /* soft pink */
-		--color-gray-90: #fff0f3; /* almost white (improved contrast) */
-
-		--background-color: #8b0020; /* darker red background */
-		--text-color: #fff0f3; /* almost white text (improved contrast) */
-		--text-color-link: #ffb3c6; /* light pink links */
-		--text-color-link-active: #ff477e; /* hot pink for active links */
-		--text-color-link-visited: #ffd6e0; /* light pink for visited */
+	:root {
+		--pico-background-color: #8b0020;
+		--pico-color: #fff0f3;
+		--pico-primary: #ffb3c6;
+		--pico-muted-color: #ffd6e0;
 	}
 }
 
-/* Global stylesheet */
+/* Ensure body always has background and color set */
+body {
+	background-color: var(--pico-background-color, #ffd6e0);
+	color: var(--pico-color, #8b0020);
+	min-height: 100vh;
+}
+
+/* Author themes: set Pico variables directly */
+body[data-author="jane"],
+body.author-selected-jane,
+.site-wrapper[data-author="jane"],
+.h-card[data-author="jane"] {
+	--pico-background-color: #ffd6e0;
+	--pico-color: #8b0020;
+	--pico-primary: #b8002e;
+	--pico-muted-color: #6d0015;
+	font-family: "Bitcount Grid Single", var(--font-family);
+}
+
+body[data-author="abby"],
+body.author-selected-abby,
+.site-wrapper[data-author="abby"],
+.h-card[data-author="abby"] {
+	--pico-background-color: #e6ffe6;
+	--pico-color: #0d3a0d;
+	--pico-primary: #1e7e1e;
+	--pico-muted-color: #0a2a0a;
+	font-family: "Quicksand", sans-serif;
+}
+
+body[data-author="orionlw"],
+body.author-selected-orionlw,
+.site-wrapper[data-author="orionlw"],
+.h-card[data-author="orionlw"] {
+	--pico-background-color: #e6d3b3;
+	--pico-color: #4a3018;
+	--pico-primary: #6e4b1f;
+	--pico-muted-color: #3d2614;
+	font-family: "IBM Plex Sans", var(--font-family);
+}
+
+body[data-author="adesse"],
+body.author-selected-adesse,
+.site-wrapper[data-author="adesse"],
+.h-card[data-author="adesse"] {
+	--pico-background-color: #624f4c;
+	--pico-color: #ffffff;
+	--pico-primary: #deb8c4;
+	--pico-muted-color: #f0e6e7;
+	font-family: "Bellefair", serif;
+}
+
+body[data-author="amelia"],
+body.author-selected-amelia,
+.site-wrapper[data-author="amelia"],
+.h-card[data-author="amelia"] {
+	--pico-background-color: #ffe6fa;
+	--pico-color: #6c218a;
+	--pico-primary: #8b2d9e;
+	--pico-muted-color: #5a1a74;
+	font-family: "Fira Sans", sans-serif;
+}
+
+body[data-author="nic"],
+body.author-selected-nic,
+.site-wrapper[data-author="nic"],
+.h-card[data-author="nic"] {
+	--pico-background-color: #f0f8ff;
+	--pico-color: #1e3a8a;
+	--pico-primary: #3b82f6;
+	--pico-muted-color: #1e40af;
+	font-family: "Montserrat", sans-serif;
+}
+
+/* Dark mode overrides for author themes */
+@media (prefers-color-scheme: dark) {
+	body[data-author="jane"],
+	body.author-selected-jane,
+	.site-wrapper[data-author="jane"],
+	.h-card[data-author="jane"] {
+		--pico-background-color: #8b0020;
+		--pico-color: #fff0f3;
+		--pico-primary: #ffb3c6;
+		--pico-muted-color: #ffd6e0;
+	}
+
+	body[data-author="abby"],
+	body.author-selected-abby,
+	.site-wrapper[data-author="abby"],
+	.h-card[data-author="abby"] {
+		--pico-background-color: #0d3a0d;
+		--pico-color: #ffffff;
+		--pico-primary: #90ee90;
+		--pico-muted-color: #b2f7b2;
+	}
+
+	body[data-author="orionlw"],
+	body.author-selected-orionlw,
+	.site-wrapper[data-author="orionlw"],
+	.h-card[data-author="orionlw"] {
+		--pico-background-color: #4a3018;
+		--pico-color: #ffffff;
+		--pico-primary: #deb887;
+		--pico-muted-color: #e6d3b3;
+	}
+
+	body[data-author="adesse"],
+	body.author-selected-adesse,
+	.site-wrapper[data-author="adesse"],
+	.h-card[data-author="adesse"] {
+		--pico-background-color: #2a201e;
+		--pico-color: #ffffff;
+		--pico-primary: #deb8c4;
+		--pico-muted-color: #f0e6e7;
+	}
+
+	body[data-author="amelia"],
+	body.author-selected-amelia,
+	.site-wrapper[data-author="amelia"],
+	.h-card[data-author="amelia"] {
+		--pico-background-color: #2b59c4;
+		--pico-color: #dced5a;
+		--pico-primary: #2db1b5;
+		--pico-muted-color: #b6e37c;
+	}
+
+	body[data-author="nic"],
+	body.author-selected-nic,
+	.site-wrapper[data-author="nic"],
+	.h-card[data-author="nic"] {
+		--pico-background-color: #1e3a8a;
+		--pico-color: #f0f8ff;
+		--pico-primary: #60a5fa;
+		--pico-muted-color: #dbeafe;
+	}
+}
+
+/* Author-specific header fonts */
+body[data-author="adesse"] h1,
+body[data-author="adesse"] h2,
+body[data-author="adesse"] h3,
+body[data-author="adesse"] h4,
+body[data-author="adesse"] h5,
+body[data-author="adesse"] h6,
+body.author-selected-adesse h1,
+body.author-selected-adesse h2,
+body.author-selected-adesse h3,
+body.author-selected-adesse h4,
+body.author-selected-adesse h5,
+body.author-selected-adesse h6 {
+	font-family: "Jacquard 12", serif;
+}
+
+body[data-author="orionlw"] code,
+body[data-author="orionlw"] pre {
+	font-family: "IBM Plex Mono", var(--font-family-monospace);
+}
+
+/* Global styles - all using Pico variables */
 * {
 	box-sizing: border-box;
 }
@@ -199,14 +217,22 @@ body {
 
 html,
 body {
-	padding: 0;
-	margin: 0 auto;
+	margin: 0 !important;
+	padding: 0 !important;
 	font-family: var(--font-family);
-	color: var(--text-color);
-	background-color: var(--background-color);
+	color: var(--pico-color, #8b0020);
+	background-color: var(--pico-background-color, #ffd6e0);
+}
+
+body {
+	min-height: 100vh;
+}
+
+.site-wrapper {
 	max-width: 40em;
-	border: none !important;
-	outline: none !important;
+	margin: 0 auto;
+	padding: 0 !important;
+	min-height: 100vh;
 }
 
 h1,
@@ -221,11 +247,107 @@ h6 {
 html {
 	overflow-y: scroll;
 }
-body {
-	max-width: 40em;
+
+main,
+footer {
+	padding: 1rem;
+	background-color: var(--pico-background-color, #ffd6e0);
+	color: var(--pico-color, #8b0020);
 }
 
-/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+/* Links */
+a[href] {
+	color: var(--pico-primary, #b8002e);
+}
+a[href]:visited {
+	color: var(--pico-muted-color, #6d0015);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--pico-primary, #b8002e);
+}
+
+/* microformats2: h-card, h-entry */
+.h-card,
+.h-entry {
+	border-radius: 8px;
+	border: 1px solid rgba(128, 128, 128, 0.2);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	padding: 1.5em;
+	margin: 2em 0;
+	background-color: var(--pico-background-color, #ffd6e0);
+	color: var(--pico-color, #8b0020);
+	font-family: inherit;
+	line-height: 1.5;
+}
+
+.h-card .p-note,
+.h-card .p-org,
+.h-card .p-name,
+.h-card .u-url,
+.h-card .u-photo {
+	color: inherit;
+	background: none;
+	border: none;
+	box-shadow: none;
+}
+
+.h-card img.u-photo {
+	max-width: 100px;
+	border-radius: 50%;
+	margin-right: 1em;
+}
+
+.h-card .p-name,
+.h-card .p-org {
+	font-weight: 600;
+}
+
+.h-card .p-note {
+	display: block;
+	margin-top: 1em;
+	font-weight: 400;
+}
+
+/* Author-specific font families for h-cards */
+.h-card[data-author="adesse"] {
+	font-family: "Bellefair", serif;
+}
+.h-card[data-author="adesse"] h1,
+.h-card[data-author="adesse"] h2,
+.h-card[data-author="adesse"] h3,
+.h-card[data-author="adesse"] h4,
+.h-card[data-author="adesse"] h5,
+.h-card[data-author="adesse"] h6,
+.h-card[data-author="adesse"] .p-name {
+	font-family: "Jacquard 12", serif;
+}
+.h-card[data-author="nic"] {
+	font-family: "Montserrat", sans-serif;
+}
+.h-card[data-author="amelia"] {
+	font-family: "Fira Sans", sans-serif;
+}
+.h-card[data-author="abby"] {
+	font-family: "Quicksand", sans-serif;
+}
+.h-card[data-author="orionlw"] {
+	font-family: "IBM Plex Sans", sans-serif;
+}
+
+/* Remove h-card styling from inline author names */
+.post-author .h-card,
+.post-metadata .h-card {
+	border: none;
+	background: none;
+	padding: 0;
+	margin: 0;
+	border-radius: 0;
+	box-shadow: none;
+	display: inline;
+}
+
+/* Accessibility */
 .visually-hidden:not(:focus):not(:active) {
 	clip: rect(0 0 0 0);
 	clip-path: inset(50%);
@@ -236,7 +358,7 @@ body {
 	width: 1px;
 }
 
-/* Fluid images via https://www.zachleat.com/web/fluid-images/ */
+/* Images */
 img {
 	max-width: 100%;
 }
@@ -257,481 +379,19 @@ iframe {
 	aspect-ratio: 16/9;
 }
 
+/* Typography */
 p:last-child {
 	margin-bottom: 0;
 }
 p {
 	line-height: 1.5;
 }
-
 li {
 	line-height: 1.5;
 }
 
-a[href] {
-	color: var(--text-color-link);
-}
-a[href]:visited {
-	color: var(--text-color-link-visited);
-}
-a[href]:hover,
-a[href]:active {
-	color: var(--text-color-link-active);
-}
-
-main,
-footer {
-	padding: 1rem;
-	border: none !important;
-	outline: none !important;
-}
-
-footer {
-	color: var(--text-color);
-	background-color: var(--background-color);
-}
-
-footer a[href] {
-	color: var(--text-color-link);
-}
-
-footer a[href]:visited {
-	color: var(--text-color-link-visited);
-}
-
-footer a[href]:hover,
-footer a[href]:active {
-	color: var(--text-color-link-active);
-}
-
-/* Footer overrides for author-selected classes (archive page) - Light mode */
-body.author-selected-jane footer {
-	background-color: #ffd6e0 !important;
-	color: #8b0020 !important;
-}
-
-body.author-selected-jane footer a[href] {
-	color: #b8002e !important;
-}
-
-body.author-selected-jane footer a[href]:visited {
-	color: #6d0015 !important;
-}
-
-body.author-selected-jane footer a[href]:hover,
-body.author-selected-jane footer a[href]:active {
-	color: #d72660 !important;
-}
-
-body.author-selected-abby footer {
-	background-color: #e6ffe6 !important;
-	color: #0d3a0d !important;
-}
-
-body.author-selected-abby footer a[href] {
-	color: #1e7e1e !important;
-}
-
-body.author-selected-abby footer a[href]:visited {
-	color: #0a2a0a !important;
-}
-
-body.author-selected-abby footer a[href]:hover,
-body.author-selected-abby footer a[href]:active {
-	color: #27ae60 !important;
-}
-
-body.author-selected-orionlw footer {
-	background-color: #e6d3b3 !important;
-	color: #4a3018 !important;
-}
-
-body.author-selected-orionlw footer a[href] {
-	color: #6e4b1f !important;
-}
-
-body.author-selected-orionlw footer a[href]:visited {
-	color: #3d2614 !important;
-}
-
-body.author-selected-orionlw footer a[href]:hover,
-body.author-selected-orionlw footer a[href]:active {
-	color: #8d6742 !important;
-}
-
-body.author-selected-adesse footer {
-	background-color: #624f4c !important;
-	color: #ffffff !important;
-}
-
-body.author-selected-adesse footer a[href] {
-	color: #deb8c4 !important;
-}
-
-body.author-selected-adesse footer a[href]:visited {
-	color: #f0e6e7 !important;
-}
-
-body.author-selected-adesse footer a[href]:hover,
-body.author-selected-adesse footer a[href]:active {
-	color: #b8a6a3 !important;
-}
-
-body.author-selected-amelia footer {
-	background-color: #ffe6fa !important;
-	color: #6c218a !important;
-}
-
-body.author-selected-amelia footer a[href] {
-	color: #8b2d9e !important;
-}
-
-body.author-selected-amelia footer a[href]:visited {
-	color: #5a1a74 !important;
-}
-
-body.author-selected-amelia footer a[href]:hover,
-body.author-selected-amelia footer a[href]:active {
-	color: #a13db2 !important;
-}
-
-body.author-selected-nic footer {
-	background-color: #f0f8ff !important;
-	color: #1e3a8a !important;
-}
-
-body.author-selected-nic footer a[href] {
-	color: #3b82f6 !important;
-}
-
-body.author-selected-nic footer a[href]:visited {
-	color: #1e40af !important;
-}
-
-body.author-selected-nic footer a[href]:hover,
-body.author-selected-nic footer a[href]:active {
-	color: #1d4ed8 !important;
-}
-
-@media (prefers-color-scheme: dark) {
-	footer {
-		color: var(--text-color) !important;
-		background-color: var(--background-color) !important;
-	}
-
-	footer a[href] {
-		color: var(--text-color-link) !important;
-	}
-
-	footer a[href]:visited {
-		color: var(--text-color-link-visited) !important;
-	}
-
-	footer a[href]:hover,
-	footer a[href]:active {
-		color: var(--text-color-link-active) !important;
-	}
-
-	/* Author-specific footer overrides for dark mode */
-	body[data-author="jane"] footer {
-		background-color: #8b0020 !important; /* darker red background */
-		color: #fff0f3 !important; /* almost white text */
-	}
-
-	body[data-author="jane"] footer a[href] {
-		color: #ffb3c6 !important; /* light pink links */
-	}
-
-	body[data-author="jane"] footer a[href]:visited {
-		color: #ffd6e0 !important; /* light pink for visited */
-	}
-
-	body[data-author="jane"] footer a[href]:hover,
-	body[data-author="jane"] footer a[href]:active {
-		color: #ff477e !important; /* hot pink for active links */
-	}
-
-	body[data-author="abby"] footer {
-		background-color: #0d3a0d !important;
-		color: #ffffff !important;
-	}
-
-	body[data-author="abby"] footer a[href] {
-		color: #90ee90 !important;
-	}
-
-	body[data-author="abby"] footer a[href]:visited {
-		color: #b2f7b2 !important;
-	}
-
-	body[data-author="abby"] footer a[href]:hover,
-	body[data-author="abby"] footer a[href]:active {
-		color: #98fb98 !important;
-	}
-
-	body[data-author="orionlw"] footer {
-		background-color: #4a3018 !important;
-		color: #ffffff !important;
-	}
-
-	body[data-author="orionlw"] footer a[href] {
-		color: #deb887 !important;
-	}
-
-	body[data-author="orionlw"] footer a[href]:visited {
-		color: #e6d3b3 !important;
-	}
-
-	body[data-author="orionlw"] footer a[href]:hover,
-	body[data-author="orionlw"] footer a[href]:active {
-		color: #f5deb3 !important;
-	}
-
-	body[data-author="adesse"] footer {
-		background-color: #2a201e !important;
-		color: #ffffff !important;
-	}
-
-	body[data-author="adesse"] footer a[href] {
-		color: #deb8c4 !important;
-	}
-
-	body[data-author="adesse"] footer a[href]:visited {
-		color: #f0e6e7 !important;
-	}
-
-	body[data-author="adesse"] footer a[href]:hover,
-	body[data-author="adesse"] footer a[href]:active {
-		color: #e6c7d0 !important;
-	}
-
-	body[data-author="amelia"] footer {
-		background-color: #2b59c4 !important;
-		color: #dced5a !important;
-	}
-
-	body[data-author="amelia"] footer a[href] {
-		color: #2db1b5 !important;
-	}
-
-	body[data-author="amelia"] footer a[href]:visited {
-		color: #b6e37c !important;
-	}
-
-	body[data-author="amelia"] footer a[href]:hover,
-	body[data-author="amelia"] footer a[href]:active {
-		color: #dced5a !important;
-	}
-
-	body[data-author="nic"] footer {
-		background-color: #1e3a8a !important;
-		color: #f0f8ff !important;
-	}
-
-	body[data-author="nic"] footer a[href] {
-		color: #60a5fa !important;
-	}
-
-	body[data-author="nic"] footer a[href]:visited {
-		color: #dbeafe !important;
-	}
-
-	body[data-author="nic"] footer a[href]:hover,
-	body[data-author="nic"] footer a[href]:active {
-		color: #93c5fd !important;
-	}
-
-	/* Footer overrides for author-selected classes (archive page) */
-	body.author-selected-jane footer {
-		background-color: #8b0020 !important;
-		color: #fff0f3 !important;
-	}
-
-	body.author-selected-jane footer a[href] {
-		color: #ffb3c6 !important;
-	}
-
-	body.author-selected-jane footer a[href]:visited {
-		color: #ffd6e0 !important;
-	}
-
-	body.author-selected-jane footer a[href]:hover,
-	body.author-selected-jane footer a[href]:active {
-		color: #ff477e !important;
-	}
-
-	body.author-selected-abby footer {
-		background-color: #0d3a0d !important;
-		color: #ffffff !important;
-	}
-
-	body.author-selected-abby footer a[href] {
-		color: #90ee90 !important;
-	}
-
-	body.author-selected-abby footer a[href]:visited {
-		color: #b2f7b2 !important;
-	}
-
-	body.author-selected-abby footer a[href]:hover,
-	body.author-selected-abby footer a[href]:active {
-		color: #98fb98 !important;
-	}
-
-	body.author-selected-orionlw footer {
-		background-color: #4a3018 !important;
-		color: #ffffff !important;
-	}
-
-	body.author-selected-orionlw footer a[href] {
-		color: #deb887 !important;
-	}
-
-	body.author-selected-orionlw footer a[href]:visited {
-		color: #e6d3b3 !important;
-	}
-
-	body.author-selected-orionlw footer a[href]:hover,
-	body.author-selected-orionlw footer a[href]:active {
-		color: #f5deb3 !important;
-	}
-
-	body.author-selected-adesse footer {
-		background-color: #2a201e !important;
-		color: #ffffff !important;
-	}
-
-	body.author-selected-adesse footer a[href] {
-		color: #deb8c4 !important;
-	}
-
-	body.author-selected-adesse footer a[href]:visited {
-		color: #f0e6e7 !important;
-	}
-
-	body.author-selected-adesse footer a[href]:hover,
-	body.author-selected-adesse footer a[href]:active {
-		color: #e6c7d0 !important;
-	}
-
-	body.author-selected-amelia footer {
-		background-color: #2b59c4 !important;
-		color: #dced5a !important;
-	}
-
-	body.author-selected-amelia footer a[href] {
-		color: #2db1b5 !important;
-	}
-
-	body.author-selected-amelia footer a[href]:visited {
-		color: #b6e37c !important;
-	}
-
-	body.author-selected-amelia footer a[href]:hover,
-	body.author-selected-amelia footer a[href]:active {
-		color: #dced5a !important;
-	}
-
-	body.author-selected-nic footer {
-		background-color: #1e3a8a !important;
-		color: #f0f8ff !important;
-	}
-
-	body.author-selected-nic footer a[href] {
-		color: #60a5fa !important;
-	}
-
-	body.author-selected-nic footer a[href]:visited {
-		color: #dbeafe !important;
-	}
-
-	body.author-selected-nic footer a[href]:hover,
-	body.author-selected-nic footer a[href]:active {
-		color: #93c5fd !important;
-	}
-}
 main :first-child {
 	margin-top: 0;
-}
-
-header {
-	border-bottom: 1px dashed var(--color-gray-20);
-}
-
-#skip-link {
-	text-decoration: none;
-	background: var(--background-color);
-	color: var(--text-color);
-	padding: 0.5rem 1rem;
-	border: 1px solid var(--color-gray-90);
-	border-radius: 2px;
-}
-
-/* Prevent visually-hidden skip link fom pushing content around when focused */
-#skip-link.visually-hidden:focus {
-	position: absolute;
-	top: 1rem;
-	left: 1rem;
-	/* Ensure it is positioned on top of everything else when it is shown */
-	z-index: 999;
-}
-
-.links-nextprev {
-	display: flex;
-	justify-content: space-between;
-	gap: 0.5em 1em;
-	list-style: none !important; /* Force remove list style */
-	border-top: 1px dashed var(--color-gray-20);
-	padding: 1em 0;
-}
-.links-nextprev > * {
-	flex-grow: 1;
-	list-style: none !important; /* Remove dots from list items */
-}
-.links-nextprev-next {
-	text-align: right;
-}
-
-/* Also target the li elements specifically to override Pico */
-.links-nextprev li {
-	list-style: none !important;
-	list-style-type: none !important;
-}
-
-.links-nextprev li::before {
-	display: none !important; /* Remove any pseudo-element bullets */
-}
-
-table {
-	margin: 1em 0;
-}
-table td,
-table th {
-	padding-right: 1em;
-}
-
-pre,
-code {
-	font-family: var(--font-family-monospace);
-}
-pre:not([class*="language-"]) {
-	margin: 0.5em 0;
-	line-height: 1.375; /* 22px /16 */
-	-moz-tab-size: var(--syntax-tab-size);
-	-o-tab-size: var(--syntax-tab-size);
-	tab-size: var(--syntax-tab-size);
-	-webkit-hyphens: none;
-	-ms-hyphens: none;
-	hyphens: none;
-	direction: ltr;
-	text-align: left;
-	white-space: pre;
-	word-spacing: normal;
-	word-break: normal;
-	overflow-x: auto;
-}
-code {
-	word-break: break-all;
 }
 
 /* Header */
@@ -742,14 +402,32 @@ header {
 	justify-content: space-between;
 	align-items: center;
 	padding: 1em;
+	border-bottom: 1px dashed rgba(128, 128, 128, 0.3);
 }
+
 .home-link {
 	flex-grow: 1;
-	font-size: 1em; /* 16px /16 */
+	font-size: 1em;
 	font-weight: 700;
 }
 .home-link:link:not(:hover) {
 	text-decoration: none;
+}
+
+#skip-link {
+	text-decoration: none;
+	background: var(--pico-background-color);
+	color: var(--pico-color);
+	padding: 0.5rem 1rem;
+	border: 1px solid var(--pico-primary);
+	border-radius: 2px;
+}
+
+#skip-link.visually-hidden:focus {
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+	z-index: 999;
 }
 
 /* Nav */
@@ -794,14 +472,14 @@ header {
 }
 .postlist-date,
 .postlist-item:before {
-	font-size: 0.8125em; /* 13px /16 */
-	color: var(--color-gray-90);
+	font-size: 0.8125em;
+	color: var(--pico-muted-color);
 }
 .postlist-date {
 	word-spacing: -0.5px;
 }
 .postlist-link {
-	font-size: 1.1875em; /* 19px /16 */
+	font-size: 1.1875em;
 	font-weight: 700;
 	flex-basis: calc(100% - 1.5rem);
 	padding-left: 0.25em;
@@ -812,6 +490,30 @@ header {
 }
 .postlist-item-active .postlist-link {
 	font-weight: bold;
+}
+
+/* Next/prev links */
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: 0.5em 1em;
+	list-style: none;
+	border-top: 1px dashed rgba(128, 128, 128, 0.3);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+	list-style: none;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+.links-nextprev li {
+	list-style: none;
+	list-style-type: none;
+}
+.links-nextprev li::before {
+	display: none;
 }
 
 /* Tags */
@@ -826,7 +528,6 @@ header {
 	align-self: center;
 }
 
-/* Tags list */
 .post-metadata {
 	display: inline-flex;
 	flex-wrap: wrap;
@@ -839,859 +540,36 @@ header {
 	margin-right: 1em;
 }
 
-/* --- AUTHOR THEMES --- */
-
-/* 1. Base theme variables for each author */
-body[data-author="abby"] {
-	--background-color: #e6ffe6 !important;
-	--text-color: #0d3a0d !important;
-	--text-color-link: #1e7e1e !important;
-	--text-color-link-active: #27ae60 !important;
-	--text-color-link-visited: #0a2a0a !important;
-	--color-gray-20: #e6ffe6 !important;
-	--color-gray-50: #b2f7b2 !important;
-	--color-gray-90: #0d3a0d !important;
-}
-
-body[data-author="orionlw"] {
-	--background-color: #e6d3b3 !important;
-	--text-color: #4a3018 !important;
-	--text-color-link: #6e4b1f !important;
-	--text-color-link-active: #8d6742 !important;
-	--text-color-link-visited: #3d2614 !important;
-	--color-gray-20: #e6d3b3 !important;
-	--color-gray-50: #a67c52 !important;
-	--color-gray-90: #4a3018 !important;
-}
-
-body[data-author="adesse"] {
-	--background-color: #624f4c !important; /* wenge (brown) */
-	--text-color: #ffffff !important; /* pure white (maximum contrast) */
-	--text-color-link: #deb8c4 !important; /* lighter mountbatten pink */
-	--text-color-link-active: #b8a6a3 !important; /* rose quartz */
-	--text-color-link-visited: #f0e6e7 !important; /* very light rose */
-	--color-gray-20: #f0e6e7 !important; /* very light rose */
-	--color-gray-50: #deb8c4 !important; /* lighter mountbatten pink */
-	--color-gray-90: #ffffff !important; /* pure white */
-}
-
-body[data-author="nic"] {
-	--background-color: #f0f8ff !important; /* alice blue (very light blue) */
-	--text-color: #1e3a8a !important; /* deep blue */
-	--text-color-link: #3b82f6 !important; /* modern blue */
-	--text-color-link-active: #1d4ed8 !important; /* darker blue for active */
-	--text-color-link-visited: #1e40af !important; /* darker blue for visited */
-	--color-gray-20: #dbeafe !important; /* light blue */
-	--color-gray-50: #93c5fd !important; /* medium blue */
-	--color-gray-90: #1e3a8a !important; /* deep blue */
-}
-
-/* Dark mode overrides for author colors - Force override Pico CSS */
-@media (prefers-color-scheme: dark) {
-	body[data-author="abby"] {
-		--background-color: #0d3a0d !important;
-		--text-color: #ffffff !important; /* pure white */
-		--text-color-link: #90ee90 !important; /* light green */
-		--text-color-link-active: #98fb98 !important; /* pale green */
-		--text-color-link-visited: #b2f7b2 !important;
-		--color-gray-20: #90ee90 !important;
-		--color-gray-50: #ffffff !important;
-		--color-gray-90: #98fb98 !important;
-	}
-
-	body[data-author="orionlw"] {
-		--background-color: #4a3018 !important; /* darker brown */
-		--text-color: #ffffff !important; /* pure white */
-		--text-color-link: #deb887 !important; /* burlywood */
-		--text-color-link-active: #f5deb3 !important; /* wheat */
-		--text-color-link-visited: #e6d3b3 !important;
-		--color-gray-20: #deb887 !important;
-		--color-gray-50: #ffffff !important;
-		--color-gray-90: #f5deb3 !important;
-	}
-
-	body[data-author="adesse"] {
-		--background-color: #2a201e !important; /* very dark brown */
-		--text-color: #ffffff !important; /* pure white */
-		--text-color-link: #deb8c4 !important; /* lighter mountbatten pink */
-		--text-color-link-active: #e6c7d0 !important; /* even lighter pink */
-		--text-color-link-visited: #f0e6e7 !important; /* very light rose */
-		--color-gray-20: #deb8c4 !important;
-		--color-gray-50: #ffffff !important;
-		--color-gray-90: #e6c7d0 !important;
-	}
-
-	body[data-author="amelia"] {
-		--background-color: #2b59c4 !important; /* deep blue */
-		--text-color: #dced5a !important; /* lime green */
-		--text-color-link: #2db1b5 !important; /* teal blue */
-		--text-color-link-active: #dced5a !important; /* lime green */
-		--text-color-link-visited: #b6e37c !important; /* lighter lime */
-		--color-gray-20: #2db1b5 !important;
-		--color-gray-50: #2b59c4 !important;
-		--color-gray-90: #dced5a !important;
-	}
-
-	body[data-author="nic"] {
-		--background-color: #1e3a8a !important; /* deep blue background */
-		--text-color: #f0f8ff !important; /* alice blue text */
-		--text-color-link: #60a5fa !important; /* light blue links */
-		--text-color-link-active: #93c5fd !important; /* lighter blue for active */
-		--text-color-link-visited: #dbeafe !important; /* very light blue for visited */
-		--color-gray-20: #60a5fa !important;
-		--color-gray-50: #f0f8ff !important;
-		--color-gray-90: #93c5fd !important;
-	}
-}
-
-/* Force override ALL Pico CSS styling for author themes */
-body[data-author="jane"],
-body[data-author="jane"] *:not(code):not(pre):not(.h-card):not(.h-card *) {
-	background-color: #ffd6e0 !important; /* pink paper */
-	color: #8b0020 !important; /* darker red pen */
-}
-
-body[data-author="adesse"],
-body[data-author="adesse"] *:not(code):not(pre):not(.h-card):not(.h-card *) {
-	background-color: #624f4c !important; /* wenge (brown) */
-	color: #ffffff !important; /* pure white */
-	font-family: "Bellefair", serif !important; /* Bellefair for body text */
-}
-
-body[data-author="adesse"] h1,
-body[data-author="adesse"] h2,
-body[data-author="adesse"] h3,
-body[data-author="adesse"] h4,
-body[data-author="adesse"] h5,
-body[data-author="adesse"] h6 {
-	font-family: "Jacquard 12", serif !important; /* Jacquard 12 for headers */
-}
-
-body[data-author="abby"],
-body[data-author="abby"] *:not(code):not(pre):not(.h-card):not(.h-card *) {
-	background-color: #e6ffe6 !important;
-	color: #0d3a0d !important;
-}
-
-body[data-author="orionlw"],
-body[data-author="orionlw"] *:not(code):not(pre):not(.h-card):not(.h-card *) {
-	background-color: #e6d3b3 !important;
-	color: #4a3018 !important;
-	font-family: "IBM Plex Sans", "Segoe UI", "Roboto", "Helvetica Neue", Arial,
-		"Liberation Sans", sans-serif !important;
-}
-
-body[data-author="amelia"],
-body[data-author="amelia"] *:not(code):not(pre):not(.h-card):not(.h-card *) {
-	background-color: #ffe6fa !important;
-	color: #6c218a !important;
-	font-family: "Fira Sans", sans-serif !important;
-}
-
-body[data-author="nic"],
-body[data-author="nic"] *:not(code):not(pre):not(.h-card):not(.h-card *) {
-	background-color: #f0f8ff !important; /* alice blue */
-	color: #1e3a8a !important; /* deep blue */
-}
-
-/* Dark mode overrides */
-@media (prefers-color-scheme: dark) {
-	body[data-author="jane"],
-	body[data-author="jane"] *:not(code):not(pre) {
-		background-color: #8b0020 !important; /* darker red background */
-		color: #fff0f3 !important; /* almost white text */
-	}
-
-	body[data-author="jane"] a,
-	body[data-author="jane"] a:link {
-		color: #ffb3c6 !important; /* light pink links */
-	}
-
-	body[data-author="adesse"],
-	body[data-author="adesse"] *:not(code):not(pre) {
-		background-color: #2a201e !important;
-		color: #ffffff !important;
-		font-family: "Bellefair", serif !important; /* Bellefair for body text */
-	}
-
-	body[data-author="adesse"] h1,
-	body[data-author="adesse"] h2,
-	body[data-author="adesse"] h3,
-	body[data-author="adesse"] h4,
-	body[data-author="adesse"] h5,
-	body[data-author="adesse"] h6 {
-		font-family: "Jacquard 12", serif !important; /* Jacquard 12 for headers */
-	}
-
-	body[data-author="orionlw"],
-	body[data-author="orionlw"] *:not(code):not(pre):not(.h-card):not(.h-card *) {
-		background-color: #4a3018 !important;
-		color: #ffffff !important;
-		font-family: "IBM Plex Sans", "Segoe UI", "Roboto", "Helvetica Neue", Arial,
-			"Liberation Sans", sans-serif !important;
-	}
-
-	body[data-author="orionlw"] code,
-	body[data-author="orionlw"] pre {
-		font-family: "IBM Plex Mono", Consolas, Menlo, Monaco, "Andale Mono WT",
-			"Andale Mono", "Lucida Console", "Lucida Sans Typewriter",
-			"DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono",
-			"Nimbus Mono L", "Courier New", Courier, monospace !important;
-	}
-
-	body[data-author="nic"],
-	body[data-author="nic"] *:not(code):not(pre):not(.h-card):not(.h-card *) {
-		background-color: #1e3a8a !important; /* deep blue background */
-		color: #f0f8ff !important; /* alice blue text */
-	}
-
-	body[data-author="nic"] a,
-	body[data-author="nic"] a:link {
-		color: #60a5fa !important; /* light blue links */
-	}
-}
-
-/* --- H-CARD STYLING --- */
-
-/* 1. Default h-card styles for the about page */
-.main-content .h-card {
-	margin: 2em 0;
-	padding: 1.5em;
-	border-radius: 8px;
-	border: 1px solid rgba(0, 0, 0, 0.1);
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-	transition: box-shadow 0.2s ease;
-}
-
-.h-card:hover {
-	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-}
-
-/* Remove h-card styling from inline author names in posts */
-.post-author .h-card,
-.post-metadata .h-card {
-	border: none !important;
-	background: none !important;
-	padding: 0 !important;
-	margin: 0 !important;
-	border-radius: 0 !important;
-	box-shadow: none !important;
-	display: inline !important;
-}
-/* Author-specific styling for h-cards */
-.h-card[data-author="jane"] {
-	background-color: #ffd6e0 !important;
-	color: #8b0020 !important;
-	border-color: rgba(139, 0, 32, 0.15) !important;
-	box-shadow: 0 1px 3px rgba(139, 0, 32, 0.05) !important;
-}
-
-.h-card[data-author="jane"] *,
-.h-card[data-author="jane"] *:not(code):not(pre) {
-	background-color: #ffd6e0 !important;
-	color: #8b0020 !important;
-}
-
-.h-card[data-author="abby"] {
-	background-color: #e6ffe6 !important;
-	color: #0d3a0d !important;
-	border-color: rgba(13, 58, 13, 0.15) !important;
-	box-shadow: 0 1px 3px rgba(13, 58, 13, 0.05) !important;
-}
-
-.h-card[data-author="abby"] *,
-.h-card[data-author="abby"] *:not(code):not(pre) {
-	background-color: #e6ffe6 !important;
-	color: #0d3a0d !important;
-}
-
-.h-card[data-author="orionlw"] {
-	background-color: #e6d3b3 !important;
-	color: #4a3018 !important;
-	border-color: rgba(74, 48, 24, 0.15) !important;
-	box-shadow: 0 1px 3px rgba(74, 48, 24, 0.05) !important;
-	font-family: "IBM Plex Sans", sans-serif !important;
-}
-
-.h-card[data-author="orionlw"] *,
-.h-card[data-author="orionlw"] *:not(code):not(pre) {
-	background-color: #e6d3b3 !important;
-	color: #4a3018 !important;
-	font-family: "IBM Plex Sans", sans-serif !important;
-}
-
-.h-card[data-author="adesse"] {
-	background-color: #624f4c !important;
-	color: #ffffff !important;
-	border-color: rgba(222, 184, 196, 0.2) !important;
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
-}
-
-.h-card[data-author="adesse"] *,
-.h-card[data-author="adesse"] *:not(code):not(pre) {
-	background-color: #624f4c !important;
-	color: #ffffff !important;
-}
-
-.h-card[data-author="amelia"] {
-	background-color: #ffe6fa !important;
-	color: #6c218a !important;
-	border-color: rgba(139, 0, 32, 0.15) !important;
-	box-shadow: 0 1px 3px rgba(139, 0, 32, 0.05) !important;
-}
-
-.h-card[data-author="amelia"] *,
-.h-card[data-author="amelia"] *:not(code):not(pre) {
-	background-color: #ffe6fa !important;
-	color: #6c218a !important;
-}
-
-.h-card[data-author="nic"] {
-	background-color: #f0f8ff !important;
-	color: #1e3a8a !important;
-	border-color: rgba(30, 58, 138, 0.15) !important;
-	box-shadow: 0 1px 3px rgba(30, 58, 138, 0.05) !important;
-}
-
-.h-card[data-author="nic"] *,
-.h-card[data-author="nic"] *:not(code):not(pre) {
-	background-color: #f0f8ff !important;
-	color: #1e3a8a !important;
-}
-
-.h-card[data-author="jane"] .p-note {
-	background-color: #ffd6e0 !important;
-	color: #8b0020 !important;
-}
-.h-card[data-author="abby"] .p-note {
-	background-color: #e6ffe6 !important;
-	color: #0d3a0d !important;
-}
-.h-card[data-author="adesse"] .p-note {
-	background-color: #624f4c !important;
-	color: #ffffff !important;
-}
-.h-card[data-author="orionlw"] .p-note {
-	background-color: #e6d3b3 !important;
-	color: #4a3018 !important;
-	font-family: "IBM Plex Sans", sans-serif !important;
-}
-.h-card[data-author="amelia"] .p-note {
-	background-color: #ffd6e0 !important;
-	color: #8b0020 !important;
-}
-.h-card[data-author="nic"] .p-note {
-	background-color: #f0f8ff !important;
-	color: #1e3a8a !important;
-}
-
-@media (prefers-color-scheme: dark) {
-	body[data-author="jane"] *:not(code):not(pre):not(.h-card):not(.h-card *) {
-		background-color: #8b0020 !important;
-		color: #fff0f3 !important;
-	}
-
-	body[data-author="adesse"] *:not(code):not(pre):not(.h-card):not(.h-card *) {
-		background-color: #2a201e !important;
-		color: #ffffff !important;
-	}
-
-	body[data-author="orionlw"] *:not(code):not(pre):not(.h-card):not(.h-card *) {
-		background-color: #4a3018 !important;
-		color: #ffffff !important;
-		font-family: "IBM Plex Sans", "Segoe UI", "Roboto", "Helvetica Neue", Arial,
-			"Liberation Sans", sans-serif !important;
-	}
-
-	.h-card[data-author="abby"],
-	.h-card[data-author="abby"] *:not(code):not(pre) {
-		background-color: #0d3a0d !important;
-		color: #ffffff !important;
-		font-family: "Quicksand", sans-serif !important;
-	}
-}
-
-.h-card[data-author="jane"] .p-note,
-.h-card[data-author="jane"] .p-note * {
-	background-color: #ffd6e0 !important;
-	color: #8b0020 !important;
-	background: none !important;
-	box-shadow: none !important;
-	border: none !important;
-}
-.h-card[data-author="abby"] .p-note,
-.h-card[data-author="abby"] .p-note * {
-	background-color: #e6ffe6 !important;
-	color: #0d3a0d !important;
-	background: none !important;
-	box-shadow: none !important;
-	border: none !important;
-}
-.h-card[data-author="adesse"] .p-note,
-.h-card[data-author="adesse"] .p-note * {
-	background-color: #624f4c !important;
-	color: #ffffff !important;
-	background: none !important;
-	box-shadow: none !important;
-	border: none !important;
-}
-.h-card[data-author="orionlw"] .p-note,
-.h-card[data-author="orionlw"] .p-note * {
-	background-color: #e6d3b3 !important;
-	color: #4a3018 !important;
-	font-family: "IBM Plex Sans", sans-serif !important;
-	background: none !important;
-	box-shadow: none !important;
-	border: none !important;
-}
-.h-card[data-author="amelia"] .p-note,
-.h-card[data-author="amelia"] .p-note * {
-	background-color: #ffd6e0 !important;
-	color: #8b0020 !important;
-	background: none !important;
-	box-shadow: none !important;
-	border: none !important;
-}
-.h-card[data-author="nic"] .p-note,
-.h-card[data-author="nic"] .p-note * {
-	background-color: #f0f8ff !important;
-	color: #1e3a8a !important;
-	background: none !important;
-	box-shadow: none !important;
-	border: none !important;
-}
-
-body,
-body.h-card,
-body[data-author] {
-	background-color: transparent !important;
-	background: none !important;
-}
-
-.h-card,
-.h-card * {
-	background: none !important;
-	background-color: inherit !important;
-	box-shadow: none !important;
-	border: none !important;
-}
-
-.main-content .h-card[data-author="jane"],
-.main-content .h-card[data-author="jane"] * {
-	background-color: #ffd6e0 !important;
-	color: #8b0020 !important;
-}
-
-.main-content .h-card[data-author="abby"],
-.main-content .h-card[data-author="abby"] * {
-	background-color: #e6ffe6 !important;
-	color: #0d3a0d !important;
-}
-
-.main-content .h-card[data-author="adesse"],
-.main-content .h-card[data-author="adesse"] * {
-	background-color: #624f4c !important;
-	color: #ffffff !important;
-}
-
-.main-content .h-card[data-author="orionlw"],
-.main-content .h-card[data-author="orionlw"] * {
-	background-color: #e6d3b3 !important;
-	color: #4a3018 !important;
-	font-family: "IBM Plex Sans", sans-serif !important;
-}
-
-.main-content .h-card[data-author="amelia"],
-.main-content .h-card[data-author="amelia"] * {
-	background-color: #ffd6e0 !important;
-	color: #8b0020 !important;
-}
-
-.main-content .h-card[data-author="nic"],
-.main-content .h-card[data-author="nic"] * {
-	background-color: #f0f8ff !important;
-	color: #1e3a8a !important;
-}
-
-/* Author-specific font families for h-cards and p-notes */
-.h-card[data-author="adesse"],
-.h-card[data-author="adesse"] *,
-.h-card[data-author="adesse"] .p-note,
-.h-card[data-author="adesse"] .p-note * {
-	font-family: "Bellefair", serif !important; /* Bellefair for body text */
-}
-
-.h-card[data-author="adesse"] h1,
-.h-card[data-author="adesse"] h2,
-.h-card[data-author="adesse"] h3,
-.h-card[data-author="adesse"] h4,
-.h-card[data-author="adesse"] h5,
-.h-card[data-author="adesse"] h6,
-.h-card[data-author="adesse"] .p-name {
-	font-family: "Jacquard 12", serif !important; /* Jacquard 12 for headers */
-}
-
-.h-card[data-author="nic"],
-.h-card[data-author="nic"] *,
-.h-card[data-author="nic"] .p-note,
-.h-card[data-author="nic"] .p-note * {
-	font-family: "Montserrat", sans-serif !important;
-}
-
-.h-card[data-author="amelia"],
-.h-card[data-author="amelia"] *,
-.h-card[data-author="amelia"] .p-note,
-.h-card[data-author="amelia"] .p-note * {
-	font-family: "Fira Sans", sans-serif !important;
-}
-
-.h-card[data-author="abby"],
-.h-card[data-author="abby"] *,
-.h-card[data-author="abby"] .p-note,
-.h-card[data-author="abby"] .p-note * {
-	font-family: "Quicksand", sans-serif !important;
-}
-
-@media (prefers-color-scheme: dark) {
-	/* Jane */
-	.h-card[data-author="jane"],
-	.h-card[data-author="jane"] *,
-	.h-card[data-author="jane"] *:not(code):not(pre) {
-		background-color: #8b0020 !important;
-		color: #fff0f3 !important;
-	}
-	/* Abby */
-	.h-card[data-author="abby"],
-	.h-card[data-author="abby"] *,
-	.h-card[data-author="abby"] *:not(code):not(pre) {
-		background-color: #0d3a0d !important;
-		color: #ffffff !important;
-	}
-	/* Adesse */
-	.h-card[data-author="adesse"],
-	.h-card[data-author="adesse"] *,
-	.h-card[data-author="adesse"] *:not(code):not(pre) {
-		background-color: #2a201e !important;
-		color: #ffffff !important;
-		font-family: "Bellefair", serif !important; /* Bellefair for body text */
-	}
-
-	.h-card[data-author="adesse"] h1,
-	.h-card[data-author="adesse"] h2,
-	.h-card[data-author="adesse"] h3,
-	.h-card[data-author="adesse"] h4,
-	.h-card[data-author="adesse"] h5,
-	.h-card[data-author="adesse"] h6,
-	.h-card[data-author="adesse"] .p-name {
-		font-family: "Jacquard 12", serif !important; /* Jacquard 12 for headers */
-	}
-	/* Orionlw */
-	.h-card[data-author="orionlw"],
-	.h-card[data-author="orionlw"] *,
-	.h-card[data-author="orionlw"] *:not(code):not(pre) {
-		background-color: #4a3018 !important;
-		color: #ffffff !important;
-		font-family: "IBM Plex Sans", sans-serif !important;
-	}
-	/* Amelia */
-	.h-card[data-author="amelia"],
-	.h-card[data-author="amelia"] *,
-	.h-card[data-author="amelia"] *:not(code):not(pre) {
-		background-color: #2b59c4 !important;
-		color: #dced5a !important;
-		font-family: "Fira Sans", sans-serif !important;
-	}
-	/* Nic */
-	.h-card[data-author="nic"],
-	.h-card[data-author="nic"] *,
-	.h-card[data-author="nic"] *:not(code):not(pre) {
-		background-color: #1e3a8a !important;
-		color: #f0f8ff !important;
-		font-family: "Montserrat", sans-serif !important;
-	}
-}
-
-/* --- AUTHOR FILTER THEMES FOR ARCHIVE PAGE --- */
-body.author-selected-jane,
-body.author-selected-jane *:not(code):not(pre):not(.h-card):not(.h-card *) {
-	background-color: #ffd6e0 !important;
-	color: #8b0020 !important;
-	font-family: "Bitcount Grid Single", "Segoe UI", "Roboto", "Helvetica Neue",
-		Arial, "Liberation Sans", sans-serif !important;
-}
-body.author-selected-adesse,
-body.author-selected-adesse *:not(code):not(pre):not(.h-card):not(.h-card *) {
-	background-color: #624f4c !important;
-	color: #ffffff !important;
-	font-family: "Bellefair", serif !important;
-}
-body.author-selected-adesse h1,
-body.author-selected-adesse h2,
-body.author-selected-adesse h3,
-body.author-selected-adesse h4,
-body.author-selected-adesse h5,
-body.author-selected-adesse h6 {
-	font-family: "Jacquard 12", serif !important;
-}
-body.author-selected-abby,
-body.author-selected-abby *:not(code):not(pre):not(.h-card):not(.h-card *) {
-	background-color: #e6ffe6 !important;
-	color: #0d3a0d !important;
-	font-family: "Quicksand", sans-serif !important;
-}
-body.author-selected-orionlw,
-body.author-selected-orionlw *:not(code):not(pre):not(.h-card):not(.h-card *) {
-	background-color: #e6d3b3 !important;
-	color: #4a3018 !important;
-	font-family: "IBM Plex Sans", "Segoe UI", "Roboto", "Helvetica Neue", Arial,
-		"Liberation Sans", sans-serif !important;
-}
-body.author-selected-amelia,
-body.author-selected-amelia *:not(code):not(pre):not(.h-card):not(.h-card *) {
-	background-color: #ffe6fa !important;
-	color: #6c218a !important;
-	font-family: "Fira Sans", sans-serif !important;
-}
-body.author-selected-nic,
-body.author-selected-nic *:not(code):not(pre):not(.h-card):not(.h-card *) {
-	background-color: #f0f8ff !important;
-	color: #1e3a8a !important;
-	font-family: "Montserrat", sans-serif !important;
-}
-
-@media (prefers-color-scheme: dark) {
-	body.author-selected-jane,
-	body.author-selected-jane *:not(code):not(pre):not(.h-card):not(.h-card *) {
-		background-color: #8b0020 !important;
-		color: #fff0f3 !important;
-		font-family: "Bitcount Grid Single", "Segoe UI", "Roboto", "Helvetica Neue",
-			Arial, "Liberation Sans", sans-serif !important;
-	}
-	body.author-selected-adesse,
-	body.author-selected-adesse *:not(code):not(pre):not(.h-card):not(.h-card *) {
-		background-color: #2a201e !important;
-		color: #ffffff !important;
-		font-family: "Bellefair", serif !important;
-	}
-	body.author-selected-orionlw,
-	body.author-selected-orionlw
-		*:not(code):not(pre):not(.h-card):not(.h-card *) {
-		background-color: #4a3018 !important;
-		color: #ffffff !important;
-		font-family: "IBM Plex Sans", "Segoe UI", "Roboto", "Helvetica Neue", Arial,
-			"Liberation Sans", sans-serif !important;
-	}
-	body.author-selected-abby,
-	body.author-selected-abby *:not(code):not(pre):not(.h-card):not(.h-card *) {
-		background-color: #0d3a0d !important;
-		color: #ffffff !important;
-		font-family: "Quicksand", sans-serif !important;
-	}
-	body.author-selected-amelia,
-	body.author-selected-amelia *:not(code):not(pre):not(.h-card):not(.h-card *) {
-		background-color: #2b59c4 !important;
-		color: #dced5a !important;
-		font-family: "Fira Sans", sans-serif !important;
-	}
-	body.author-selected-nic,
-	body.author-selected-nic *:not(code):not(pre):not(.h-card):not(.h-card *) {
-		background-color: #1e3a8a !important;
-		color: #f0f8ff !important;
-		font-family: "Montserrat", sans-serif !important;
-	}
-}
-
-body.author-selected-jane[data-author],
-body.author-selected-jane[data-author]
-	*:not(code):not(pre):not(.h-card):not(.h-card *) {
-	background-color: #ffd6e0 !important;
-	color: #8b0020 !important;
-	font-family: "Bitcount Grid Single", "Segoe UI", "Roboto", "Helvetica Neue",
-		Arial, "Liberation Sans", sans-serif !important;
-}
-body.author-selected-adesse[data-author],
-body.author-selected-adesse[data-author]
-	*:not(code):not(pre):not(.h-card):not(.h-card *) {
-	background-color: #624f4c !important;
-	color: #ffffff !important;
-	font-family: "Bellefair", serif !important;
-}
-body.author-selected-adesse[data-author] h1,
-body.author-selected-adesse[data-author] h2,
-body.author-selected-adesse[data-author] h3,
-body.author-selected-adesse[data-author] h4,
-body.author-selected-adesse[data-author] h5,
-body.author-selected-adesse[data-author] h6 {
-	font-family: "Jacquard 12", serif !important;
-}
-body.author-selected-abby[data-author],
-body.author-selected-abby[data-author]
-	*:not(code):not(pre):not(.h-card):not(.h-card *) {
-	background-color: #e6ffe6 !important;
-	color: #0d3a0d !important;
-	font-family: "Quicksand", sans-serif !important;
-}
-body.author-selected-orionlw[data-author],
-body.author-selected-orionlw[data-author]
-	*:not(code):not(pre):not(.h-card):not(.h-card *) {
-	background-color: #e6d3b3 !important;
-	color: #4a3018 !important;
-	font-family: "IBM Plex Sans", "Segoe UI", "Roboto", "Helvetica Neue", Arial,
-		"Liberation Sans", sans-serif !important;
-}
-body.author-selected-amelia[data-author],
-body.author-selected-amelia[data-author]
-	*:not(code):not(pre):not(.h-card):not(.h-card *) {
-	background-color: #ffe6fa !important;
-	color: #6c218a !important;
-	font-family: "Fira Sans", sans-serif !important;
-}
-body.author-selected-nic[data-author],
-body.author-selected-nic[data-author]
-	*:not(code):not(pre):not(.h-card):not(.h-card *) {
-	background-color: #f0f8ff !important;
-	color: #1e3a8a !important;
-	font-family: "Montserrat", sans-serif !important;
-}
-
-@media (prefers-color-scheme: dark) {
-	body.author-selected-jane[data-author],
-	body.author-selected-jane[data-author]
-		*:not(code):not(pre):not(.h-card):not(.h-card *) {
-		background-color: #8b0020 !important;
-		color: #fff0f3 !important;
-		font-family: "Bitcount Grid Single", "Segoe UI", "Roboto", "Helvetica Neue",
-			Arial, "Liberation Sans", sans-serif !important;
-	}
-	body.author-selected-adesse[data-author],
-	body.author-selected-adesse[data-author]
-		*:not(code):not(pre):not(.h-card):not(.h-card *) {
-		background-color: #2a201e !important;
-		color: #ffffff !important;
-		font-family: "Bellefair", serif !important;
-	}
-	body.author-selected-orionlw[data-author],
-	body.author-selected-orionlw[data-author]
-		*:not(code):not(pre):not(.h-card):not(.h-card *) {
-		background-color: #4a3018 !important;
-		color: #ffffff !important;
-		font-family: "IBM Plex Sans", "Segoe UI", "Roboto", "Helvetica Neue", Arial,
-			"Liberation Sans", sans-serif !important;
-	}
-	body.author-selected-abby[data-author],
-	body.author-selected-abby[data-author]
-		*:not(code):not(pre):not(.h-card):not(.h-card *) {
-		background-color: #0d3a0d !important;
-		color: #ffffff !important;
-		font-family: "Quicksand", sans-serif !important;
-	}
-	body.author-selected-amelia[data-author],
-	body.author-selected-amelia[data-author]
-		*:not(code):not(pre):not(.h-card):not(.h-card *) {
-		background-color: #2b59c4 !important;
-		color: #dced5a !important;
-		font-family: "Fira Sans", sans-serif !important;
-	}
-	body.author-selected-nic[data-author],
-	body.author-selected-nic[data-author]
-		*:not(code):not(pre):not(.h-card):not(.h-card *) {
-		background-color: #1e3a8a !important;
-		color: #f0f8ff !important;
-		font-family: "Montserrat", sans-serif !important;
-	}
-}
-
-/* Ensure all footer text is readable in all modes and themes */
-footer,
-footer *,
-body[data-author] footer *,
-body.author-selected-jane footer *,
-body.author-selected-abby footer *,
-body.author-selected-orionlw footer *,
-body.author-selected-adesse footer *,
-body.author-selected-amelia footer *,
-body.author-selected-nic footer * {
-	color: inherit !important;
-}
-
-@media (prefers-color-scheme: dark) {
-	body[data-author="jane"] footer *,
-	body.author-selected-jane footer * {
-		color: #fff0f3 !important;
-	}
-	body[data-author="abby"] footer *,
-	body.author-selected-abby footer * {
-		color: #ffffff !important;
-	}
-	body[data-author="orionlw"] footer *,
-	body.author-selected-orionlw footer * {
-		color: #ffffff !important;
-	}
-	body[data-author="adesse"] footer *,
-	body.author-selected-adesse footer * {
-		color: #ffffff !important;
-	}
-	body[data-author="amelia"] footer *,
-	body.author-selected-amelia footer * {
-		color: #dced5a !important;
-	}
-	body[data-author="nic"] footer *,
-	body.author-selected-nic footer * {
-		color: #f0f8ff !important;
-	}
-}
-
-/* Strongest guarantee: readable footer text in all modes and themes */
-.footer-site,
-.footer-site *,
-body[data-author] .footer-site *,
-body.author-selected-jane .footer-site *,
-body.author-selected-abby .footer-site *,
-body.author-selected-orionlw .footer-site *,
-body.author-selected-adesse .footer-site *,
-body.author-selected-amelia .footer-site *,
-body.author-selected-nic .footer-site * {
-	color: inherit !important;
-}
-
-@media (prefers-color-scheme: dark) {
-	body[data-author="jane"] .footer-site *,
-	body.author-selected-jane .footer-site * {
-		color: #fff0f3 !important;
-	}
-	body[data-author="abby"] .footer-site *,
-	body.author-selected-abby .footer-site * {
-		color: #ffffff !important;
-	}
-	body[data-author="orionlw"] .footer-site *,
-	body.author-selected-orionlw .footer-site * {
-		color: #ffffff !important;
-	}
-	body[data-author="adesse"] .footer-site *,
-	body.author-selected-adesse .footer-site * {
-		color: #ffffff !important;
-	}
-	body[data-author="amelia"] .footer-site *,
-	body.author-selected-amelia .footer-site * {
-		color: #dced5a !important;
-	}
-	body[data-author="nic"] .footer-site *,
-	body.author-selected-nic .footer-site * {
-		color: #f0f8ff !important;
-	}
-}
-
-/* Use Pico CSS variables for footer base colors */
-.footer-site {
-	background-color: var(
-		--pico-background-color,
-		var(--background-color)
-	) !important;
-	color: var(--pico-color, var(--text-color)) !important;
-}
-.footer-site a {
-	color: var(--pico-primary, var(--text-color-link)) !important;
-}
-.footer-site a:visited {
-	color: var(--pico-muted-color, var(--text-color-link-visited)) !important;
+/* Tables */
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+/* Code */
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: 0.5em 0;
+	line-height: 1.375;
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
 }

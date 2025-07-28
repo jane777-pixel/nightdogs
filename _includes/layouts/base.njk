@@ -56,6 +56,7 @@
         <link rel="pingback" href="https://webmention.io/nightdogs.xyz/xmlrpc">
     </head>
     <body data-author="{{ author or 'jane' }}" class="h-card">
+        <div class="site-wrapper" data-author="{{ author or 'jane' }}">
         <a href="#main" id="skip-link" class="visually-hidden">Skip to main content</a>
 
 		<header>
@@ -83,7 +84,7 @@
                 <em>Built with <a href="https://www.11ty.dev/">Eleventy v3.1.2</a></em>
             </p>
         </footer>
-
+        </div>
 		<!-- This page `{{ page.url }}` was built on {% currentBuildDate %} -->
 		<script type="module" src="{% getBundleFileUrl "js" %}"></script>
         <script async defer src="//assets.pinterest.com/js/pinit.js"></script>

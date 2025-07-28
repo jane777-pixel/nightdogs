@@ -61,6 +61,19 @@ const authorFilter = document.getElementById("author-filter");
 const tagFilter = document.getElementById("tag-filter");
 const yearFilter = document.getElementById("year-filter");
 const postItems = document.querySelectorAll(".postlist-item");
+const siteWrapper = document.querySelector('.site-wrapper');
+
+function setThemeByAuthor(author) {
+	document.body.classList.remove(...Array.from(document.body.classList).filter(c => c.startsWith('author-selected-')));
+	if (author && author !== "all") {
+		document.body.classList.add(`author-selected-${author}`);
+		document.body.setAttribute('data-author', author);
+		if (siteWrapper) siteWrapper.setAttribute('data-author', author);
+	} else {
+		document.body.setAttribute('data-author', 'jane'); // Reset to default
+		if (siteWrapper) siteWrapper.setAttribute('data-author', 'jane');
+	}
+}
 
 authorFilter.addEventListener("change", filterPosts);
 tagFilter.addEventListener("change", filterPosts);
@@ -71,14 +84,8 @@ function filterPosts() {
 	const selectedTag = tagFilter.value;
 	const selectedYear = yearFilter.value;
 
-	// Set author-selected class on body and update data-author
-	document.body.classList.remove(...Array.from(document.body.classList).filter(c => c.startsWith('author-selected-')));
-	if (selectedAuthor !== "all") {
-		document.body.classList.add(`author-selected-${selectedAuthor}`);
-		document.body.setAttribute('data-author', selectedAuthor);
-	} else {
-		document.body.setAttribute('data-author', 'jane'); // Reset to default
-	}
+	let anyVisible = false;
+	let firstVisibleAuthor = null;
 
 	postItems.forEach((item) => {
 		const itemAuthor = item.getAttribute("data-author");
@@ -89,9 +96,19 @@ function filterPosts() {
 		const yearMatch = selectedYear === "all" || itemYear === selectedYear;
 		if (authorMatch && tagMatch && yearMatch) {
 			item.style.display = "";
+			if (!anyVisible) {
+				firstVisibleAuthor = itemAuthor;
+				anyVisible = true;
+			}
 		} else {
 			item.style.display = "none";
 		}
 	});
+
+	if (selectedAuthor !== "all") {
+		setThemeByAuthor(selectedAuthor);
+	} else {
+		setThemeByAuthor(firstVisibleAuthor || 'jane');
+	}
 }
 </script>
