@@ -1,8 +1,9 @@
 backend:
   name: git-gateway
   branch: main
-media_folder: "public/img"
-public_folder: "/img"
+publish_mode: editorial_workflow
+media_folder: "content/blog"
+public_folder: "/blog"
 collections:
   - name: "blog"
     label: "Blog Posts"
@@ -14,17 +15,9 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Slug", name: "slug", widget: "string" }
+      - { label: "Summary", name: "summary", widget: "text" }
       - { label: "Publish Date", name: "date", widget: "datetime" }
-      - {
-          label: "Author",
-          name: "author",
-          widget: "relation",
-          collection: "authors",
-          file: "authors",
-          searchFields: ["*.name"],
-          displayFields: ["*.name"],
-          valueField: "{{slug}}",
-        }
+      - { label: "Author", name: "author", widget: "string" }
       - { label: "Tags", name: "tags", widget: "list", default: ["posts"] }
       - { label: "Body", name: "body", widget: "markdown" }
   - name: "authors"
