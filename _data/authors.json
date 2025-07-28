@@ -36,9 +36,18 @@
   },
   "orionlw": {
     "name": "Orion Leidl Wilson",
-    "bio": "Guy.",
+    "bio": "Electric bassist and Composer. ",
     "note": "🎧📀🐈‍⬛",
-    "links": []
+    "links": [
+      {
+        "url": "https://orionlw.me",
+        "label": "personal site"
+      },
+      {
+        "url": "https://mastodon.social/@orionlw",
+        "label": "mastodon"
+      }
+    ]
   },
   "amelia": {
     "name": "Amelia Wheeler",
