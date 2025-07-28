@@ -90,15 +90,22 @@ export default async function (eleventyConfig) {
 
 	// Image optimization: https://www.11ty.dev/docs/plugins/image/#eleventy-transform
 	eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
-		// Output formats for each image.
-		formats: ["avif", "webp", "auto"],
+		// Output formats for each image - reducing from 3 to 2 formats for speed
+		formats: ["webp", "auto"],
 
-		// widths: ["auto"],
+		// Specify exact widths instead of "auto" for faster processing
+		widths: [400, 800, 1200],
 
 		failOnError: false,
 
 		// Skip processing images that are already in /img/imported/
 		transformOnHTMLParseError: false,
+
+		// Use disk cache for faster rebuilds
+		cacheOptions: {
+			duration: "1d", // Cache for 1 day
+			directory: "./.cache",
+		},
 
 		htmlOptions: {
 			imgAttributes: {
@@ -109,7 +116,13 @@ export default async function (eleventyConfig) {
 		},
 
 		sharpOptions: {
-			animated: true,
+			animated: false, // Disable animated processing for speed
+			jpeg: {
+				quality: 80, // Lower quality for faster processing
+			},
+			webp: {
+				quality: 80,
+			},
 		},
 
 		// Add a function to skip certain images
@@ -149,7 +162,7 @@ export default async function (eleventyConfig) {
 	// to emulate the file copy on the dev server. Learn more:
 	// https://www.11ty.dev/docs/copy/#emulate-passthrough-copy-during-serve
 
-	// eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
+	eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
 }
 
 export const config = {
