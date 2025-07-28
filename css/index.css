@@ -4,6 +4,8 @@
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
 /* Import Merriweather for adesse */
 @import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap");
+/* Import Jacquard 12 and Bellefair for adesse */
+@import url("https://fonts.googleapis.com/css2?family=Jacquard+12&family=Bellefair:wght@400&display=swap");
 /* Import Montserrat for nic */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
 /* Import Fira Sans for amelia */
@@ -470,6 +472,16 @@ body[data-author="adesse"],
 body[data-author="adesse"] *:not(code):not(pre):not(.h-card):not(.h-card *) {
 	background-color: #624f4c !important; /* wenge (brown) */
 	color: #ffffff !important; /* pure white */
+	font-family: "Bellefair", serif !important; /* Bellefair for body text */
+}
+
+body[data-author="adesse"] h1,
+body[data-author="adesse"] h2,
+body[data-author="adesse"] h3,
+body[data-author="adesse"] h4,
+body[data-author="adesse"] h5,
+body[data-author="adesse"] h6 {
+	font-family: "Jacquard 12", serif !important; /* Jacquard 12 for headers */
 }
 
 body[data-author="abby"],
@@ -529,6 +541,16 @@ body[data-author="nic"] *:not(code):not(pre):not(.h-card):not(.h-card *) {
 	body[data-author="adesse"] *:not(code):not(pre) {
 		background-color: #2a201e !important;
 		color: #ffffff !important;
+		font-family: "Bellefair", serif !important; /* Bellefair for body text */
+	}
+
+	body[data-author="adesse"] h1,
+	body[data-author="adesse"] h2,
+	body[data-author="adesse"] h3,
+	body[data-author="adesse"] h4,
+	body[data-author="adesse"] h5,
+	body[data-author="adesse"] h6 {
+		font-family: "Jacquard 12", serif !important; /* Jacquard 12 for headers */
 	}
 
 	body[data-author="orionlw"],
@@ -826,7 +848,17 @@ body[data-author] {
 .h-card[data-author="adesse"] *,
 .h-card[data-author="adesse"] .p-note,
 .h-card[data-author="adesse"] .p-note * {
-	font-family: "Merriweather", serif !important;
+	font-family: "Bellefair", serif !important; /* Bellefair for body text */
+}
+
+.h-card[data-author="adesse"] h1,
+.h-card[data-author="adesse"] h2,
+.h-card[data-author="adesse"] h3,
+.h-card[data-author="adesse"] h4,
+.h-card[data-author="adesse"] h5,
+.h-card[data-author="adesse"] h6,
+.h-card[data-author="adesse"] .p-name {
+	font-family: "Jacquard 12", serif !important; /* Jacquard 12 for headers */
 }
 
 .h-card[data-author="nic"],
@@ -871,6 +903,17 @@ body[data-author] {
 	.h-card[data-author="adesse"] *:not(code):not(pre) {
 		background-color: #2a201e !important;
 		color: #ffffff !important;
+		font-family: "Bellefair", serif !important; /* Bellefair for body text */
+	}
+
+	.h-card[data-author="adesse"] h1,
+	.h-card[data-author="adesse"] h2,
+	.h-card[data-author="adesse"] h3,
+	.h-card[data-author="adesse"] h4,
+	.h-card[data-author="adesse"] h5,
+	.h-card[data-author="adesse"] h6,
+	.h-card[data-author="adesse"] .p-name {
+		font-family: "Jacquard 12", serif !important; /* Jacquard 12 for headers */
 	}
 	/* Orionlw */
 	.h-card[data-author="orionlw"],
