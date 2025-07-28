@@ -24,40 +24,31 @@
   },
   "abby": {
     "name": "Abby Rhynold",
-    "bio": "-",
+    "bio": "author with a green theme.",
     "note": "🪱🐑🎂",
     "links": []
   },
   "adesse": {
     "name": "Adèsse Brown",
-    "bio": "-",
-    "note": "🐝⋅.˳˳.⋅ॱ˙˙ॱ⋅.˳˳.⋅ॱ˙˙ॱᐧ.˳˳.⋅˚ ༘ ೀ⋆｡˚ ･ ｡ﾟ☆: *.☽ .* :☆ﾟ. ✧˚ ༘ ⋆｡♡˚ 🐝⋅.˳˳.⋅ॱ˙˙ॱ⋅.˳˳.⋅ॱ˙˙ॱᐧ.˳˳.⋅",
+    "bio": "🌻⋅.˳˳.⋅ॱ˙˙ॱ⋅.˳˳.⋅ॱ˙˙ॱᐧ.˳˳.⋅˚ ༘ ೀ⋆｡˚ ･ ｡ﾟ☆: *.☽ .* :☆ﾟ. ✧˚ ༘ ⋆｡♡˚ 🐝⋅.˳˳.⋅ॱ˙˙ॱ⋅.˳˳.⋅ॱ˙˙ॱᐧ.˳˳.⋅",
+    "note": "🐝🕯️🎹",
     "links": []
   },
   "orionlw": {
     "name": "Orion Leidl Wilson",
-    "bio": "Electric bassist and Composer. ",
+    "bio": "Guy.",
     "note": "🎧📀🐈‍⬛",
-    "links": [
-      {
-        "url": "https://orionlw.me",
-        "label": "personal site"
-      },
-      {
-        "url": "https://mastodon.social/@orionlw",
-        "label": "mastodon"
-      }
-    ]
+    "links": []
   },
   "amelia": {
     "name": "Amelia Wheeler",
-    "bio": "-",
+    "bio": "Colour scheme to be defined.",
     "note": "🎨🎤🧚‍♀️",
     "links": []
   },
   "nic": {
     "name": "Nicholas Leighton",
-    "bio": "-",
+    "bio": "Author with a modern blue theme.",
     "note": "💙🌊✨",
     "links": []
   }
