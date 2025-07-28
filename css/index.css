@@ -147,6 +147,24 @@ footer {
 	border: none !important;
 	outline: none !important;
 }
+
+footer {
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+
+footer a[href] {
+	color: var(--text-color-link);
+}
+
+footer a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+
+footer a[href]:hover,
+footer a[href]:active {
+	color: var(--text-color-link-active);
+}
 main :first-child {
 	margin-top: 0;
 }
