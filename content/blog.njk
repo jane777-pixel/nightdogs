@@ -71,6 +71,15 @@ function filterPosts() {
 	const selectedTag = tagFilter.value;
 	const selectedYear = yearFilter.value;
 
+	// Set author-selected class on body and update data-author
+	document.body.classList.remove(...Array.from(document.body.classList).filter(c => c.startsWith('author-selected-')));
+	if (selectedAuthor !== "all") {
+		document.body.classList.add(`author-selected-${selectedAuthor}`);
+		document.body.setAttribute('data-author', selectedAuthor);
+	} else {
+		document.body.setAttribute('data-author', 'jane'); // Reset to default
+	}
+
 	postItems.forEach((item) => {
 		const itemAuthor = item.getAttribute("data-author");
 		const itemTags = (item.getAttribute("data-tags") || "").split(",");

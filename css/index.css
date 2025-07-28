@@ -522,20 +522,6 @@ body[data-author="amelia"] *:not(code):not(pre) {
 	color: #6c218a !important;
 }
 
-body[data-author="amelia"] a,
-body[data-author="amelia"] a:link {
-	color: #b800a6 !important;
-}
-
-body[data-author="amelia"] a:visited {
-	color: #a65fcf !important;
-}
-
-body[data-author="amelia"] a:hover,
-body[data-author="amelia"] a:active {
-	color: #ff7edb !important;
-}
-
 body[data-author="nic"],
 body[data-author="nic"] *:not(code):not(pre):not(.h-card):not(.h-card *) {
 	background-color: #f0f8ff !important; /* alice blue */
@@ -953,6 +939,196 @@ body[data-author] {
 	.h-card[data-author="nic"],
 	.h-card[data-author="nic"] *,
 	.h-card[data-author="nic"] *:not(code):not(pre) {
+		background-color: #1e3a8a !important;
+		color: #f0f8ff !important;
+		font-family: "Montserrat", sans-serif !important;
+	}
+}
+
+/* --- AUTHOR FILTER THEMES FOR ARCHIVE PAGE --- */
+body.author-selected-jane,
+body.author-selected-jane *:not(code):not(pre):not(.h-card):not(.h-card *) {
+	background-color: #ffd6e0 !important;
+	color: #8b0020 !important;
+	font-family: "Bitcount Grid Single", "Segoe UI", "Roboto", "Helvetica Neue",
+		Arial, "Liberation Sans", sans-serif !important;
+}
+body.author-selected-adesse,
+body.author-selected-adesse *:not(code):not(pre):not(.h-card):not(.h-card *) {
+	background-color: #624f4c !important;
+	color: #ffffff !important;
+	font-family: "Bellefair", serif !important;
+}
+body.author-selected-adesse h1,
+body.author-selected-adesse h2,
+body.author-selected-adesse h3,
+body.author-selected-adesse h4,
+body.author-selected-adesse h5,
+body.author-selected-adesse h6 {
+	font-family: "Jacquard 12", serif !important;
+}
+body.author-selected-abby,
+body.author-selected-abby *:not(code):not(pre):not(.h-card):not(.h-card *) {
+	background-color: #e6ffe6 !important;
+	color: #0d3a0d !important;
+	font-family: "Quicksand", sans-serif !important;
+}
+body.author-selected-orionlw,
+body.author-selected-orionlw *:not(code):not(pre):not(.h-card):not(.h-card *) {
+	background-color: #e6d3b3 !important;
+	color: #4a3018 !important;
+	font-family: "IBM Plex Sans", "Segoe UI", "Roboto", "Helvetica Neue", Arial,
+		"Liberation Sans", sans-serif !important;
+}
+body.author-selected-amelia,
+body.author-selected-amelia *:not(code):not(pre):not(.h-card):not(.h-card *) {
+	background-color: #ffe6fa !important;
+	color: #6c218a !important;
+	font-family: "Fira Sans", sans-serif !important;
+}
+body.author-selected-nic,
+body.author-selected-nic *:not(code):not(pre):not(.h-card):not(.h-card *) {
+	background-color: #f0f8ff !important;
+	color: #1e3a8a !important;
+	font-family: "Montserrat", sans-serif !important;
+}
+
+@media (prefers-color-scheme: dark) {
+	body.author-selected-jane,
+	body.author-selected-jane *:not(code):not(pre):not(.h-card):not(.h-card *) {
+		background-color: #8b0020 !important;
+		color: #fff0f3 !important;
+		font-family: "Bitcount Grid Single", "Segoe UI", "Roboto", "Helvetica Neue",
+			Arial, "Liberation Sans", sans-serif !important;
+	}
+	body.author-selected-adesse,
+	body.author-selected-adesse *:not(code):not(pre):not(.h-card):not(.h-card *) {
+		background-color: #2a201e !important;
+		color: #ffffff !important;
+		font-family: "Bellefair", serif !important;
+	}
+	body.author-selected-orionlw,
+	body.author-selected-orionlw
+		*:not(code):not(pre):not(.h-card):not(.h-card *) {
+		background-color: #4a3018 !important;
+		color: #ffffff !important;
+		font-family: "IBM Plex Sans", "Segoe UI", "Roboto", "Helvetica Neue", Arial,
+			"Liberation Sans", sans-serif !important;
+	}
+	body.author-selected-abby,
+	body.author-selected-abby *:not(code):not(pre):not(.h-card):not(.h-card *) {
+		background-color: #0d3a0d !important;
+		color: #ffffff !important;
+		font-family: "Quicksand", sans-serif !important;
+	}
+	body.author-selected-amelia,
+	body.author-selected-amelia *:not(code):not(pre):not(.h-card):not(.h-card *) {
+		background-color: #2b59c4 !important;
+		color: #dced5a !important;
+		font-family: "Fira Sans", sans-serif !important;
+	}
+	body.author-selected-nic,
+	body.author-selected-nic *:not(code):not(pre):not(.h-card):not(.h-card *) {
+		background-color: #1e3a8a !important;
+		color: #f0f8ff !important;
+		font-family: "Montserrat", sans-serif !important;
+	}
+}
+
+body.author-selected-jane[data-author],
+body.author-selected-jane[data-author]
+	*:not(code):not(pre):not(.h-card):not(.h-card *) {
+	background-color: #ffd6e0 !important;
+	color: #8b0020 !important;
+	font-family: "Bitcount Grid Single", "Segoe UI", "Roboto", "Helvetica Neue",
+		Arial, "Liberation Sans", sans-serif !important;
+}
+body.author-selected-adesse[data-author],
+body.author-selected-adesse[data-author]
+	*:not(code):not(pre):not(.h-card):not(.h-card *) {
+	background-color: #624f4c !important;
+	color: #ffffff !important;
+	font-family: "Bellefair", serif !important;
+}
+body.author-selected-adesse[data-author] h1,
+body.author-selected-adesse[data-author] h2,
+body.author-selected-adesse[data-author] h3,
+body.author-selected-adesse[data-author] h4,
+body.author-selected-adesse[data-author] h5,
+body.author-selected-adesse[data-author] h6 {
+	font-family: "Jacquard 12", serif !important;
+}
+body.author-selected-abby[data-author],
+body.author-selected-abby[data-author]
+	*:not(code):not(pre):not(.h-card):not(.h-card *) {
+	background-color: #e6ffe6 !important;
+	color: #0d3a0d !important;
+	font-family: "Quicksand", sans-serif !important;
+}
+body.author-selected-orionlw[data-author],
+body.author-selected-orionlw[data-author]
+	*:not(code):not(pre):not(.h-card):not(.h-card *) {
+	background-color: #e6d3b3 !important;
+	color: #4a3018 !important;
+	font-family: "IBM Plex Sans", "Segoe UI", "Roboto", "Helvetica Neue", Arial,
+		"Liberation Sans", sans-serif !important;
+}
+body.author-selected-amelia[data-author],
+body.author-selected-amelia[data-author]
+	*:not(code):not(pre):not(.h-card):not(.h-card *) {
+	background-color: #ffe6fa !important;
+	color: #6c218a !important;
+	font-family: "Fira Sans", sans-serif !important;
+}
+body.author-selected-nic[data-author],
+body.author-selected-nic[data-author]
+	*:not(code):not(pre):not(.h-card):not(.h-card *) {
+	background-color: #f0f8ff !important;
+	color: #1e3a8a !important;
+	font-family: "Montserrat", sans-serif !important;
+}
+
+@media (prefers-color-scheme: dark) {
+	body.author-selected-jane[data-author],
+	body.author-selected-jane[data-author]
+		*:not(code):not(pre):not(.h-card):not(.h-card *) {
+		background-color: #8b0020 !important;
+		color: #fff0f3 !important;
+		font-family: "Bitcount Grid Single", "Segoe UI", "Roboto", "Helvetica Neue",
+			Arial, "Liberation Sans", sans-serif !important;
+	}
+	body.author-selected-adesse[data-author],
+	body.author-selected-adesse[data-author]
+		*:not(code):not(pre):not(.h-card):not(.h-card *) {
+		background-color: #2a201e !important;
+		color: #ffffff !important;
+		font-family: "Bellefair", serif !important;
+	}
+	body.author-selected-orionlw[data-author],
+	body.author-selected-orionlw[data-author]
+		*:not(code):not(pre):not(.h-card):not(.h-card *) {
+		background-color: #4a3018 !important;
+		color: #ffffff !important;
+		font-family: "IBM Plex Sans", "Segoe UI", "Roboto", "Helvetica Neue", Arial,
+			"Liberation Sans", sans-serif !important;
+	}
+	body.author-selected-abby[data-author],
+	body.author-selected-abby[data-author]
+		*:not(code):not(pre):not(.h-card):not(.h-card *) {
+		background-color: #0d3a0d !important;
+		color: #ffffff !important;
+		font-family: "Quicksand", sans-serif !important;
+	}
+	body.author-selected-amelia[data-author],
+	body.author-selected-amelia[data-author]
+		*:not(code):not(pre):not(.h-card):not(.h-card *) {
+		background-color: #2b59c4 !important;
+		color: #dced5a !important;
+		font-family: "Fira Sans", sans-serif !important;
+	}
+	body.author-selected-nic[data-author],
+	body.author-selected-nic[data-author]
+		*:not(code):not(pre):not(.h-card):not(.h-card *) {
 		background-color: #1e3a8a !important;
 		color: #f0f8ff !important;
 		font-family: "Montserrat", sans-serif !important;
