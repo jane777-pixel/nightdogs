@@ -27,7 +27,8 @@ export default async function (eleventyConfig) {
 			"./public/": "/",
 		})
 		.addPassthroughCopy("./content/feed/pretty-atom-feed.xsl")
-		.addPassthroughCopy("content/blog/**/*.{jpg,jpeg,png,gif}");
+		.addPassthroughCopy("content/blog/**/*.{jpg,jpeg,png,gif}")
+		.addPassthroughCopy("content/blog/**/*.{mp3,mp4,wav,ogg,m4a}");
 
 	// Run Eleventy when these files change:
 	// https://www.11ty.dev/docs/watch-serve/#add-your-own-watch-targets
@@ -113,7 +114,14 @@ export default async function (eleventyConfig) {
 
 		// Add a function to skip certain images
 		skipImages: (src) => {
-			return src.includes("/img/imported/");
+			return (
+				src.includes("/img/imported/") ||
+				src.endsWith(".mp3") ||
+				src.endsWith(".mp4") ||
+				src.endsWith(".wav") ||
+				src.endsWith(".ogg") ||
+				src.endsWith(".m4a")
+			);
 		},
 	});
 
