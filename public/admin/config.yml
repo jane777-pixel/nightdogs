@@ -1,5 +1,6 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: jane777-pixel/nightdogs
   branch: main
 media_folder: "public/img"
 public_folder: "/img"
