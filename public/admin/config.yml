@@ -5,6 +5,24 @@ publish_mode: editorial_workflow
 media_folder: "public/img"
 public_folder: "/img"
 collections:
+  - name: "settings"
+    label: "Settings"
+    files:
+      - label: "Global Metadata"
+        name: "metadata"
+        file: "_data/metadata.json"
+        fields:
+          - { label: "Site Title", name: "title", widget: "string" }
+          - { label: "Site URL", name: "url", widget: "string" }
+          - { label: "Language", name: "language", widget: "string" }
+          - { label: "Description", name: "description", widget: "string" }
+          - label: "Author"
+            name: "author"
+            widget: "object"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Email", name: "email", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
   - name: "blog"
     label: "Blog Posts"
     folder: "content/blog"
