@@ -669,21 +669,70 @@ code {
 	word-break: break-all;
 }
 
-.h-card[data-author="adesse"] {
+[data-author="adesse"] {
 	--font-family: "Bellefair", serif !important;
+	font-family: "Bellefair", serif;
 }
-.h-card[data-author="orionlw"] {
+[data-author="orionlw"] {
 	--font-family: "EB Garamond", serif !important;
+	font-family: "EB Garamond", serif;
 }
-.h-card[data-author="jane"] {
+[data-author="jane"] {
 	--font-family: "Bitcount Grid Single", var(--font-family) !important;
+	font-family: "Bitcount Grid Single", var(--font-family);
 }
-.h-card[data-author="nic"] {
+[data-author="nic"] {
 	--font-family: "Montserrat", sans-serif !important;
+	font-family: "Montserrat", sans-serif;
 }
-.h-card[data-author="amelia"] {
+[data-author="amelia"] {
 	--font-family: "Fira Sans", sans-serif !important;
+	font-family: "Fira Sans", sans-serif;
 }
-.h-card[data-author="abby"] {
+[data-author="abby"] {
 	--font-family: "Quicksand", sans-serif !important;
+	font-family: "Quicksand", sans-serif;
+}
+
+body[data-author="adesse"] .postlist-link,
+body.author-selected-adesse .postlist-link {
+	font-family: "Jacquard 12", serif !important;
+}
+body[data-author="orionlw"] .postlist-link,
+body.author-selected-orionlw .postlist-link {
+	font-family: "Montserrat", sans-serif !important;
+}
+body[data-author="nic"] .postlist-link,
+body.author-selected-nic .postlist-link {
+	font-family: "Montserrat", sans-serif !important;
+}
+body[data-author="amelia"] .postlist-link,
+body.author-selected-amelia .postlist-link {
+	font-family: "Fira Sans", sans-serif !important;
+}
+body[data-author="abby"] .postlist-link,
+body.author-selected-abby .postlist-link {
+	font-family: "Quicksand", sans-serif !important;
+}
+body[data-author="jane"] .postlist-link,
+body.author-selected-jane .postlist-link {
+	font-family: "Bitcount Grid Single", var(--font-family) !important;
+}
+.postlist-item[data-author="adesse"] .postlist-link {
+	font-family: "Jacquard 12", serif !important;
+}
+.postlist-item[data-author="orionlw"] .postlist-link {
+	font-family: "Montserrat", sans-serif !important;
+}
+.postlist-item[data-author="nic"] .postlist-link {
+	font-family: "Montserrat", sans-serif !important;
+}
+.postlist-item[data-author="amelia"] .postlist-link {
+	font-family: "Fira Sans", sans-serif !important;
+}
+.postlist-item[data-author="abby"] .postlist-link {
+	font-family: "Quicksand", sans-serif !important;
+}
+.postlist-item[data-author="jane"] .postlist-link {
+	font-family: "Bitcount Grid Single", var(--font-family) !important;
 }
