@@ -4,19 +4,99 @@ backend:
 media_folder: "public/img"
 public_folder: "/img"
 collections:
-  - name: "blog"
-    label: "Blog Posts"
-    folder: "content/blog"
+  - name: "jane_posts"
+    label: "Jane's Posts"
+    folder: "content/blog/jane"
     create: true
-    slug: "{{author}}/{{date | date('YYYY-MM-DD')}}/{{slug}}/index"
-    path: "{{author}}/{{date | date('YYYY-MM-DD')}}/{{slug}}/index"
+    slug: "{{date | date('YYYY-MM-DD')}}/{{slug}}"
+    path: "{{slug}}/index"
     media_folder: ""
     public_folder: ""
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Slug", name: "slug", widget: "string" }
       - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Author", name: "author", widget: "string" }
+      - { label: "Author", name: "author", widget: "hidden", default: "jane" }
+      - { label: "Tags", name: "tags", widget: "list", default: ["posts"] }
+      - { label: "Body", name: "body", widget: "markdown" }
+  - name: "abby_posts"
+    label: "Abby's Posts"
+    folder: "content/blog/abby"
+    create: true
+    slug: "{{date | date('YYYY-MM-DD')}}/{{slug}}"
+    path: "{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Author", name: "author", widget: "hidden", default: "abby" }
+      - { label: "Tags", name: "tags", widget: "list", default: ["posts"] }
+      - { label: "Body", name: "body", widget: "markdown" }
+  - name: "adesse_posts"
+    label: "Adèsse's Posts"
+    folder: "content/blog/adesse"
+    create: true
+    slug: "{{date | date('YYYY-MM-DD')}}/{{slug}}"
+    path: "{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Author", name: "author", widget: "hidden", default: "adesse" }
+      - { label: "Tags", name: "tags", widget: "list", default: ["posts"] }
+      - { label: "Body", name: "body", widget: "markdown" }
+  - name: "orionlw_posts"
+    label: "Orion's Posts"
+    folder: "content/blog/orionlw"
+    create: true
+    slug: "{{date | date('YYYY-MM-DD')}}/{{slug}}"
+    path: "{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - {
+          label: "Author",
+          name: "author",
+          widget: "hidden",
+          default: "orionlw",
+        }
+      - { label: "Tags", name: "tags", widget: "list", default: ["posts"] }
+      - { label: "Body", name: "body", widget: "markdown" }
+  - name: "amelia_posts"
+    label: "Amelia's Posts"
+    folder: "content/blog/amelia"
+    create: true
+    slug: "{{date | date('YYYY-MM-DD')}}/{{slug}}"
+    path: "{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Author", name: "author", widget: "hidden", default: "amelia" }
+      - { label: "Tags", name: "tags", widget: "list", default: ["posts"] }
+      - { label: "Body", name: "body", widget: "markdown" }
+  - name: "nic_posts"
+    label: "Nic's Posts"
+    folder: "content/blog/nic"
+    create: true
+    slug: "{{date | date('YYYY-MM-DD')}}/{{slug}}"
+    path: "{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Author", name: "author", widget: "hidden", default: "nic" }
       - { label: "Tags", name: "tags", widget: "list", default: ["posts"] }
       - { label: "Body", name: "body", widget: "markdown" }
   - name: "pages"
