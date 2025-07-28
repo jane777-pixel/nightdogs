@@ -41,8 +41,24 @@ collections:
           widget: "relation",
           collection: "authors",
           file: "authors",
-          searchFields: ["*.name"],
-          displayFields: ["*.name"],
+          searchFields:
+            [
+              "jane.name",
+              "abby.name",
+              "adesse.name",
+              "orionlw.name",
+              "amelia.name",
+              "nic.name",
+            ],
+          displayFields:
+            [
+              "jane.name",
+              "abby.name",
+              "adesse.name",
+              "orionlw.name",
+              "amelia.name",
+              "nic.name",
+            ],
           valueField: "{{slug}}",
         }
       - { label: "Tags", name: "tags", widget: "list", default: ["posts"] }
