@@ -10,6 +10,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap");
 /* Import Quicksand for abby author */
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap");
+/* Import EB Garamond for orionlw author */
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&display=swap");
 
 /*
  * =============================
@@ -58,8 +60,7 @@ body {
 /* Author themes: set Pico variables directly */
 body[data-author="jane"],
 body.author-selected-jane,
-.site-wrapper[data-author="jane"],
-.h-card[data-author="jane"] {
+.site-wrapper[data-author="jane"] {
 	--pico-background-color: #ffd6e0;
 	--pico-color: #8b0020;
 	--pico-primary: #b8002e;
@@ -67,10 +68,16 @@ body.author-selected-jane,
 	font-family: "Bitcount Grid Single", var(--font-family);
 }
 
+.h-card[data-author="jane"] {
+	--pico-background-color: #ffd6e0;
+	--pico-color: #8b0020;
+	--pico-primary: #b8002e;
+	--pico-muted-color: #6d0015;
+}
+
 body[data-author="abby"],
 body.author-selected-abby,
-.site-wrapper[data-author="abby"],
-.h-card[data-author="abby"] {
+.site-wrapper[data-author="abby"] {
 	--pico-background-color: #e6ffe6;
 	--pico-color: #0d3a0d;
 	--pico-primary: #1e7e1e;
@@ -78,21 +85,33 @@ body.author-selected-abby,
 	font-family: "Quicksand", sans-serif;
 }
 
+.h-card[data-author="abby"] {
+	--pico-background-color: #e6ffe6;
+	--pico-color: #0d3a0d;
+	--pico-primary: #1e7e1e;
+	--pico-muted-color: #0a2a0a;
+}
+
 body[data-author="orionlw"],
 body.author-selected-orionlw,
-.site-wrapper[data-author="orionlw"],
+.site-wrapper[data-author="orionlw"] {
+	--pico-background-color: #e6d3b3;
+	--pico-color: #4a3018;
+	--pico-primary: #6e4b1f;
+	--pico-muted-color: #3d2614;
+	font-family: "EB Garamond", serif;
+}
+
 .h-card[data-author="orionlw"] {
 	--pico-background-color: #e6d3b3;
 	--pico-color: #4a3018;
 	--pico-primary: #6e4b1f;
 	--pico-muted-color: #3d2614;
-	font-family: "IBM Plex Sans", var(--font-family);
 }
 
 body[data-author="adesse"],
 body.author-selected-adesse,
-.site-wrapper[data-author="adesse"],
-.h-card[data-author="adesse"] {
+.site-wrapper[data-author="adesse"] {
 	--pico-background-color: #624f4c;
 	--pico-color: #ffffff;
 	--pico-primary: #deb8c4;
@@ -100,10 +119,16 @@ body.author-selected-adesse,
 	font-family: "Bellefair", serif;
 }
 
+.h-card[data-author="adesse"] {
+	--pico-background-color: #624f4c;
+	--pico-color: #ffffff;
+	--pico-primary: #deb8c4;
+	--pico-muted-color: #f0e6e7;
+}
+
 body[data-author="amelia"],
 body.author-selected-amelia,
-.site-wrapper[data-author="amelia"],
-.h-card[data-author="amelia"] {
+.site-wrapper[data-author="amelia"] {
 	--pico-background-color: #ffe6fa;
 	--pico-color: #6c218a;
 	--pico-primary: #8b2d9e;
@@ -111,10 +136,16 @@ body.author-selected-amelia,
 	font-family: "Fira Sans", sans-serif;
 }
 
+.h-card[data-author="amelia"] {
+	--pico-background-color: #ffe6fa;
+	--pico-color: #6c218a;
+	--pico-primary: #8b2d9e;
+	--pico-muted-color: #5a1a74;
+}
+
 body[data-author="nic"],
 body.author-selected-nic,
-.site-wrapper[data-author="nic"],
-.h-card[data-author="nic"] {
+.site-wrapper[data-author="nic"] {
 	--pico-background-color: #f0f8ff;
 	--pico-color: #1e3a8a;
 	--pico-primary: #3b82f6;
@@ -122,11 +153,24 @@ body.author-selected-nic,
 	font-family: "Montserrat", sans-serif;
 }
 
+.h-card[data-author="nic"] {
+	--pico-background-color: #f0f8ff;
+	--pico-color: #1e3a8a;
+	--pico-primary: #3b82f6;
+	--pico-muted-color: #1e40af;
+}
+
 /* Dark mode overrides for author themes */
 @media (prefers-color-scheme: dark) {
 	body[data-author="jane"],
 	body.author-selected-jane,
-	.site-wrapper[data-author="jane"],
+	.site-wrapper[data-author="jane"] {
+		--pico-background-color: #8b0020;
+		--pico-color: #fff0f3;
+		--pico-primary: #ffb3c6;
+		--pico-muted-color: #ffd6e0;
+	}
+
 	.h-card[data-author="jane"] {
 		--pico-background-color: #8b0020;
 		--pico-color: #fff0f3;
@@ -136,7 +180,13 @@ body.author-selected-nic,
 
 	body[data-author="abby"],
 	body.author-selected-abby,
-	.site-wrapper[data-author="abby"],
+	.site-wrapper[data-author="abby"] {
+		--pico-background-color: #0d3a0d;
+		--pico-color: #ffffff;
+		--pico-primary: #90ee90;
+		--pico-muted-color: #b2f7b2;
+	}
+
 	.h-card[data-author="abby"] {
 		--pico-background-color: #0d3a0d;
 		--pico-color: #ffffff;
@@ -146,7 +196,13 @@ body.author-selected-nic,
 
 	body[data-author="orionlw"],
 	body.author-selected-orionlw,
-	.site-wrapper[data-author="orionlw"],
+	.site-wrapper[data-author="orionlw"] {
+		--pico-background-color: #4a3018;
+		--pico-color: #ffffff;
+		--pico-primary: #deb887;
+		--pico-muted-color: #e6d3b3;
+	}
+
 	.h-card[data-author="orionlw"] {
 		--pico-background-color: #4a3018;
 		--pico-color: #ffffff;
@@ -199,6 +255,21 @@ body.author-selected-adesse h4,
 body.author-selected-adesse h5,
 body.author-selected-adesse h6 {
 	font-family: "Jacquard 12", serif;
+}
+
+body[data-author="orionlw"] h1,
+body[data-author="orionlw"] h2,
+body[data-author="orionlw"] h3,
+body[data-author="orionlw"] h4,
+body[data-author="orionlw"] h5,
+body[data-author="orionlw"] h6,
+body.author-selected-orionlw h1,
+body.author-selected-orionlw h2,
+body.author-selected-orionlw h3,
+body.author-selected-orionlw h4,
+body.author-selected-orionlw h5,
+body.author-selected-orionlw h6 {
+	font-family: "Montserrat", sans-serif;
 }
 
 body[data-author="orionlw"] code,
@@ -277,7 +348,7 @@ a[href]:active {
 	margin: 2em 0;
 	background-color: var(--pico-background-color, #ffd6e0);
 	color: var(--pico-color, #8b0020);
-	font-family: inherit;
+	font-family: var(--font-family);
 	line-height: 1.5;
 }
 
@@ -303,16 +374,7 @@ a[href]:active {
 	font-weight: 600;
 }
 
-.h-card .p-note {
-	display: block;
-	margin-top: 1em;
-	font-weight: 400;
-}
-
 /* Author-specific font families for h-cards */
-.h-card[data-author="adesse"] {
-	font-family: "Bellefair", serif;
-}
 .h-card[data-author="adesse"] h1,
 .h-card[data-author="adesse"] h2,
 .h-card[data-author="adesse"] h3,
@@ -320,19 +382,52 @@ a[href]:active {
 .h-card[data-author="adesse"] h5,
 .h-card[data-author="adesse"] h6,
 .h-card[data-author="adesse"] .p-name {
-	font-family: "Jacquard 12", serif;
+	font-family: "Jacquard 12", serif !important;
 }
-.h-card[data-author="nic"] {
-	font-family: "Montserrat", sans-serif;
+.h-card[data-author="orionlw"] h1,
+.h-card[data-author="orionlw"] h2,
+.h-card[data-author="orionlw"] h3,
+.h-card[data-author="orionlw"] h4,
+.h-card[data-author="orionlw"] h5,
+.h-card[data-author="orionlw"] h6,
+.h-card[data-author="orionlw"] .p-name {
+	font-family: "Montserrat", sans-serif !important;
 }
-.h-card[data-author="amelia"] {
-	font-family: "Fira Sans", sans-serif;
+.h-card[data-author="nic"] h1,
+.h-card[data-author="nic"] h2,
+.h-card[data-author="nic"] h3,
+.h-card[data-author="nic"] h4,
+.h-card[data-author="nic"] h5,
+.h-card[data-author="nic"] h6,
+.h-card[data-author="nic"] .p-name {
+	font-family: "Montserrat", sans-serif !important;
 }
-.h-card[data-author="abby"] {
-	font-family: "Quicksand", sans-serif;
+.h-card[data-author="amelia"] h1,
+.h-card[data-author="amelia"] h2,
+.h-card[data-author="amelia"] h3,
+.h-card[data-author="amelia"] h4,
+.h-card[data-author="amelia"] h5,
+.h-card[data-author="amelia"] h6,
+.h-card[data-author="amelia"] .p-name {
+	font-family: "Fira Sans", sans-serif !important;
 }
-.h-card[data-author="orionlw"] {
-	font-family: "IBM Plex Sans", sans-serif;
+.h-card[data-author="abby"] h1,
+.h-card[data-author="abby"] h2,
+.h-card[data-author="abby"] h3,
+.h-card[data-author="abby"] h4,
+.h-card[data-author="abby"] h5,
+.h-card[data-author="abby"] h6,
+.h-card[data-author="abby"] .p-name {
+	font-family: "Quicksand", sans-serif !important;
+}
+.h-card[data-author="jane"] h1,
+.h-card[data-author="jane"] h2,
+.h-card[data-author="jane"] h3,
+.h-card[data-author="jane"] h4,
+.h-card[data-author="jane"] h5,
+.h-card[data-author="jane"] h6,
+.h-card[data-author="jane"] .p-name {
+	font-family: "Bitcount Grid Single", var(--font-family) !important;
 }
 
 /* Remove h-card styling from inline author names */
@@ -572,4 +667,23 @@ pre:not([class*="language-"]) {
 }
 code {
 	word-break: break-all;
+}
+
+.h-card[data-author="adesse"] {
+	--font-family: "Bellefair", serif !important;
+}
+.h-card[data-author="orionlw"] {
+	--font-family: "EB Garamond", serif !important;
+}
+.h-card[data-author="jane"] {
+	--font-family: "Bitcount Grid Single", var(--font-family) !important;
+}
+.h-card[data-author="nic"] {
+	--font-family: "Montserrat", sans-serif !important;
+}
+.h-card[data-author="amelia"] {
+	--font-family: "Fira Sans", sans-serif !important;
+}
+.h-card[data-author="abby"] {
+	--font-family: "Quicksand", sans-serif !important;
 }
