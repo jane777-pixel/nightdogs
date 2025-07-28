@@ -4,53 +4,11 @@ backend:
 media_folder: "public/img"
 public_folder: "/img"
 collections:
-  - name: "jane_posts"
-    label: "Jane's Posts"
-    folder: "content/blog/jane"
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "content/blog"
     create: true
-    slug: "{{date | date('YYYY-MM-DD')}}/{{slug}}/index"
-    media_folder: ""
-    public_folder: ""
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Slug", name: "slug", widget: "string" }
-      - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Author", name: "author", widget: "hidden", default: "jane" }
-      - { label: "Tags", name: "tags", widget: "list", default: ["posts"] }
-      - { label: "Body", name: "body", widget: "markdown" }
-  - name: "abby_posts"
-    label: "Abby's Posts"
-    folder: "content/blog/abby"
-    create: true
-    slug: "{{date | date('YYYY-MM-DD')}}/{{slug}}/index"
-    media_folder: ""
-    public_folder: ""
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Slug", name: "slug", widget: "string" }
-      - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Author", name: "author", widget: "hidden", default: "abby" }
-      - { label: "Tags", name: "tags", widget: "list", default: ["posts"] }
-      - { label: "Body", name: "body", widget: "markdown" }
-  - name: "adesse_posts"
-    label: "Adèsse's Posts"
-    folder: "content/blog/adesse"
-    create: true
-    slug: "{{date | date('YYYY-MM-DD')}}/{{slug}}/index"
-    media_folder: ""
-    public_folder: ""
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Slug", name: "slug", widget: "string" }
-      - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Author", name: "author", widget: "hidden", default: "adesse" }
-      - { label: "Tags", name: "tags", widget: "list", default: ["posts"] }
-      - { label: "Body", name: "body", widget: "markdown" }
-  - name: "orionlw_posts"
-    label: "Orion's Posts"
-    folder: "content/blog/orionlw"
-    create: true
-    slug: "{{date | date('YYYY-MM-DD')}}/{{slug}}/index"
+    slug: "{{author}}/{{date | date('YYYY-MM-DD')}}/{{slug}}/index"
     media_folder: ""
     public_folder: ""
     fields:
@@ -60,37 +18,28 @@ collections:
       - {
           label: "Author",
           name: "author",
-          widget: "hidden",
-          default: "orionlw",
+          widget: "relation",
+          collection: "authors",
+          searchFields:
+            [
+              "jane.name",
+              "abby.name",
+              "adesse.name",
+              "orionlw.name",
+              "amelia.name",
+              "nic.name",
+            ],
+          valueField: "{{slug}}",
+          displayFields:
+            [
+              "jane.name",
+              "abby.name",
+              "adesse.name",
+              "orionlw.name",
+              "amelia.name",
+              "nic.name",
+            ],
         }
-      - { label: "Tags", name: "tags", widget: "list", default: ["posts"] }
-      - { label: "Body", name: "body", widget: "markdown" }
-  - name: "amelia_posts"
-    label: "Amelia's Posts"
-    folder: "content/blog/amelia"
-    create: true
-    slug: "{{date | date('YYYY-MM-DD')}}/{{slug}}/index"
-    media_folder: ""
-    public_folder: ""
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Slug", name: "slug", widget: "string" }
-      - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Author", name: "author", widget: "hidden", default: "amelia" }
-      - { label: "Tags", name: "tags", widget: "list", default: ["posts"] }
-      - { label: "Body", name: "body", widget: "markdown" }
-  - name: "nic_posts"
-    label: "Nic's Posts"
-    folder: "content/blog/nic"
-    create: true
-    slug: "{{date | date('YYYY-MM-DD')}}/{{slug}}/index"
-    media_folder: ""
-    public_folder: ""
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Slug", name: "slug", widget: "string" }
-      - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Author", name: "author", widget: "hidden", default: "nic" }
       - { label: "Tags", name: "tags", widget: "list", default: ["posts"] }
       - { label: "Body", name: "body", widget: "markdown" }
   - name: "authors"
@@ -226,12 +175,3 @@ collections:
                   },
                 ],
             }
-  - name: "pages"
-    label: "Pages"
-    files:
-      - label: "About"
-        name: "about"
-        file: "content/about.md"
-        fields:
-          - { label: "Title", name: "title", widget: "string" }
-          - { label: "Body", name: "body", widget: "markdown" }
