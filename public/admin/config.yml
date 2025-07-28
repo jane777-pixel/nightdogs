@@ -38,28 +38,16 @@ collections:
       - {
           label: "Author",
           name: "author",
-          widget: "relation",
-          collection: "authors",
-          file: "authors",
-          searchFields:
+          widget: "select",
+          options:
             [
-              "jane.name",
-              "abby.name",
-              "adesse.name",
-              "orionlw.name",
-              "amelia.name",
-              "nic.name",
+              { label: "Jane", value: "jane" },
+              { label: "Abby", value: "abby" },
+              { label: "Adèsse", value: "adesse" },
+              { label: "Orion", value: "orionlw" },
+              { label: "Amelia", value: "amelia" },
+              { label: "Nic", value: "nic" },
             ],
-          displayFields:
-            [
-              "jane.name",
-              "abby.name",
-              "adesse.name",
-              "orionlw.name",
-              "amelia.name",
-              "nic.name",
-            ],
-          valueField: "{{slug}}",
         }
       - { label: "Tags", name: "tags", widget: "list", default: ["posts"] }
       - { label: "Body", name: "body", widget: "markdown" }
