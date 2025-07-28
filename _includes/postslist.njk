@@ -13,6 +13,8 @@
 		{%
 		endif
 		%}
+		{%- if post.data.tags -%}data-tags="{{ post.data.tags | join(',') }}"{%- endif -%}
+		data-year="{{ post.date | date('yyyy') }}"
 	>
 		<a href="{{ post.url }}" class="postlist-link"
 			>{% if post.data.title %}{{ post.data.title }}{% else %}<code>{{

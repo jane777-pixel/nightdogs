@@ -57,4 +57,8 @@ export default function (eleventyConfig) {
 	eleventyConfig.addFilter("rfc822", (dateObj) => {
 		return new Date(dateObj).toUTCString();
 	});
+
+	eleventyConfig.addFilter("date", (dateObj, format = "yyyy") => {
+		return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat(format);
+	});
 }

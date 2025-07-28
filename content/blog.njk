@@ -7,32 +7,82 @@ const eleventyNavigation = {
 
 <h1>Archive</h1>
 
-<div class="author-selector">
-	<label for="author-filter">Filter by author:</label>
-	<select id="author-filter">
-		<option value="all">All Authors</option>
-		{% for authorKey, authorData in authors %}
-		<option value="{{ authorKey }}">{{ authorData.name }}</option>
-		{% endfor %}
-	</select>
+<div class="filters" style="display: flex; gap: 1em; align-items: center; margin-bottom: 1em;">
+	<div class="author-selector">
+		<label for="author-filter">Filter by author:</label>
+		<select id="author-filter">
+			<option value="all">All Authors</option>
+			{% for authorKey, authorData in authors %}
+			<option value="{{ authorKey }}">{{ authorData.name }}</option>
+			{% endfor %}
+		</select>
+	</div>
+	<div class="tag-selector">
+		<label for="tag-filter">Filter by tag:</label>
+		<select id="tag-filter">
+			<option value="all">All Tags</option>
+			{# Collect all unique tags except 'posts' #}
+			{% set allTags = [] %}
+			{% for post in collections.posts %}
+				{% for tag in post.data.tags %}
+					{% if tag != "posts" and tag not in allTags %}
+						{% set allTags = allTags.concat([tag]) %}
+					{% endif %}
+				{% endfor %}
+			{% endfor %}
+			{% for tag in allTags | sort %}
+			<option value="{{ tag }}">{{ tag }}</option>
+			{% endfor %}
+		</select>
+	</div>
+	<div class="year-selector">
+		<label for="year-filter">Filter by year:</label>
+		<select id="year-filter">
+			<option value="all">All Years</option>
+			{# Collect all unique years from post dates #}
+			{% set allYears = [] %}
+			{% for post in collections.posts %}
+				{% set year = post.date | date("yyyy") %}
+				{% if year not in allYears %}
+					{% set allYears = allYears.concat([year]) %}
+				{% endif %}
+			{% endfor %}
+			{% for year in allYears | sort(true) %}
+			<option value="{{ year }}">{{ year }}</option>
+			{% endfor %}
+		</select>
+	</div>
 </div>
 
 {% set postslist = collections.posts %} {% include "postslist.njk" %}
 
 <script>
-	const authorFilter = document.getElementById("author-filter");
-	const postItems = document.querySelectorAll(".postlist-item");
+const authorFilter = document.getElementById("author-filter");
+const tagFilter = document.getElementById("tag-filter");
+const yearFilter = document.getElementById("year-filter");
+const postItems = document.querySelectorAll(".postlist-item");
 
-	authorFilter.addEventListener("change", (event) => {
-		const selectedAuthor = event.target.value;
+authorFilter.addEventListener("change", filterPosts);
+tagFilter.addEventListener("change", filterPosts);
+yearFilter.addEventListener("change", filterPosts);
 
-		postItems.forEach((item) => {
-			const itemAuthor = item.getAttribute("data-author");
-			if (selectedAuthor === "all" || selectedAuthor === itemAuthor) {
-				item.style.display = "";
-			} else {
-				item.style.display = "none";
-			}
-		});
+function filterPosts() {
+	const selectedAuthor = authorFilter.value;
+	const selectedTag = tagFilter.value;
+	const selectedYear = yearFilter.value;
+
+	postItems.forEach((item) => {
+		const itemAuthor = item.getAttribute("data-author");
+		const itemTags = (item.getAttribute("data-tags") || "").split(",");
+		const itemYear = item.getAttribute("data-year");
+		const authorMatch = selectedAuthor === "all" || itemAuthor === selectedAuthor;
+		const tagMatch = selectedTag === "all" || itemTags.includes(selectedTag);
+		const yearMatch = selectedYear === "all" || itemYear === selectedYear;
+		if (authorMatch && tagMatch && yearMatch) {
+			item.style.display = "";
+		} else {
+			item.style.display = "none";
+		}
 	});
+}
 </script>

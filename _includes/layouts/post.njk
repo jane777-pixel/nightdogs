@@ -35,6 +35,20 @@ base.njk #} {#
 		{%- endif -%}
 	</div>
 
+	{%- if tags and tags.length -%}
+	{%- set uniqueTags = tags | unique -%}
+	<div class="post-tags" style="margin: 0.5em 0;">
+		<span>Tags:</span>
+		{%- for tag in uniqueTags %}
+			{% if tag == "posts" %}
+				<a href="/blog/" class="post-tag">posts</a>{% if not loop.last %}, {% endif %}
+			{% else %}
+				<a href="/tags/{{ tag | slugify }}/" class="post-tag">{{ tag }}</a>{% if not loop.last %}, {% endif %}
+			{% endif %}
+		{%- endfor %}
+	</div>
+	{%- endif -%}
+
 	<div class="e-content">
 		{{ content | safe }}
 	</div>

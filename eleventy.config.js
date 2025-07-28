@@ -156,6 +156,8 @@ export default async function (eleventyConfig) {
 		return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat(format);
 	});
 
+	eleventyConfig.addFilter("unique", (arr) => Array.from(new Set(arr)));
+
 	// Features to make your build faster (when you need them)
 
 	// If your passthrough copy gets heavy and cumbersome, add this line
