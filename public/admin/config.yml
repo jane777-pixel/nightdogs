@@ -1,0 +1,150 @@
+backend:
+  name: git-gateway
+  branch: main
+media_folder: "public/img"
+public_folder: "/img"
+collections:
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "content/blog"
+    create: true
+    slug: "{{author}}/{{date | date('YYYY-MM-DD')}}/{{slug}}/index"
+    path: "{{author}}/{{date | date('YYYY-MM-DD')}}/{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Author", name: "author", widget: "string" }
+      - { label: "Tags", name: "tags", widget: "list", default: ["posts"] }
+      - { label: "Body", name: "body", widget: "markdown" }
+  - name: "pages"
+    label: "Pages"
+    files:
+      - label: "About"
+        name: "about"
+        file: "content/about.md"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Body", name: "body", widget: "markdown" }
+          - label: "Jane's Note"
+            name: "jane_note"
+            widget: "markdown"
+          - label: "Jane's Links"
+            name: "jane_links"
+            widget: "list"
+            fields:
+              - { label: "Link Text", name: "label", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
+              - label: "Link Type"
+                name: "type"
+                widget: "select"
+                options:
+                  - { label: "Website/Profile", value: "u-url" }
+                  - { label: "Email", value: "u-email" }
+                default: "u-url"
+              - label: "Is this a link to one of your own profiles?"
+                name: "is_me"
+                widget: "boolean"
+                default: false
+              - label: "Open link in a new tab?"
+                name: "new_tab"
+                widget: "boolean"
+                default: false
+          - label: "Abby's Note"
+            name: "abby_note"
+            widget: "markdown"
+          - label: "Abby's Links"
+            name: "abby_links"
+            widget: "list"
+            fields:
+              - { label: "Link Text", name: "label", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
+              - label: "Link Type"
+                name: "type"
+                widget: "select"
+                options:
+                  - { label: "Website/Profile", value: "u-url" }
+                  - { label: "Email", value: "u-email" }
+                default: "u-url"
+              - label: "Is this a link to one of your own profiles?"
+                name: "is_me"
+                widget: "boolean"
+                default: false
+              - label: "Open link in a new tab?"
+                name: "new_tab"
+                widget: "boolean"
+                default: false
+          - label: "Adèsse's Note"
+            name: "adesse_note"
+            widget: "markdown"
+          - label: "Adèsse's Links"
+            name: "adesse_links"
+            widget: "list"
+            fields:
+              - { label: "Link Text", name: "label", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
+              - label: "Link Type"
+                name: "type"
+                widget: "select"
+                options:
+                  - { label: "Website/Profile", value: "u-url" }
+                  - { label: "Email", value: "u-email" }
+                default: "u-url"
+              - label: "Is this a link to one of your own profiles?"
+                name: "is_me"
+                widget: "boolean"
+                default: false
+              - label: "Open link in a new tab?"
+                name: "new_tab"
+                widget: "boolean"
+                default: false
+          - label: "Orion's Note"
+            name: "orion_note"
+            widget: "markdown"
+          - label: "Orion's Links"
+            name: "orion_links"
+            widget: "list"
+            fields:
+              - { label: "Link Text", name: "label", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
+              - label: "Link Type"
+                name: "type"
+                widget: "select"
+                options:
+                  - { label: "Website/Profile", value: "u-url" }
+                  - { label: "Email", value: "u-email" }
+                default: "u-url"
+              - label: "Is this a link to one of your own profiles?"
+                name: "is_me"
+                widget: "boolean"
+                default: false
+              - label: "Open link in a new tab?"
+                name: "new_tab"
+                widget: "boolean"
+                default: false
+          - label: "Amelia's Note"
+            name: "amelia_note"
+            widget: "markdown"
+          - label: "Amelia's Links"
+            name: "amelia_links"
+            widget: "list"
+            fields:
+              - { label: "Link Text", name: "label", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
+              - label: "Link Type"
+                name: "type"
+                widget: "select"
+                options:
+                  - { label: "Website/Profile", value: "u-url" }
+                  - { label: "Email", value: "u-email" }
+                default: "u-url"
+              - label: "Is this a link to one of your own profiles?"
+                name: "is_me"
+                widget: "boolean"
+                default: false
+              - label: "Open link in a new tab?"
+                name: "new_tab"
+                widget: "boolean"
+                default: false
