@@ -1,11 +1,11 @@
 {
-	"title": "nightdogs",
-	"url": "https://nightdogs.xyz/",
-	"language": "en",
-	"description": "nightdogs",
-	"author": {
-		"name": "Jane Marie Bach",
-		"email": "haileebach@gmail.com",
-		"url": "https://nightdogs.xyz/about-me/"
-	}
+  "title": "nightdogs",
+  "url": "https://nightdogs.xyz/",
+  "language": "en",
+  "description": "Nightdogs are hotdogs that you eat in the middle of the night",
+  "author": {
+    "name": "Jane Marie Bach",
+    "email": "haileebach@gmail.com",
+    "url": "https://nightdogs.xyz/about-me/"
+  }
 }
