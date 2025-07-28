@@ -19,10 +19,10 @@ base.njk #} {#
 </script>
 #}
 
-<article>
-	<h1 class="post-title">{{ title }}</h1>
+<article class="h-entry">
+	<h1 class="post-title p-name">{{ title }}</h1>
 	<div class="post-meta">
-		<time datetime="{{ page.date | htmlDateString }}">{{
+		<time class="dt-published" datetime="{{ page.date | htmlDateString }}">{{
 			page.date | readableDate
 		}}</time>
 		{%- if author -%}
@@ -35,7 +35,9 @@ base.njk #} {#
 		{%- endif -%}
 	</div>
 
-	{{ content | safe }}
+	<div class="e-content">
+		{{ content | safe }}
+	</div>
 
 	{%- if collections.posts %}
 	<ul class="links-nextprev">
