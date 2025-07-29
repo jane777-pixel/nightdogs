@@ -148,5 +148,16 @@ mentionType('mention-of') %} {% if mentionsForUrl.length %}
 		</li>
 		{% endfor %}
 	</ol>
+
+	<pre>{{ mentionsForUrl | dump }}</pre>
+
+	<ol class="webmention-list">
+		{% for mention in mentionsForUrl %}
+			<li>
+				<a href="{{ mention.source }}">{{ mention.source }}</a>
+				({{ mention["wm-property"] or "no wm-property" }})
+			</li>
+		{% endfor %}
+	</ol>
 </div>
 {% endif %}
