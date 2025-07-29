@@ -102,21 +102,19 @@ mentionType('mention-of') %} {% if mentionsForUrl.length %}
         {% set url = (mention.data and mention.data.url) or mention.url %}
         {% set publishedRaw = (mention.data and mention.data.published) or mention.published or (mention.data and mention.data.verified_date) or (mention.data and mention.data['wm-received']) or mention['wm-received'] %}
         {% set published = false %}
-        {% if publishedRaw %}
-          {% if publishedRaw is string and publishedRaw != '' %}
-            {# Handle timezone offset conversion: +00:00 to Z #}
-            {% if publishedRaw.endswith('+00:00') %}
-              {% set published = publishedRaw.replace('+00:00', 'Z') %}
-            {% elif publishedRaw.endswith('Z') or publishedRaw.includes('T') %}
-              {% set published = publishedRaw %}
-            {% else %}
-              {# Try to parse as date and convert to ISO #}
-              {% set published = publishedRaw | date('iso') %}
-            {% endif %}
+        {% if publishedRaw and publishedRaw is string and publishedRaw != '' %}
+          {# Handle timezone offset conversion: +00:00 to Z #}
+          {% if '+00:00' in publishedRaw %}
+            {% set published = publishedRaw.replace('+00:00', 'Z') %}
+          {% elif 'Z' in publishedRaw or 'T' in publishedRaw %}
+            {% set published = publishedRaw %}
           {% else %}
-            {# Non-string date, convert to ISO #}
+            {# Try to parse as date and convert to ISO #}
             {% set published = publishedRaw | date('iso') %}
           {% endif %}
+        {% elif publishedRaw %}
+          {# Non-string date, convert to ISO #}
+          {% set published = publishedRaw | date('iso') %}
         {% endif %}
         {% set content = (mention.data and mention.data.content) or (mention.content and mention.content.html) %}
         {% if author %}
