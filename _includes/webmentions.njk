@@ -1,5 +1,3 @@
-<p>DEBUG: url = {{ webmentionsUrl }}, mentionsForUrl.length = {{ mentionsForUrl.length }}</p>
-
 <style>
 	.webmentions {
 		margin-top: 3em;
@@ -150,33 +148,37 @@ mentionType('mention-of') %} {% if mentionsForUrl.length %}
 	</ol>
 
 	<ol class="webmention-list">
-		{% for mention in mentionsForUrl %}
+  {% for mention in mentionsForUrl %}
     <li class="webmention h-cite">
       <div class="webmention-author">
-        {% if mention.data and mention.data.author %}
-          <a href="{{ mention.data.author.url }}" class="u-author">
+        {% set author = mention.data and mention.data.author ? mention.data.author : mention.author %}
+        {% set url = mention.data and mention.data.url ? mention.data.url : mention.url %}
+        {% set published = mention.data and mention.data.published ? mention.data.published : mention.published %}
+        {% set content = mention.data and mention.data.content ? mention.data.content : mention.content.html %}
+        {% if author %}
+          <a href="{{ author.url }}" class="u-author">
             <img
-              src="{{ mention.data.author.photo }}"
-              alt="{{ mention.data.author.name }}"
+              src="{{ author.photo }}"
+              alt="{{ author.name }}"
               class="u-photo"
               loading="lazy"
               width="48"
               height="48"
             />
-            <strong class="p-name">{{ mention.data.author.name }}</strong>
+            <strong class="p-name">{{ author.name }}</strong>
           </a>
         {% endif %}
-        {% if mention.data and mention.data.url %}
-          <a href="{{ mention.data.url }}" class="u-url">
-            <time datetime="{{ mention.data.published | date('yyyy-MM-dd\'T\'HH:mm:ss\'Z\'') }}">
-              {{ mention.data.published | readableDate }}
+        {% if url and published %}
+          <a href="{{ url }}" class="u-url">
+            <time datetime="{{ published | date('yyyy-MM-dd\'T\'HH:mm:ss\'Z\'') }}">
+              {{ published | readableDate }}
             </time>
           </a>
         {% endif %}
       </div>
       <div class="webmention-content p-content">
-        {% if mention.data and mention.data.content %}
-          {{ mention.data.content | safe }}
+        {% if content %}
+          {{ content | safe }}
         {% endif %}
       </div>
     </li>
