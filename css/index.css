@@ -14,13 +14,12 @@
 @import url("https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&display=swap");
 
 :root {
-	--font-family:
-		"Bitcount Grid Single", "Segoe UI", "Roboto", "Helvetica Neue", Arial,
-		"Liberation Sans", sans-serif;
-	--font-family-monospace:
-		Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console,
-		Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono,
-		Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+	--font-family: "Bitcount Grid Single", "Segoe UI", "Roboto", "Helvetica Neue",
+		Arial, "Liberation Sans", sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono,
+		Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono,
+		Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New,
+		Courier, monospace;
 	--syntax-tab-size: 2;
 
 	/* Default Pico variables - pink theme with fallbacks */
@@ -724,4 +723,31 @@ body.author-selected-jane .postlist-link {
 }
 .postlist-item[data-author="jane"] .postlist-link {
 	font-family: "Bitcount Grid Single", var(--font-family) !important;
+}
+
+body[data-author="amelia"],
+body.author-selected-amelia,
+.site-wrapper[data-author="amelia"],
+.h-card[data-author="amelia"],
+main[data-author="amelia"],
+footer[data-author="amelia"] {
+	--pico-background-color: #ffe6fa;
+	--pico-color: #6c218a;
+	--pico-primary: #8b2d9e;
+	--pico-muted-color: #5a1a74;
+	font-family: "Fira Sans", sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+	body[data-author="amelia"],
+	body.author-selected-amelia,
+	.site-wrapper[data-author="amelia"],
+	.h-card[data-author="amelia"],
+	main[data-author="amelia"],
+	footer[data-author="amelia"] {
+		--pico-background-color: #2b59c4;
+		--pico-color: #dced5a;
+		--pico-primary: #2db1b5;
+		--pico-muted-color: #b6e37c;
+	}
 }
