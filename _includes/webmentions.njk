@@ -153,8 +153,25 @@ mentionType('mention-of') %} {% if mentionsForUrl.length %}
       <div class="webmention-author">
         {% set author = (mention.data and mention.data.author) or mention.author %}
         {% set url = (mention.data and mention.data.url) or mention.url %}
-        {# Try all possible date fields in order of preference #}
-        {% set published = (mention.data and mention.data.published) or mention.published or (mention.data and mention.data.verified_date) or (mention.data and mention.data['wm-received']) or mention['wm-received'] %}
+        {# Robust date handling: try all possible fields, and always output valid ISO 8601 for datetime #}
+        {% set publishedRaw = (mention.data and mention.data.published) or mention.published or (mention.data and mention.data.verified_date) or (mention.data and mention.data['wm-received']) or mention['wm-received'] %}
+        {% set published = publishedRaw %}
+        {% if publishedRaw and publishedRaw is string and publishedRaw != '' %}
+          {# Remove timezone offset and force Z if needed #}
+          {% if publishedRaw matches '^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\+|-)\\d{2}:\\d{2}$' %}
+            {# Convert e.g. 2025-07-29T15:10:51+00:00 to 2025-07-29T15:10:51Z #}
+            {% set published = publishedRaw[:19] ~ 'Z' %}
+          {% elif publishedRaw matches '^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$' %}
+            {# Already ISO, use as is #}
+            {% set published = publishedRaw %}
+          {% else %}
+            {# Try to parse as date and output ISO #}
+            {% set publishedDate = publishedRaw | date %}
+            {% if publishedDate %}
+              {% set published = publishedDate | date('yyyy-MM-dd\'T\'HH:mm:ss\'Z\'') %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
         {% set content = (mention.data and mention.data.content) or (mention.content and mention.content.html) %}
         {% if author %}
           <a href="{{ author.url }}" class="u-author">
@@ -171,7 +188,7 @@ mentionType('mention-of') %} {% if mentionsForUrl.length %}
         {% endif %}
         {% if url and published %}
           <a href="{{ url }}" class="u-url">
-            <time datetime="{{ published | date('yyyy-MM-dd\'T\'HH:mm:ss\'Z\'') }}">
+            <time datetime="{{ published }}">
               {{ published | readableDate }}
             </time>
           </a>
