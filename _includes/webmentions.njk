@@ -102,33 +102,23 @@ mentionType('mention-of') %} {% if mentionsForUrl.length %}
         {% set url = (mention.data and mention.data.url) or mention.url %}
         {% set publishedRaw = mention.verified_date or (mention.data and mention.data.published) or mention.published or (mention.data and mention.data.verified_date) or (mention.data and mention.data['wm-received']) or mention['wm-received'] %}
         {% set published = false %}
-        
-        <!-- DEBUG: publishedRaw = "{{ publishedRaw }}" (type: {{ publishedRaw.__class__.__name__ if publishedRaw else 'null' }}) -->
-        
         {% if publishedRaw and publishedRaw is string and publishedRaw != '' %}
           {# Handle timezone offset conversion: +00:00 to Z #}
           {% if '+00:00' in publishedRaw %}
             {% set published = publishedRaw.replace('+00:00', 'Z') %}
-            <!-- DEBUG: +00:00 replacement → "{{ published }}" -->
           {% elif '+' in publishedRaw and publishedRaw | length > 19 %}
             {# Handle other timezone offsets like +01:00, +02:00, etc. - convert to Z for simplicity #}
             {% set published = publishedRaw | truncate(19, true, '') + 'Z' %}
-            <!-- DEBUG: timezone truncation → "{{ published }}" -->
           {% elif 'Z' in publishedRaw and 'T' in publishedRaw %}
             {% set published = publishedRaw %}
-            <!-- DEBUG: already ISO → "{{ published }}" -->
           {% else %}
             {# Try to parse as date and convert to ISO #}
             {% set published = publishedRaw | date('iso') %}
-            <!-- DEBUG: date('iso') conversion → "{{ published }}" -->
           {% endif %}
         {% elif publishedRaw %}
           {# Non-string date, convert to ISO #}
           {% set published = publishedRaw | date('iso') %}
-          <!-- DEBUG: non-string date('iso') → "{{ published }}" -->
         {% endif %}
-        
-        <!-- DEBUG: Final published value = "{{ published }}" -->
         {% set content = (mention.data and mention.data.content) or (mention.content and mention.content.html) %}
         {% if author %}
           <a href="{{ author.url }}" class="u-author">
@@ -146,7 +136,7 @@ mentionType('mention-of') %} {% if mentionsForUrl.length %}
         {% if url and published %}
           <a href="{{ url }}" class="u-url">
             <time datetime="{{ published }}">
-              {{ published | readableDate }}
+              {{ publishedRaw | readableDate }}
             </time>
           </a>
         {% endif %}
