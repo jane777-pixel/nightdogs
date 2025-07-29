@@ -6,9 +6,23 @@ The source code for the blog at nightdogs.xyz. Built with [Eleventy](https://www
 
 This project was originally forked from [eleventy-base-blog](https://github.com/11ty/eleventy-base-blog).
 
+## Developer Workflows
+
+- **Build:** `npm run build` (or `npx eleventy`)
+- **Serve locally:** `npm start` (or `npx eleventy --serve`)
+- **Deploy:** Push to main; Netlify auto-deploy.
+- **Add author:** Update `_data/authors.json` and add theme CSS if needed.
+- **Add post:** Place markdown/Nunjucks file in `content/blog/<author>/<date>/<slug>/`.
+
+## Project-Specific Conventions
+
+- **Author slugs** must match those in `authors.json` and theme selectors.
+- **Custom filters**: Add to `_config/filters.js` and register in `eleventy.config.js`.
+- **Webmentions:** Data and templates in `_data/webmentions.js` and `_includes/webmentions.njk`.
+- **No direct edits** in `_site/`—always edit source files.
+
 ## TODO
 
 - [x] Make Nic an author
-- [ ] Fix CMS authentication
-- [ ] give orionlw more permissions on repo
-- [ ] ditto netlify
+- [x] Fix CMS authentication
+- [ ] Add Dog page for Adesse
