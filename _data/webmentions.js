@@ -1,8 +1,7 @@
-import dotenv from "dotenv";
 import axios from "axios";
 import EleventyFetch from "@11ty/eleventy-fetch";
 
-dotenv.config();
+// Removed dotenv import and config; Netlify injects env vars automatically
 
 const API_TOKEN = process.env.WEBMENTION_IO_TOKEN;
 const DOMAIN = "nightdogs.xyz";
