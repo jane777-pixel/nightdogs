@@ -13,25 +13,14 @@
 /* Import EB Garamond for orionlw author */
 @import url("https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&display=swap");
 
-/*
- * =============================
- * Pico CSS Only Variable Refactor
- * =============================
- * - Uses ONLY Pico CSS variables for all backgrounds, text, and links
- * - Author themes set Pico variables directly
- * - Removes all custom color variables and redundant overrides
- * - Keeps font-family overrides for author themes
- * - microformats2 and accessibility best practices preserved
- * - File reduced from ~1800 lines to ~400 lines
- */
-
 :root {
-	--font-family: "Bitcount Grid Single", "Segoe UI", "Roboto", "Helvetica Neue",
-		Arial, "Liberation Sans", sans-serif;
-	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono,
-		Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono,
-		Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New,
-		Courier, monospace;
+	--font-family:
+		"Bitcount Grid Single", "Segoe UI", "Roboto", "Helvetica Neue", Arial,
+		"Liberation Sans", sans-serif;
+	--font-family-monospace:
+		Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console,
+		Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono,
+		Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
 	--syntax-tab-size: 2;
 
 	/* Default Pico variables - pink theme with fallbacks */

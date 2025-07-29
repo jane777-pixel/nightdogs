@@ -1,56 +1,33 @@
 <!doctype html>
 <html lang="{{ metadata.language }}">
 	<head>
+  	{% css %}
+    {% include "css/pico.min.css" %}
+	  {% include "css/index.css" %};
+		{% endcss %}
+    
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>{{ title or metadata.title }}</title>
         <meta name="description" content="{{ description or metadata.description }}">
-        <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="{{ metadata.title }}">
-
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
-
-        {#- Uncomment this if you’d like folks to know that you used Eleventy to build your site!  #}
-        {#- <meta name="generator" content="{{ eleventy.generator }}"> #}
-
-		{#-
-		Plain-text bundles are provided via the `eleventy-plugin-bundle` plugin:
-		1. CSS:
-			* Add to a per-page bundle using `{% css %}{% endcss %}`
-			* Retrieve bundle content using `{% getBundle "css" %}` or `{% getBundleFileUrl "css" %}`
-		2. Or for JavaScript:
-			* Add to a per-page bundle using `{% js %}{% endjs %}`
-			* Retrieve via `{% getBundle "js" %}` or `{% getBundleFileUrl "js" %}`
-		3. Learn more: https://github.com/11ty/eleventy-plugin-bundle
-		#}
-
-		{#- Add CSS to the bundle #}
-		<style>/* This is an arbitrary CSS string added to the bundle */</style>
-
-		{#- Add the contents of a file to the bundle #}
-		<style>{% include "css/index.css" %}</style>
-
-		{#- Or you can add from node_modules #}
-		{# <style>{% include "node_modules/something.css" %}</style> #}
+        <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="{{ metadata.title }}"
 
 		{#- Render the CSS bundle using inlined CSS (for the fastest site performance in production) #}
 		<style>{% getBundle "css" %}</style>
 
-		{#- Renders the CSS bundle using a separate file, if you can't set CSP directive style-src: 'unsafe-inline' #}
-		{#- <link rel="stylesheet" href="{% getBundleFileUrl "css" %}"> #}
-
 		{#- Add the heading-anchors web component to the JavaScript bundle #}
 		<script type="module">{% include "node_modules/@zachleat/heading-anchors/heading-anchors.js" %}</script>
-        
+
         <!-- IndieAuth endpoints -->
         <link rel="authorization_endpoint" href="https://indieauth.com/auth">
         <link rel="token_endpoint" href="https://tokens.indieauth.com/token">
-        
+
         <!-- Identity verification -->
         <link rel="me" href="https://github.com/jane777-pixel">
         <link rel="me" href="mailto:haileebach@gmail.com">
 		<link rel="me" href="mailto:orionlw@pm.me">
 		<link rel="me" href="https://github.com/orionlw">
-        
+
         <!-- Webmention endpoints -->
         <link rel="webmention" href="https://webmention.io/nightdogs.xyz/webmention">
         <link rel="pingback" href="https://webmention.io/nightdogs.xyz/xmlrpc">
