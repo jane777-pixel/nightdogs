@@ -7,9 +7,7 @@ tags:
   - posts
   - music
 ---
-`.center-align {
-display: block;
-text-align: center;`
+⛧☾༺♰༻☽⛧
 
 yesterday was brimming with hope, love, and fear. it was very human.
 
@@ -17,6 +15,4 @@ is it weird to say i'm glad they've stopped playing the beach boys so incessantl
 
 ![](img_3676.jpg)
 
-`.center-align {
-display: block;
-text-align: center;`
+⛧☾༺♰༻☽⛧
