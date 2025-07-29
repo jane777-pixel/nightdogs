@@ -153,7 +153,8 @@ mentionType('mention-of') %} {% if mentionsForUrl.length %}
       <div class="webmention-author">
         {% set author = (mention.data and mention.data.author) or mention.author %}
         {% set url = (mention.data and mention.data.url) or mention.url %}
-        {% set published = (mention.data and mention.data.published) or mention.published or mention.data and mention.data.verified_date %}
+        {# Try all possible date fields in order of preference #}
+        {% set published = (mention.data and mention.data.published) or mention.published or (mention.data and mention.data.verified_date) or (mention.data and mention.data['wm-received']) or mention['wm-received'] %}
         {% set content = (mention.data and mention.data.content) or (mention.content and mention.content.html) %}
         {% if author %}
           <a href="{{ author.url }}" class="u-author">
