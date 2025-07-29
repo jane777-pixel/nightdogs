@@ -32,9 +32,11 @@ export default async function () {
 		});
 		console.log("Webmention API response:", response);
 
-		// Adjust parsing: prefer children, fallback to root array
+		// Adjust parsing: use links array from API response
 		let mentions = [];
-		if (Array.isArray(response.children)) {
+		if (Array.isArray(response.links)) {
+			mentions = response.links;
+		} else if (Array.isArray(response.children)) {
 			mentions = response.children;
 		} else if (Array.isArray(response)) {
 			mentions = response;
