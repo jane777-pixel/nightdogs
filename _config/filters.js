@@ -54,8 +54,12 @@ export default function (eleventyConfig) {
 		return mentions.filter((m) => {
 			if (!m.target) return false;
 			const targetNorm = normalize(m.target);
-			// Match relative, absolute, and with/without trailing slash
-			return targetNorm === normUrl || targetNorm === normUrl + "/";
+			// Match with or without trailing slash
+			return (
+				targetNorm === normUrl ||
+				targetNorm === normUrl.replace(/\/$/, "") ||
+				targetNorm + "/" === normUrl
+			);
 		});
 	});
 
