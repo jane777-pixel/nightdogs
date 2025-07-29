@@ -90,86 +90,34 @@ mentionType('mention-of') %} {% if mentionsForUrl.length %}
 		</a>
 		{% endfor %}
 	</div>
-	{% endif %} {% if replies.length %}
+	{% endif %} {% if replies.length or mentions.length %}
 	<h4>Replies & Mentions ({{ replies.length + mentions.length }})</h4>
 	{% endif %}
 
 	<ol class="webmention-list">
-		{% for mention in replies %}
-		<li class="webmention h-cite">
-			<div class="webmention-author">
-				<a href="{{ mention.author.url }}" class="u-author">
-					<img
-						src="{{ mention.author.photo }}"
-						alt="{{ mention.author.name }}"
-						class="u-photo"
-						loading="lazy"
-						width="48"
-						height="48"
-					/>
-					<strong class="p-name">{{ mention.author.name }}</strong>
-				</a>
-				<a href="{{ mention.url }}" class="u-url">
-					<time datetime="{{ mention.published | date('yyyy-MM-dd\'T\'HH:mm:ss\'Z\'') }}">{{
-						mention.published | readableDate
-					}}</time>
-				</a>
-			</div>
-			<div class="webmention-content p-content">
-				{{ mention.content.html | safe }}
-			</div>
-		</li>
-		{% endfor %} {% for mention in mentions %}
-		<li class="webmention h-cite">
-			<div class="webmention-author">
-				<a href="{{ mention.author.url }}" class="u-author">
-					<img
-						src="{{ mention.author.photo }}"
-						alt="{{ mention.author.name }}"
-						class="u-photo"
-						loading="lazy"
-						width="48"
-						height="48"
-					/>
-					<strong class="p-name">{{ mention.author.name }}</strong>
-				</a>
-				<a href="{{ mention.url }}" class="u-url">
-					<time datetime="{{ mention.published | date('yyyy-MM-dd\'T\'HH:mm:ss\'Z\'') }}">{{
-						mention.published | readableDate
-					}}</time>
-				</a>
-			</div>
-			<div class="webmention-content p-content">
-				Mentioned this post on <a href="{{ mention.url }}">{{ mention.url }}</a
-					>.
-			</div>
-		</li>
-		{% endfor %}
-	</ol>
-
-	<ol class="webmention-list">
   {% for mention in mentionsForUrl %}
+    {% if mention['wm-property'] == 'in-reply-to' or mention['wm-property'] == 'mention-of' %}
     <li class="webmention h-cite">
       <div class="webmention-author">
         {% set author = (mention.data and mention.data.author) or mention.author %}
         {% set url = (mention.data and mention.data.url) or mention.url %}
         {# Robust date handling: try all possible fields, and always output valid ISO 8601 for datetime #}
         {% set publishedRaw = (mention.data and mention.data.published) or mention.published or (mention.data and mention.data.verified_date) or (mention.data and mention.data['wm-received']) or mention['wm-received'] %}
-        {% set published = publishedRaw %}
-        {% if publishedRaw and publishedRaw is string and publishedRaw != '' %}
-          {# Remove timezone offset and force Z if needed #}
-          {% if publishedRaw matches '^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\+|-)\\d{2}:\\d{2}$' %}
-            {# Convert e.g. 2025-07-29T15:10:51+00:00 to 2025-07-29T15:10:51Z #}
-            {% set published = publishedRaw[0:19] ~ 'Z' %}
-          {% elif publishedRaw matches '^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$' %}
-            {# Already ISO, use as is #}
-            {% set published = publishedRaw %}
-          {% else %}
-            {# Try to parse as date and output ISO #}
-            {% set publishedDate = publishedRaw | date %}
-            {% if publishedDate %}
-              {% set published = publishedDate | date('yyyy-MM-dd\'T\'HH:mm:ss\'Z\'') %}
+        {% set published = false %}
+        {% if publishedRaw %}
+          {% if publishedRaw is string and publishedRaw != '' %}
+            {# Handle timezone offset conversion: +00:00 to Z #}
+            {% if publishedRaw.endswith('+00:00') %}
+              {% set published = publishedRaw.replace('+00:00', 'Z') %}
+            {% elif publishedRaw.endswith('Z') or publishedRaw.includes('T') %}
+              {% set published = publishedRaw %}
+            {% else %}
+              {# Try to parse as date and convert to ISO #}
+              {% set published = publishedRaw | date | date('iso') %}
             {% endif %}
+          {% else %}
+            {# Non-string date, convert to ISO #}
+            {% set published = publishedRaw | date('iso') %}
           {% endif %}
         {% endif %}
         {% set content = (mention.data and mention.data.content) or (mention.content and mention.content.html) %}
@@ -195,11 +143,14 @@ mentionType('mention-of') %} {% if mentionsForUrl.length %}
         {% endif %}
       </div>
       <div class="webmention-content p-content">
-        {% if content %}
+        {% if mention['wm-property'] == 'in-reply-to' and content %}
           {{ content | safe }}
+        {% elif mention['wm-property'] == 'mention-of' %}
+          Mentioned this post on <a href="{{ url }}">{{ url }}</a>.
         {% endif %}
       </div>
     </li>
+    {% endif %}
   {% endfor %}
 	</ol>
 </div>
