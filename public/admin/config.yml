@@ -27,7 +27,7 @@ collections:
     label: "Blog Posts"
     folder: "content/blog"
     create: true
-    slug: "{{author}}/{{date | date('YYYY-MM-DD')}}/{{slug}}/index"
+    slug: "{{slug}}"
     path: "{{author}}/{{date | date('YYYY-MM-DD')}}/{{slug}}/index"
     media_folder: ""
     public_folder: ""
