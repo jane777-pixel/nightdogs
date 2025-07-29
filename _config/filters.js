@@ -46,11 +46,17 @@ export default function (eleventyConfig) {
 	// Webmentions
 	eleventyConfig.addFilter("mentionsForUrl", (mentions, url) => {
 		const normalize = (u) =>
-			decodeURIComponent(u)
+			decodeURIComponent(u || "")
 				.replace(/^https?:\/\/(www\.)?nightdogs\.xyz/, "") // strip domain if present
-				.replace(/\/+$/, ""); // remove trailing slash(es)
+				.replace(/\/+$/, "") // remove trailing slash(es)
+				.replace(/\/index$/, ""); // treat /foo/ and /foo/index as same
 		const normUrl = normalize(url);
-		return mentions.filter((m) => m.target && normalize(m.target) === normUrl);
+		return mentions.filter((m) => {
+			if (!m.target) return false;
+			const targetNorm = normalize(m.target);
+			// Match relative, absolute, and with/without trailing slash
+			return targetNorm === normUrl || targetNorm === normUrl + "/";
+		});
 	});
 
 	eleventyConfig.addFilter("mentionType", (mentions, type) => {
