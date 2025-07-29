@@ -151,10 +151,10 @@ mentionType('mention-of') %} {% if mentionsForUrl.length %}
   {% for mention in mentionsForUrl %}
     <li class="webmention h-cite">
       <div class="webmention-author">
-        {% set author = mention.data and mention.data.author ? mention.data.author : mention.author %}
-        {% set url = mention.data and mention.data.url ? mention.data.url : mention.url %}
-        {% set published = mention.data and mention.data.published ? mention.data.published : mention.published %}
-        {% set content = mention.data and mention.data.content ? mention.data.content : mention.content.html %}
+        {% set author = (mention.data and mention.data.author) or mention.author %}
+        {% set url = (mention.data and mention.data.url) or mention.url %}
+        {% set published = (mention.data and mention.data.published) or mention.published %}
+        {% set content = (mention.data and mention.data.content) or (mention.content and mention.content.html) %}
         {% if author %}
           <a href="{{ author.url }}" class="u-author">
             <img
