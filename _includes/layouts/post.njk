@@ -70,5 +70,6 @@ base.njk #} {#
 		{% endif %}
 	</ul>
 	{%- endif %}
-{% include "webmentions.njk" with { url: page.url } %}
+{% set webmentionsUrl = page.url %}
+{% include "webmentions.njk" %}
 </article>
