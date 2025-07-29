@@ -1,18 +1,19 @@
 <!doctype html>
 <html lang="{{ metadata.language }}">
 	<head>
-  	{% css %}
-    {% include "css/pico.min.css" %}
-	  {% include "css/index.css" %};
-		{% endcss %}
+
 
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>{{ title or metadata.title }}</title>
         <meta name="description" content="{{ description or metadata.description }}">
-        <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="{{ metadata.title }}"
+        <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="{{ metadata.title }}">
 
 		{#- Render the CSS bundle using inlined CSS (for the fastest site performance in production) #}
+ 	{% css %}
+  {% include "css/pico.min.css" %};
+  {% include "css/index.css" %};
+	{% endcss %}
 		<style>{% getBundle "css" %}</style>
 
 		{#- Add the heading-anchors web component to the JavaScript bundle #}
