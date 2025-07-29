@@ -76,4 +76,16 @@ export default function (eleventyConfig) {
 	eleventyConfig.addFilter("date", (dateObj, format = "yyyy") => {
 		return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat(format);
 	});
+
+	// Convert ISO date string to JavaScript Date object for webmentions
+	eleventyConfig.addFilter("dateObject", (dateString) => {
+		if (!dateString) return null;
+		if (typeof dateString !== "string") return dateString; // Already a Date object
+		try {
+			const date = new Date(dateString);
+			return isNaN(date.getTime()) ? null : date;
+		} catch (e) {
+			return null;
+		}
+	});
 }

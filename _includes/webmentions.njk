@@ -5,7 +5,18 @@
 		border-top: 1px dashed var(--color-gray-20);
 	}
 	.webmention-list {
-		padding-left: 0;
+		        {% if url and published %}
+          <a href="{{ url }}" class="u-url">
+            <time datetime="{{ published }}">
+              {% set dateObj = publishedRaw | dateObject %}
+              {% if dateObj %}
+                {{ dateObj | readableDate }}
+              {% else %}
+                {{ published | truncate(10, true, '') | replace('-', ' ') }}
+              {% endif %}
+            </time>
+          </a>
+        {% endif %}: 0;
 		list-style: none;
 	}
 	.webmention {
@@ -136,7 +147,12 @@ mentionType('mention-of') %} {% if mentionsForUrl.length %}
         {% if url and published %}
           <a href="{{ url }}" class="u-url">
             <time datetime="{{ published }}">
-              {{ publishedRaw | readableDate }}
+              {% set publishedDate = (publishedRaw | date('2025-01-01')) %}
+              {% if publishedDate and publishedDate != 'Invalid DateTime' %}
+                {{ (publishedRaw | date('2025-01-01')) | readableDate }}
+              {% else %}
+                {{ published | truncate(10, true, '') | replace('-', ' ') }}
+              {% endif %}
             </time>
           </a>
         {% endif %}
