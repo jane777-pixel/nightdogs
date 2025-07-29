@@ -1,8 +1,7 @@
 import axios from "axios";
 import EleventyFetch from "@11ty/eleventy-fetch";
 
-// Removed dotenv import and config; Netlify injects env vars automatically
-
+// Netlify injects env vars automatically
 const API_TOKEN = process.env.WEBMENTION_IO_TOKEN;
 const DOMAIN = "nightdogs.xyz";
 const API_URL = `https://webmention.io/api/mentions.json?domain=${DOMAIN}&token=${API_TOKEN}`;
@@ -31,7 +30,17 @@ export default async function () {
 				},
 			},
 		});
-		const mentions = response.children || [];
+		console.log("Webmention API response:", response);
+
+		// Adjust parsing: prefer children, fallback to root array
+		let mentions = [];
+		if (Array.isArray(response.children)) {
+			mentions = response.children;
+		} else if (Array.isArray(response)) {
+			mentions = response;
+		} else {
+			console.warn("⚠️ Unexpected webmention API response structure.");
+		}
 
 		const likes = mentions.filter((m) => m["wm-property"] === "like-of");
 		const reposts = mentions.filter((m) => m["wm-property"] === "repost-of");
