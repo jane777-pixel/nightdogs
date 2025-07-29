@@ -45,8 +45,10 @@ export default function (eleventyConfig) {
 
 	// Webmentions
 	eleventyConfig.addFilter("mentionsForUrl", (mentions, url) => {
-		if (!mentions || !url) return [];
-		return mentions.filter((mention) => mention["wm-target"] === url);
+		// Normalize URLs: remove trailing slashes, decode URI, etc.
+		const normalize = (u) => decodeURIComponent(u).replace(/\/+$/, "");
+		const normUrl = normalize(url);
+		return mentions.filter((m) => m.target && normalize(m.target) === normUrl);
 	});
 
 	eleventyConfig.addFilter("mentionType", (mentions, type) => {
