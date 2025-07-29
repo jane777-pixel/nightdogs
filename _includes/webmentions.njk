@@ -112,7 +112,7 @@ mentionType('mention-of') %} {% if mentionsForUrl.length %}
 					<strong class="p-name">{{ mention.author.name }}</strong>
 				</a>
 				<a href="{{ mention.url }}" class="u-url">
-					<time datetime="{{ mention.published | rfc822 }}">{{
+					<time datetime="{{ mention.published | date('yyyy-MM-dd\'T\'HH:mm:ss\'Z\'') }}">{{
 						mention.published | readableDate
 					}}</time>
 				</a>
@@ -136,20 +136,18 @@ mentionType('mention-of') %} {% if mentionsForUrl.length %}
 					<strong class="p-name">{{ mention.author.name }}</strong>
 				</a>
 				<a href="{{ mention.url }}" class="u-url">
-					<time datetime="{{ mention.published | rfc822 }}">{{
+					<time datetime="{{ mention.published | date('yyyy-MM-dd\'T\'HH:mm:ss\'Z\'') }}">{{
 						mention.published | readableDate
 					}}</time>
 				</a>
 			</div>
 			<div class="webmention-content p-content">
 				Mentioned this post on <a href="{{ mention.url }}">{{ mention.url }}</a
-				>.
+					>.
 			</div>
 		</li>
 		{% endfor %}
 	</ol>
-
-	<pre>{{ mentionsForUrl | dump }}</pre>
 
 	<ol class="webmention-list">
 		{% for mention in mentionsForUrl %}
@@ -170,7 +168,7 @@ mentionType('mention-of') %} {% if mentionsForUrl.length %}
         {% endif %}
         {% if mention.data and mention.data.url %}
           <a href="{{ mention.data.url }}" class="u-url">
-            <time datetime="{{ mention.data.published | rfc822 }}">
+            <time datetime="{{ mention.data.published | date('yyyy-MM-dd\'T\'HH:mm:ss\'Z\'') }}">
               {{ mention.data.published | readableDate }}
             </time>
           </a>
