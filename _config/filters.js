@@ -51,10 +51,11 @@ export default function (eleventyConfig) {
 				.replace(/\/+$/, "") // remove trailing slash(es)
 				.replace(/\/index$/, ""); // treat /foo/ and /foo/index as same
 		const normUrl = normalize(url);
+		console.log("Webmentions DEBUG: normUrl =", normUrl);
 		return mentions.filter((m) => {
 			if (!m.target) return false;
 			const targetNorm = normalize(m.target);
-			// Match with or without trailing slash
+			console.log("Webmentions DEBUG: comparing", targetNorm, "vs", normUrl);
 			return (
 				targetNorm === normUrl ||
 				targetNorm === normUrl.replace(/\/$/, "") ||
