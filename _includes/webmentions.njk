@@ -160,7 +160,7 @@ mentionType('mention-of') %} {% if mentionsForUrl.length %}
           {# Remove timezone offset and force Z if needed #}
           {% if publishedRaw matches '^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\+|-)\\d{2}:\\d{2}$' %}
             {# Convert e.g. 2025-07-29T15:10:51+00:00 to 2025-07-29T15:10:51Z #}
-            {% set published = publishedRaw[:19] ~ 'Z' %}
+            {% set published = publishedRaw[0:19] ~ 'Z' %}
           {% elif publishedRaw matches '^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$' %}
             {# Already ISO, use as is #}
             {% set published = publishedRaw %}
