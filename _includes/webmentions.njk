@@ -100,13 +100,16 @@ mentionType('mention-of') %} {% if mentionsForUrl.length %}
       <div class="webmention-author">
         {% set author = (mention.data and mention.data.author) or mention.author %}
         {% set url = (mention.data and mention.data.url) or mention.url %}
-        {% set publishedRaw = (mention.data and mention.data.published) or mention.published or (mention.data and mention.data.verified_date) or (mention.data and mention.data['wm-received']) or mention['wm-received'] %}
+        {% set publishedRaw = mention.verified_date or (mention.data and mention.data.published) or mention.published or (mention.data and mention.data.verified_date) or (mention.data and mention.data['wm-received']) or mention['wm-received'] %}
         {% set published = false %}
         {% if publishedRaw and publishedRaw is string and publishedRaw != '' %}
           {# Handle timezone offset conversion: +00:00 to Z #}
           {% if '+00:00' in publishedRaw %}
             {% set published = publishedRaw.replace('+00:00', 'Z') %}
-          {% elif 'Z' in publishedRaw or 'T' in publishedRaw %}
+          {% elif '+' in publishedRaw and publishedRaw | length > 19 %}
+            {# Handle other timezone offsets like +01:00, +02:00, etc. - convert to Z for simplicity #}
+            {% set published = publishedRaw | truncate(19, true, '') + 'Z' %}
+          {% elif 'Z' in publishedRaw and 'T' in publishedRaw %}
             {% set published = publishedRaw %}
           {% else %}
             {# Try to parse as date and convert to ISO #}
