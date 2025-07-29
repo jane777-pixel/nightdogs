@@ -45,8 +45,10 @@ export default function (eleventyConfig) {
 
 	// Webmentions
 	eleventyConfig.addFilter("mentionsForUrl", (mentions, url) => {
-		// Normalize URLs: remove trailing slashes, decode URI, etc.
-		const normalize = (u) => decodeURIComponent(u).replace(/\/+$/, "");
+		const normalize = (u) =>
+			decodeURIComponent(u)
+				.replace(/^https?:\/\/(www\.)?nightdogs\.xyz/, "") // strip domain if present
+				.replace(/\/+$/, ""); // remove trailing slash(es)
 		const normUrl = normalize(url);
 		return mentions.filter((m) => m.target && normalize(m.target) === normUrl);
 	});
