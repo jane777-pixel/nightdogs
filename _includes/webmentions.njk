@@ -153,11 +153,36 @@ mentionType('mention-of') %} {% if mentionsForUrl.length %}
 
 	<ol class="webmention-list">
 		{% for mention in mentionsForUrl %}
-			<li>
-				<a href="{{ mention.source }}">{{ mention.source }}</a>
-				({{ mention["wm-property"] or "no wm-property" }})
-			</li>
-		{% endfor %}
+    <li class="webmention h-cite">
+      <div class="webmention-author">
+        {% if mention.data and mention.data.author %}
+          <a href="{{ mention.data.author.url }}" class="u-author">
+            <img
+              src="{{ mention.data.author.photo }}"
+              alt="{{ mention.data.author.name }}"
+              class="u-photo"
+              loading="lazy"
+              width="48"
+              height="48"
+            />
+            <strong class="p-name">{{ mention.data.author.name }}</strong>
+          </a>
+        {% endif %}
+        {% if mention.data and mention.data.url %}
+          <a href="{{ mention.data.url }}" class="u-url">
+            <time datetime="{{ mention.data.published | rfc822 }}">
+              {{ mention.data.published | readableDate }}
+            </time>
+          </a>
+        {% endif %}
+      </div>
+      <div class="webmention-content p-content">
+        {% if mention.data and mention.data.content %}
+          {{ mention.data.content | safe }}
+        {% endif %}
+      </div>
+    </li>
+  {% endfor %}
 	</ol>
 </div>
 {% endif %}
