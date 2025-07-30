@@ -9,13 +9,12 @@
 
 /* === Root Variables === */
 :root {
-	--font-family:
-		"Bitcount Grid Single", "Segoe UI", "Roboto", "Helvetica Neue", Arial,
-		"Liberation Sans", sans-serif;
-	--font-family-monospace:
-		Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console,
-		Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono,
-		Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+	--font-family: "Bitcount Grid Single", "Segoe UI", "Roboto", "Helvetica Neue",
+		Arial, "Liberation Sans", sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono,
+		Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono,
+		Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New,
+		Courier, monospace;
 	--syntax-tab-size: 2;
 	/* Pico defaults as fallback */
 	--pico-background-color: #ffd6e0;
@@ -57,7 +56,6 @@ h6 {
 	margin: 2em 0;
 	background-color: var(--pico-background-color, #ffd6e0);
 	color: var(--pico-color, #8b0020);
-	font-family: var(--font-family);
 	line-height: 1.5;
 }
 pre,
@@ -256,7 +254,6 @@ a[href]:active {
 	margin: 2em 0;
 	background-color: var(--pico-background-color, #ffd6e0);
 	color: var(--pico-color, #8b0020);
-	font-family: var(--font-family);
 	line-height: 1.5;
 }
 .h-card .p-note,
