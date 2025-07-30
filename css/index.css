@@ -7,6 +7,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&display=swap");
 
+/* === Root Variables === */
+:root {
+	--font-family: "Bitcount Grid Single", "Segoe UI", "Roboto", "Helvetica Neue",
+		Arial, "Liberation Sans", sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono,
+		Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono,
+		Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New,
+		Courier, monospace;
+	--syntax-tab-size: 2;
+	/* Pico defaults as fallback */
+	--pico-background-color: #ffd6e0;
+	--pico-color: #8b0020;
+	--pico-primary: #b8002e;
+	--pico-muted-color: #6d0015;
+	/* Author variables are injected here by Nunjucks */
+}
+
 /* === Generic Styles (always come first) === */
 html,
 body {
