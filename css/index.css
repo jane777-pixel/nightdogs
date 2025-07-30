@@ -65,7 +65,8 @@ code {
 
 /* === Author Theme Overrides (must come after generic styles) === */
 
-/* Body and wrapper: colors and body font */
+/* Body, html, and wrapper: colors and body font */
+html[data-author="jane"],
 body[data-author="jane"],
 .site-wrapper[data-author="jane"] {
 	--pico-background-color: var(--author-jane-background);
@@ -74,6 +75,7 @@ body[data-author="jane"],
 	--pico-muted-color: var(--author-jane-muted);
 	font-family: var(--author-jane-font-body, var(--font-family));
 }
+html[data-author="abby"],
 body[data-author="abby"],
 .site-wrapper[data-author="abby"] {
 	--pico-background-color: var(--author-abby-background);
@@ -82,6 +84,7 @@ body[data-author="abby"],
 	--pico-muted-color: var(--author-abby-muted);
 	font-family: var(--author-abby-font-body, var(--font-family));
 }
+html[data-author="orionlw"],
 body[data-author="orionlw"],
 .site-wrapper[data-author="orionlw"] {
 	--pico-background-color: var(--author-orionlw-background);
@@ -90,6 +93,7 @@ body[data-author="orionlw"],
 	--pico-muted-color: var(--author-orionlw-muted);
 	font-family: var(--author-orionlw-font-body, var(--font-family));
 }
+html[data-author="adesse"],
 body[data-author="adesse"],
 .site-wrapper[data-author="adesse"] {
 	--pico-background-color: var(--author-adesse-background);
@@ -98,6 +102,7 @@ body[data-author="adesse"],
 	--pico-muted-color: var(--author-adesse-muted);
 	font-family: var(--author-adesse-font-body, var(--font-family));
 }
+html[data-author="amelia"],
 body[data-author="amelia"],
 .site-wrapper[data-author="amelia"] {
 	--pico-background-color: var(--author-amelia-background);
@@ -106,6 +111,7 @@ body[data-author="amelia"],
 	--pico-muted-color: var(--author-amelia-muted);
 	font-family: var(--author-amelia-font-body, var(--font-family));
 }
+html[data-author="nic"],
 body[data-author="nic"],
 .site-wrapper[data-author="nic"] {
 	--pico-background-color: var(--author-nic-background);
@@ -542,7 +548,7 @@ body[data-author="amelia"] .home-link {
 	font-family: var(--author-amelia-font-header, var(--font-family)) !important;
 }
 body[data-author="nic"] .home-link {
-	font-family: var(--author-nic-font-header, var,--font-family)) !important;
+	font-family: var(--author-nic-font-header, var(--font-family)) !important;
 }
 
 /* ...add any additional utility or component styles below... */
