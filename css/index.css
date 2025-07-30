@@ -546,5 +546,23 @@ body[data-author="nic"] .nav-item,
 body[data-author="nic"] .nav-item a {
 	font-family: var(--author-nic-font-header, var(--font-family)) !important;
 }
+body[data-author="jane"] .home-link {
+	font-family: var(--author-jane-font-header, var(--font-family)) !important;
+}
+body[data-author="abby"] .home-link {
+	font-family: var(--author-abby-font-header, var(--font-family)) !important;
+}
+body[data-author="orionlw"] .home-link {
+	font-family: var(--author-orionlw-font-header, var(--font-family)) !important;
+}
+body[data-author="adesse"] .home-link {
+	font-family: var(--author-adesse-font-header, var(--font-family)) !important;
+}
+body[data-author="amelia"] .home-link {
+	font-family: var(--author-amelia-font-header, var(--font-family)) !important;
+}
+body[data-author="nic"] .home-link {
+	font-family: var(--author-nic-font-header, var(--font-family)) !important;
+}
 
 /* ...add any additional utility or component styles below... */
