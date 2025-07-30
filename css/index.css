@@ -1,30 +1,4 @@
-/* Import Bitcount Grid Single from Google Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Bitcount+Grid+Single&display=swap");
-/* Import IBM Plex for orionlw author */
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
-/* Import Jacquard 12 and Bellefair for adesse */
-@import url("https://fonts.googleapis.com/css2?family=Jacquard+12&family=Bellefair:wght@400&display=swap");
-/* Import Montserrat for nic */
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
-/* Import Fira Sans for amelia */
-@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap");
-/* Import Quicksand for abby author */
-@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap");
-/* Import EB Garamond for orionlw author */
-@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&display=swap");
-
-/*
- * =============================
- * Pico CSS Only Variable Refactor
- * =============================
- * - Uses ONLY Pico CSS variables for all backgrounds, text, and links
- * - Author themes set Pico variables directly
- * - Removes all custom color variables and redundant overrides
- * - Keeps font-family overrides for author themes
- * - microformats2 and accessibility best practices preserved
- * - File reduced from ~1800 lines to ~400 lines
- */
-
+/* === Root Variables === */
 :root {
 	--font-family: "Bitcount Grid Single", "Segoe UI", "Roboto", "Helvetica Neue",
 		Arial, "Liberation Sans", sans-serif;
@@ -33,279 +7,29 @@
 		Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New,
 		Courier, monospace;
 	--syntax-tab-size: 2;
-
-	/* Default Pico variables - pink theme with fallbacks */
+	/* Pico defaults as fallback */
 	--pico-background-color: #ffd6e0;
 	--pico-color: #8b0020;
 	--pico-primary: #b8002e;
 	--pico-muted-color: #6d0015;
+	/* Author variables are injected here by Nunjucks */
 }
 
-@media (prefers-color-scheme: dark) {
-	:root {
-		--pico-background-color: #8b0020;
-		--pico-color: #fff0f3;
-		--pico-primary: #ffb3c6;
-		--pico-muted-color: #ffd6e0;
-	}
-}
-
-/* Ensure body always has background and color set */
-body {
-	background-color: var(--pico-background-color, #ffd6e0);
-	color: var(--pico-color, #8b0020);
-	min-height: 100vh;
-}
-
-/* Author themes: set Pico variables directly */
-body[data-author="jane"],
-body.author-selected-jane,
-.site-wrapper[data-author="jane"] {
-	--pico-background-color: #ffd6e0;
-	--pico-color: #8b0020;
-	--pico-primary: #b8002e;
-	--pico-muted-color: #6d0015;
-	font-family: "Bitcount Grid Single", var(--font-family);
-}
-
-.h-card[data-author="jane"] {
-	--pico-background-color: #ffd6e0;
-	--pico-color: #8b0020;
-	--pico-primary: #b8002e;
-	--pico-muted-color: #6d0015;
-}
-
-body[data-author="abby"],
-body.author-selected-abby,
-.site-wrapper[data-author="abby"] {
-	--pico-background-color: #e6ffe6;
-	--pico-color: #0d3a0d;
-	--pico-primary: #1e7e1e;
-	--pico-muted-color: #0a2a0a;
-	font-family: "Quicksand", sans-serif;
-}
-
-.h-card[data-author="abby"] {
-	--pico-background-color: #e6ffe6;
-	--pico-color: #0d3a0d;
-	--pico-primary: #1e7e1e;
-	--pico-muted-color: #0a2a0a;
-}
-
-body[data-author="orionlw"],
-body.author-selected-orionlw,
-.site-wrapper[data-author="orionlw"] {
-	--pico-background-color: #e6d3b3;
-	--pico-color: #4a3018;
-	--pico-primary: #6e4b1f;
-	--pico-muted-color: #3d2614;
-	font-family: "EB Garamond", serif;
-}
-
-.h-card[data-author="orionlw"] {
-	--pico-background-color: #e6d3b3;
-	--pico-color: #4a3018;
-	--pico-primary: #6e4b1f;
-	--pico-muted-color: #3d2614;
-}
-
-body[data-author="adesse"],
-body.author-selected-adesse,
-.site-wrapper[data-author="adesse"] {
-	--pico-background-color: #624f4c;
-	--pico-color: #ffffff;
-	--pico-primary: #deb8c4;
-	--pico-muted-color: #f0e6e7;
-	font-family: "Bellefair", serif;
-}
-
-.h-card[data-author="adesse"] {
-	--pico-background-color: #624f4c;
-	--pico-color: #ffffff;
-	--pico-primary: #deb8c4;
-	--pico-muted-color: #f0e6e7;
-}
-
-body[data-author="amelia"],
-body.author-selected-amelia,
-.site-wrapper[data-author="amelia"] {
-	--pico-background-color: #ffe6fa;
-	--pico-color: #6c218a;
-	--pico-primary: #8b2d9e;
-	--pico-muted-color: #5a1a74;
-	font-family: "Fira Sans", sans-serif;
-}
-
-.h-card[data-author="amelia"] {
-	--pico-background-color: #2b59c4;
-	--pico-color: #dced5a;
-	--pico-primary: #2db1b5;
-	--pico-muted-color: #b6e37c;
-}
-
-body[data-author="nic"],
-body.author-selected-nic,
-.site-wrapper[data-author="nic"] {
-	--pico-background-color: #91cbff;
-	--pico-color: #1e3a8a;
-	--pico-primary: #8bbfff;
-	--pico-muted-color: #1e40af;
-	font-family: "Montserrat", sans-serif;
-}
-
-.h-card[data-author="nic"] {
-	--pico-background-color: #91cbff;
-	--pico-color: #1e3a8a;
-	--pico-primary: #8bbfff;
-	--pico-muted-color: #1e40af;
-}
-
-/* Dark mode overrides for author themes */
-@media (prefers-color-scheme: dark) {
-	body[data-author="jane"],
-	body.author-selected-jane,
-	.site-wrapper[data-author="jane"] {
-		--pico-background-color: #8b0020;
-		--pico-color: #fff0f3;
-		--pico-primary: #ffb3c6;
-		--pico-muted-color: #ffd6e0;
-	}
-
-	.h-card[data-author="jane"] {
-		--pico-background-color: #8b0020;
-		--pico-color: #fff0f3;
-		--pico-primary: #ffb3c6;
-		--pico-muted-color: #ffd6e0;
-	}
-
-	body[data-author="abby"],
-	body.author-selected-abby,
-	.site-wrapper[data-author="abby"] {
-		--pico-background-color: #0d3a0d;
-		--pico-color: #ffffff;
-		--pico-primary: #90ee90;
-		--pico-muted-color: #b2f7b2;
-	}
-
-	.h-card[data-author="abby"] {
-		--pico-background-color: #0d3a0d;
-		--pico-color: #ffffff;
-		--pico-primary: #90ee90;
-		--pico-muted-color: #b2f7b2;
-	}
-
-	body[data-author="orionlw"],
-	body.author-selected-orionlw,
-	.site-wrapper[data-author="orionlw"] {
-		--pico-background-color: #4a3018;
-		--pico-color: #ffffff;
-		--pico-primary: #deb887;
-		--pico-muted-color: #e6d3b3;
-	}
-
-	.h-card[data-author="orionlw"] {
-		--pico-background-color: #4a3018;
-		--pico-color: #ffffff;
-		--pico-primary: #deb887;
-		--pico-muted-color: #e6d3b3;
-	}
-
-	body[data-author="adesse"],
-	body.author-selected-adesse,
-	.site-wrapper[data-author="adesse"],
-	.h-card[data-author="adesse"] {
-		--pico-background-color: #2a201e;
-		--pico-color: #ffffff;
-		--pico-primary: #deb8c4;
-		--pico-muted-color: #f0e6e7;
-	}
-
-	body[data-author="amelia"],
-	body.author-selected-amelia,
-	.site-wrapper[data-author="amelia"],
-	.h-card[data-author="amelia"] {
-		--pico-background-color: #2b59c4;
-		--pico-color: #dced5a;
-		--pico-primary: #2db1b5;
-		--pico-muted-color: #b6e37c;
-	}
-
-	body[data-author="nic"],
-	body.author-selected-nic,
-	.site-wrapper[data-author="nic"],
-	.h-card[data-author="nic"] {
-		--pico-background-color: #1e3a8a;
-		--pico-color: #91cbff;
-		--pico-primary: #8bbfff;
-		--pico-muted-color: #dbeafe;
-	}
-}
-
-/* Author-specific header fonts */
-body[data-author="adesse"] h1,
-body[data-author="adesse"] h2,
-body[data-author="adesse"] h3,
-body[data-author="adesse"] h4,
-body[data-author="adesse"] h5,
-body[data-author="adesse"] h6,
-body.author-selected-adesse h1,
-body.author-selected-adesse h2,
-body.author-selected-adesse h3,
-body.author-selected-adesse h4,
-body.author-selected-adesse h5,
-body.author-selected-adesse h6 {
-	font-family: "Jacquard 12", serif;
-}
-
-body[data-author="orionlw"] h1,
-body[data-author="orionlw"] h2,
-body[data-author="orionlw"] h3,
-body[data-author="orionlw"] h4,
-body[data-author="orionlw"] h5,
-body[data-author="orionlw"] h6,
-body.author-selected-orionlw h1,
-body.author-selected-orionlw h2,
-body.author-selected-orionlw h3,
-body.author-selected-orionlw h4,
-body.author-selected-orionlw h5,
-body.author-selected-orionlw h6 {
-	font-family: "Montserrat", sans-serif;
-}
-
-body[data-author="orionlw"] code,
-body[data-author="orionlw"] pre {
-	font-family: "IBM Plex Mono", var(--font-family-monospace);
-}
-
-/* Global styles - all using Pico variables */
-* {
-	box-sizing: border-box;
-}
-
-@view-transition {
-	navigation: auto;
-}
-
+/* === Generic Styles (always come first) === */
 html,
 body {
-	margin: 0 !important;
-	padding: 0 !important;
+	margin: 0;
+	padding: 0;
 	font-family: var(--font-family);
 	color: var(--pico-color, #8b0020);
 	background-color: var(--pico-background-color, #ffd6e0);
 }
-
-body {
-	min-height: 100vh;
-}
-
 .site-wrapper {
 	max-width: 40em;
 	margin: 0 auto;
-	padding: 0 !important;
+	padding: 0;
 	min-height: 100vh;
 }
-
 h1,
 h2,
 h3,
@@ -314,11 +38,215 @@ h5,
 h6 {
 	font-family: var(--font-family);
 }
+.h-card,
+.h-entry {
+	border-radius: 8px;
+	border: 1px solid rgba(128, 128, 128, 0.2);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	padding: 1.5em;
+	margin: 2em 0;
+	background-color: var(--pico-background-color, #ffd6e0);
+	color: var(--pico-color, #8b0020);
+	line-height: 1.5;
+}
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
 
+/* === Audio Player Styling === */
+audio {
+	width: 100%;
+	max-width: 100%;
+	margin: 1rem 0;
+	border-radius: 8px;
+	background-color: var(--pico-background-color, #ffd6e0);
+	border: 1px solid var(--pico-primary, #b8002e);
+	outline: none;
+}
+
+audio:focus {
+	box-shadow: 0 0 0 2px var(--pico-primary, #b8002e);
+}
+
+/* Webkit browsers (Chrome, Safari, Edge) */
+audio::-webkit-media-controls-panel {
+	background-color: var(--pico-background-color, #ffd6e0);
+	border-radius: 8px;
+}
+
+audio::-webkit-media-controls-play-button,
+audio::-webkit-media-controls-mute-button {
+	background-color: var(--pico-primary, #b8002e);
+	border-radius: 50%;
+}
+
+/* Firefox */
+audio::-moz-range-thumb {
+	background-color: var(--pico-primary, #b8002e);
+	border: none;
+	border-radius: 50%;
+}
+
+/* === Author Theme Overrides (must come after generic styles) === */
+
+/* Colors and fonts for Jane */
+html[data-author="jane"],
+html[data-author="jane"] body {
+	--pico-background-color: var(--author-jane-background);
+	--pico-color: var(--author-jane-color);
+	--pico-primary: var(--author-jane-primary);
+	--pico-muted-color: var(--author-jane-muted);
+	font-family: var(--author-jane-font-body, var(--font-family));
+	color: var(--author-jane-color);
+	background-color: var(--author-jane-background);
+}
+/* Colors and fonts for Abby */
+html[data-author="abby"],
+html[data-author="abby"] body {
+	--pico-background-color: var(--author-abby-background);
+	--pico-color: var(--author-abby-color);
+	--pico-primary: var(--author-abby-primary);
+	--pico-muted-color: var(--author-abby-muted);
+	font-family: var(--author-abby-font-body, var(--font-family));
+	color: var(--author-abby-color);
+	background-color: var(--author-abby-background);
+}
+/* Colors and fonts for Orion */
+html[data-author="orionlw"],
+html[data-author="orionlw"] body {
+	--pico-background-color: var(--author-orionlw-background);
+	--pico-color: var(--author-orionlw-color);
+	--pico-primary: var(--author-orionlw-primary);
+	--pico-muted-color: var(--author-orionlw-muted);
+	font-family: var(--author-orionlw-font-body, var(--font-family));
+	color: var(--author-orionlw-color);
+	background-color: var(--author-orionlw-background);
+}
+/* Colors and fonts for Adesse */
+html[data-author="adesse"],
+html[data-author="adesse"] body {
+	--pico-background-color: var(--author-adesse-background);
+	--pico-color: var(--author-adesse-color);
+	--pico-primary: var(--author-adesse-primary);
+	--pico-muted-color: var(--author-adesse-muted);
+	font-family: var(--author-adesse-font-body, var(--font-family));
+	color: var(--author-adesse-color);
+	background-color: var(--author-adesse-background);
+}
+/* Colors and fonts for Amelia */
+html[data-author="amelia"],
+html[data-author="amelia"] body {
+	--pico-background-color: var(--author-amelia-background);
+	--pico-color: var(--author-amelia-color);
+	--pico-primary: var(--author-amelia-primary);
+	--pico-muted-color: var(--author-amelia-muted);
+	font-family: var(--author-amelia-font-body, var(--font-family));
+	color: var(--author-amelia-color);
+	background-color: var(--author-amelia-background);
+}
+/* Colors and fonts for Nic */
+html[data-author="nic"],
+html[data-author="nic"] body {
+	--pico-background-color: var(--author-nic-background);
+	--pico-color: var(--author-nic-color);
+	--pico-primary: var(--author-nic-primary);
+	--pico-muted-color: var(--author-nic-muted);
+	font-family: var(--author-nic-font-body, var(--font-family));
+	color: var(--author-nic-color);
+	background-color: var(--author-nic-background);
+}
+
+/* Headings: header font */
+html[data-author="jane"] h1,
+html[data-author="jane"] h2,
+html[data-author="jane"] h3,
+html[data-author="jane"] h4,
+html[data-author="jane"] h5,
+html[data-author="jane"] h6 {
+	font-family: var(--author-jane-font-header, var(--font-family));
+}
+html[data-author="abby"] h1,
+html[data-author="abby"] h2,
+html[data-author="abby"] h3,
+html[data-author="abby"] h4,
+html[data-author="abby"] h5,
+html[data-author="abby"] h6 {
+	font-family: var(--author-abby-font-header, var(--font-family));
+}
+html[data-author="orionlw"] h1,
+html[data-author="orionlw"] h2,
+html[data-author="orionlw"] h3,
+html[data-author="orionlw"] h4,
+html[data-author="orionlw"] h5,
+html[data-author="orionlw"] h6 {
+	font-family: var(--author-orionlw-font-header, var(--font-family));
+}
+html[data-author="adesse"] h1,
+html[data-author="adesse"] h2,
+html[data-author="adesse"] h3,
+html[data-author="adesse"] h4,
+html[data-author="adesse"] h5,
+html[data-author="adesse"] h6 {
+	font-family: var(--author-adesse-font-header, var(--font-family));
+}
+html[data-author="amelia"] h1,
+html[data-author="amelia"] h2,
+html[data-author="amelia"] h3,
+html[data-author="amelia"] h4,
+html[data-author="amelia"] h5,
+html[data-author="amelia"] h6 {
+	font-family: var(--author-amelia-font-header, var(--font-family));
+}
+html[data-author="nic"] h1,
+html[data-author="nic"] h2,
+html[data-author="nic"] h3,
+html[data-author="nic"] h4,
+html[data-author="nic"] h5,
+html[data-author="nic"] h6 {
+	font-family: var(--author-nic-font-header, var(--font-family));
+}
+
+/* Mono font for Orion */
+html[data-author="orionlw"] code,
+html[data-author="orionlw"] pre {
+	font-family: var(--author-orionlw-font-mono, var(--font-family-monospace));
+}
+
+/* ...rest of your CSS (global styles, utility classes, etc.) ... */
+
+/* === Global Styles === */
+* {
+	box-sizing: border-box;
+}
+html,
+body {
+	margin: 0 !important;
+	padding: 0 !important;
+	font-family: var(--font-family);
+	color: var(--pico-color, #8b0020);
+	background-color: var(--pico-background-color, #ffd6e0);
+}
+body {
+	min-height: 100vh;
+}
+.site-wrapper {
+	max-width: 40em;
+	margin: 0 auto;
+	padding: 0 !important;
+	min-height: 100vh;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: var(--font-family);
+}
 html {
 	overflow-y: scroll;
 }
-
 main,
 footer {
 	padding: 1rem;
@@ -348,10 +276,8 @@ a[href]:active {
 	margin: 2em 0;
 	background-color: var(--pico-background-color, #ffd6e0);
 	color: var(--pico-color, #8b0020);
-	font-family: var(--font-family);
 	line-height: 1.5;
 }
-
 .h-card .p-note,
 .h-card .p-org,
 .h-card .p-name,
@@ -362,72 +288,14 @@ a[href]:active {
 	border: none;
 	box-shadow: none;
 }
-
 .h-card img.u-photo {
 	max-width: 100px;
 	border-radius: 50%;
 	margin-right: 1em;
 }
-
 .h-card .p-name,
 .h-card .p-org {
 	font-weight: 600;
-}
-
-/* Author-specific font families for h-cards */
-.h-card[data-author="adesse"] h1,
-.h-card[data-author="adesse"] h2,
-.h-card[data-author="adesse"] h3,
-.h-card[data-author="adesse"] h4,
-.h-card[data-author="adesse"] h5,
-.h-card[data-author="adesse"] h6,
-.h-card[data-author="adesse"] .p-name {
-	font-family: "Jacquard 12", serif !important;
-}
-.h-card[data-author="orionlw"] h1,
-.h-card[data-author="orionlw"] h2,
-.h-card[data-author="orionlw"] h3,
-.h-card[data-author="orionlw"] h4,
-.h-card[data-author="orionlw"] h5,
-.h-card[data-author="orionlw"] h6,
-.h-card[data-author="orionlw"] .p-name {
-	font-family: "Montserrat", sans-serif !important;
-}
-.h-card[data-author="nic"] h1,
-.h-card[data-author="nic"] h2,
-.h-card[data-author="nic"] h3,
-.h-card[data-author="nic"] h4,
-.h-card[data-author="nic"] h5,
-.h-card[data-author="nic"] h6,
-.h-card[data-author="nic"] .p-name {
-	font-family: "Montserrat", sans-serif !important;
-}
-.h-card[data-author="amelia"] h1,
-.h-card[data-author="amelia"] h2,
-.h-card[data-author="amelia"] h3,
-.h-card[data-author="amelia"] h4,
-.h-card[data-author="amelia"] h5,
-.h-card[data-author="amelia"] h6,
-.h-card[data-author="amelia"] .p-name {
-	font-family: "Fira Sans", sans-serif !important;
-}
-.h-card[data-author="abby"] h1,
-.h-card[data-author="abby"] h2,
-.h-card[data-author="abby"] h3,
-.h-card[data-author="abby"] h4,
-.h-card[data-author="abby"] h5,
-.h-card[data-author="abby"] h6,
-.h-card[data-author="abby"] .p-name {
-	font-family: "Quicksand", sans-serif !important;
-}
-.h-card[data-author="jane"] h1,
-.h-card[data-author="jane"] h2,
-.h-card[data-author="jane"] h3,
-.h-card[data-author="jane"] h4,
-.h-card[data-author="jane"] h5,
-.h-card[data-author="jane"] h6,
-.h-card[data-author="jane"] .p-name {
-	font-family: "Bitcount Grid Single", var(--font-family) !important;
 }
 
 /* Remove h-card styling from inline author names */
@@ -478,13 +346,10 @@ iframe {
 p:last-child {
 	margin-bottom: 0;
 }
-p {
-	line-height: 1.5;
-}
+p,
 li {
 	line-height: 1.5;
 }
-
 main :first-child {
 	margin-top: 0;
 }
@@ -499,7 +364,6 @@ header {
 	padding: 1em;
 	border-bottom: 1px dashed rgba(128, 128, 128, 0.3);
 }
-
 .home-link {
 	flex-grow: 1;
 	font-size: 1em;
@@ -508,7 +372,6 @@ header {
 .home-link:link:not(:hover) {
 	text-decoration: none;
 }
-
 #skip-link {
 	text-decoration: none;
 	background: var(--pico-background-color);
@@ -517,7 +380,6 @@ header {
 	border: 1px solid var(--pico-primary);
 	border-radius: 2px;
 }
-
 #skip-link.visually-hidden:focus {
 	position: absolute;
 	top: 1rem;
@@ -669,70 +531,60 @@ code {
 	word-break: break-all;
 }
 
-[data-author="adesse"] {
-	--font-family: "Bellefair", serif !important;
-	font-family: "Bellefair", serif;
+/* Increase specificity and add !important to force nav and links to use author header font */
+body[data-author="jane"] nav,
+body[data-author="jane"] .nav,
+body[data-author="jane"] .nav-item,
+body[data-author="jane"] .nav-item a {
+	font-family: var(--author-jane-font-header, var(--font-family)) !important;
 }
-[data-author="orionlw"] {
-	--font-family: "EB Garamond", serif !important;
-	font-family: "EB Garamond", serif;
+body[data-author="abby"] nav,
+body[data-author="abby"] .nav,
+body[data-author="abby"] .nav-item,
+body[data-author="abby"] .nav-item a {
+	font-family: var(--author-abby-font-header, var(--font-family)) !important;
 }
-[data-author="jane"] {
-	--font-family: "Bitcount Grid Single", var(--font-family) !important;
-	font-family: "Bitcount Grid Single", var(--font-family);
+body[data-author="orionlw"] nav,
+body[data-author="orionlw"] .nav,
+body[data-author="orionlw"] .nav-item,
+body[data-author="orionlw"] .nav-item a {
+	font-family: var(--author-orionlw-font-header, var(--font-family)) !important;
 }
-[data-author="nic"] {
-	--font-family: "Montserrat", sans-serif !important;
-	font-family: "Montserrat", sans-serif;
+body[data-author="adesse"] nav,
+body[data-author="adesse"] .nav,
+body[data-author="adesse"] .nav-item,
+body[data-author="adesse"] .nav-item a {
+	font-family: var(--author-adesse-font-header, var(--font-family)) !important;
 }
-[data-author="amelia"] {
-	--font-family: "Fira Sans", sans-serif !important;
-	font-family: "Fira Sans", sans-serif;
+body[data-author="amelia"] nav,
+body[data-author="amelia"] .nav,
+body[data-author="amelia"] .nav-item,
+body[data-author="amelia"] .nav-item a {
+	font-family: var(--author-amelia-font-header, var(--font-family)) !important;
 }
-[data-author="abby"] {
-	--font-family: "Quicksand", sans-serif !important;
-	font-family: "Quicksand", sans-serif;
+body[data-author="nic"] nav,
+body[data-author="nic"] .nav,
+body[data-author="nic"] .nav-item,
+body[data-author="nic"] .nav-item a {
+	font-family: var(--author-nic-font-header, var(--font-family)) !important;
+}
+body[data-author="jane"] .home-link {
+	font-family: var(--author-jane-font-header, var(--font-family)) !important;
+}
+body[data-author="abby"] .home-link {
+	font-family: var(--author-abby-font-header, var(--font-family)) !important;
+}
+body[data-author="orionlw"] .home-link {
+	font-family: var(--author-orionlw-font-header, var(--font-family)) !important;
+}
+body[data-author="adesse"] .home-link {
+	font-family: var(--author-adesse-font-header, var(--font-family)) !important;
+}
+body[data-author="amelia"] .home-link {
+	font-family: var(--author-amelia-font-header, var(--font-family)) !important;
+}
+body[data-author="nic"] .home-link {
+	font-family: var(--author-nic-font-header, var(--font-family)) !important;
 }
 
-body[data-author="adesse"] .postlist-link,
-body.author-selected-adesse .postlist-link {
-	font-family: "Jacquard 12", serif !important;
-}
-body[data-author="orionlw"] .postlist-link,
-body.author-selected-orionlw .postlist-link {
-	font-family: "Montserrat", sans-serif !important;
-}
-body[data-author="nic"] .postlist-link,
-body.author-selected-nic .postlist-link {
-	font-family: "Montserrat", sans-serif !important;
-}
-body[data-author="amelia"] .postlist-link,
-body.author-selected-amelia .postlist-link {
-	font-family: "Fira Sans", sans-serif !important;
-}
-body[data-author="abby"] .postlist-link,
-body.author-selected-abby .postlist-link {
-	font-family: "Quicksand", sans-serif !important;
-}
-body[data-author="jane"] .postlist-link,
-body.author-selected-jane .postlist-link {
-	font-family: "Bitcount Grid Single", var(--font-family) !important;
-}
-.postlist-item[data-author="adesse"] .postlist-link {
-	font-family: "Jacquard 12", serif !important;
-}
-.postlist-item[data-author="orionlw"] .postlist-link {
-	font-family: "Montserrat", sans-serif !important;
-}
-.postlist-item[data-author="nic"] .postlist-link {
-	font-family: "Montserrat", sans-serif !important;
-}
-.postlist-item[data-author="amelia"] .postlist-link {
-	font-family: "Fira Sans", sans-serif !important;
-}
-.postlist-item[data-author="abby"] .postlist-link {
-	font-family: "Quicksand", sans-serif !important;
-}
-.postlist-item[data-author="jane"] .postlist-link {
-	font-family: "Bitcount Grid Single", var(--font-family) !important;
-}
+/* ...add any additional utility or component styles below... */

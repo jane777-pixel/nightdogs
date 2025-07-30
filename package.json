@@ -50,6 +50,7 @@
 	"dependencies": {
 		"@11ty/eleventy-cache-assets": "^2.3.0",
 		"@11ty/eleventy-fetch": "^5.1.0",
+		"@11ty/eleventy-plugin-bundle": "^3.0.6",
 		"@zachleat/heading-anchors": "^1.0.3",
 		"axios": "^1.11.0",
 		"rss-parser": "^3.13.0"
