@@ -165,26 +165,6 @@ body[data-author="nic"] h6 {
 	font-family: var(--author-nic-font-header, var(--font-family));
 }
 
-/* h-card blocks: body font */
-.h-card[data-author="jane"] {
-	font-family: var(--author-jane-font-body, var(--font-family));
-}
-.h-card[data-author="abby"] {
-	font-family: var(--author-abby-font-body, var(--font-family));
-}
-.h-card[data-author="orionlw"] {
-	font-family: var(--author-orionlw-font-body, var(--font-family));
-}
-.h-card[data-author="adesse"] {
-	font-family: var(--author-adesse-font-body, var(--font-family));
-}
-.h-card[data-author="amelia"] {
-	font-family: var(--author-amelia-font-body, var(--font-family));
-}
-.h-card[data-author="nic"] {
-	font-family: var(--author-nic-font-body, var(--font-family));
-}
-
 /* Mono font for Orion */
 body[data-author="orionlw"] code,
 body[data-author="orionlw"] pre {
@@ -562,7 +542,7 @@ body[data-author="amelia"] .home-link {
 	font-family: var(--author-amelia-font-header, var(--font-family)) !important;
 }
 body[data-author="nic"] .home-link {
-	font-family: var(--author-nic-font-header, var(--font-family)) !important;
+	font-family: var(--author-nic-font-header, var,--font-family)) !important;
 }
 
 /* ...add any additional utility or component styles below... */
