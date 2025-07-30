@@ -86,7 +86,7 @@
         <link rel="webmention" href="https://webmention.io/nightdogs.xyz/webmention">
         <link rel="pingback" href="https://webmention.io/nightdogs.xyz/xmlrpc">
     </head>
-    <body data-author="{{ author or 'jane' }}" class="h-card">
+    <body data-author="{{ author or 'jane' }}" class="h-card" {% if layout == "layouts/post.njk" %}data-is-post="true"{% endif %}>
         <div class="site-wrapper" data-author="{{ author or 'jane' }}">
         <a href="#main" id="skip-link" class="visually-hidden">Skip to main content</a>
 
@@ -129,24 +129,42 @@
   </div>
   <script>
   (function() {
-    // Author theme selector
     const select = document.getElementById('author-select');
     const body = document.body;
     const wrapper = document.querySelector('.site-wrapper');
-    if (body.dataset.author) select.value = body.dataset.author;
-    select.addEventListener('change', function() {
-      body.setAttribute('data-author', this.value);
-      if (wrapper) wrapper.setAttribute('data-author', this.value);
-      try { localStorage.setItem('author-theme', this.value); } catch(e){}
-    });
-    try {
-      const saved = localStorage.getItem('author-theme');
-      if (saved) {
-        select.value = saved;
-        body.setAttribute('data-author', saved);
-        if (wrapper) wrapper.setAttribute('data-author', saved);
+    const pageAuthor = body.dataset.author;
+    const isPost = body.dataset.isPost === "true";
+
+    if (isPost) {
+      // Always use the post's author
+      select.value = pageAuthor;
+      body.setAttribute('data-author', pageAuthor);
+      if (wrapper) wrapper.setAttribute('data-author', pageAuthor);
+      select.addEventListener('change', function() {
+        body.setAttribute('data-author', this.value);
+        if (wrapper) wrapper.setAttribute('data-author', this.value);
+      });
+    } else {
+      // Use localStorage for persistence on non-post pages
+      try {
+        const saved = localStorage.getItem('author-theme');
+        if (saved) {
+          select.value = saved;
+          body.setAttribute('data-author', saved);
+          if (wrapper) wrapper.setAttribute('data-author', saved);
+        } else if (pageAuthor) {
+          select.value = pageAuthor;
+          localStorage.setItem('author-theme', pageAuthor);
+        }
+      } catch(e){
+        if (pageAuthor) select.value = pageAuthor;
       }
-    } catch(e){}
+      select.addEventListener('change', function() {
+        body.setAttribute('data-author', this.value);
+        if (wrapper) wrapper.setAttribute('data-author', this.value);
+        try { localStorage.setItem('author-theme', this.value); } catch(e){}
+      });
+    }
   })();
   </script>
 </footer>
