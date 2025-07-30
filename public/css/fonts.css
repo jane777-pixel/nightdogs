@@ -1,0 +1,675 @@
+/* Auto-generated fonts.css for local font serving */
+
+/* Bellefair */
+@font-face {
+	font-family: "Bellefair";
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url("/fonts/bellefair-v14-latin-regular.woff2") format("woff2");
+	unicode-range: U+000-5FF;
+}
+
+/* Bitcount Grid Single */
+@font-face {
+	font-family: "Bitcount Grid Single";
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url("/fonts/bitcount-grid-single-v1-latin-regular.woff2") format("woff2");
+	unicode-range: U+000-5FF;
+}
+
+/* Jacquard 12 */
+@font-face {
+	font-family: "Jacquard 12";
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url("/fonts/jacquard-12-v7-latin-regular.woff2") format("woff2");
+	unicode-range: U+000-5FF;
+}
+
+/* EB Garamond */
+@font-face {
+	font-family: "EB Garamond";
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+	src: url("/fonts/eb-garamond-v31-latin/eb-garamond-v31-latin-500.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "EB Garamond";
+	font-style: italic;
+	font-weight: 500;
+	font-display: swap;
+	src: url("/fonts/eb-garamond-v31-latin/eb-garamond-v31-latin-500italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "EB Garamond";
+	font-style: normal;
+	font-weight: 600;
+	font-display: swap;
+	src: url("/fonts/eb-garamond-v31-latin/eb-garamond-v31-latin-600.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "EB Garamond";
+	font-style: italic;
+	font-weight: 600;
+	font-display: swap;
+	src: url("/fonts/eb-garamond-v31-latin/eb-garamond-v31-latin-600italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "EB Garamond";
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url("/fonts/eb-garamond-v31-latin/eb-garamond-v31-latin-700.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "EB Garamond";
+	font-style: italic;
+	font-weight: 700;
+	font-display: swap;
+	src: url("/fonts/eb-garamond-v31-latin/eb-garamond-v31-latin-700italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "EB Garamond";
+	font-style: normal;
+	font-weight: 800;
+	font-display: swap;
+	src: url("/fonts/eb-garamond-v31-latin/eb-garamond-v31-latin-800.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "EB Garamond";
+	font-style: italic;
+	font-weight: 800;
+	font-display: swap;
+	src: url("/fonts/eb-garamond-v31-latin/eb-garamond-v31-latin-800italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "EB Garamond";
+	font-style: italic;
+	font-weight: 400;
+	font-display: swap;
+	src: url("/fonts/eb-garamond-v31-latin/eb-garamond-v31-latin-italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "EB Garamond";
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url("/fonts/eb-garamond-v31-latin/eb-garamond-v31-latin-regular.woff2")
+		format("woff2");
+}
+
+/* Fira Sans */
+@font-face {
+	font-family: "Fira Sans";
+	font-style: normal;
+	font-weight: 100;
+	font-display: swap;
+	src: url("/fonts/fira-sans-v17-latin/fira-sans-v17-latin-100.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Fira Sans";
+	font-style: italic;
+	font-weight: 100;
+	font-display: swap;
+	src: url("/fonts/fira-sans-v17-latin/fira-sans-v17-latin-100italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Fira Sans";
+	font-style: normal;
+	font-weight: 200;
+	font-display: swap;
+	src: url("/fonts/fira-sans-v17-latin/fira-sans-v17-latin-200.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Fira Sans";
+	font-style: italic;
+	font-weight: 200;
+	font-display: swap;
+	src: url("/fonts/fira-sans-v17-latin/fira-sans-v17-latin-200italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Fira Sans";
+	font-style: normal;
+	font-weight: 300;
+	font-display: swap;
+	src: url("/fonts/fira-sans-v17-latin/fira-sans-v17-latin-300.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Fira Sans";
+	font-style: italic;
+	font-weight: 300;
+	font-display: swap;
+	src: url("/fonts/fira-sans-v17-latin/fira-sans-v17-latin-300italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Fira Sans";
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+	src: url("/fonts/fira-sans-v17-latin/fira-sans-v17-latin-500.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Fira Sans";
+	font-style: italic;
+	font-weight: 500;
+	font-display: swap;
+	src: url("/fonts/fira-sans-v17-latin/fira-sans-v17-latin-500italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Fira Sans";
+	font-style: normal;
+	font-weight: 600;
+	font-display: swap;
+	src: url("/fonts/fira-sans-v17-latin/fira-sans-v17-latin-600.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Fira Sans";
+	font-style: italic;
+	font-weight: 600;
+	font-display: swap;
+	src: url("/fonts/fira-sans-v17-latin/fira-sans-v17-latin-600italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Fira Sans";
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url("/fonts/fira-sans-v17-latin/fira-sans-v17-latin-700.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Fira Sans";
+	font-style: italic;
+	font-weight: 700;
+	font-display: swap;
+	src: url("/fonts/fira-sans-v17-latin/fira-sans-v17-latin-700italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Fira Sans";
+	font-style: normal;
+	font-weight: 800;
+	font-display: swap;
+	src: url("/fonts/fira-sans-v17-latin/fira-sans-v17-latin-800.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Fira Sans";
+	font-style: italic;
+	font-weight: 800;
+	font-display: swap;
+	src: url("/fonts/fira-sans-v17-latin/fira-sans-v17-latin-800italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Fira Sans";
+	font-style: normal;
+	font-weight: 900;
+	font-display: swap;
+	src: url("/fonts/fira-sans-v17-latin/fira-sans-v17-latin-900.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Fira Sans";
+	font-style: italic;
+	font-weight: 900;
+	font-display: swap;
+	src: url("/fonts/fira-sans-v17-latin/fira-sans-v17-latin-900italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Fira Sans";
+	font-style: italic;
+	font-weight: 400;
+	font-display: swap;
+	src: url("/fonts/fira-sans-v17-latin/fira-sans-v17-latin-italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Fira Sans";
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url("/fonts/fira-sans-v17-latin/fira-sans-v17-latin-regular.woff2")
+		format("woff2");
+}
+
+/* IBM Plex Mono */
+@font-face {
+	font-family: "IBM Plex Mono";
+	font-style: normal;
+	font-weight: 100;
+	font-display: swap;
+	src: url("/fonts/ibm-plex-mono-v19-latin/ibm-plex-mono-v19-latin-100.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "IBM Plex Mono";
+	font-style: italic;
+	font-weight: 100;
+	font-display: swap;
+	src: url("/fonts/ibm-plex-mono-v19-latin/ibm-plex-mono-v19-latin-100italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "IBM Plex Mono";
+	font-style: normal;
+	font-weight: 200;
+	font-display: swap;
+	src: url("/fonts/ibm-plex-mono-v19-latin/ibm-plex-mono-v19-latin-200.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "IBM Plex Mono";
+	font-style: italic;
+	font-weight: 200;
+	font-display: swap;
+	src: url("/fonts/ibm-plex-mono-v19-latin/ibm-plex-mono-v19-latin-200italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "IBM Plex Mono";
+	font-style: normal;
+	font-weight: 300;
+	font-display: swap;
+	src: url("/fonts/ibm-plex-mono-v19-latin/ibm-plex-mono-v19-latin-300.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "IBM Plex Mono";
+	font-style: italic;
+	font-weight: 300;
+	font-display: swap;
+	src: url("/fonts/ibm-plex-mono-v19-latin/ibm-plex-mono-v19-latin-300italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "IBM Plex Mono";
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+	src: url("/fonts/ibm-plex-mono-v19-latin/ibm-plex-mono-v19-latin-500.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "IBM Plex Mono";
+	font-style: italic;
+	font-weight: 500;
+	font-display: swap;
+	src: url("/fonts/ibm-plex-mono-v19-latin/ibm-plex-mono-v19-latin-500italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "IBM Plex Mono";
+	font-style: normal;
+	font-weight: 600;
+	font-display: swap;
+	src: url("/fonts/ibm-plex-mono-v19-latin/ibm-plex-mono-v19-latin-600.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "IBM Plex Mono";
+	font-style: italic;
+	font-weight: 600;
+	font-display: swap;
+	src: url("/fonts/ibm-plex-mono-v19-latin/ibm-plex-mono-v19-latin-600italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "IBM Plex Mono";
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url("/fonts/ibm-plex-mono-v19-latin/ibm-plex-mono-v19-latin-700.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "IBM Plex Mono";
+	font-style: italic;
+	font-weight: 700;
+	font-display: swap;
+	src: url("/fonts/ibm-plex-mono-v19-latin/ibm-plex-mono-v19-latin-700italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "IBM Plex Mono";
+	font-style: italic;
+	font-weight: 400;
+	font-display: swap;
+	src: url("/fonts/ibm-plex-mono-v19-latin/ibm-plex-mono-v19-latin-italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "IBM Plex Mono";
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url("/fonts/ibm-plex-mono-v19-latin/ibm-plex-mono-v19-latin-regular.woff2")
+		format("woff2");
+}
+
+/* IBM Plex Sans */
+@font-face {
+	font-family: "IBM Plex Sans";
+	font-style: normal;
+	font-weight: 100;
+	font-display: swap;
+	src: url("/fonts/ibm-plex-sans-v22-latin/ibm-plex-sans-v22-latin-100.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "IBM Plex Sans";
+	font-style: italic;
+	font-weight: 100;
+	font-display: swap;
+	src: url("/fonts/ibm-plex-sans-v22-latin/ibm-plex-sans-v22-latin-100italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "IBM Plex Sans";
+	font-style: normal;
+	font-weight: 200;
+	font-display: swap;
+	src: url("/fonts/ibm-plex-sans-v22-latin/ibm-plex-sans-v22-latin-200.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "IBM Plex Sans";
+	font-style: italic;
+	font-weight: 200;
+	font-display: swap;
+	src: url("/fonts/ibm-plex-sans-v22-latin/ibm-plex-sans-v22-latin-200italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "IBM Plex Sans";
+	font-style: normal;
+	font-weight: 300;
+	font-display: swap;
+	src: url("/fonts/ibm-plex-sans-v22-latin/ibm-plex-sans-v22-latin-300.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "IBM Plex Sans";
+	font-style: italic;
+	font-weight: 300;
+	font-display: swap;
+	src: url("/fonts/ibm-plex-sans-v22-latin/ibm-plex-sans-v22-latin-300italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "IBM Plex Sans";
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+	src: url("/fonts/ibm-plex-sans-v22-latin/ibm-plex-sans-v22-latin-500.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "IBM Plex Sans";
+	font-style: italic;
+	font-weight: 500;
+	font-display: swap;
+	src: url("/fonts/ibm-plex-sans-v22-latin/ibm-plex-sans-v22-latin-500italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "IBM Plex Sans";
+	font-style: normal;
+	font-weight: 600;
+	font-display: swap;
+	src: url("/fonts/ibm-plex-sans-v22-latin/ibm-plex-sans-v22-latin-600.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "IBM Plex Sans";
+	font-style: italic;
+	font-weight: 600;
+	font-display: swap;
+	src: url("/fonts/ibm-plex-sans-v22-latin/ibm-plex-sans-v22-latin-600italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "IBM Plex Sans";
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url("/fonts/ibm-plex-sans-v22-latin/ibm-plex-sans-v22-latin-700.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "IBM Plex Sans";
+	font-style: italic;
+	font-weight: 700;
+	font-display: swap;
+	src: url("/fonts/ibm-plex-sans-v22-latin/ibm-plex-sans-v22-latin-700italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "IBM Plex Sans";
+	font-style: italic;
+	font-weight: 400;
+	font-display: swap;
+	src: url("/fonts/ibm-plex-sans-v22-latin/ibm-plex-sans-v22-latin-italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "IBM Plex Sans";
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url("/fonts/ibm-plex-sans-v22-latin/ibm-plex-sans-v22-latin-regular.woff2")
+		format("woff2");
+}
+
+/* Montserrat */
+@font-face {
+	font-family: "Montserrat";
+	font-style: normal;
+	font-weight: 100;
+	font-display: swap;
+	src: url("/fonts/montserrat-v30-latin/montserrat-v30-latin-100.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Montserrat";
+	font-style: italic;
+	font-weight: 100;
+	font-display: swap;
+	src: url("/fonts/montserrat-v30-latin/montserrat-v30-latin-100italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Montserrat";
+	font-style: normal;
+	font-weight: 200;
+	font-display: swap;
+	src: url("/fonts/montserrat-v30-latin/montserrat-v30-latin-200.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Montserrat";
+	font-style: italic;
+	font-weight: 200;
+	font-display: swap;
+	src: url("/fonts/montserrat-v30-latin/montserrat-v30-latin-200italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Montserrat";
+	font-style: normal;
+	font-weight: 300;
+	font-display: swap;
+	src: url("/fonts/montserrat-v30-latin/montserrat-v30-latin-300.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Montserrat";
+	font-style: italic;
+	font-weight: 300;
+	font-display: swap;
+	src: url("/fonts/montserrat-v30-latin/montserrat-v30-latin-300italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Montserrat";
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+	src: url("/fonts/montserrat-v30-latin/montserrat-v30-latin-500.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Montserrat";
+	font-style: italic;
+	font-weight: 500;
+	font-display: swap;
+	src: url("/fonts/montserrat-v30-latin/montserrat-v30-latin-500italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Montserrat";
+	font-style: normal;
+	font-weight: 600;
+	font-display: swap;
+	src: url("/fonts/montserrat-v30-latin/montserrat-v30-latin-600.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Montserrat";
+	font-style: italic;
+	font-weight: 600;
+	font-display: swap;
+	src: url("/fonts/montserrat-v30-latin/montserrat-v30-latin-600italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Montserrat";
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url("/fonts/montserrat-v30-latin/montserrat-v30-latin-700.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Montserrat";
+	font-style: italic;
+	font-weight: 700;
+	font-display: swap;
+	src: url("/fonts/montserrat-v30-latin/montserrat-v30-latin-700italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Montserrat";
+	font-style: normal;
+	font-weight: 800;
+	font-display: swap;
+	src: url("/fonts/montserrat-v30-latin/montserrat-v30-latin-800.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Montserrat";
+	font-style: italic;
+	font-weight: 800;
+	font-display: swap;
+	src: url("/fonts/montserrat-v30-latin/montserrat-v30-latin-800italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Montserrat";
+	font-style: normal;
+	font-weight: 900;
+	font-display: swap;
+	src: url("/fonts/montserrat-v30-latin/montserrat-v30-latin-900.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Montserrat";
+	font-style: italic;
+	font-weight: 900;
+	font-display: swap;
+	src: url("/fonts/montserrat-v30-latin/montserrat-v30-latin-900italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Montserrat";
+	font-style: italic;
+	font-weight: 400;
+	font-display: swap;
+	src: url("/fonts/montserrat-v30-latin/montserrat-v30-latin-italic.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Montserrat";
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url("/fonts/montserrat-v30-latin/montserrat-v30-latin-regular.woff2")
+		format("woff2");
+}
+
+/* Quicksand */
+@font-face {
+	font-family: "Quicksand";
+	font-style: normal;
+	font-weight: 300;
+	font-display: swap;
+	src: url("/fonts/quicksand-v36-latin/quicksand-v36-latin-300.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Quicksand";
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+	src: url("/fonts/quicksand-v36-latin/quicksand-v36-latin-500.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Quicksand";
+	font-style: normal;
+	font-weight: 600;
+	font-display: swap;
+	src: url("/fonts/quicksand-v36-latin/quicksand-v36-latin-600.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Quicksand";
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url("/fonts/quicksand-v36-latin/quicksand-v36-latin-700.woff2")
+		format("woff2");
+}
+@font-face {
+	font-family: "Quicksand";
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url("/fonts/quicksand-v36-latin/quicksand-v36-latin-regular.woff2")
+		format("woff2");
+}
