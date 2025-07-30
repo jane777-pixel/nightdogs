@@ -509,4 +509,42 @@ code {
 	word-break: break-all;
 }
 
+/* Increase specificity and add !important to force nav and links to use author header font */
+body[data-author="jane"] nav,
+body[data-author="jane"] .nav,
+body[data-author="jane"] .nav-item,
+body[data-author="jane"] .nav-item a {
+	font-family: var(--author-jane-font-header, var(--font-family)) !important;
+}
+body[data-author="abby"] nav,
+body[data-author="abby"] .nav,
+body[data-author="abby"] .nav-item,
+body[data-author="abby"] .nav-item a {
+	font-family: var(--author-abby-font-header, var(--font-family)) !important;
+}
+body[data-author="orionlw"] nav,
+body[data-author="orionlw"] .nav,
+body[data-author="orionlw"] .nav-item,
+body[data-author="orionlw"] .nav-item a {
+	font-family: var(--author-orionlw-font-header, var(--font-family)) !important;
+}
+body[data-author="adesse"] nav,
+body[data-author="adesse"] .nav,
+body[data-author="adesse"] .nav-item,
+body[data-author="adesse"] .nav-item a {
+	font-family: var(--author-adesse-font-header, var(--font-family)) !important;
+}
+body[data-author="amelia"] nav,
+body[data-author="amelia"] .nav,
+body[data-author="amelia"] .nav-item,
+body[data-author="amelia"] .nav-item a {
+	font-family: var(--author-amelia-font-header, var(--font-family)) !important;
+}
+body[data-author="nic"] nav,
+body[data-author="nic"] .nav,
+body[data-author="nic"] .nav-item,
+body[data-author="nic"] .nav-item a {
+	font-family: var(--author-nic-font-header, var(--font-family)) !important;
+}
+
 /* ...add any additional utility or component styles below... */
