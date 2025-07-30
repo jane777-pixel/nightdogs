@@ -27,7 +27,8 @@ export default async function (eleventyConfig) {
 		})
 		.addPassthroughCopy("./content/feed/pretty-atom-feed.xsl")
 		.addPassthroughCopy("content/blog/**/*.{jpg,jpeg,png,gif}")
-		.addPassthroughCopy("content/blog/**/*.{mp3,mp4,wav,ogg,m4a}");
+		.addPassthroughCopy("content/blog/**/*.{mp3,mp4,wav,ogg,m4a}")
+		.addPassthroughCopy("content/**/*.mp3"); // Passthrough copy for all mp3 files in content
 
 	// Run Eleventy when these files change:
 	// https://www.11ty.dev/docs/watch-serve/#add-your-own-watch-targets

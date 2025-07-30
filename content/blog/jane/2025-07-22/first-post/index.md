@@ -42,7 +42,7 @@ Anyway, water may be the most miraculous substance we have here on earth. pure s
 </div>
 
 <audio controls>
-  <source src="./soundcloud-2134704477.mp3" type="audio/mpeg">
+  <source src="/blog/jane/2025-07-22/first-post/soundcloud-2134704477.mp3" type="audio/mpeg">
   Your browser does not support the audio element.
 </audio>
 
