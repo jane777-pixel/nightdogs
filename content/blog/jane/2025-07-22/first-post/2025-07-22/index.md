@@ -2,7 +2,7 @@
 title: first post! 🐠
 tags:
   - posts
-  - knitting
+  - fibre arts
   - swimming
 description: welcome to nightdogs
 date: 2025-07-22
