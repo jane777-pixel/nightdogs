@@ -182,5 +182,34 @@
         "header": "\"Montserrat\", sans-serif"
       }
     }
+  }, 
+   "ewan": {
+    "name": "Ewan MacLean",
+    "bio": ".",
+    "note": "🥁📚🦧",
+    "links": [
+      {
+        "url": "https://www.youtube.com/watch?v=dj7PEpU54kY",
+        "label": "chihuahua jumping"
+      }
+    ],
+    "theme": {
+      "light": {
+        "background": "#91cbff",
+        "color": "#1e3a8a",
+        "primary": "#8bbfff",
+        "muted": "#1e40af"
+      },
+      "dark": {
+        "background": "#1e3a8a",
+        "color": "#91cbff",
+        "primary": "#8bbfff",
+        "muted": "#dbeafe"
+      },
+      "fonts": {
+        "body": "\"Montserrat\", sans-serif",
+        "header": "\"Montserrat\", sans-serif"
+      }
+    }
   }
 }
