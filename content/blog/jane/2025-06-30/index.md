@@ -27,13 +27,13 @@ Saturday was a nice little celebration! a picnic and then we watched Smokey and 
     <img src="./cake.jpg" alt="cake" loading="lazy">
   </div>
   <div>
-    <img src="./nicwithcat.jpg" alt="nic with cat" loading="lazy">
+    <img src="./nic with cat.jpg" alt="nic with cat" loading="lazy">
   </div>
   <div>
     <img src="./picnic.png" alt="picnic" loading="lazy">
   </div>
   <div>
-    <img src="./meatjoint.jpg" alt="meatjoint" loading="lazy">
+    <img src="./meatjoint.ppg" alt="meatjoint" loading="lazy">
   </div>
 </div>
 
@@ -42,7 +42,7 @@ two new horses at fairytail fields! one is named ferny, I forget the other's nam
 
 <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
   <div>
-    <img src="./braid.jpg" alt="braided mane" loading="lazy">
+    <img src="./braid.png" alt="braided mane" loading="lazy">
   </div>
   <div>
     <img src="./horse 1.png" alt="neigh" loading="lazy">
@@ -87,7 +87,7 @@ Check out Orion's post for a nice capture of one of the little chipmunks that li
 
 <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
   <div>
-    <img src="./ewan1.jpg" alt="braided mane" loading="lazy">
+    <img src="./ewan1.png" alt="braided mane" loading="lazy">
   </div>
   <div>
     <img src="./adesseandorion1.png" alt="neigh" loading="lazy">
