@@ -27,17 +27,17 @@ Saturday was a nice little celebration! a picnic and then we watched Smokey and 
     <img src="./cake.jpg" alt="cake" loading="lazy">
   </div>
   <div>
-    <img src="./nic with cat.jpg" alt="nic with cat" loading="lazy">
+    <img src="./nic with cat.png" alt="nic with cat" loading="lazy">
   </div>
   <div>
     <img src="./picnic.png" alt="picnic" loading="lazy">
   </div>
   <div>
-    <img src="./meatjoint.ppg" alt="meatjoint" loading="lazy">
+    <img src="./meatjoint.png" alt="meatjoint" loading="lazy">
   </div>
 </div>
 
-#horses
+## horses
 two new horses at fairytail fields! one is named ferny, I forget the other's name. words can't describe how much i love these horses. without my dear friend, Spaghetti, my life would not be complete. Spaghetti wears boots because she has some hoof issues - they're so cute but there's a hole from her wearing them so much, so new boots are coming in the mail. can't wait to get them muddy! the horses smell so nice this time of year because Gina uses this lemongrass scented fly spray. I'm so lucky to spend time there and learn from Gina and the horses. if I could braid manes all day every day, I would.
 
 <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
@@ -79,6 +79,9 @@ I would like to take a moment to appreciate the wendy’s chicken burger for all
 
 had fun hosting the visible mending workshop today! finally feeling confident with swiss darning. finally put a patch Ewan made on my jacket! if you ever need a hand with a mend, let me know. I say fuck fast fashion by making my mends colourful and loud.
 
+<img src="./mending.png" alt="mending" loading="lazy">
+
+here's a very simple zine I put together about mending. likely all info you already know, but let me know if you want a printed copy:
 <img src="./mending.png" alt="mending" loading="lazy">
 
 also wanted to say, the open mic was so lovely. moments like that are what life's all about for me. Beans in my Ears was definitely the highlight of the show. can't wait to do it again on August 30th - save the date! 
