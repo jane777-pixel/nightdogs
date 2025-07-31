@@ -76,3 +76,14 @@ Nightdogs are hotdogs that you eat in the middle of the night
         {% endfor %}
     </ul>
 </div>
+
+<div class="h-card" data-author="ewan" id="ewan">
+    <h3 class="p-name">{{ authors.ewan.name }}</h3>
+    <p class="p-bio">{{ authors.ewan.bio | safe }}</p>
+    <p class="p-note">{{ authors.ewan.note | safe }}</p>
+    <ul>
+        {% for link in authors.ewan.links %}
+        <li><a href="{{ link.url }}" {% if link.rel %}rel="{{ link.rel }}"{% endif %} {% if link.class %}class="{{ link.class }}"{% endif %} {% if link.target %}target="{{ link.target }}"{% endif %}>{{ link.label }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
