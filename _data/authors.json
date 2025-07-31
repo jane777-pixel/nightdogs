@@ -195,20 +195,20 @@
     ],
     "theme": {
       "light": {
-        "background": "#91cbff",
-        "color": "#1e3a8a",
-        "primary": "#8bbfff",
-        "muted": "#1e40af"
+        "background": "#92cbff",
+        "color": "#1e3a5a",
+        "primary": "#8bbeff",
+        "muted": "#1e40bf"
       },
       "dark": {
-        "background": "#1e3a8a",
-        "color": "#91cbff",
-        "primary": "#8bbfff",
-        "muted": "#dbeafe"
+        "background": "#1b3a8a",
+        "color": "#91cbcf",
+        "primary": "#8bbgff",
+        "muted": "#deeafe"
       },
       "fonts": {
-        "body": "\"Montserrat\", sans-serif",
-        "header": "\"Montserrat\", sans-serif"
+        "body": "\"Fira Sans\", sans-serif",
+        "header": "\"Fira Sans\", sans-serif"
       }
     }
   }

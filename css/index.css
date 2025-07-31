@@ -156,6 +156,17 @@ html[data-author="nic"] body {
 	color: var(--author-nic-color);
 	background-color: var(--author-nic-background);
 }
+/* Colors and fonts for Ewan */
+html[data-author="ewan"],
+html[data-author="ewan"] body {
+	--pico-background-color: var(--author-ewan-background);
+	--pico-color: var(--author-ewan-color);
+	--pico-primary: var(--author-ewan-primary);
+	--pico-muted-color: var(--author-ewan-muted);
+	font-family: var(--author-ewan-font-body, var(--font-family));
+	color: var(--author-ewan-color);
+	background-color: var(--author-ewan-background);
+}
 
 /* Headings: header font */
 html[data-author="jane"] h1,
@@ -205,6 +216,14 @@ html[data-author="nic"] h4,
 html[data-author="nic"] h5,
 html[data-author="nic"] h6 {
 	font-family: var(--author-nic-font-header, var(--font-family));
+}
+html[data-author="ewan"] h1,
+html[data-author="ewan"] h2,
+html[data-author="ewan"] h3,
+html[data-author="ewan"] h4,
+html[data-author="ewan"] h5,
+html[data-author="ewan"] h6 {
+	font-family: var(--author-ewan-font-header, var(--font-family));
 }
 
 /* Mono font for Orion */
@@ -568,6 +587,12 @@ body[data-author="nic"] .nav-item,
 body[data-author="nic"] .nav-item a {
 	font-family: var(--author-nic-font-header, var(--font-family)) !important;
 }
+body[data-author="ewan"] nav,
+body[data-author="ewan"] .nav,
+body[data-author="ewan"] .nav-item,
+body[data-author="ewan"] .nav-item a {
+	font-family: var(--author-ewan-font-header, var(--font-family)) !important;
+}
 body[data-author="jane"] .home-link {
 	font-family: var(--author-jane-font-header, var(--font-family)) !important;
 }
@@ -585,6 +610,9 @@ body[data-author="amelia"] .home-link {
 }
 body[data-author="nic"] .home-link {
 	font-family: var(--author-nic-font-header, var(--font-family)) !important;
+}
+body[data-author="ewan"] .home-link {
+	font-family: var(--author-ewan-font-header, var(--font-family)) !important;
 }
 
 /* ...add any additional utility or component styles below... */
