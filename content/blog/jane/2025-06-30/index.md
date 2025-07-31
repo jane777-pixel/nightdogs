@@ -4,7 +4,7 @@ tags:
   - posts
   - horses
   - cats
-  - concrete house
+  - concrete
   - fibre arts
   - baking
 description: about jane's week, featuring nic's birthday
