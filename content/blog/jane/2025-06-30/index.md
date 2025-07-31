@@ -82,7 +82,7 @@ had fun hosting the visible mending workshop today! finally feeling confident wi
 <img src="./mending.png" alt="mending" loading="lazy">
 
 here's a very simple zine I put together about mending. likely all info you already know, but let me know if you want a printed copy:
-<img src="./mending.png" alt="mending" loading="lazy">
+<img src="./mendingzine.png" alt="mending" loading="lazy">
 
 also wanted to say, the open mic was so lovely. moments like that are what life's all about for me. Beans in my Ears was definitely the highlight of the show. can't wait to do it again on August 30th - save the date! 
 
