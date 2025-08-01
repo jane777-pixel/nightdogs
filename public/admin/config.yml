@@ -47,6 +47,7 @@ collections:
               { label: "Orion", value: "orionlw" },
               { label: "Amelia", value: "amelia" },
               { label: "Nic", value: "nic" },
+              { label: "Ewan", value: "ewan" },
             ],
         }
       - { label: "Tags", name: "tags", widget: "list", default: ["posts"] }
@@ -606,6 +607,113 @@ collections:
           - {
               label: "Nic",
               name: "nic",
+              widget: "object",
+              fields:
+                [
+                  { label: "Name", name: "name", widget: "string" },
+                  { label: "Bio", name: "bio", widget: "string" },
+                  { label: "Note", name: "note", widget: "string" },
+                  {
+                    label: "Links",
+                    name: "links",
+                    widget: "list",
+                    fields:
+                      [
+                        { label: "URL", name: "url", widget: "string" },
+                        { label: "Label", name: "label", widget: "string" },
+                      ],
+                  },
+                  {
+                    label: "Theme",
+                    name: "theme",
+                    widget: "object",
+                    fields:
+                      [
+                        {
+                          label: "Light Mode",
+                          name: "light",
+                          widget: "object",
+                          fields:
+                            [
+                              {
+                                label: "Background",
+                                name: "background",
+                                widget: "string",
+                              },
+                              {
+                                label: "Color",
+                                name: "color",
+                                widget: "string",
+                              },
+                              {
+                                label: "Primary",
+                                name: "primary",
+                                widget: "string",
+                              },
+                              {
+                                label: "Muted",
+                                name: "muted",
+                                widget: "string",
+                              },
+                            ],
+                        },
+                        {
+                          label: "Dark Mode",
+                          name: "dark",
+                          widget: "object",
+                          fields:
+                            [
+                              {
+                                label: "Background",
+                                name: "background",
+                                widget: "string",
+                              },
+                              {
+                                label: "Color",
+                                name: "color",
+                                widget: "string",
+                              },
+                              {
+                                label: "Primary",
+                                name: "primary",
+                                widget: "string",
+                              },
+                              {
+                                label: "Muted",
+                                name: "muted",
+                                widget: "string",
+                              },
+                            ],
+                        },
+                        {
+                          label: "Fonts",
+                          name: "fonts",
+                          widget: "object",
+                          fields:
+                            [
+                              {
+                                label: "Body Font",
+                                name: "body",
+                                widget: "string",
+                              },
+                              {
+                                label: "Header Font",
+                                name: "header",
+                                widget: "string",
+                              },
+                              {
+                                label: "Mono Font",
+                                name: "mono",
+                                widget: "string",
+                                required: false,
+                              },
+                            ],
+                        },
+                      ],
+                  },
+                ],
+                              label: "Ewan",
+              name: "ewan",
               widget: "object",
               fields:
                 [
