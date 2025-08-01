@@ -1,19 +1,186 @@
 /* === Root Variables === */
+/* === Pico Root Variables (adapted) === */
 :root {
-	--font-family: "Bitcount Grid Single", "Segoe UI", "Roboto", "Helvetica Neue",
-		Arial, "Liberation Sans", sans-serif;
-	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono,
-		Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono,
-		Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New,
-		Courier, monospace;
+	--font-family:
+		"Bitcount Grid Single", "Segoe UI", "Roboto", "Helvetica Neue", Arial,
+		"Liberation Sans", sans-serif;
+	--font-family-monospace:
+		Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console,
+		Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono,
+		Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
 	--syntax-tab-size: 2;
-	/* Pico defaults as fallback */
-	--pico-background-color: #ffd6e0;
-	--pico-color: #8b0020;
-	--pico-primary: #b8002e;
-	--pico-muted-color: #6d0015;
-	/* Author variables are injected here by Nunjucks */
+	--line-height: 1.5;
+	--font-weight: 400;
+	--font-size: 100%;
+	--border-radius: 0.25rem;
+	--border-width: 0.0625rem;
+	--outline-width: 0.125rem;
+	--transition: 0.2s ease-in-out;
+	--spacing: 1rem;
+	--block-spacing-vertical: var(--spacing);
+	--block-spacing-horizontal: var(--spacing);
+	--grid-column-gap: var(--spacing);
+	--grid-row-gap: var(--spacing);
+	--form-element-spacing-vertical: 0.75rem;
+	--form-element-spacing-horizontal: 1rem;
+	--muted-color: #6d0015;
+	--background-color: #ffd6e0;
+	--color: #8b0020;
+	--primary: #b8002e;
+	/* Author variables injected by Nunjucks */
 }
+
+/* === Author Theme Overrides === */
+/* (same as your current logic, see your file for full details) */
+
+/* === Pico Utility Classes === */
+.container,
+.container-fluid {
+	width: 100%;
+	margin-right: auto;
+	margin-left: auto;
+	padding-right: var(--spacing);
+	padding-left: var(--spacing);
+}
+@media (min-width: 576px) {
+	.container {
+		max-width: 510px;
+		padding-right: 0;
+		padding-left: 0;
+	}
+}
+@media (min-width: 768px) {
+	.container {
+		max-width: 700px;
+	}
+}
+@media (min-width: 1024px) {
+	.container {
+		max-width: 950px;
+	}
+}
+@media (min-width: 1280px) {
+	.container {
+		max-width: 1200px;
+	}
+}
+@media (min-width: 1536px) {
+	.container {
+		max-width: 1450px;
+	}
+}
+
+.grid {
+	grid-column-gap: var(--grid-column-gap);
+	grid-row-gap: var(--grid-row-gap);
+	display: grid;
+	grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+	.grid {
+		grid-template-columns: repeat(auto-fit, minmax(0%, 1fr));
+	}
+}
+.grid > * {
+	min-width: 0;
+}
+.overflow-auto {
+	overflow: auto;
+}
+
+/* === Pico Element Resets & Typography === */
+*,
+::after,
+::before {
+	box-sizing: border-box;
+	background-repeat: no-repeat;
+}
+body {
+	width: 100%;
+	margin: 0 !important;
+	padding: 0 !important;
+	font-family: var(--font-family);
+	color: var(--color, #8b0020);
+	background-color: var(--background-color, #ffd6e0);
+	min-height: 100vh;
+}
+main {
+	display: block;
+}
+section {
+	margin-bottom: var(--block-spacing-vertical);
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: var(--font-family);
+	margin-top: 0;
+	margin-bottom: var(--block-spacing-vertical);
+	color: var(--color, #8b0020);
+	font-weight: var(--font-weight);
+	font-size: var(--font-size);
+	line-height: var(--line-height);
+}
+p,
+li {
+	line-height: var(--line-height);
+}
+p:last-child {
+	margin-bottom: 0;
+}
+a[href] {
+	color: var(--primary, #b8002e);
+}
+a[href]:visited {
+	color: var(--muted-color, #6d0015);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--primary, #b8002e);
+}
+img {
+	max-width: 100%;
+	height: auto;
+	border-style: none;
+}
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre {
+	overflow-x: auto;
+}
+mark {
+	background-color: #ffe6e0;
+	color: #8b0020;
+}
+blockquote {
+	border-left: 0.25rem solid var(--muted-color);
+	padding: var(--spacing);
+	margin: var(--block-spacing-vertical) 0;
+}
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+td,
+th {
+	padding: calc(var(--spacing) / 2) var(--spacing);
+	border-bottom: var(--border-width) solid var(--muted-color);
+}
+tfoot td,
+tfoot th {
+	border-top: var(--border-width) solid var(--muted-color);
+	border-bottom: 0;
+}
+
+/* === Your Custom Styles === */
+/* (copy all your author logic, nav, h-card, etc. from your current index.css) */
+
+/* ...rest of your CSS ... */
 
 /* === Generic Styles (always come first) === */
 html,
@@ -21,8 +188,8 @@ body {
 	margin: 0;
 	padding: 0;
 	font-family: var(--font-family);
-	color: var(--pico-color, #8b0020);
-	background-color: var(--pico-background-color, #ffd6e0);
+	color: var(--color, #8b0020);
+	background-color: var(--background-color, #ffd6e0);
 }
 .site-wrapper {
 	max-width: 40em;
@@ -45,8 +212,8 @@ h6 {
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 	padding: 1.5em;
 	margin: 2em 0;
-	background-color: var(--pico-background-color, #ffd6e0);
-	color: var(--pico-color, #8b0020);
+	background-color: var(--background-color, #ffd6e0);
+	color: var(--color, #8b0020);
 	line-height: 1.5;
 }
 pre,
@@ -60,30 +227,30 @@ audio {
 	max-width: 100%;
 	margin: 1rem 0;
 	border-radius: 8px;
-	background-color: var(--pico-background-color, #ffd6e0);
-	border: 1px solid var(--pico-primary, #b8002e);
+	background-color: var(--background-color, #ffd6e0);
+	border: 1px solid var(--primary, #b8002e);
 	outline: none;
 }
 
 audio:focus {
-	box-shadow: 0 0 0 2px var(--pico-primary, #b8002e);
+	box-shadow: 0 0 0 2px var(--primary, #b8002e);
 }
 
 /* Webkit browsers (Chrome, Safari, Edge) */
 audio::-webkit-media-controls-panel {
-	background-color: var(--pico-background-color, #ffd6e0);
+	background-color: var(--background-color, #ffd6e0);
 	border-radius: 8px;
 }
 
 audio::-webkit-media-controls-play-button,
 audio::-webkit-media-controls-mute-button {
-	background-color: var(--pico-primary, #b8002e);
+	background-color: var(--primary, #b8002e);
 	border-radius: 50%;
 }
 
 /* Firefox */
 audio::-moz-range-thumb {
-	background-color: var(--pico-primary, #b8002e);
+	background-color: var(--primary, #b8002e);
 	border: none;
 	border-radius: 50%;
 }
@@ -93,10 +260,10 @@ audio::-moz-range-thumb {
 /* Colors and fonts for Jane */
 html[data-author="jane"],
 html[data-author="jane"] body {
-	--pico-background-color: var(--author-jane-background);
-	--pico-color: var(--author-jane-color);
-	--pico-primary: var(--author-jane-primary);
-	--pico-muted-color: var(--author-jane-muted);
+	--background-color: var(--author-jane-background);
+	--color: var(--author-jane-color);
+	--primary: var(--author-jane-primary);
+	--muted-color: var(--author-jane-muted);
 	font-family: var(--author-jane-font-body, var(--font-family));
 	color: var(--author-jane-color);
 	background-color: var(--author-jane-background);
@@ -104,10 +271,10 @@ html[data-author="jane"] body {
 /* Colors and fonts for Abby */
 html[data-author="abby"],
 html[data-author="abby"] body {
-	--pico-background-color: var(--author-abby-background);
-	--pico-color: var(--author-abby-color);
-	--pico-primary: var(--author-abby-primary);
-	--pico-muted-color: var(--author-abby-muted);
+	--background-color: var(--author-abby-background);
+	--color: var(--author-abby-color);
+	--primary: var(--author-abby-primary);
+	--muted-color: var(--author-abby-muted);
 	font-family: var(--author-abby-font-body, var(--font-family));
 	color: var(--author-abby-color);
 	background-color: var(--author-abby-background);
@@ -115,10 +282,10 @@ html[data-author="abby"] body {
 /* Colors and fonts for Orion */
 html[data-author="orionlw"],
 html[data-author="orionlw"] body {
-	--pico-background-color: var(--author-orionlw-background);
-	--pico-color: var(--author-orionlw-color);
-	--pico-primary: var(--author-orionlw-primary);
-	--pico-muted-color: var(--author-orionlw-muted);
+	--background-color: var(--author-orionlw-background);
+	--color: var(--author-orionlw-color);
+	--primary: var(--author-orionlw-primary);
+	--muted-color: var(--author-orionlw-muted);
 	font-family: var(--author-orionlw-font-body, var(--font-family));
 	color: var(--author-orionlw-color);
 	background-color: var(--author-orionlw-background);
@@ -126,10 +293,10 @@ html[data-author="orionlw"] body {
 /* Colors and fonts for Adesse */
 html[data-author="adesse"],
 html[data-author="adesse"] body {
-	--pico-background-color: var(--author-adesse-background);
-	--pico-color: var(--author-adesse-color);
-	--pico-primary: var(--author-adesse-primary);
-	--pico-muted-color: var(--author-adesse-muted);
+	--background-color: var(--author-adesse-background);
+	--color: var(--author-adesse-color);
+	--primary: var(--author-adesse-primary);
+	--muted-color: var(--author-adesse-muted);
 	font-family: var(--author-adesse-font-body, var(--font-family));
 	color: var(--author-adesse-color);
 	background-color: var(--author-adesse-background);
@@ -137,10 +304,10 @@ html[data-author="adesse"] body {
 /* Colors and fonts for Amelia */
 html[data-author="amelia"],
 html[data-author="amelia"] body {
-	--pico-background-color: var(--author-amelia-background);
-	--pico-color: var(--author-amelia-color);
-	--pico-primary: var(--author-amelia-primary);
-	--pico-muted-color: var(--author-amelia-muted);
+	--background-color: var(--author-amelia-background);
+	--color: var(--author-amelia-color);
+	--primary: var(--author-amelia-primary);
+	--muted-color: var(--author-amelia-muted);
 	font-family: var(--author-amelia-font-body, var(--font-family));
 	color: var(--author-amelia-color);
 	background-color: var(--author-amelia-background);
@@ -148,10 +315,10 @@ html[data-author="amelia"] body {
 /* Colors and fonts for Nic */
 html[data-author="nic"],
 html[data-author="nic"] body {
-	--pico-background-color: var(--author-nic-background);
-	--pico-color: var(--author-nic-color);
-	--pico-primary: var(--author-nic-primary);
-	--pico-muted-color: var(--author-nic-muted);
+	--background-color: var(--author-nic-background);
+	--color: var(--author-nic-color);
+	--primary: var(--author-nic-primary);
+	--muted-color: var(--author-nic-muted);
 	font-family: var(--author-nic-font-body, var(--font-family));
 	color: var(--author-nic-color);
 	background-color: var(--author-nic-background);
@@ -159,10 +326,10 @@ html[data-author="nic"] body {
 /* Colors and fonts for Ewan */
 html[data-author="ewan"],
 html[data-author="ewan"] body {
-	--pico-background-color: var(--author-ewan-background);
-	--pico-color: var(--author-ewan-color);
-	--pico-primary: var(--author-ewan-primary);
-	--pico-muted-color: var(--author-ewan-muted);
+	--background-color: var(--author-ewan-background);
+	--color: var(--author-ewan-color);
+	--primary: var(--author-ewan-primary);
+	--muted-color: var(--author-ewan-muted);
 	font-family: var(--author-ewan-font-body, var(--font-family));
 	color: var(--author-ewan-color);
 	background-color: var(--author-ewan-background);
@@ -243,8 +410,8 @@ body {
 	margin: 0 !important;
 	padding: 0 !important;
 	font-family: var(--font-family);
-	color: var(--pico-color, #8b0020);
-	background-color: var(--pico-background-color, #ffd6e0);
+	color: var(--color, #8b0020);
+	background-color: var(--background-color, #ffd6e0);
 }
 body {
 	min-height: 100vh;
@@ -269,20 +436,20 @@ html {
 main,
 footer {
 	padding: 1rem;
-	background-color: var(--pico-background-color, #ffd6e0);
-	color: var(--pico-color, #8b0020);
+	background-color: var(--background-color, #ffd6e0);
+	color: var(--color, #8b0020);
 }
 
 /* Links */
 a[href] {
-	color: var(--pico-primary, #b8002e);
+	color: var(--primary, #b8002e);
 }
 a[href]:visited {
-	color: var(--pico-muted-color, #6d0015);
+	color: var(--muted-color, #6d0015);
 }
 a[href]:hover,
 a[href]:active {
-	color: var(--pico-primary, #b8002e);
+	color: var(--primary, #b8002e);
 }
 
 /* microformats2: h-card, h-entry */
@@ -293,8 +460,8 @@ a[href]:active {
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 	padding: 1.5em;
 	margin: 2em 0;
-	background-color: var(--pico-background-color, #ffd6e0);
-	color: var(--pico-color, #8b0020);
+	background-color: var(--background-color, #ffd6e0);
+	color: var(--color, #8b0020);
 	line-height: 1.5;
 }
 .h-card .p-note,
@@ -393,10 +560,10 @@ header {
 }
 #skip-link {
 	text-decoration: none;
-	background: var(--pico-background-color);
-	color: var(--pico-color);
+	background: var(--background-color);
+	color: var(--color);
 	padding: 0.5rem 1rem;
-	border: 1px solid var(--pico-primary);
+	border: 1px solid var(--primary);
 	border-radius: 2px;
 }
 #skip-link.visually-hidden:focus {
@@ -449,7 +616,7 @@ header {
 .postlist-date,
 .postlist-item:before {
 	font-size: 0.8125em;
-	color: var(--pico-muted-color);
+	color: var(--muted-color);
 }
 .postlist-date {
 	word-spacing: -0.5px;

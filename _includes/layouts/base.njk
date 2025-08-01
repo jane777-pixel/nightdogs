@@ -1,6 +1,20 @@
 <!doctype html>
 <html lang="{{ metadata.language }}"{% if author %} data-author="{{ author }}"{% endif %}>
 	<head>
+ <script>
+        (function () {
+const THEME_KEY = "author-theme";
+const DEFAULT_THEME = "jane";
+if (document.documentElement.dataset.author) return;
+try {
+const savedTheme = localStorage.getItem(THEME_KEY) || DEFAULT_THEME;
+document.documentElement.setAttribute("data-author", savedTheme);
+} catch (e) {
+document.documentElement.setAttribute("data-author", DEFAULT_THEME);
+}
+        })();
+        </script>
+
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>{{ title or metadata.title }}</title>
@@ -8,7 +22,6 @@
         <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="{{ metadata.title }}">
 
         <!-- Inline theme script to prevent FOUC -->
-        <script>{% include "js/theme.js" %}</script>
 
         <!-- Load local fonts as a separate stylesheet -->
         <link rel="stylesheet" href="/css/fonts.css">
@@ -21,10 +34,10 @@
   	--font-family: "Bitcount Grid Single", "Segoe UI", "Roboto", "Helvetica Neue", Arial, "Liberation Sans", sans-serif;
    	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
     --syntax-tab-size: 2;
-  --pico-background-color: #ffd6e0;
-  --pico-color: #8b0020;
-  --pico-primary: #b8002e;
-  --pico-muted-color: #6d0015;
+  --background-color: #ffd6e0;
+  --color: #8b0020;
+  --primary: #b8002e;
+  --muted-color: #6d0015;
   {%- for author, data in authors | dictsort %}
     /* Author: {{ author }} */
     --author-{{ author }}-background: {{ data.theme.light.background }};
@@ -51,7 +64,6 @@
 }
 
 {# --- 3. Pico and your main CSS (these will now use the variables above) --- #}
-{% include "css/pico.min.css" %}
 {% include "css/index.css" %}
 {% endcss %}
 <style>{% getBundle "css" %}</style>
