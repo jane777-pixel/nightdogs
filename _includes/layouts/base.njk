@@ -166,5 +166,25 @@
           syncAuthorSelectors(initialAuthor);
         })();
         </script>
+        <script>
+        function updateCatNavText() {
+          const author = document.documentElement.getAttribute('data-author');
+          // Find the nav link for the Cat page (assumes href contains 'cat')
+          const navLinks = document.querySelectorAll('.nav-item a');
+          navLinks.forEach(link => {
+            if (link.getAttribute('href') && link.getAttribute('href').includes('cat')) {
+              link.textContent = (author === 'adesse') ? 'Dog' : 'Cat';
+            }
+          });
+        }
+
+        // Run on page load
+        updateCatNavText();
+
+        // Listen for author changes
+        const navObserver = new MutationObserver(updateCatNavText);
+        navObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-author'] });
+        </script>
+
     </body>
 </html>

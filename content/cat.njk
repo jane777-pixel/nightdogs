@@ -27,26 +27,53 @@ const eleventyNavigation = {
     <button id="new-cat" class="contrast">Show Another Cat</button>
   </div>
   <script>
-    async function loadCat() {
-      document.getElementById("cat-img").style.display = "none";
-      document.getElementById("cat-loading").style.display = "block";
-      document.getElementById("cat-error").style.display = "none";
+    function getSelectedAuthor() {
+      return document.documentElement.getAttribute('data-author');
+    }
+
+    async function loadAnimal() {
+      const author = getSelectedAuthor();
+      const isAdesse = author === "adesse";
+      const imgEl = document.getElementById("cat-img");
+      const loadingEl = document.getElementById("cat-loading");
+      const errorEl = document.getElementById("cat-error");
+      const btnEl = document.getElementById("new-cat");
+
+      imgEl.style.display = "none";
+      loadingEl.style.display = "block";
+      errorEl.style.display = "none";
+
+      // Set UI labels
+      imgEl.alt = isAdesse ? "Random dog" : "Random cat";
+      btnEl.textContent = isAdesse ? "Show Another Dog" : "Show Another Cat";
+      errorEl.textContent = isAdesse ? "Could not load dog 🐶" : "Could not load cat 😿";
+
+      // Choose API
+      const apiUrl = isAdesse
+        ? "https://api.thedogapi.com/v1/images/search"
+        : "https://api.thecatapi.com/v1/images/search";
+
       try {
-        const res = await fetch("https://api.thecatapi.com/v1/images/search");
+        const res = await fetch(apiUrl);
         if (!res.ok) throw new Error("Network error");
         const data = await res.json();
-        const img = document.getElementById("cat-img");
-        img.src = data[0].url;
-        img.onload = () => {
-          img.style.display = "block";
-          document.getElementById("cat-loading").style.display = "none";
+        imgEl.src = data[0].url;
+        imgEl.onload = () => {
+          imgEl.style.display = "block";
+          loadingEl.style.display = "none";
         };
       } catch (e) {
-        document.getElementById("cat-loading").style.display = "none";
-        document.getElementById("cat-error").style.display = "block";
+        loadingEl.style.display = "none";
+        errorEl.style.display = "block";
       }
     }
-    document.getElementById("new-cat").onclick = loadCat;
-    loadCat();
+
+    document.getElementById("new-cat").onclick = loadAnimal;
+
+    // Listen for author changes (sync logic triggers filterPosts, so listen for changes to data-author)
+    const observer = new MutationObserver(loadAnimal);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-author'] });
+
+    loadAnimal();
   </script>
 </main>
