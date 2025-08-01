@@ -11,7 +11,7 @@
 	--syntax-tab-size: 2;
 	--line-height: 1.5;
 	--font-weight: 400;
-	--font-size: 100%;
+	--font-size: 125%;
 	--border-radius: 0.25rem;
 	--border-width: 0.0625rem;
 	--outline-width: 0.125rem;
@@ -100,6 +100,7 @@ body {
 	margin: 0 !important;
 	padding: 0 !important;
 	font-family: var(--font-family);
+	font-size: var(--font-size);
 	color: var(--color, #8b0020);
 	background-color: var(--background-color, #ffd6e0);
 	min-height: 100vh;
