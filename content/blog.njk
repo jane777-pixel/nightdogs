@@ -10,7 +10,7 @@ const eleventyNavigation = {
 <div class="filters" style="display: flex; gap: 1em; align-items: center; margin-bottom: 1em;">
 	<div class="author-selector">
 		<label for="author-filter">Filter by author:</label>
-		<select id="author-filter">
+		<select id="author-filter" class="author-sync">
 			<option value="all">All Authors</option>
 			{% for authorKey, authorData in authors %}
 			<option value="{{ authorKey }}">{{ authorData.name }}</option>
@@ -61,19 +61,6 @@ const authorFilter = document.getElementById("author-filter");
 const tagFilter = document.getElementById("tag-filter");
 const yearFilter = document.getElementById("year-filter");
 const postItems = document.querySelectorAll(".postlist-item");
-const siteWrapper = document.querySelector('.site-wrapper');
-
-function setThemeByAuthor(author) {
-	document.body.classList.remove(...Array.from(document.body.classList).filter(c => c.startsWith('author-selected-')));
-	if (author && author !== "all") {
-		document.body.classList.add(`author-selected-${author}`);
-		document.body.setAttribute('data-author', author);
-		if (siteWrapper) siteWrapper.setAttribute('data-author', author);
-	} else {
-		document.body.setAttribute('data-author', 'jane'); // Reset to default
-		if (siteWrapper) siteWrapper.setAttribute('data-author', 'jane');
-	}
-}
 
 authorFilter.addEventListener("change", filterPosts);
 tagFilter.addEventListener("change", filterPosts);
@@ -104,11 +91,5 @@ function filterPosts() {
 			item.style.display = "none";
 		}
 	});
-
-	if (selectedAuthor !== "all") {
-		setThemeByAuthor(selectedAuthor);
-	} else {
-		setThemeByAuthor(firstVisibleAuthor || 'jane');
-	}
 }
 </script>

@@ -104,7 +104,7 @@
   <div style="display:flex;align-items:center;justify-content:flex-end;margin-top:0.5em;">
     <div class="author-theme-selector" style="display:flex;align-items:center;gap:0.25em;font-size:0.92em;opacity:0.7;">
       <span style="font-size:1em;opacity:0.5;" aria-hidden="true">🎨</span>
-      <select id="author-select" name="author-select" style="min-width:6em;font-size:0.92em;padding:0.1em 0.7em;border-radius:0.7em;">
+      <select id="author-select" class="author-sync" name="author-select" style="min-width:6em;font-size:0.92em;padding:0.1em 0.7em;border-radius:0.7em;">
         <option value="jane">Jane</option>
         <option value="orionlw">Orion</option>
         <option value="adesse">Adèsse</option>
@@ -115,44 +115,56 @@
       </select>
     </div>
   </div>
-  <script>
-  (function() {
-    const select = document.getElementById('author-select');
-    const html = document.documentElement;
-    const pageAuthor = html.dataset.author;
-    const isPost = document.body.dataset.isPost === "true";
-
-    if (isPost) {
-      // Always use the post's author
-      select.value = pageAuthor;
-      html.setAttribute('data-author', pageAuthor);
-      select.addEventListener('change', function() {
-        html.setAttribute('data-author', this.value);
-      });
-    } else {
-      // Use localStorage for persistence on non-post pages
-      try {
-        const saved = localStorage.getItem('author-theme');
-        if (saved) {
-          select.value = saved;
-          html.setAttribute('data-author', saved);
-        } else if (pageAuthor) {
-          select.value = pageAuthor;
-          localStorage.setItem('author-theme', pageAuthor);
-        }
-      } catch(e){
-        if (pageAuthor) select.value = pageAuthor;
-      }
-      select.addEventListener('change', function() {
-        html.setAttribute('data-author', this.value);
-        try { localStorage.setItem('author-theme', this.value); } catch(e){}
-      });
-    }
-  })();
-  </script>
 </footer>
         </div>
 		<!-- This page `{{ page.url }}` was built on {% currentBuildDate %} -->
 		<script type="module" src="{% getBundleFileUrl "js" %}"></script>
+        <script>
+        // Sync all author selectors and theme
+        (function() {
+          const authorSelectors = document.querySelectorAll('.author-sync');
+          const siteWrapper = document.querySelector('.site-wrapper');
+          const html = document.documentElement;
+
+          function setThemeByAuthor(author) {
+            document.body.classList.remove(...Array.from(document.body.classList).filter(c => c.startsWith('author-selected-')));
+            if (author && author !== "all") {
+              document.body.classList.add(`author-selected-${author}`);
+              document.body.setAttribute('data-author', author);
+              if (siteWrapper) siteWrapper.setAttribute('data-author', author);
+              html.setAttribute('data-author', author);
+              try { localStorage.setItem('author-theme', author); } catch(e){}
+            } else {
+              document.body.setAttribute('data-author', 'jane');
+              if (siteWrapper) siteWrapper.setAttribute('data-author', 'jane');
+              html.setAttribute('data-author', 'jane');
+              try { localStorage.setItem('author-theme', 'jane'); } catch(e){}
+            }
+          }
+
+          function syncAuthorSelectors(author) {
+            authorSelectors.forEach(sel => {
+              if (sel.value !== author) sel.value = author;
+            });
+            setThemeByAuthor(author);
+            // If on blog archive, trigger post filtering
+            if (typeof filterPosts === "function") filterPosts();
+          }
+
+          authorSelectors.forEach(sel => {
+            sel.addEventListener('change', function() {
+              syncAuthorSelectors(this.value);
+            });
+          });
+
+          // On page load, sync selectors to localStorage or default
+          let initialAuthor = "jane";
+          try {
+            const saved = localStorage.getItem('author-theme');
+            if (saved) initialAuthor = saved;
+          } catch(e){}
+          syncAuthorSelectors(initialAuthor);
+        })();
+        </script>
     </body>
 </html>
