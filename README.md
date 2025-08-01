@@ -89,6 +89,19 @@ content/blog/jane/2025-07-22/first-post/
 - Only use author slugs and tags defined in the config and `_data/authors.json`.
 - For more, see the [Netlify CMS config](public/admin/config.yml) and [authors.json](_data/authors.json).
 
+## Fonts
+
+The following fonts are available for use in this project (see `public/css/fonts.css`):
+
+- **Bellefair**
+- **Bitcount Grid Single**
+- **Jacquard 12**
+- **EB Garamond** (weights: 400, 500, 600, 700, 800; styles: normal, italic)
+- **Fira Sans** (weights: 100, 200, 300, 500; styles: normal, italic)
+
+To use a font in your templates or CSS, reference its `font-family` name as listed above.
+
+
 ## TODO
 
 - [x] Make Nic an author
