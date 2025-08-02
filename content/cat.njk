@@ -33,7 +33,7 @@ const eleventyNavigation = {
 
     async function loadAnimal() {
       const author = getSelectedAuthor();
-      const isAdesse = author === "adesse";
+      const isDogPerson = author === "adesse" || author == "abby";
       const imgEl = document.getElementById("cat-img");
       const loadingEl = document.getElementById("cat-loading");
       const errorEl = document.getElementById("cat-error");
@@ -44,12 +44,12 @@ const eleventyNavigation = {
       errorEl.style.display = "none";
 
       // Set UI labels
-      imgEl.alt = isAdesse ? "Random dog" : "Random cat";
-      btnEl.textContent = isAdesse ? "Show Another Dog" : "Show Another Cat";
-      errorEl.textContent = isAdesse ? "Could not load dog 🐶" : "Could not load cat 😿";
+      imgEl.alt = isDogPerson ? "Random dog" : "Random cat";
+      btnEl.textContent = isDogPerson ? "Show Another Dog" : "Show Another Cat";
+      errorEl.textContent = isDogPerson ? "Could not load dog 🐶" : "Could not load cat 😿";
 
       // Choose API
-      const apiUrl = isAdesse
+      const apiUrl = isDogPerson
         ? "https://api.thedogapi.com/v1/images/search"
         : "https://api.thecatapi.com/v1/images/search";
 
