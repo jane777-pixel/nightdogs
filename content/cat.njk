@@ -33,7 +33,7 @@ const eleventyNavigation = {
 
     async function loadAnimal() {
       const author = getSelectedAuthor();
-      const isDogPerson = author === "adesse" || author == "abby";
+      const isDogPerson = window.AUTHORS_DOG_PERSON?.[author] === true;
       const imgEl = document.getElementById("cat-img");
       const loadingEl = document.getElementById("cat-loading");
       const errorEl = document.getElementById("cat-error");

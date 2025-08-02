@@ -27,6 +27,14 @@ document.documentElement.setAttribute("data-author", DEFAULT_THEME);
         <link rel="stylesheet" href="/css/fonts.css">
 
 		{#- Render the CSS bundle using inlined CSS (for the fastest site performance in production) #}
+		<script>
+  window.AUTHORS_DOG_PERSON = {
+    {% for key, author in authors %}
+      "{{ key }}": {{ author.isDogPerson | default(false) | dump }}{% if not loop.last %},{% endif %}
+    {% endfor %}
+  };
+</script>
+
 		{% css %}
 
 {# --- 2. Root and author variables (before any CSS uses them) --- #}
@@ -185,7 +193,7 @@ document.documentElement.setAttribute("data-author", DEFAULT_THEME);
           const navLinks = document.querySelectorAll('.nav-item a');
           navLinks.forEach(link => {
             if (link.getAttribute('href') && link.getAttribute('href').includes('cat')) {
-              link.textContent = (author === 'adesse') ? 'Dog' : 'Cat';
+            link.textContent = window.AUTHORS_DOG_PERSON?.[author] === true ? 'Dog' : 'Cat';
             }
           });
         }

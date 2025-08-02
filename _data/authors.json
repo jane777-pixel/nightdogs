@@ -1,215 +1,217 @@
 {
-  "jane": {
-    "name": "Jane Marie Bach",
-    "bio": "likes: kittens + horses, thunderstorms, concrete, gossip, and reefer. <br> <br> dislikes: wearing socks + shoes, emailing, fireworks, musicals, and fascists.",
-    "note": "♻︎ ⛵︎ ☭ ",
-    "links": [
-      {
-        "url": "https://listenbrainz.org/user/jay777marie/",
-        "label": "listenbrainz"
-      },
-      {
-        "url": "mailto:haileebach@gmail.com",
-        "label": "email"
-      },
-      {
-        "url": "https://ca.pinterest.com/janemariebach/",
-        "label": "pinterest"
-      },
-      {
-        "url": "https://www.ravelry.com/people/jay777",
-        "label": "ravelry"
-      }
-    ],
-    "theme": {
-      "light": {
-        "background": "#ffd6e0",
-        "color": "#8b0020",
-        "primary": "#b8002e",
-        "muted": "#6d0015"
-      },
-      "dark": {
-        "background": "#8b0020",
-        "color": "#fff0f3",
-        "primary": "#ffb3c6",
-        "muted": "#ffd6e0"
-      },
-      "fonts": {
-        "body": "\"Bitcount Grid Single\", \"Segoe UI\", sans-serif",
-        "header": "\"Bitcount Grid Single\", \"Segoe UI\", sans-serif"
-      }
-    }
-  },
-  "abby": {
-    "name": "Abby Rhynold",
-    "bio": ".",
-    "note": "🪱🐑🎂",
-    "links": [],
-    "theme": {
-      "light": {
-        "background": "#e6ffe6",
-        "color": "#0d3a0d",
-        "primary": "#1e7e1e",
-        "muted": "#0a2a0a"
-      },
-      "dark": {
-        "background": "#0d3a0d",
-        "color": "#ffffff",
-        "primary": "#90ee90",
-        "muted": "#b2f7b2"
-      },
-      "fonts": {
-        "body": "\"Quicksand\", sans-serif",
-        "header": "\"Quicksand\", sans-serif"
-      }
-    }
-  },
-  "adesse": {
-    "name": "Adèsse Brown",
-    "bio": "🌻⋅.˳˳.⋅ॱ˙˙ॱ⋅.˳˳.⋅ॱ˙˙ॱᐧ.˳˳.⋅˚ ༘ ೀ⋆｡˚ ･ ｡ﾟ☆: *.☽ .* :☆ﾟ. ✧˚ ༘ ⋆｡♡˚ 🐝⋅.˳˳.⋅ॱ˙˙ॱ⋅.˳˳.⋅ॱ˙˙ॱᐧ.˳˳.⋅",
-    "note": "🐝🕯️🎹",
-    "links": [],
-    "theme": {
-      "light": {
-        "background": "#624f4c",
-        "color": "#ffffff",
-        "primary": "#deb8c4",
-        "muted": "#f0e6e7"
-      },
-      "dark": {
-        "background": "#2a201e",
-        "color": "#ffffff",
-        "primary": "#deb8c4",
-        "muted": "#f0e6e7"
-      },
-      "fonts": {
-        "body": "\"Bellefair\", serif",
-        "header": "\"Jacquard 12\", serif"
-      }
-    }
-  },
-  "orionlw": {
-    "name": "Orion Leidl Wilson",
-    "bio": "Electric bassist & composer",
-    "note": "🎧📀🐈‍⬛",
-    "links": [
-      {
-        "url": "https://orionlw.me",
-        "label": "personal site"
-      },
-      {
-        "url": "https://mastodon.social/@orionlw",
-        "label": "mastodon"
-      }
-    ],
-    "theme": {
-      "light": {
-        "background": "#e6d3b3",
-        "color": "#4a3018",
-        "primary": "#6e4b1f",
-        "muted": "#3d2614"
-      },
-      "dark": {
-        "background": "#4a3018",
-        "color": "#ffffff",
-        "primary": "#deb887",
-        "muted": "#e6d3b3"
-      },
-      "fonts": {
-        "body": "\"EB Garamond\", serif",
-        "header": "\"Montserrat\", sans-serif",
-        "mono": "\"IBM Plex Mono\", monospace"
-      }
-    }
-  },
-  "amelia": {
-    "name": "Amelia Wheeler",
-    "bio": ".",
-    "note": "🎨🎤🧚‍♀️",
-    "links": [],
-    "theme": {
-      "light": {
-        "background": "#ffe6fa",
-        "color": "#6c218a",
-        "primary": "#8b2d9e",
-        "muted": "#5a1a74"
-      },
-      "dark": {
-        "background": "#2b59c4",
-        "color": "#dced5a",
-        "primary": "#2db1b5",
-        "muted": "#b6e37c"
-      },
-      "fonts": {
-        "body": "\"Fira Sans\", sans-serif",
-        "header": "\"Fira Sans\", sans-serif"
-      }
-    }
-  },
-  "nic": {
-    "name": "Nic Leighton",
-    "bio": "likes: movies, jane, snow, the blues, and family guy. <br> dislikes: mean people, sweating, being poisoned, haters, and skinny jeans.",
-    "note": "⛄︎♟🂻",
-    "links": [
-      {
-        "url": "https://www.youtube.com/watch?v=dj7PEpU54kY",
-        "label": "chihuahua jumping"
-      },
-      {
-        "url": "https://letterboxd.com/discofever/",
-        "label": "nic's movies"
-      },
-      {
-        "url": "https://listenbrainz.org/user/grub_eater/",
-        "label": "nic's music"
-      }
-    ],
-    "theme": {
-      "light": {
-        "background": "#91cbff",
-        "color": "#1e3a8a",
-        "primary": "#8bbfff",
-        "muted": "#1e40af"
-      },
-      "dark": {
-        "background": "#1e3a8a",
-        "color": "#91cbff",
-        "primary": "#8bbfff",
-        "muted": "#dbeafe"
-      },
-      "fonts": {
-        "body": "\"Montserrat\", sans-serif",
-        "header": "\"Montserrat\", sans-serif"
-      }
-    }
-  }, 
-   "ewan": {
-    "name": "Ewan MacLean",
-    "bio": ".",
-    "note": "🥁📚🦧",
-    "links": [
-      {
-        "url": "https://www.youtube.com/watch?v=dj7PEpU54kY",
-        "label": "chihuahua jumping"
-      }
-    ],
-    "theme": {
-      "light": {
-        "background": "#92cbff",
-        "color": "#1e3a5a",
-        "primary": "#8bbeff",
-        "muted": "#1e40bf"
-      },
-      "dark": {
-        "background": "#1b3a8a",
-        "color": "#91cbcf",
-        "primary": "#8bbgff",
-        "muted": "#deeafe"
-      },
-      "fonts": {
-        "body": "\"Fira Sans\", sans-serif",
-        "header": "\"Fira Sans\", sans-serif"
-      }
-    }
-  }
+	"jane": {
+		"name": "Jane Marie Bach",
+		"bio": "likes: kittens + horses, thunderstorms, concrete, gossip, and reefer. <br> <br> dislikes: wearing socks + shoes, emailing, fireworks, musicals, and fascists.",
+		"note": "♻︎ ⛵︎ ☭ ",
+		"links": [
+			{
+				"url": "https://listenbrainz.org/user/jay777marie/",
+				"label": "listenbrainz"
+			},
+			{
+				"url": "mailto:haileebach@gmail.com",
+				"label": "email"
+			},
+			{
+				"url": "https://ca.pinterest.com/janemariebach/",
+				"label": "pinterest"
+			},
+			{
+				"url": "https://www.ravelry.com/people/jay777",
+				"label": "ravelry"
+			}
+		],
+		"theme": {
+			"light": {
+				"background": "#ffd6e0",
+				"color": "#8b0020",
+				"primary": "#b8002e",
+				"muted": "#6d0015"
+			},
+			"dark": {
+				"background": "#8b0020",
+				"color": "#fff0f3",
+				"primary": "#ffb3c6",
+				"muted": "#ffd6e0"
+			},
+			"fonts": {
+				"body": "\"Bitcount Grid Single\", \"Segoe UI\", sans-serif",
+				"header": "\"Bitcount Grid Single\", \"Segoe UI\", sans-serif"
+			}
+		}
+	},
+	"abby": {
+		"name": "Abby Rhynold",
+		"bio": ".",
+		"note": "🪱🐑🎂",
+		"links": [],
+		"isDogPerson": true,
+		"theme": {
+			"light": {
+				"background": "#e6ffe6",
+				"color": "#0d3a0d",
+				"primary": "#1e7e1e",
+				"muted": "#0a2a0a"
+			},
+			"dark": {
+				"background": "#0d3a0d",
+				"color": "#ffffff",
+				"primary": "#90ee90",
+				"muted": "#b2f7b2"
+			},
+			"fonts": {
+				"body": "\"Quicksand\", sans-serif",
+				"header": "\"Quicksand\", sans-serif"
+			}
+		}
+	},
+	"adesse": {
+		"name": "Adèsse Brown",
+		"bio": "🌻⋅.˳˳.⋅ॱ˙˙ॱ⋅.˳˳.⋅ॱ˙˙ॱᐧ.˳˳.⋅˚ ༘ ೀ⋆｡˚ ･ ｡ﾟ☆: *.☽ .* :☆ﾟ. ✧˚ ༘ ⋆｡♡˚ 🐝⋅.˳˳.⋅ॱ˙˙ॱ⋅.˳˳.⋅ॱ˙˙ॱᐧ.˳˳.⋅",
+		"note": "🐝🕯️🎹",
+		"links": [],
+		"isDogPerson": true,
+		"theme": {
+			"light": {
+				"background": "#624f4c",
+				"color": "#ffffff",
+				"primary": "#deb8c4",
+				"muted": "#f0e6e7"
+			},
+			"dark": {
+				"background": "#2a201e",
+				"color": "#ffffff",
+				"primary": "#deb8c4",
+				"muted": "#f0e6e7"
+			},
+			"fonts": {
+				"body": "\"Bellefair\", serif",
+				"header": "\"Jacquard 12\", serif"
+			}
+		}
+	},
+	"orionlw": {
+		"name": "Orion Leidl Wilson",
+		"bio": "Electric bassist & composer",
+		"note": "🎧📀🐈‍⬛",
+		"links": [
+			{
+				"url": "https://orionlw.me",
+				"label": "personal site"
+			},
+			{
+				"url": "https://mastodon.social/@orionlw",
+				"label": "mastodon"
+			}
+		],
+		"theme": {
+			"light": {
+				"background": "#e6d3b3",
+				"color": "#4a3018",
+				"primary": "#6e4b1f",
+				"muted": "#3d2614"
+			},
+			"dark": {
+				"background": "#4a3018",
+				"color": "#ffffff",
+				"primary": "#deb887",
+				"muted": "#e6d3b3"
+			},
+			"fonts": {
+				"body": "\"EB Garamond\", serif",
+				"header": "\"Montserrat\", sans-serif",
+				"mono": "\"IBM Plex Mono\", monospace"
+			}
+		}
+	},
+	"amelia": {
+		"name": "Amelia Wheeler",
+		"bio": ".",
+		"note": "🎨🎤🧚‍♀️",
+		"links": [],
+		"theme": {
+			"light": {
+				"background": "#ffe6fa",
+				"color": "#6c218a",
+				"primary": "#8b2d9e",
+				"muted": "#5a1a74"
+			},
+			"dark": {
+				"background": "#2b59c4",
+				"color": "#dced5a",
+				"primary": "#2db1b5",
+				"muted": "#b6e37c"
+			},
+			"fonts": {
+				"body": "\"Fira Sans\", sans-serif",
+				"header": "\"Fira Sans\", sans-serif"
+			}
+		}
+	},
+	"nic": {
+		"name": "Nic Leighton",
+		"bio": "likes: movies, jane, snow, the blues, and family guy. <br> dislikes: mean people, sweating, being poisoned, haters, and skinny jeans.",
+		"note": "⛄︎♟🂻",
+		"links": [
+			{
+				"url": "https://www.youtube.com/watch?v=dj7PEpU54kY",
+				"label": "chihuahua jumping"
+			},
+			{
+				"url": "https://letterboxd.com/discofever/",
+				"label": "nic's movies"
+			},
+			{
+				"url": "https://listenbrainz.org/user/grub_eater/",
+				"label": "nic's music"
+			}
+		],
+		"theme": {
+			"light": {
+				"background": "#91cbff",
+				"color": "#1e3a8a",
+				"primary": "#8bbfff",
+				"muted": "#1e40af"
+			},
+			"dark": {
+				"background": "#1e3a8a",
+				"color": "#91cbff",
+				"primary": "#8bbfff",
+				"muted": "#dbeafe"
+			},
+			"fonts": {
+				"body": "\"Montserrat\", sans-serif",
+				"header": "\"Montserrat\", sans-serif"
+			}
+		}
+	},
+	"ewan": {
+		"name": "Ewan MacLean",
+		"bio": ".",
+		"note": "🥁📚🦧",
+		"links": [
+			{
+				"url": "https://www.youtube.com/watch?v=dj7PEpU54kY",
+				"label": "chihuahua jumping"
+			}
+		],
+		"theme": {
+			"light": {
+				"background": "#92cbff",
+				"color": "#1e3a5a",
+				"primary": "#8bbeff",
+				"muted": "#1e40bf"
+			},
+			"dark": {
+				"background": "#1b3a8a",
+				"color": "#91cbcf",
+				"primary": "#8bbgff",
+				"muted": "#deeafe"
+			},
+			"fonts": {
+				"body": "\"Fira Sans\", sans-serif",
+				"header": "\"Fira Sans\", sans-serif"
+			}
+		}
+	}
 }
