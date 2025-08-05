@@ -712,7 +712,9 @@ collections:
                       ],
                   },
                 ],
-                              label: "Ewan",
+            }
+          - {
+              label: "Ewan",
               name: "ewan",
               widget: "object",
               fields:
