@@ -1,5 +1,5 @@
 ---
-title: My Commute Has Been Made Illegal
+title: My Commute Has Been Made Illegal (with update)
 slug: illegal-commute
 date: 2025-08-05T20:58:00.000Z
 author: orionlw
