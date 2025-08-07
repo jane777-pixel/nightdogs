@@ -1,7 +1,7 @@
 ---
 title: poisoned by my enemies
 slug: poisoned
-date: 2025-08-07T20:34:00.000Z
+date: 2025-08-07T20:46:00.000Z
 author: nic
 tags:
   - posts
