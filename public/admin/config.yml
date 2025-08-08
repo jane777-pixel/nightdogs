@@ -52,6 +52,91 @@ collections:
         }
       - { label: "Tags", name: "tags", widget: "list", default: ["posts"] }
       - { label: "Body", name: "body", widget: "markdown" }
+  - name: "author-profiles"
+    label: "Author Profiles"
+    folder: "content/authors"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - {
+          label: "Author",
+          name: "author",
+          widget: "select",
+          options:
+            [
+              { label: "Jane", value: "jane" },
+              { label: "Abby", value: "abby" },
+              { label: "Adèsse", value: "adesse" },
+              { label: "Orion", value: "orionlw" },
+              { label: "Amelia", value: "amelia" },
+              { label: "Nic", value: "nic" },
+              { label: "Ewan", value: "ewan" },
+            ],
+        }
+      - {
+          label: "Featured Image",
+          name: "image",
+          widget: "image",
+          required: false,
+        }
+      - {
+          label: "Extended Bio",
+          name: "extendedBio",
+          widget: "markdown",
+          required: false,
+        }
+      - {
+          label: "Achievements",
+          name: "achievements",
+          widget: "list",
+          required: false,
+          fields:
+            [
+              { label: "Achievement", name: "text", widget: "string" },
+              {
+                label: "Date",
+                name: "date",
+                widget: "datetime",
+                required: false,
+              },
+            ],
+        }
+      - {
+          label: "Favorite Posts",
+          name: "favoritePosts",
+          widget: "list",
+          required: false,
+          fields:
+            [
+              { label: "Post Title", name: "title", widget: "string" },
+              { label: "Post URL", name: "url", widget: "string" },
+              {
+                label: "Why it's favorite",
+                name: "reason",
+                widget: "text",
+                required: false,
+              },
+            ],
+        }
+      - {
+          label: "Fun Facts",
+          name: "funFacts",
+          widget: "list",
+          required: false,
+        }
+      - {
+          label: "Currently Reading",
+          name: "currentlyReading",
+          widget: "string",
+          required: false,
+        }
+      - {
+          label: "Favorite Quote",
+          name: "favoriteQuote",
+          widget: "text",
+          required: false,
+        }
   - name: "authors"
     label: "Authors"
     files:

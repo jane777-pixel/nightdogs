@@ -1,0 +1,366 @@
+---
+title: "Authors - nightdogs"
+layout: layouts/base.njk
+permalink: /authors/
+eleventyNavigation:
+  key: Authors
+  order: 3
+---
+
+<style>
+.authors-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.page-title {
+  font-size: 3rem;
+  margin: 0 0 1rem 0;
+  color: var(--color);
+}
+
+.page-subtitle {
+  font-size: 1.2rem;
+  color: var(--muted-color);
+  margin: 0;
+}
+
+.authors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.author-card {
+  background: var(--background-color);
+  border: 2px solid var(--primary);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+.author-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--primary);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.author-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  border-color: var(--color);
+  text-decoration: none;
+}
+
+.author-card:hover::before {
+  transform: scaleX(1);
+}
+
+.author-card:hover * {
+  color: inherit;
+}
+
+.card-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--primary);
+  margin: 0 auto 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: var(--background-color);
+  font-weight: bold;
+  border: 3px solid var(--background-color);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.card-name {
+  font-size: 1.5rem;
+  margin: 0 0 0.5rem 0;
+  color: var(--color);
+}
+
+.card-note {
+  font-size: 1.2rem;
+  margin: 0 0 1rem 0;
+  opacity: 0.8;
+}
+
+.card-bio {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  opacity: 0.9;
+}
+
+.card-stats {
+  display: flex;
+  justify-content: space-around;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: rgba(255,255,255,0.1);
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-number {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--primary);
+}
+
+.stat-label {
+  display: block;
+  opacity: 0.8;
+  margin-top: 0.25rem;
+}
+
+.theme-preview-mini {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.color-swatch {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--background-color);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.authors-stats {
+  text-align: center;
+  padding: 2rem;
+  background: var(--background-color);
+  border: 2px solid var(--primary);
+  border-radius: 12px;
+  margin-bottom: 2rem;
+}
+
+.authors-stats h2 {
+  margin: 0 0 1rem 0;
+  color: var(--color);
+}
+
+.overall-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.overall-stat {
+  padding: 1rem;
+  background: rgba(255,255,255,0.1);
+  border-radius: 8px;
+}
+
+.overall-stat-number {
+  display: block;
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--primary);
+}
+
+.overall-stat-label {
+  display: block;
+  margin-top: 0.5rem;
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .authors-page {
+    padding: 1rem;
+  }
+
+  .page-title {
+    font-size: 2.5rem;
+  }
+
+  .authors-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .author-card {
+    padding: 1.5rem;
+  }
+
+  .card-stats {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .overall-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+</style>
+
+<div class="authors-page">
+  <div class="page-header">
+    <h1 class="page-title">Meet the Pack</h1>
+    <p class="page-subtitle">
+      Get to know the writers behind nightdogs and explore their unique themes
+    </p>
+  </div>
+
+  {% set allBlogPosts = collections.blog %}
+  {% set totalPosts = allBlogPosts.length %}
+  {% set totalWords = allBlogPosts | totalWordCount %}
+
+  <div class="authors-stats">
+    <h2>🐾 Our Community</h2>
+    <div class="overall-stats">
+      <div class="overall-stat">
+        <span class="overall-stat-number">{{ authors | getKeys | length }}</span>
+        <span class="overall-stat-label">Authors</span>
+      </div>
+      <div class="overall-stat">
+        <span class="overall-stat-number">{{ totalPosts }}</span>
+        <span class="overall-stat-label">Posts</span>
+      </div>
+      <div class="overall-stat">
+        <span class="overall-stat-number">{{ totalWords | numberFormat }}</span>
+        <span class="overall-stat-label">Words</span>
+      </div>
+      <div class="overall-stat">
+        <span class="overall-stat-number">{{ (totalWords / 200) | round }}</span>
+        <span class="overall-stat-label">Minutes</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="authors-grid">
+    {% for authorKey, authorData in authors %}
+      {% set authorPosts = collections.blog | filterByAuthor(authorKey) %}
+      {% set postCount = authorPosts.length %}
+      {% set authorWords = authorPosts | totalWordCount %}
+
+      <a href="/authors/{{ authorKey }}/" class="author-card">
+        <div class="card-avatar">
+          {{ authorData.name | first | upper }}
+        </div>
+        <h3 class="card-name">{{ authorData.name }}</h3>
+        <div class="card-note">{{ authorData.note }}</div>
+        <div class="card-bio">{{ authorData.bio | safe | striptags | truncate(120) }}</div>
+
+        <div class="card-stats">
+          <div class="stat">
+            <span class="stat-number">{{ postCount }}</span>
+            <span class="stat-label">Posts</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">{{ authorWords | numberFormat }}</span>
+            <span class="stat-label">Words</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">{{ (authorWords / 200) | round }}</span>
+            <span class="stat-label">Min Read</span>
+          </div>
+        </div>
+
+        <div class="theme-preview-mini">
+          <div class="color-swatch" style="background: {{ authorData.theme.light.primary }};"></div>
+          <div class="color-swatch" style="background: {{ authorData.theme.light.background }};"></div>
+          <div class="color-swatch" style="background: {{ authorData.theme.dark.background }};"></div>
+          <div class="color-swatch" style="background: {{ authorData.theme.dark.primary }};"></div>
+        </div>
+
+        <div style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.7;">
+          {% if authorData.isDogPerson %}🐕{% else %}🐱{% endif %}
+          {{ "Dog" if authorData.isDogPerson else "Cat" }} person •
+          Click to explore
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+
+  <div style="text-align: center; margin-top: 3rem; padding: 2rem; border: 1px solid var(--primary); border-radius: 8px; background: var(--background-color);">
+    <h3 style="margin: 0 0 1rem 0; color: var(--color);">🚀 Want to Join the Pack?</h3>
+    <p style="margin: 0 0 1rem 0; color: var(--muted-color);">
+      We're always looking for new voices and perspectives to add to our community.
+    </p>
+    <a href="/about/" style="color: var(--primary); text-decoration: none; font-weight: bold;">
+      Learn more about contributing →
+    </a>
+  </div>
+</div>
+
+<script>
+// Author card hover effects and theme preview
+document.addEventListener('DOMContentLoaded', function() {
+  const authorCards = document.querySelectorAll('.author-card');
+
+  authorCards.forEach(card => {
+    // Add keyboard navigation
+    card.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        window.location.href = this.href;
+      }
+    });
+
+    // Preview author theme on hover
+    card.addEventListener('mouseenter', function() {
+      const authorSlug = this.href.split('/authors/')[1].replace('/', '');
+      const authorSelectors = document.querySelectorAll('.author-sync');
+
+      // Temporarily preview this author's theme
+      authorSelectors.forEach(selector => {
+        if (selector.value !== authorSlug) {
+          selector.value = authorSlug;
+          selector.dispatchEvent(new Event('change'));
+        }
+      });
+    });
+  });
+
+  // Restore original theme when not hovering over any card
+  document.addEventListener('mouseover', function(e) {
+    if (!e.target.closest('.author-card')) {
+      // Restore the original author theme after a short delay
+      setTimeout(() => {
+        if (!document.querySelector('.author-card:hover')) {
+          const originalAuthor = localStorage.getItem('author-theme') || 'jane';
+          const authorSelectors = document.querySelectorAll('.author-sync');
+          authorSelectors.forEach(selector => {
+            if (selector.value !== originalAuthor) {
+              selector.value = originalAuthor;
+              selector.dispatchEvent(new Event('change'));
+            }
+          });
+        }
+      }, 100);
+    }
+  });
+});
+</script>

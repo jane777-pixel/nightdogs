@@ -127,4 +127,56 @@ export default function (eleventyConfig) {
 			return null;
 		}
 	});
+
+	// Filter posts by author
+	eleventyConfig.addFilter("filterByAuthor", (posts, authorSlug) => {
+		if (!posts || !authorSlug) return [];
+		return posts.filter((post) => post.data.author === authorSlug);
+	});
+
+	// Calculate total word count for an array of posts
+	eleventyConfig.addFilter("totalWordCount", (posts) => {
+		if (!posts || !Array.isArray(posts)) return 0;
+		return posts.reduce((total, post) => {
+			if (post.data.readingTime && post.data.readingTime.words) {
+				return total + post.data.readingTime.words;
+			}
+			// Fallback: estimate from content
+			const content = post.content || post.templateContent || "";
+			const plainText = content.replace(/<[^>]*>/g, "");
+			const words = plainText.split(/\s+/).filter((word) => word.length > 0);
+			return total + words.length;
+		}, 0);
+	});
+
+	// Format numbers with commas
+	eleventyConfig.addFilter("numberFormat", (num) => {
+		if (typeof num !== "number") return num;
+		return num.toLocaleString();
+	});
+
+	// Get first character
+	eleventyConfig.addFilter("first", (str) => {
+		if (!str) return "";
+		return str.toString().charAt(0);
+	});
+
+	// ISO date format
+	eleventyConfig.addFilter("isoDate", (dateObj) => {
+		if (!dateObj) return "";
+		return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("yyyy-LL-dd");
+	});
+
+	// Strip HTML tags from content
+	eleventyConfig.addFilter("striptags", (content) => {
+		if (!content || typeof content !== "string") return "";
+		return content.replace(/<[^>]*>/g, "");
+	});
+
+	// Truncate text to specified length
+	eleventyConfig.addFilter("truncate", (text, length = 100) => {
+		if (!text || typeof text !== "string") return "";
+		if (text.length <= length) return text;
+		return text.substring(0, length).trim() + "...";
+	});
 }

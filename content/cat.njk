@@ -5,75 +5,499 @@ const eleventyNavigation = {
 };
 ---
 
-<main class="container">
-  <div id="cat-container" style="text-align: center">
-    <img
-      id="cat-img"
-      src=""
-      alt="Random cat"
-      style="
-        max-width: 400px;
-        width: 100%;
-        height: auto;
-        border-radius: 8px;
-        display: none;
-      "
-    />
-    <div id="cat-loading">Loading...</div>
-    <div id="cat-error" style="color: red; display: none">
-      Could not load cat 😿
-    </div>
-    <br />
-    <button id="new-cat" class="contrast">Show Another Cat</button>
+<style>
+.animal-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.dynamic-title {
+  font-size: 3rem;
+  margin: 0 0 1rem 0;
+  color: var(--color);
+}
+
+.team-badge {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: var(--primary);
+  color: var(--background-color);
+  border-radius: 20px;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.author-preference {
+  background: var(--background-color);
+  border: 2px solid var(--primary);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.team-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.team-stat {
+  background: var(--background-color);
+  border: 1px solid var(--primary);
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.team-stat:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.team-stat.current-team {
+  border: 3px solid var(--primary);
+  background: var(--primary);
+  color: var(--background-color);
+}
+
+.stat-emoji {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--primary);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.team-stat.current-team .stat-number {
+  color: var(--background-color);
+}
+
+.stat-label {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.animal-display {
+  text-align: center;
+  margin: 3rem 0;
+}
+
+.animal-container {
+  position: relative;
+  display: inline-block;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  background: var(--background-color);
+  border: 3px solid var(--primary);
+}
+
+.animal-image {
+  max-width: 500px;
+  width: 100%;
+  height: auto;
+  display: none;
+  transition: opacity 0.3s ease;
+}
+
+.loading-state, .error-state {
+  padding: 3rem;
+  font-size: 1.2rem;
+  color: var(--muted-color);
+}
+
+.error-state {
+  color: var(--primary);
+  display: none;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.animal-button {
+  padding: 0.75rem 1.5rem;
+  background: var(--primary);
+  color: var(--background-color);
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.animal-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.author-list {
+  margin-top: 2rem;
+  text-align: left;
+}
+
+.author-list h4 {
+  margin: 0 0 1rem 0;
+  color: var(--color);
+  font-size: 1.2rem;
+}
+
+.author-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.author-chip {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  background: var(--muted-color);
+  color: var(--background-color);
+  border-radius: 16px;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.author-chip:hover {
+  background: var(--primary);
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .animal-page {
+    padding: 1rem;
+  }
+
+  .dynamic-title {
+    font-size: 2.5rem;
+  }
+
+  .team-stats {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .animal-button {
+    width: 100%;
+    max-width: 250px;
+    justify-content: center;
+  }
+
+  .author-chips {
+    justify-content: center;
+  }
+}
+</style>
+
+<div class="animal-page">
+  <div class="page-header">
+    <h1 class="dynamic-title" id="page-title">🐱 Team Cat</h1>
+    <div class="team-badge" id="team-badge">Cat Person</div>
   </div>
-  <script>
-    function getSelectedAuthor() {
-      return document.documentElement.getAttribute('data-author');
-    }
 
-    async function loadAnimal() {
-      const author = getSelectedAuthor();
-      const isDogPerson = window.AUTHORS_DOG_PERSON?.[author] === true;
-      const imgEl = document.getElementById("cat-img");
-      const loadingEl = document.getElementById("cat-loading");
-      const errorEl = document.getElementById("cat-error");
-      const btnEl = document.getElementById("new-cat");
+  <div class="author-preference">
+    <h2 style="margin: 0 0 1rem 0; color: var(--color);">
+      <span id="current-author-name">Current Author</span>'s Preference
+    </h2>
+    <p id="preference-description" style="margin: 0; font-size: 1.1rem; color: var(--muted-color);">
+      Loading author preference...
+    </p>
+  </div>
 
-      imgEl.style.display = "none";
-      loadingEl.style.display = "block";
-      errorEl.style.display = "none";
+  <div class="team-stats">
+    <div class="team-stat" id="dog-team">
+      <span class="stat-emoji">🐕</span>
+      <span class="stat-number" id="dog-count">0</span>
+      <span class="stat-label">Dog People</span>
+      <div class="author-list">
+        <h4>Team Dog:</h4>
+        <div class="author-chips" id="dog-authors"></div>
+      </div>
+    </div>
+    <div class="team-stat" id="cat-team">
+      <span class="stat-emoji">🐱</span>
+      <span class="stat-number" id="cat-count">0</span>
+      <span class="stat-label">Cat People</span>
+      <div class="author-list">
+        <h4>Team Cat:</h4>
+        <div class="author-chips" id="cat-authors"></div>
+      </div>
+    </div>
+  </div>
 
-      // Set UI labels
-      imgEl.alt = isDogPerson ? "Random dog" : "Random cat";
-      btnEl.textContent = isDogPerson ? "Show Another Dog" : "Show Another Cat";
-      errorEl.textContent = isDogPerson ? "Could not load dog 🐶" : "Could not load cat 😿";
+  <div class="animal-display">
+    <div class="animal-container">
+      <img id="animal-img" src="" alt="Random animal" class="animal-image" />
+      <div id="loading-state" class="loading-state">Loading adorable content...</div>
+      <div id="error-state" class="error-state">Could not load image 😿</div>
+    </div>
 
-      // Choose API
-      const apiUrl = isDogPerson
-        ? "https://api.thedogapi.com/v1/images/search"
-        : "https://api.thecatapi.com/v1/images/search";
+    <div class="action-buttons">
+      <button id="new-animal" class="animal-button">
+        <span id="button-emoji">🐱</span>
+        <span id="button-text">Show Another Cat</span>
+      </button>
+      <button id="switch-team" class="animal-button" style="background: var(--muted-color);">
+        <span id="switch-emoji">🐕</span>
+        <span id="switch-text">Switch to Dogs</span>
+      </button>
+    </div>
+  </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Authors data (will be populated by the template)
+  const AUTHORS_DATA = {
+    {% for authorKey, authorData in authors %}
+      "{{ authorKey }}": {
+        name: "{{ authorData.name }}",
+        isDogPerson: {{ authorData.isDogPerson | default(false) }},
+        note: "{{ authorData.note }}"
+      }{% if not loop.last %},{% endif %}
+    {% endfor %}
+  };
 
-      try {
-        const res = await fetch(apiUrl);
-        if (!res.ok) throw new Error("Network error");
-        const data = await res.json();
-        imgEl.src = data[0].url;
-        imgEl.onload = () => {
-          imgEl.style.display = "block";
-          loadingEl.style.display = "none";
-        };
-      } catch (e) {
-        loadingEl.style.display = "none";
-        errorEl.style.display = "block";
+  // DOM elements
+  const elements = {
+    title: document.getElementById('page-title'),
+    badge: document.getElementById('team-badge'),
+    authorName: document.getElementById('current-author-name'),
+    preference: document.getElementById('preference-description'),
+    animalImg: document.getElementById('animal-img'),
+    loading: document.getElementById('loading-state'),
+    error: document.getElementById('error-state'),
+    newAnimalBtn: document.getElementById('new-animal'),
+    switchTeamBtn: document.getElementById('switch-team'),
+    buttonEmoji: document.getElementById('button-emoji'),
+    buttonText: document.getElementById('button-text'),
+    switchEmoji: document.getElementById('switch-emoji'),
+    switchText: document.getElementById('switch-text'),
+    dogCount: document.getElementById('dog-count'),
+    catCount: document.getElementById('cat-count'),
+    dogAuthors: document.getElementById('dog-authors'),
+    catAuthors: document.getElementById('cat-authors'),
+    dogTeam: document.getElementById('dog-team'),
+    catTeam: document.getElementById('cat-team')
+  };
+
+  let currentForceMode = null; // 'dog' or 'cat' to override author preference
+
+  function getSelectedAuthor() {
+    return document.documentElement.getAttribute('data-author') || 'jane';
+  }
+
+  function getCurrentAnimalType() {
+    if (currentForceMode) return currentForceMode;
+    const author = getSelectedAuthor();
+    return AUTHORS_DATA[author]?.isDogPerson ? 'dog' : 'cat';
+  }
+
+  function updateTeamStats() {
+    const dogAuthors = [];
+    const catAuthors = [];
+
+    Object.entries(AUTHORS_DATA).forEach(([key, data]) => {
+      if (data.isDogPerson) {
+        dogAuthors.push({ key, data });
+      } else {
+        catAuthors.push({ key, data });
       }
+    });
+
+    // Update counts
+    elements.dogCount.textContent = dogAuthors.length;
+    elements.catCount.textContent = catAuthors.length;
+
+    // Update author lists
+    elements.dogAuthors.innerHTML = dogAuthors.map(author =>
+      `<a href="/authors/${author.key}/" class="author-chip">${author.data.name}</a>`
+    ).join('');
+
+    elements.catAuthors.innerHTML = catAuthors.map(author =>
+      `<a href="/authors/${author.key}/" class="author-chip">${author.data.name}</a>`
+    ).join('');
+
+    // Highlight current team
+    const currentType = getCurrentAnimalType();
+    elements.dogTeam.classList.toggle('current-team', currentType === 'dog');
+    elements.catTeam.classList.toggle('current-team', currentType === 'cat');
+  }
+
+  function updateUI() {
+    const author = getSelectedAuthor();
+    const authorData = AUTHORS_DATA[author];
+    const animalType = getCurrentAnimalType();
+    const isDog = animalType === 'dog';
+
+    // Update title and badge
+    elements.title.textContent = isDog ? '🐕 Team Dog' : '🐱 Team Cat';
+    elements.badge.textContent = isDog ? 'Dog Person' : 'Cat Person';
+
+    // Update author preference section
+    elements.authorName.textContent = authorData?.name || 'Unknown Author';
+
+    if (currentForceMode) {
+      elements.preference.innerHTML = `
+        You're currently viewing <strong>${currentForceMode}s</strong> regardless of author preference.
+        <br><small style="opacity: 0.7;">Switch back to see ${authorData?.name}'s natural preference!</small>
+      `;
+    } else {
+      const naturalPreference = authorData?.isDogPerson ? 'dogs' : 'cats';
+      elements.preference.innerHTML = `
+        ${authorData?.name} is naturally a <strong>${naturalPreference}</strong> person ${authorData?.note || ''}
+        <br><small style="opacity: 0.7;">The page automatically shows ${naturalPreference} based on their preference!</small>
+      `;
     }
 
-    document.getElementById("new-cat").onclick = loadAnimal;
+    // Update buttons
+    elements.buttonEmoji.textContent = isDog ? '🐕' : '🐱';
+    elements.buttonText.textContent = `Show Another ${isDog ? 'Dog' : 'Cat'}`;
 
-    // Listen for author changes (sync logic triggers filterPosts, so listen for changes to data-author)
-    const observer = new MutationObserver(loadAnimal);
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-author'] });
+    const oppositeType = isDog ? 'cat' : 'dog';
+    const oppositeEmoji = isDog ? '🐱' : '🐕';
+    elements.switchEmoji.textContent = oppositeEmoji;
+    elements.switchText.textContent = `Switch to ${oppositeType.charAt(0).toUpperCase() + oppositeType.slice(1)}s`;
 
+    // Update team stats
+    updateTeamStats();
+  }
+
+  async function loadAnimal() {
+    const animalType = getCurrentAnimalType();
+    const isDog = animalType === 'dog';
+
+    // Show loading state
+    elements.animalImg.style.display = "none";
+    elements.loading.style.display = "block";
+    elements.error.style.display = "none";
+    elements.loading.textContent = `Loading adorable ${animalType}...`;
+
+    // Choose API
+    const apiUrl = isDog
+      ? "https://api.thedogapi.com/v1/images/search"
+      : "https://api.thecatapi.com/v1/images/search";
+
+    try {
+      const res = await fetch(apiUrl);
+      if (!res.ok) throw new Error("Network error");
+      const data = await res.json();
+
+      elements.animalImg.src = data[0].url;
+      elements.animalImg.alt = `Random ${animalType}`;
+
+      elements.animalImg.onload = () => {
+        elements.animalImg.style.display = "block";
+        elements.loading.style.display = "none";
+      };
+    } catch (e) {
+      elements.loading.style.display = "none";
+      elements.error.style.display = "block";
+      elements.error.textContent = `Could not load ${animalType} ${isDog ? '🐶' : '😿'}`;
+    }
+  }
+
+  function switchTeam() {
+    const currentType = getCurrentAnimalType();
+    currentForceMode = currentType === 'dog' ? 'cat' : 'dog';
+    updateUI();
     loadAnimal();
-  </script>
-</main>
+  }
+
+  function resetToAuthorPreference() {
+    currentForceMode = null;
+    updateUI();
+    loadAnimal();
+  }
+
+  // Event listeners
+  elements.newAnimalBtn.addEventListener('click', loadAnimal);
+  elements.switchTeamBtn.addEventListener('click', switchTeam);
+
+  // Double-click to reset to author preference
+  elements.switchTeamBtn.addEventListener('dblclick', function() {
+    if (currentForceMode) {
+      resetToAuthorPreference();
+    }
+  });
+
+  // Listen for author changes
+  const observer = new MutationObserver(() => {
+    currentForceMode = null; // Reset force mode when author changes
+    updateUI();
+    loadAnimal();
+  });
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['data-author']
+  });
+
+  // Keyboard shortcuts
+  document.addEventListener('keydown', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+    switch(e.key.toLowerCase()) {
+      case ' ':
+      case 'n':
+        e.preventDefault();
+        loadAnimal();
+        break;
+      case 's':
+        e.preventDefault();
+        switchTeam();
+        break;
+      case 'r':
+        if (currentForceMode) {
+          e.preventDefault();
+          resetToAuthorPreference();
+        }
+        break;
+    }
+  });
+
+  // Initial setup
+  updateUI();
+  loadAnimal();
+
+  // Add keyboard shortcut help
+  const shortcuts = document.createElement('div');
+  shortcuts.innerHTML = `
+    <div style="position: fixed; bottom: 1rem; right: 1rem; background: var(--background-color); border: 1px solid var(--primary); border-radius: 8px; padding: 1rem; font-size: 0.8rem; opacity: 0.7; max-width: 200px;">
+      <strong>Keyboard Shortcuts:</strong><br>
+      <kbd>Space/N</kbd> - New animal<br>
+      <kbd>S</kbd> - Switch teams<br>
+      <kbd>R</kbd> - Reset to author preference
+    </div>
+  `;
+  document.body.appendChild(shortcuts);
+});
+</script>

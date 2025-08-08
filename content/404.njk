@@ -1,0 +1,172 @@
+---
+title: "404 - Page Not Found"
+layout: layouts/base.njk
+permalink: /404.html
+eleventyExcludeFromCollections: true
+---
+
+<style>
+.error-page {
+  text-align: center;
+  padding: 2rem 1rem;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-code {
+  font-size: 6rem;
+  font-weight: bold;
+  color: var(--primary);
+  margin: 0;
+  line-height: 1;
+}
+
+.error-title {
+  font-size: 1.5rem;
+  margin: 1rem 0;
+  color: var(--color);
+}
+
+.error-message {
+  font-size: 1.1rem;
+  color: var(--muted-color);
+  margin-bottom: 2rem;
+  max-width: 500px;
+}
+
+.error-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.search-prompt {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: var(--background-color);
+  border: 2px solid var(--primary);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  text-decoration: none;
+  color: var(--color);
+}
+
+.search-prompt:hover {
+  background: var(--primary);
+  color: var(--background-color);
+}
+
+.home-link-btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: var(--primary);
+  color: var(--background-color);
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: opacity 0.2s ease;
+}
+
+.home-link-btn:hover {
+  opacity: 0.9;
+}
+
+.helpful-links {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.helpful-links a {
+  color: var(--primary);
+  text-decoration: none;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.helpful-links a:hover {
+  background: var(--primary);
+  color: var(--background-color);
+}
+
+@media (max-width: 768px) {
+  .error-code {
+    font-size: 4rem;
+  }
+
+  .error-title {
+    font-size: 1.25rem;
+  }
+
+  .error-actions {
+    width: 100%;
+  }
+
+  .search-prompt {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+</style>
+
+<div class="error-page">
+  <h1 class="error-code">404</h1>
+  <h2 class="error-title">🐕 Oops! This page went to chase squirrels</h2>
+  <p class="error-message">
+    The page you're looking for seems to have wandered off. Maybe it's exploring the backyard or got distracted by a tennis ball. Let's help you find what you're looking for!
+  </p>
+
+  <div class="error-actions">
+    <button class="search-prompt" data-search-trigger aria-label="Search the site">
+      <span aria-hidden="true">🔍</span>
+      <span>Search nightdogs</span>
+    </button>
+
+    <a href="/" class="home-link-btn">
+      🏠 Go Home
+    </a>
+  </div>
+
+  <div class="helpful-links">
+    <a href="/blog/">📝 All Posts</a>
+    <a href="/about/">ℹ️ About</a>
+    <a href="/cat/">🐱 Cat (or Dog)</a>
+  </div>
+</div>
+
+<script>
+// Auto-focus search if user tries to search from 404 page
+document.addEventListener('DOMContentLoaded', function() {
+  // Check if URL has search parameters and trigger search
+  const urlParams = new URLSearchParams(window.location.search);
+  const searchQuery = urlParams.get('q') || urlParams.get('search');
+
+  if (searchQuery) {
+    // Delay slightly to ensure search is loaded
+    setTimeout(() => {
+      const searchTrigger = document.querySelector('[data-search-trigger]');
+      if (searchTrigger) {
+        searchTrigger.click();
+        // Try to populate search with the query
+        setTimeout(() => {
+          const searchInput = document.getElementById('search-input');
+          if (searchInput) {
+            searchInput.value = searchQuery;
+            searchInput.dispatchEvent(new Event('input'));
+          }
+        }, 100);
+      }
+    }, 100);
+  }
+});
+</script>

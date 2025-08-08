@@ -1,0 +1,606 @@
+---
+pagination:
+  data: authors
+  size: 1
+  alias: authorData
+  addAllPagesToCollections: true
+permalink: "/authors/{{ pagination.items[0][0] }}/"
+eleventyComputed:
+  title: "{{ authorData[1].name }} - Author Profile"
+  author: "{{ pagination.items[0][0] }}"
+layout: layouts/base.njk
+---
+
+<style>
+.author-profile {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.breadcrumb {
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+  color: var(--muted-color);
+}
+
+.breadcrumb a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.author-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2.5rem;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--background-color) 0%, var(--primary) 1%, var(--background-color) 2%);
+  border: 2px solid var(--primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.author-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--color), var(--primary));
+}
+
+.author-avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: var(--primary);
+  margin: 0 auto 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+  color: var(--background-color);
+  font-weight: bold;
+  border: 4px solid var(--background-color);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.author-name {
+  font-size: 2.8rem;
+  margin: 0 0 0.5rem 0;
+  color: var(--color);
+  font-family: var(--author-{{ pagination.items[0][0] }}-font-header, var(--font-family));
+}
+
+.author-note {
+  font-size: 1.8rem;
+  margin: 0 0 1.5rem 0;
+  opacity: 0.8;
+  letter-spacing: 0.1em;
+}
+
+.author-bio {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: var(--color);
+  margin-bottom: 1.5rem;
+  font-family: var(--author-{{ pagination.items[0][0] }}-font-body, var(--font-family));
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.author-links {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.author-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background: var(--primary);
+  color: var(--background-color);
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.author-link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin: 3rem 0;
+}
+
+.profile-card {
+  background: var(--background-color);
+  border: 1px solid var(--primary);
+  border-radius: 12px;
+  padding: 2rem;
+  transition: all 0.2s ease;
+}
+
+.profile-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  border-color: var(--color);
+}
+
+.profile-card h3 {
+  margin: 0 0 1rem 0;
+  color: var(--primary);
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.theme-preview {
+  margin: 3rem 0;
+  text-align: center;
+}
+
+.theme-preview h2 {
+  margin-bottom: 1.5rem;
+  color: var(--color);
+  font-size: 2rem;
+}
+
+.theme-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.theme-card {
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.theme-card:hover {
+  transform: scale(1.02);
+}
+
+.theme-card.light {
+  background: {{ authorData[1].theme.light.background }};
+  color: {{ authorData[1].theme.light.color }};
+  border: 3px solid {{ authorData[1].theme.light.primary }};
+}
+
+.theme-card.dark {
+  background: {{ authorData[1].theme.dark.background }};
+  color: {{ authorData[1].theme.dark.color }};
+  border: 3px solid {{ authorData[1].theme.dark.primary }};
+}
+
+.theme-card h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.3rem;
+  font-family: var(--author-{{ pagination.items[0][0] }}-font-header, var(--font-family));
+}
+
+.theme-card p {
+  margin: 0;
+  font-size: 0.95rem;
+  opacity: 0.9;
+  font-family: var(--author-{{ pagination.items[0][0] }}-font-body, var(--font-family));
+}
+
+.posts-section {
+  margin-top: 4rem;
+}
+
+.posts-section h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--color);
+  font-size: 2rem;
+}
+
+.posts-stats {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  padding: 1.5rem;
+  background: var(--background-color);
+  border: 2px solid var(--primary);
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.posts-stats .stat-number {
+  color: var(--primary);
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.author-posts {
+  display: grid;
+  gap: 2rem;
+}
+
+.author-post {
+  padding: 2rem;
+  border: 1px solid var(--primary);
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  background: var(--background-color);
+}
+
+.author-post:hover {
+  background: var(--primary);
+  color: var(--background-color);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.author-post:hover * {
+  color: inherit;
+}
+
+.post-title {
+  margin: 0 0 1rem 0;
+  font-size: 1.4rem;
+  font-family: var(--author-{{ pagination.items[0][0] }}-font-header, var(--font-family));
+}
+
+.post-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.post-meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.95rem;
+  opacity: 0.8;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.post-excerpt {
+  line-height: 1.7;
+  margin: 0;
+  font-family: var(--author-{{ pagination.items[0][0] }}-font-body, var(--font-family));
+}
+
+.tag {
+  background: var(--muted-color);
+  color: var(--background-color);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  text-decoration: none;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  padding: 0.6rem 1.2rem;
+  background: var(--primary);
+  color: var(--background-color);
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.back-link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.fun-facts {
+  background: var(--background-color);
+  border: 1px solid var(--primary);
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+.fun-facts ul {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0 0;
+}
+
+.fun-facts li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--primary);
+}
+
+.fun-facts li:last-child {
+  border-bottom: none;
+}
+
+.fun-facts li::before {
+  content: '🐾';
+  margin-right: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .author-profile {
+    padding: 1rem;
+  }
+
+  .author-header {
+    padding: 2rem 1.5rem;
+  }
+
+  .author-name {
+    font-size: 2.2rem;
+  }
+
+  .author-note {
+    font-size: 1.5rem;
+  }
+
+  .profile-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .theme-cards {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .author-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .author-link {
+    width: 100%;
+    max-width: 250px;
+    justify-content: center;
+  }
+
+  .post-meta {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+</style>
+
+<div class="author-profile">
+  <nav class="breadcrumb">
+    <a href="/">nightdogs</a> →
+    <a href="/blog/">blog</a> →
+    <span>{{ authorData[1].name }}</span>
+  </nav>
+
+  <a href="/blog/" class="back-link">
+    ← Back to All Posts
+  </a>
+
+  <div class="author-header">
+    <div class="author-avatar">
+      {{ authorData[1].name | first | upper }}
+    </div>
+    <h1 class="author-name">{{ authorData[1].name }}</h1>
+    <div class="author-note">{{ authorData[1].note }}</div>
+    <div class="author-bio">{{ authorData[1].bio | safe }}</div>
+
+    {% if authorData[1].links and authorData[1].links.length > 0 %}
+    <div class="author-links">
+      {% for link in authorData[1].links %}
+        <a href="{{ link.url }}" class="author-link" target="_blank" rel="noopener noreferrer">
+          <span>🔗</span>
+          {{ link.label }}
+        </a>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="profile-grid">
+    <div class="profile-card">
+      <h3>
+        {% if authorData[1].isDogPerson %}
+          🐕 Dog Person
+        {% else %}
+          🐱 Cat Person
+        {% endif %}
+      </h3>
+      <p>
+        {{ authorData[1].name }} is a
+        {% if authorData[1].isDogPerson %}
+          dog person who probably gets excited about fetch, long walks, and loyal companionship.
+        {% else %}
+          cat person who likely appreciates independence, cozy naps, and subtle affection.
+        {% endif %}
+      </p>
+    </div>
+
+    <div class="profile-card fun-facts">
+      <h3>🎨 Theme Style</h3>
+      <p>
+        {{ authorData[1].name }}'s theme uses
+        <strong style="color: {{ authorData[1].theme.light.primary }};">{{ authorData[1].theme.light.primary }}</strong>
+        as the primary color with
+        {% if authorData[1].theme.fonts.header %}
+          <span style="font-family: {{ authorData[1].theme.fonts.header }};">{{ authorData[1].theme.fonts.header | replace('"', '') | replace(',', ' and') }}</span>
+        {% else %}
+          the default font family
+        {% endif %}
+        for headers.
+      </p>
+    </div>
+  </div>
+
+  <div class="theme-preview">
+    <h2>{{ authorData[1].name }}'s Theme</h2>
+    <p style="margin-bottom: 2rem; color: var(--muted-color);">
+      Click the theme cards below to see how the site looks in {{ authorData[1].name }}'s style!
+    </p>
+    <div class="theme-cards">
+      <div class="theme-card light" onclick="previewTheme('light')">
+        <h3>☀️ Light Mode</h3>
+        <p>Clean and bright, perfect for daytime reading</p>
+        <small style="display: block; margin-top: 1rem; opacity: 0.7;">
+          Click to preview
+        </small>
+      </div>
+      <div class="theme-card dark" onclick="previewTheme('dark')">
+        <h3>🌙 Dark Mode</h3>
+        <p>Easy on the eyes for night-time browsing</p>
+        <small style="display: block; margin-top: 1rem; opacity: 0.7;">
+          Click to preview
+        </small>
+      </div>
+    </div>
+  </div>
+
+  <div class="posts-section">
+    {% set authorPosts = collections.blog | filterByAuthor(pagination.items[0][0]) %}
+    {% set postCount = authorPosts.length %}
+    {% set totalWords = authorPosts | totalWordCount %}
+    {% set avgReadTime = (totalWords / 200) | round %}
+
+    <div class="posts-stats">
+      <span class="stat-number">{{ postCount }}</span> post{{ "s" if postCount != 1 }} •
+      <span class="stat-number">{{ totalWords | numberFormat }}</span> words •
+      <span class="stat-number">{{ avgReadTime }}</span> minutes of reading
+      {% if authorData[1].isDogPerson %}
+        • 🐕 Team Dog
+      {% else %}
+        • 🐱 Team Cat
+      {% endif %}
+    </div>
+
+    {% if postCount > 0 %}
+      <h2>Latest Posts by {{ authorData[1].name }}</h2>
+      <div class="author-posts">
+        {% for post in authorPosts | reverse %}
+          <article class="author-post">
+            <h3 class="post-title">
+              <a href="{{ post.url }}">{{ post.data.title }}</a>
+            </h3>
+            <div class="post-meta">
+              <time datetime="{{ post.date | isoDate }}">
+                📅 {{ post.date | readableDate }}
+              </time>
+              {% if post.data.readingTime %}
+                <span>⏱️ {{ post.data.readingTime.text }}</span>
+              {% endif %}
+              {% if post.data.tags %}
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                  {% for tag in post.data.tags %}
+                    {% if tag != "blog" %}
+                      <a href="/tags/{{ tag }}/" class="tag">#{{ tag }}</a>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </div>
+            {% if post.data.description %}
+              <p class="post-excerpt">{{ post.data.description }}</p>
+            {% endif %}
+          </article>
+        {% endfor %}
+      </div>
+
+      {% if postCount > 3 %}
+        <div style="text-align: center; margin-top: 2rem;">
+          <a href="/blog/?author={{ pagination.items[0][0] }}" class="back-link">
+            View All {{ postCount }} Posts by {{ authorData[1].name }} →
+          </a>
+        </div>
+      {% endif %}
+
+    {% else %}
+      <div style="text-align: center; padding: 3rem; opacity: 0.7;">
+        <h3>🚧 Coming Soon</h3>
+        <p>{{ authorData[1].name }} hasn't published any posts yet, but great things are coming!</p>
+        <p style="margin-top: 1rem;">
+          <a href="/blog/" style="color: var(--primary);">Check out posts from other authors →</a>
+        </p>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<script>
+// Set the author theme when viewing their profile
+document.addEventListener('DOMContentLoaded', function() {
+  const authorSlug = '{{ pagination.items[0][0] }}';
+  const authorSelectors = document.querySelectorAll('.author-sync');
+
+  // Update all author selectors to this author
+  function setAuthorTheme() {
+    authorSelectors.forEach(selector => {
+      if (selector.value !== authorSlug) {
+        selector.value = authorSlug;
+        selector.dispatchEvent(new Event('change'));
+      }
+    });
+  }
+
+  setAuthorTheme();
+
+  // Theme preview functionality
+  window.previewTheme = function(mode) {
+    const currentMode = document.documentElement.getAttribute('data-theme');
+    const darkToggle = document.getElementById('dark-mode-toggle');
+
+    // If clicking on a mode that's not current, switch to it
+    if ((mode === 'dark' && currentMode !== 'dark') ||
+        (mode === 'light' && currentMode === 'dark')) {
+      if (darkToggle) {
+        darkToggle.click();
+      }
+    }
+
+    // Brief visual feedback
+    const card = event.target.closest('.theme-card');
+    if (card) {
+      card.style.transform = 'scale(0.98)';
+      setTimeout(() => {
+        card.style.transform = 'scale(1.02)';
+      }, 100);
+    }
+  };
+
+  // Add keyboard navigation for theme cards
+  document.querySelectorAll('.theme-card').forEach(card => {
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
+
+    card.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const mode = this.classList.contains('dark') ? 'dark' : 'light';
+        previewTheme(mode);
+      }
+    });
+  });
+});
+</script>
