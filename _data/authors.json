@@ -168,20 +168,20 @@
 		],
 		"theme": {
 			"light": {
-				"background": "#91cbff",
-				"color": "#1e3a8a",
-				"primary": "#8bbfff",
-				"muted": "#1e40af"
+				"background": "#faf0e6",
+				"color": "#1c343c",
+				"primary": "#2563eb",
+				"muted": "#64748b"
 			},
 			"dark": {
-				"background": "#1e3a8a",
-				"color": "#91cbff",
+				"background": "#1c343c",
+				"color": "#ffff99",
 				"primary": "#8bbfff",
 				"muted": "#dbeafe"
 			},
 			"fonts": {
-				"body": "\"Montserrat\", sans-serif",
-				"header": "\"Montserrat\", sans-serif"
+				"body": "\"Georgia\", serif",
+				"header": "\"Georgia\", serif"
 			}
 		}
 	},
