@@ -493,7 +493,7 @@ document.documentElement.setAttribute("data-author", DEFAULT_THEME);
         }
         </script>
 
-        <script>
+        <script eleventy:ignore>
         // Sync all author selectors and theme
         (function() {
           const authorSelectors = document.querySelectorAll('.author-sync');
@@ -540,7 +540,7 @@ document.documentElement.setAttribute("data-author", DEFAULT_THEME);
           syncAuthorSelectors(initialAuthor);
         })();
         </script>
-        <script>
+        <script eleventy:ignore>
         function updateCatNavText() {
           const author = document.documentElement.getAttribute('data-author');
           // Find the nav link for the Cat page (assumes href contains 'cat')
