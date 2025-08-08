@@ -78,6 +78,9 @@ document.addEventListener('DOMContentLoaded', function() {
 		{{ content | safe }}
 	</div>
 
+{% set webmentionsUrl = page.url %}
+{% include "webmentions.njk" %}
+
 	{%- if author and collections.posts %}
 	{%- set authorPosts = collections.posts | filterByAuthor(author) | reverse %}
 	{%- set currentIndex = -1 %}
@@ -133,6 +136,4 @@ document.addEventListener('DOMContentLoaded', function() {
 		</ul>
 	</div>
 	{%- endif %}
-{% set webmentionsUrl = page.url %}
-{% include "webmentions.njk" %}
 </article>
