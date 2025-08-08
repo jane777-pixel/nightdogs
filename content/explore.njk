@@ -94,130 +94,11 @@ const pagination = {
   font-size: 1rem;
 }
 
-/* Tag Cloud Styles with Individual Colors */
-.tag-cloud {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 2rem;
-  background: var(--background-color);
-  border: 2px solid var(--primary);
-  border-radius: 12px;
-  min-height: 200px;
-}
-
-.tag-cloud-item {
-  display: inline-block;
-  padding: 0.4rem 0.8rem;
-  color: #ffffff;
-  text-decoration: none;
-  border-radius: 20px;
-  transition: all 0.3s ease;
-  font-weight: 500;
-  position: relative;
-  overflow: hidden;
-  border: 2px solid transparent;
-}
-
-.tag-cloud-item::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transition: left 0.6s ease;
-}
-
-.tag-cloud-item:hover::before {
-  left: 100%;
-}
-
-.tag-cloud-item:hover {
-  transform: scale(1.1);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  z-index: 10;
-  border-color: rgba(255,255,255,0.3);
-}
-
-/* Size classes for tag cloud */
-.tag-cloud-item.size-xs { font-size: 0.8rem; opacity: 0.8; }
-.tag-cloud-item.size-sm { font-size: 0.9rem; opacity: 0.85; }
-.tag-cloud-item.size-md { font-size: 1rem; opacity: 0.9; }
-.tag-cloud-item.size-lg { font-size: 1.2rem; opacity: 0.95; }
-.tag-cloud-item.size-xl { font-size: 1.4rem; opacity: 1; font-weight: bold; }
-
-/* Popular Tags Grid */
-.tags-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 3rem;
-}
-
-.tag-card {
-  background: var(--background-color);
-  border: 1px solid var(--primary);
-  border-radius: 12px;
-  padding: 1.5rem;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  color: inherit;
-}
-
-.tag-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-  border-color: var(--color);
-  text-decoration: none;
-}
-
-.tag-card:hover * {
-  color: inherit;
-}
-
-.tag-card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-}
-
-.tag-card-name {
-  font-size: 1.3rem;
-  font-weight: bold;
-  color: var(--color);
-  margin: 0;
-}
-
-.tag-card-count {
-  color: #ffffff;
-  padding: 0.3rem 0.6rem;
-  border-radius: 12px;
-  font-size: 0.85rem;
-  font-weight: bold;
-}
-
-.tag-card-authors {
-  font-size: 0.9rem;
-  color: var(--muted-color);
-  margin-bottom: 1rem;
-}
-
-.tag-card-preview {
-  font-size: 0.85rem;
-  line-height: 1.5;
-  color: var(--color);
-  opacity: 0.8;
-}
-
 /* Archive Section Styles */
 .archive-section {
-  border-top: 2px solid var(--primary);
-  padding-top: 3rem;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 3rem;
+  margin-bottom: 4rem;
 }
 
 .filters-section {
@@ -233,7 +114,7 @@ const pagination = {
   margin-bottom: 2rem;
 }
 
-.filters-header h2 {
+.filters-header h3 {
   font-size: 1.5rem;
   margin: 0 0 0.5rem 0;
   color: var(--color);
@@ -272,7 +153,7 @@ const pagination = {
   text-align: center;
 }
 
-.filter-group h3 {
+.filter-group h4 {
   font-size: 1.1rem;
   margin: 0 0 1rem 0;
   color: var(--color);
@@ -423,6 +304,126 @@ const pagination = {
   font-size: 0.9rem;
 }
 
+/* Tag Cloud Styles with Individual Colors */
+.tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 2rem;
+  background: var(--background-color);
+  border: 2px solid var(--primary);
+  border-radius: 12px;
+  min-height: 200px;
+}
+
+.tag-cloud-item {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid transparent;
+}
+
+.tag-cloud-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.tag-cloud-item:hover::before {
+  left: 100%;
+}
+
+.tag-cloud-item:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  z-index: 10;
+  border-color: rgba(255,255,255,0.3);
+}
+
+/* Size classes for tag cloud */
+.tag-cloud-item.size-xs { font-size: 0.8rem; opacity: 0.8; }
+.tag-cloud-item.size-sm { font-size: 0.9rem; opacity: 0.85; }
+.tag-cloud-item.size-md { font-size: 1rem; opacity: 0.9; }
+.tag-cloud-item.size-lg { font-size: 1.2rem; opacity: 0.95; }
+.tag-cloud-item.size-xl { font-size: 1.4rem; opacity: 1; font-weight: bold; }
+
+/* Popular Tags Grid */
+.tags-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.tag-card {
+  background: var(--background-color);
+  border: 1px solid var(--primary);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.tag-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  border-color: var(--color);
+  text-decoration: none;
+}
+
+.tag-card:hover * {
+  color: inherit;
+}
+
+.tag-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.tag-card-name {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--color);
+  margin: 0;
+}
+
+.tag-card-count {
+  color: #ffffff;
+  padding: 0.3rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.tag-card-authors {
+  font-size: 0.9rem;
+  color: var(--muted-color);
+  margin-bottom: 1rem;
+}
+
+.tag-card-preview {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--color);
+  opacity: 0.8;
+}
+
 @media (max-width: 768px) {
   .explore-page {
     padding: 1rem;
@@ -497,6 +498,111 @@ const pagination = {
     </div>
   </div>
 
+  <!-- Archive Section -->
+  <div class="section archive-section">
+    <h2 class="section-title">📚 Blog Archive</h2>
+
+    <div class="filters-section">
+      <div class="filters-header">
+        <h3>Filter & Search Posts</h3>
+        <p style="margin: 0; color: var(--muted-color); font-size: 0.95rem;">
+          Find exactly what you're looking for
+        </p>
+      </div>
+
+      <div class="search-filter">
+        <input type="text" id="post-search" class="search-input"
+               placeholder="🔍 Search posts by title, content, or author...">
+      </div>
+
+      <div class="filter-options">
+        <div class="filter-group">
+          <h4>📅 Filter by Tag</h4>
+          <div class="filter-tags" id="filter-tags">
+            <button class="filter-tag active" data-tag="all">All Posts</button>
+            {% for tagInfo in tagStats | head(15) %}
+              {% set tagDesc = tagDescriptions.tags[tagInfo.tag] %}
+              <button class="filter-tag" data-tag="{{ tagInfo.tag }}">
+                {% if tagDesc and tagDesc.icon %}{{ tagDesc.icon }} {% endif %}{{ tagInfo.tag }} ({{ tagInfo.count }})
+              </button>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h4>🔄 Sort Posts</h4>
+          <div class="sort-options">
+            <button class="sort-option active" data-sort="date-desc">Newest First</button>
+            <button class="sort-option" data-sort="date-asc">Oldest First</button>
+            <button class="sort-option" data-sort="title-asc">A-Z</button>
+            <button class="sort-option" data-sort="author-asc">By Author</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="posts-section">
+      <div class="posts-header">
+        <div class="posts-count" id="posts-count">
+          Showing {{ posts.length }} of {{ totalPosts }} posts
+        </div>
+      </div>
+
+      <div class="posts-grid" id="posts-grid">
+        {% for post in posts %}
+          <a href="{{ post.url }}" class="post-card" data-tags="{{ post.data.tags | join(',') }}"
+             data-author="{{ post.data.author }}" data-date="{{ post.date | date('YYYY-MM-DD') }}">
+            <div class="post-card-header">
+              <h3 class="post-card-title">
+                {{ post.data.title }}
+              </h3>
+              <div class="post-card-meta">
+                by {{ authors[post.data.author].name }} •
+                {{ post.date | date("MMM DD, YYYY") }} •
+                {{ post.data.wordCount if post.data.wordCount else (post.templateContent | striptags | wordcount) }} words
+              </div>
+            </div>
+
+            {% if post.data.description %}
+              <p class="post-card-description">
+                {{ post.data.description | striptags | truncate(150) }}
+              </p>
+            {% endif %}
+
+            {% if post.data.tags %}
+              <div class="post-card-tags">
+                {% for tag in post.data.tags | head(4) %}
+                  {% set tagDesc = tagDescriptions.tags[tag] %}
+                  {% set tagColor = tagDesc.color if tagDesc and tagDesc.color else '#6c757d' %}
+                  <span class="post-card-tag" style="background-color: {{ tagColor }};">
+                    {% if tagDesc and tagDesc.icon %}{{ tagDesc.icon }} {% endif %}{{ tag }}
+                  </span>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </a>
+        {% endfor %}
+      </div>
+
+      <!-- Pagination -->
+      {% if pagination.href.previous or pagination.href.next %}
+        <nav class="pagination">
+          {% if pagination.href.previous %}
+            <a href="{{ pagination.href.previous }}" class="pagination-link">← Previous</a>
+          {% endif %}
+
+          <span class="pagination-info">
+            Page {{ pagination.pageNumber + 1 }} of {{ pagination.hrefs.length }}
+          </span>
+
+          {% if pagination.href.next %}
+            <a href="{{ pagination.href.next }}" class="pagination-link">Next →</a>
+          {% endif %}
+        </nav>
+      {% endif %}
+    </div>
+  </div>
+
   <!-- Tag Cloud Section -->
   <div class="section tag-cloud-section">
     <h2 class="section-title">🏷️ Tag Cloud</h2>
@@ -556,111 +662,6 @@ const pagination = {
           {% endif %}
         </a>
       {% endfor %}
-    </div>
-  </div>
-
-  <!-- Archive Section -->
-  <div class="section archive-section">
-    <h2 class="section-title">📚 Blog Archive</h2>
-
-    <div class="filters-section">
-      <div class="filters-header">
-        <h3>Filter & Search Posts</h3>
-        <p style="margin: 0; color: var(--muted-color); font-size: 0.95rem;">
-          Find exactly what you're looking for
-        </p>
-      </div>
-
-      <div class="search-filter">
-        <input type="text" id="post-search" class="search-input"
-               placeholder="🔍 Search posts by title, content, or author...">
-      </div>
-
-      <div class="filter-options">
-        <div class="filter-group">
-          <h3>📅 Filter by Tag</h3>
-          <div class="filter-tags" id="filter-tags">
-            <button class="filter-tag active" data-tag="all">All Posts</button>
-            {% for tagInfo in tagStats | head(15) %}
-              {% set tagDesc = tagDescriptions.tags[tagInfo.tag] %}
-              <button class="filter-tag" data-tag="{{ tagInfo.tag }}">
-                {% if tagDesc and tagDesc.icon %}{{ tagDesc.icon }} {% endif %}{{ tagInfo.tag }} ({{ tagInfo.count }})
-              </button>
-            {% endfor %}
-          </div>
-        </div>
-
-        <div class="filter-group">
-          <h3>🔄 Sort Posts</h3>
-          <div class="sort-options">
-            <button class="sort-option active" data-sort="date-desc">Newest First</button>
-            <button class="sort-option" data-sort="date-asc">Oldest First</button>
-            <button class="sort-option" data-sort="title-asc">A-Z</button>
-            <button class="sort-option" data-sort="author-asc">By Author</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="posts-section">
-      <div class="posts-header">
-        <div class="posts-count" id="posts-count">
-          Showing {{ posts.length }} of {{ totalPosts }} posts
-        </div>
-      </div>
-
-      <div class="posts-grid" id="posts-grid">
-        {% for post in posts %}
-          <article class="post-card" data-tags="{{ post.data.tags | join(',') }}"
-                   data-author="{{ post.data.author }}" data-date="{{ post.date | date('YYYY-MM-DD') }}">
-            <div class="post-card-header">
-              <h3 class="post-card-title">
-                {{ post.data.title }}
-              </h3>
-              <div class="post-card-meta">
-                by {{ authors[post.data.author].name }} •
-                {{ post.date | date("MMM DD, YYYY") }} •
-                {{ post.data.wordCount if post.data.wordCount else (post.templateContent | striptags | wordcount) }} words
-              </div>
-            </div>
-
-            {% if post.data.description %}
-              <p class="post-card-description">
-                {{ post.data.description | striptags | truncate(150) }}
-              </p>
-            {% endif %}
-
-            {% if post.data.tags %}
-              <div class="post-card-tags">
-                {% for tag in post.data.tags | head(4) %}
-                  {% set tagDesc = tagDescriptions.tags[tag] %}
-                  {% set tagColor = tagDesc.color if tagDesc and tagDesc.color else '#6c757d' %}
-                  <span class="post-card-tag" style="background-color: {{ tagColor }};">
-                    {% if tagDesc and tagDesc.icon %}{{ tagDesc.icon }} {% endif %}{{ tag }}
-                  </span>
-                {% endfor %}
-              </div>
-            {% endif %}
-          </article>
-        {% endfor %}
-      </div>
-
-      <!-- Pagination -->
-      {% if pagination.href.previous or pagination.href.next %}
-        <nav class="pagination">
-          {% if pagination.href.previous %}
-            <a href="{{ pagination.href.previous }}" class="pagination-link">← Previous</a>
-          {% endif %}
-
-          <span class="pagination-info">
-            Page {{ pagination.pageNumber + 1 }} of {{ pagination.hrefs.length }}
-          </span>
-
-          {% if pagination.href.next %}
-            <a href="{{ pagination.href.next }}" class="pagination-link">Next →</a>
-          {% endif %}
-        </nav>
-      {% endif %}
     </div>
   </div>
 </div>
