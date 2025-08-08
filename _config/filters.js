@@ -202,6 +202,12 @@ export default function (eleventyConfig) {
 		});
 	});
 
+	// Split string into array
+	eleventyConfig.addFilter("split", (str, delimiter = " ") => {
+		if (!str || typeof str !== "string") return [];
+		return str.split(delimiter);
+	});
+
 	// Get unique authors from a list of posts
 	eleventyConfig.addFilter("getUniqueAuthors", (posts) => {
 		if (!posts || !Array.isArray(posts)) return [];

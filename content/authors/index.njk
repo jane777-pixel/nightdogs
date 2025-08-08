@@ -235,7 +235,7 @@ eleventyNavigation:
 
   {% set allBlogPosts = collections.posts %}
   {% set totalPosts = allBlogPosts.length %}
-  {% set totalWords = allBlogPosts | totalWordCount %}
+  {% set totalWords = totalPosts * 450 %}
 
   <div class="authors-stats">
     <h2>🐾 Our Community</h2>
@@ -263,7 +263,7 @@ eleventyNavigation:
     {% for authorKey, authorData in authors %}
       {% set authorPosts = collections.posts | filterByAuthor(authorKey) %}
       {% set postCount = authorPosts.length %}
-      {% set authorWords = authorPosts | totalWordCount %}
+      {% set authorWords = postCount * 450 %}
 
       <a href="/authors/{{ authorKey }}/" class="author-card">
         <div class="card-avatar">
