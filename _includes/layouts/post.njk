@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		<span>Tags:</span>
 		{%- for tag in uniqueTags %}
 			{% if tag == "posts" %}
-				<a href="/blog/" class="post-tag">posts</a>{% if not loop.last %}, {% endif %}
+				<a href="/explore/" class="post-tag">posts</a>{% if not loop.last %}, {% endif %}
 			{% else %}
 				<a href="/tags/{{ tag | slugify }}/" class="post-tag">{{ tag }}</a>{% if not loop.last %}, {% endif %}
 			{% endif %}

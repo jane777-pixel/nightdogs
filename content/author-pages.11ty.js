@@ -1,28 +1,32 @@
 export default class AuthorPages {
-  data() {
-    return {
-      layout: "layouts/base.njk",
-      pagination: {
-        data: "authors",
-        size: 1,
-        alias: "authorKey"
-      },
-      permalink: data => `/authors/${data.authorKey}/`,
-      eleventyComputed: {
-        title: data => `${data.authors[data.authorKey].name} - Author Profile`,
-        description: data => `Posts and profile for ${data.authors[data.authorKey].name}`
-      }
-    };
-  }
+	data() {
+		return {
+			layout: "layouts/base.njk",
+			pagination: {
+				data: "authors",
+				size: 1,
+				alias: "authorKey",
+			},
+			permalink: (data) => `/authors/${data.authorKey}/`,
+			eleventyComputed: {
+				title: (data) =>
+					`${data.authors[data.authorKey].name} - Author Profile`,
+				description: (data) =>
+					`Posts and profile for ${data.authors[data.authorKey].name}`,
+			},
+		};
+	}
 
-  render(data) {
-    const { authorKey, authors, collections } = data;
-    const authorInfo = authors[authorKey];
-    const authorPosts = collections.posts.filter(post => post.data.author === authorKey);
-    const totalWords = authorPosts.length * 450;
-    const totalReadingTime = Math.round(totalWords / 200);
+	render(data) {
+		const { authorKey, authors, collections } = data;
+		const authorInfo = authors[authorKey];
+		const authorPosts = collections.posts.filter(
+			(post) => post.data.author === authorKey,
+		);
+		const totalWords = authorPosts.length * 450;
+		const totalReadingTime = Math.round(totalWords / 200);
 
-    return `
+		return `
 <style>
 .author-profile {
   max-width: 1000px;
@@ -332,8 +336,8 @@ export default class AuthorPages {
       ${authorInfo.name.charAt(0).toUpperCase()}
     </div>
     <h1 class="author-name">${authorInfo.name}</h1>
-    ${authorInfo.title ? `<p class="author-title">${authorInfo.title}</p>` : ''}
-    ${authorInfo.bio ? `<div class="author-bio">${authorInfo.bio}</div>` : ''}
+    ${authorInfo.title ? `<p class="author-title">${authorInfo.title}</p>` : ""}
+    ${authorInfo.bio ? `<div class="author-bio">${authorInfo.bio}</div>` : ""}
 
     <div class="author-stats">
       <div class="author-stat">
@@ -355,17 +359,21 @@ export default class AuthorPages {
     </div>
   </div>
 
-  ${authorPosts.length > 0 ? `
+  ${
+		authorPosts.length > 0
+			? `
     <div class="posts-section">
       <div class="section-header">
         <h2 class="section-title">
-          ${authorPosts.length === 1 ? 'Latest Post' : `Posts by ${authorInfo.name}`}
+          ${authorPosts.length === 1 ? "Latest Post" : `Posts by ${authorInfo.name}`}
         </h2>
         <span class="posts-count">${authorPosts.length}</span>
       </div>
 
       <div class="posts-grid">
-        ${authorPosts.map(post => `
+        ${authorPosts
+					.map(
+						(post) => `
           <a href="${post.url}" class="post-card">
             <h3 class="post-title">${post.data.title}</h3>
 
@@ -382,31 +390,46 @@ export default class AuthorPages {
               </span>
             </div>
 
-            ${post.data.tags ? `
+            ${
+							post.data.tags
+								? `
               <div class="post-tags">
-                ${this.filterTagList(post.data.tags).slice(0, 4).map(tag =>
-                  `<span class="post-tag">#${tag}</span>`
-                ).join('')}
-                ${this.filterTagList(post.data.tags).length > 4 ?
-                  `<span class="post-tag">+${this.filterTagList(post.data.tags).length - 4} more</span>` : ''
-                }
+                ${this.filterTagList(post.data.tags)
+									.slice(0, 4)
+									.map((tag) => `<span class="post-tag">#${tag}</span>`)
+									.join("")}
+                ${
+									this.filterTagList(post.data.tags).length > 4
+										? `<span class="post-tag">+${this.filterTagList(post.data.tags).length - 4} more</span>`
+										: ""
+								}
               </div>
-            ` : ''}
+            `
+								: ""
+						}
 
-            ${post.data.description ? `
+            ${
+							post.data.description
+								? `
               <p class="post-excerpt">${this.truncate(this.stripTags(post.data.description), 120)}</p>
-            ` : ''}
+            `
+								: ""
+						}
           </a>
-        `).join('')}
+        `,
+					)
+					.join("")}
       </div>
     </div>
-  ` : `
+  `
+			: `
     <div class="empty-state">
       <div class="empty-state-icon">✍️</div>
       <h2>No posts yet</h2>
       <p>${authorInfo.name} hasn't published any posts yet, but stay tuned!</p>
     </div>
-  `}
+  `
+	}
 
   <div class="author-navigation">
     <h3 class="nav-title">Explore More Authors</h3>
@@ -414,11 +437,8 @@ export default class AuthorPages {
       <a href="/authors/" class="author-link">
         👥 All Authors
       </a>
-      <a href="/blog/" class="author-link">
-        📝 All Posts
-      </a>
-      <a href="/tags/" class="author-link">
-        🏷️ Browse Tags
+      <a href="/explore/" class="author-link">
+        🔍 Explore All Content
       </a>
     </div>
   </div>
@@ -450,49 +470,49 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
     `;
-  }
+	}
 
-  // Helper methods
-  filterTagList(tags) {
-    return (tags || []).filter(tag => !['all', 'posts'].includes(tag));
-  }
+	// Helper methods
+	filterTagList(tags) {
+		return (tags || []).filter((tag) => !["all", "posts"].includes(tag));
+	}
 
-  getAuthorTags(posts) {
-    const allTags = new Set();
-    const excludeTags = new Set(['posts', 'blog', 'all']);
+	getAuthorTags(posts) {
+		const allTags = new Set();
+		const excludeTags = new Set(["posts", "blog", "all"]);
 
-    posts.forEach(post => {
-      const tags = post.data.tags || [];
-      tags.forEach(tag => {
-        if (!excludeTags.has(tag)) {
-          allTags.add(tag);
-        }
-      });
-    });
+		posts.forEach((post) => {
+			const tags = post.data.tags || [];
+			tags.forEach((tag) => {
+				if (!excludeTags.has(tag)) {
+					allTags.add(tag);
+				}
+			});
+		});
 
-    return Array.from(allTags).sort();
-  }
+		return Array.from(allTags).sort();
+	}
 
-  formatDateString(date) {
-    return new Date(date).toISOString().split('T')[0];
-  }
+	formatDateString(date) {
+		return new Date(date).toISOString().split("T")[0];
+	}
 
-  formatReadableDate(date) {
-    return new Date(date).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-  }
+	formatReadableDate(date) {
+		return new Date(date).toLocaleDateString("en-US", {
+			year: "numeric",
+			month: "long",
+			day: "numeric",
+		});
+	}
 
-  stripTags(content) {
-    if (!content || typeof content !== 'string') return '';
-    return content.replace(/<[^>]*>/g, '');
-  }
+	stripTags(content) {
+		if (!content || typeof content !== "string") return "";
+		return content.replace(/<[^>]*>/g, "");
+	}
 
-  truncate(text, length = 100) {
-    if (!text || typeof text !== 'string') return '';
-    if (text.length <= length) return text;
-    return text.substring(0, length).trim() + '...';
-  }
+	truncate(text, length = 100) {
+		if (!text || typeof text !== "string") return "";
+		if (text.length <= length) return text;
+		return text.substring(0, length).trim() + "...";
+	}
 }
