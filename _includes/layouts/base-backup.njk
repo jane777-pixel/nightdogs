@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="{{ metadata.language }}"{% if author %} data-author="{{ author }}"{% endif %}>
+	<head>
+ <script eleventy:ignore>
+        // Initial theme setup to prevent FOUC
+        (function () {
+          const THEME_KEY = "author-theme";
+          const DEFAULT_THEME = "jane";
+          const VALID_AUTHORS = ["jane", "orionlw", "adesse", "nic", "amelia", "abby", "ewan"];
+
+          // Only set if not already set by server-side rendering
+          if (document.documentElement.dataset.author) return;
+
+          try {
+            const savedTheme = localStorage.getItem(THEME_KEY);
+            const theme = (savedTheme && VALID_AUTHORS.includes(savedTheme)) ? savedTheme : DEFAULT_THEME;
+            document.documentElement.setAttribute("data-author", theme);
+          } catch (e) {
+            document.documentElement.setAttribute("data-author", DEFAULT_THEME);
+          }
+        })();
+        </script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title or metadata.title }}</title>
+    <meta name="description" content="{{ description or metadata.description }}">
+    <link rel="canonical" href="{{ page.url | absoluteUrl(metadata.url) }}">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="{% if layout == 'layouts/post.njk' %}article{% else %}website{% endif %}">
+    <meta property="og:url" content="{{ page.url | absoluteUrl(metadata.url) }}">
+    <meta property="og:title" content="{{ title or metadata.title }}">
+    <meta property="og:description" content="{{ description or metadata.description }}">
+    <meta property="og:site_name" content="{{ metadata.title }}">
+    {% if image %}
+    <meta property="og:image" content="{{ image | contentImgUrlFilter | absoluteUrl(metadata.url) }}">
+    <meta property="og:image:alt" content="{{ title or metadata.title }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    {% else %}
+    <meta property="og:image" content="{{ '/img/nightdogs-og-default.png' | absoluteUrl(metadata.url) }}">
+    <meta property="og:image:alt" content="nightdogs - A multi-author blog">
+    {% endif %}
+    {% if layout == 'layouts/post.njk' %}
+    <meta property="article:author" content="{{ authors[author].name }}">
+    <meta property="article:published_time" content="{{ date | dateToIso }}">
+    {% for tag in tags %}
+    {% if tag != 'posts' %}<meta property="article:tag" content="{{ tag }}">{% endif %}
+    {% endfor %}
+    {% endif %}
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="{% if image %}summary_large_image{% else %}summary{% endif %}">
+    <meta name="twitter:url" content="{{ page.url | absoluteUrl(metadata.url) }}">
+    <meta name="twitter:title" content="{{ title or metadata.title }}">
+    <meta name="twitter:description" content="{{ description or metadata.description }}">
+    {% if image %}
+    <meta name="twitter:image" content="{{ image | contentImgUrlFilter | absoluteUrl(metadata.url) }}">
+    <meta name="twitter:image:alt" content="{{ title or metadata.title }}">
+    {% else %}
+    <meta name="twitter:image" content="{{ '/img/nightdogs-twitter-card.png' | absoluteUrl(metadata.url) }}">
+    <meta name="twitter:image:alt" content="nightdogs blog">
+    {% endif %}
+
+    <!-- Additional SEO Meta Tags -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="{% if author %}{{ authors[author].name }}{% else %}nightdogs contributors{% endif %}">
+    {% if layout == 'layouts/post.njk' and tags %}
+    <meta name="keywords" content="{{ tags | reject('equalto', 'posts') | join(', ') }}">
+    {% endif %}
+    <meta name="generator" content="Eleventy v{{ eleventy.version }}">
+    <meta name="theme-color" content="#b8002e" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#ffb3c6" media="(prefers-color-scheme: dark)">
+
+    <!-- Feeds -->
+    <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="{{ metadata.title }} - Atom Feed">
+    <link rel="alternate" href="/feed/feed.json" type="application/json" title="{{ metadata.title }} - JSON Feed">
+
+    <!-- DNS prefetch for performance -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//webmention.io">
+
+        <!-- Web App Manifest -->
+        <link rel="manifest" href="/manifest.json">
+
+        <!-- Apple Touch Icons -->
+        <link rel="apple-touch-icon" sizes="180x180" href="/img/icon-180.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="/img/icon-152.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="/img/icon-144.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="/img/icon-120.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/img/icon-114.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="/img/icon-76.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/img/icon-72.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="/img/icon-60.png">
+        <link rel="apple-touch-icon" sizes="57x57" href="/img/icon-57.png">
+
+        <!-- Apple Web App Meta Tags -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="default">
+        <meta name="apple-mobile-web-app-title" content="nightdogs">
+
+        <!-- Microsoft Tiles -->
+        <meta name="msapplication-TileColor" content="#b8002e">
+        <meta name="msapplication-TileImage" content="/img/icon-144.png">
+        <meta name="msapplication-config" content="/browserconfig.xml">
+
+        <!-- Load local fonts as a separate stylesheet -->
+        <link rel="stylesheet" href="/css/fonts.css">
+
+
+
+		{#- CSS styles for nightdogs functionality #}
+		<script eleventy:ignore>
+  window.AUTHORS_DOG_PERSON = {
+    {% for key, author in authors %}
+      "{{ key }}": {{ author.isDogPerson | default(false) | dump }}{% if not loop.last %},{% endif %}
+    {% endfor %}
+  };
+</script>
+
+		{% css %}
+
+/* Simple button styles for search and dark mode */
+.search-trigger {
+	background: none;
+	border: none;
+	color: var(--color);
+	cursor: pointer;
+	padding: 0.5rem;
+	border-radius: 4px;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.25rem;
+	font-size: 0.9rem;
+	text-decoration: none;
+}
+
+.search-trigger:hover,
+.search-trigger:focus {
+	background-color: var(--primary);
+	color: var(--background-color);
+}
+
+{# --- 2. Root and author variables (before any CSS uses them) --- #}
+	:root {
+  	--font-family: "Bitcount Grid Single", "Segoe UI", "Roboto", "Helvetica Neue", Arial, "Liberation Sans", sans-serif;
+   	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+    --syntax-tab-size: 2;
+  --background-color: #ffd6e0;
+  --color: #8b0020;
+  --primary: #b8002e;
+  --muted-color: #6d0015;
+  {%- for author, data in authors | dictsort %}
+    /* Author: {{ author }} - Light theme */
+    --author-{{ author }}-background-light: {{ data.theme.light.background }};
+    --author-{{ author }}-color-light: {{ data.theme.light.color }};
+    --author-{{ author }}-primary-light: {{ data.theme.light.primary }};
+    --author-{{ author }}-muted-light: {{ data.theme.light.muted }};
+    /* Author: {{ author }} - Dark theme */
+    --author-{{ author }}-background-dark: {{ data.theme.dark.background }};
+    --author-{{ author }}-color-dark: {{ data.theme.dark.color }};
+    --author-{{ author }}-primary-dark: {{ data.theme.dark.primary }};
+    --author-{{ author }}-muted-dark: {{ data.theme.dark.muted }};
+    /* Author: {{ author }} - Fonts */
+    --author-{{ author }}-font-body: {{ data.theme.fonts.body|default('inherit')|safe }};
+    --author-{{ author }}-font-header: {{ data.theme.fonts.header|default('inherit')|safe }};
+    {%- if data.theme.fonts.mono %}
+    --author-{{ author }}-font-mono: {{ data.theme.fonts.mono|safe }};
+    {%- endif %}
+  {%- endfor %}
+}
+
+/* Default light theme variables */
+{%- for author, data in authors | dictsort %}
+[data-author="{{ author }}"] {
+  --background-color: var(--author-{{ author }}-background-light);
+  --color: var(--author-{{ author }}-color-light);
+  --primary: var(--author-{{ author }}-primary-light);
+  --muted-color: var(--author-{{ author }}-muted-light);
+  --font-family: var(--author-{{ author }}-font-body);
+}
+{%- endfor %}
+
+/* Dark theme overrides */
+{%- for author, data in authors | dictsort %}
+[data-author="{{ author }}"][data-theme="dark"] {
+  --background-color: var(--author-{{ author }}-background-dark);
+  --color: var(--author-{{ author }}-color-dark);
+  --primary: var(--author-{{ author }}-primary-dark);
+  --muted-color: var(--author-{{ author }}-muted-dark);
+}
+{%- endfor %}
+
+/* System dark mode preference */
+@media (prefers-color-scheme: dark) {
+  {%- for author, data in authors | dictsort %}
+  [data-author="{{ author }}"]:not([data-theme]) {
+    --background-color: var(--author-{{ author }}-background-dark);
+    --color: var(--author-{{ author }}-color-dark);
+    --primary: var(--author-{{ author }}-primary-dark);
+    --muted-color: var(--author-{{ author }}-muted-dark);
+  }
+  {%- endfor %}
+}
+
+{# --- 3. Pico and your main CSS (these will now use the variables above) --- #}
+{% include "css/index.css" %}
+{% endcss %}
+
+
+		{#- Add the heading-anchors web component to the JavaScript bundle #}
+		<script type="module">{% include "node_modules/@zachleat/heading-anchors/heading-anchors.js" %}</script>
+
+        <!-- IndieAuth endpoints -->
+        <link rel="authorization_endpoint" href="https://indieauth.com/auth">
+        <link rel="token_endpoint" href="https://tokens.indieauth.com/token">
+
+        <!-- Identity verification -->
+        <link rel="me" href="https://github.com/jane777-pixel">
+        <link rel="me" href="mailto:haileebach@gmail.com">
+		<link rel="me" href="mailto:orionlw@pm.me">
+		<link rel="me" href="https://github.com/orionlw">
+
+        <!-- Webmention endpoints -->
+        <link rel="webmention" href="https://webmention.io/nightdogs.xyz/webmention">
+        <link rel="pingback" href="https://webmention.io/nightdogs.xyz/xmlrpc">
+    </head>
+    <body class="h-card" {% if layout == "layouts/post.njk" %}data-is-post="true"{% endif %}>
+        <div class="site-wrapper">
+        <a href="#main" id="skip-link" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link p-name u-url">nightdogs</a>
+
+			{#- Read more about `eleventy-navigation` at https://www.11ty.dev/docs/plugins/navigation/ #}
+			<nav>
+				<h2 class="visually-hidden">Top level navigation menu</h2>
+				<ul class="nav">
+				{%- for entry in collections.all | eleventyNavigation %}
+					<li class="nav-item"><a href="{{ entry.url }}"{% if entry.url == page.url %} aria-current="page"{% endif %}>{{ entry.title }}</a></li>
+				{%- endfor %}
+					<li class="nav-item">
+						<button id="dark-mode-toggle" class="search-trigger" aria-label="Toggle dark mode">
+							<span aria-hidden="true">🌙</span>
+							<span class="search-text">Dark</span>
+						</button>
+					</li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="main" class="main-content">
+			<heading-anchors>
+				{{ content | safe }}
+			</heading-anchors>
+		</main>
+
+		<footer class="p-note footer-site">
+  <p>
+    <em>Built with <a href="https://www.11ty.dev/">Eleventy v3.1.2</a></em>
+  </p>
+  <div style="display:flex;align-items:center;justify-content:flex-end;margin-top:0.5em;">
+    <div class="author-theme-selector" style="display:flex;align-items:center;gap:0.25em;font-size:0.92em;opacity:0.7;">
+      <span style="font-size:1em;opacity:0.5;" aria-hidden="true">🎨</span>
+      <select id="author-select" class="author-sync" name="author-select" style="min-width:6em;font-size:0.92em;padding:0.1em 0.7em;border-radius:0.7em;">
+        <option value="jane">Jane</option>
+        <option value="orionlw">Orion</option>
+        <option value="adesse">Adèsse</option>
+        <option value="nic">Nic</option>
+        <option value="amelia">Amelia</option>
+        <option value="abby">Abby</option>
+        <option value="ewan">Ewan</option>
+      </select>
+    </div>
+  </div>
+</footer>
+        </div>
+		<!-- This page `{{ page.url }}` was built on {% currentBuildDate %} -->
+		<!-- Simplified functionality scripts -->
+        <script eleventy:ignore>
+        // Simplified author theme functionality
+        document.addEventListener('DOMContentLoaded', function() {
+          console.log('Initializing nightdogs functionality...');
+
+          const VALID_AUTHORS = ['jane', 'orionlw', 'adesse', 'nic', 'amelia', 'abby', 'ewan'];
+          const authorSelectors = document.querySelectorAll('.author-sync');
+          const darkModeToggle = document.getElementById('dark-mode-toggle');
+          const html = document.documentElement;
+          const body = document.body;
+
+          console.log('Found', authorSelectors.length, 'author selectors');
+          console.log('Dark mode toggle exists:', !!darkModeToggle);
+
+          // Author theme functions
+          function setAuthorTheme(author) {
+            if (!VALID_AUTHORS.includes(author)) {
+              author = 'jane';
+            }
+
+            console.log('Setting author theme to:', author);
+
+            // Update all elements
+            html.setAttribute('data-author', author);
+            body.setAttribute('data-author', author);
+
+            // Update selectors
+            authorSelectors.forEach(function(sel) {
+              if (sel.value !== author) {
+                sel.value = author;
+              }
+            });
+
+            // Save to localStorage
+            try {
+              localStorage.setItem('author-theme', author);
+            } catch(e) {
+              console.warn('Could not save author theme:', e);
+            }
+
+            // Trigger filtering if available
+            if (typeof filterPosts === 'function') {
+              filterPosts();
+            }
+          }
+
+          // Dark mode functions
+          let isDarkMode = false;
+
+          function updateDarkModeButton() {
+            if (!darkModeToggle) return;
+
+            const icon = darkModeToggle.querySelector('[aria-hidden="true"]');
+            const text = darkModeToggle.querySelector('.search-text');
+
+            if (isDarkMode) {
+              if (icon) icon.textContent = '☀️';
+              if (text) text.textContent = 'Light';
+            } else {
+              if (icon) icon.textContent = '🌙';
+              if (text) text.textContent = 'Dark';
+            }
+          }
+
+          function applyDarkMode() {
+            console.log('Applying dark mode:', isDarkMode);
+
+            if (isDarkMode) {
+              html.setAttribute('data-theme', 'dark');
+              body.setAttribute('data-theme', 'dark');
+            } else {
+              html.removeAttribute('data-theme');
+              body.removeAttribute('data-theme');
+            }
+
+            updateDarkModeButton();
+
+            try {
+              localStorage.setItem('nightdogs-dark-mode', isDarkMode);
+            } catch(e) {
+              console.warn('Could not save dark mode:', e);
+            }
+          }
+
+          function toggleDarkMode() {
+            isDarkMode = !isDarkMode;
+            applyDarkMode();
+          }
+
+          // Initialize author theme
+          let initialAuthor = html.getAttribute('data-author') || 'jane';
+          try {
+            const saved = localStorage.getItem('author-theme');
+            if (saved && VALID_AUTHORS.includes(saved)) {
+              initialAuthor = saved;
+            }
+          } catch(e) {
+            console.warn('Could not load author theme:', e);
+          }
+
+          setAuthorTheme(initialAuthor);
+
+          // Initialize dark mode
+          try {
+            const savedDark = localStorage.getItem('nightdogs-dark-mode');
+            if (savedDark !== null) {
+              isDarkMode = savedDark === 'true';
+            } else if (window.matchMedia) {
+              isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            }
+          } catch(e) {
+            isDarkMode = false;
+          }
+
+          applyDarkMode();
+
+          // Event listeners
+          authorSelectors.forEach(function(sel) {
+            sel.addEventListener('change', function() {
+              setAuthorTheme(this.value);
+            });
+          });
+
+          if (darkModeToggle) {
+            darkModeToggle.addEventListener('click', function(e) {
+              e.preventDefault();
+              toggleDarkMode();
+            });
+          }
+
+          console.log('nightdogs functionality initialized');
+        });
+        </script>
+        <script eleventy:ignore>
+        function updateCatNavText() {
+          const author = document.documentElement.getAttribute('data-author');
+          // Find the nav link for the Cat page (assumes href contains 'cat')
+          const navLinks = document.querySelectorAll('.nav-item a');
+          navLinks.forEach(link => {
+            if (link.getAttribute('href') && link.getAttribute('href').includes('cat')) {
+            link.textContent = window.AUTHORS_DOG_PERSON?.[author] === true ? 'Dog' : 'Cat';
+            }
+          });
+        }
+
+        // Run on page load
+        updateCatNavText();
+
+        // Listen for author changes
+        const navObserver = new MutationObserver(updateCatNavText);
+        navObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-author'] });
+        </script>
+
+    </body>
+</html>

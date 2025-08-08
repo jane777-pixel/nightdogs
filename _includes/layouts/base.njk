@@ -66,6 +66,16 @@ document.documentElement.setAttribute("data-author", DEFAULT_THEME);
     {%- endif %}
   {%- endfor %}
 }
+/* Dark mode support for each author */
+{%- for author, data in authors | dictsort %}
+[data-author="{{ author }}"][data-theme="dark"] {
+  --author-{{ author }}-background: {{ data.theme.dark.background }};
+  --author-{{ author }}-color: {{ data.theme.dark.color }};
+  --author-{{ author }}-primary: {{ data.theme.dark.primary }};
+  --author-{{ author }}-muted: {{ data.theme.dark.muted }};
+}
+{%- endfor %}
+
 @media (prefers-color-scheme: dark) {
   :root {
     {%- for author, data in authors | dictsort %}
@@ -80,6 +90,160 @@ document.documentElement.setAttribute("data-author", DEFAULT_THEME);
 
 {# --- 3. Pico and your main CSS (these will now use the variables above) --- #}
 {% include "css/index.css" %}
+
+/* Search functionality styles */
+.search-overlay {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.8);
+	z-index: 10000;
+	backdrop-filter: blur(4px);
+}
+
+.search-overlay.active {
+	display: flex !important;
+	align-items: flex-start;
+	justify-content: center;
+	padding-top: 10vh;
+}
+
+.search-modal {
+	background: var(--background-color);
+	border: 2px solid var(--primary);
+	border-radius: 8px;
+	width: 90%;
+	max-width: 600px;
+	max-height: 70vh;
+	overflow: hidden;
+	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.search-header {
+	display: flex;
+	align-items: center;
+	padding: 1rem;
+	border-bottom: 1px solid var(--primary);
+}
+
+#search-input {
+	flex: 1;
+	border: none;
+	background: transparent;
+	font-size: 1.2rem;
+	color: var(--color);
+	outline: none;
+	font-family: var(--font-family);
+}
+
+#search-input::placeholder {
+	color: var(--muted-color);
+	opacity: 0.7;
+}
+
+.search-close {
+	background: none;
+	border: none;
+	color: var(--color);
+	cursor: pointer;
+	padding: 0.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 4px;
+}
+
+.search-close:hover {
+	background-color: var(--primary);
+	color: var(--background-color);
+}
+
+.search-results {
+	max-height: 400px;
+	overflow-y: auto;
+	padding: 0;
+}
+
+.search-result {
+	padding: 1rem;
+	border-bottom: 1px solid var(--muted-color);
+	cursor: pointer;
+	transition: background-color 0.2s ease;
+}
+
+.search-result:hover {
+	background-color: var(--primary);
+	color: var(--background-color);
+}
+
+.search-result:hover * {
+	color: inherit;
+}
+
+.result-title {
+	margin: 0 0 0.5rem 0;
+	font-size: 1.1rem;
+	font-family: var(--font-family);
+}
+
+.result-title a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.result-meta {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+	font-size: 0.85rem;
+	opacity: 0.8;
+	margin-bottom: 0.5rem;
+}
+
+.search-footer {
+	padding: 0.75rem 1rem;
+	background: var(--muted-color);
+	color: var(--background-color);
+	font-size: 0.8rem;
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+}
+
+.search-footer kbd {
+	background: rgba(255, 255, 255, 0.2);
+	padding: 0.2rem 0.4rem;
+	border-radius: 3px;
+	font-family: monospace;
+	font-size: 0.75rem;
+}
+
+.no-results {
+	padding: 2rem;
+	text-align: center;
+	opacity: 0.7;
+}
+
+.search-overlay mark {
+	background: var(--primary);
+	color: var(--background-color);
+	padding: 0.1rem 0.2rem;
+	border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+	.search-modal {
+		width: 95%;
+		max-height: 80vh;
+	}
+	.search-overlay.active {
+		padding-top: 5vh;
+	}
+}
+
 {% endcss %}
 <style>{% getBundle "css" %}</style>
 
@@ -114,6 +278,27 @@ document.documentElement.setAttribute("data-author", DEFAULT_THEME);
 				{%- for entry in collections.all | eleventyNavigation %}
 					<li class="nav-item"><a href="{{ entry.url }}"{% if entry.url == page.url %} aria-current="page"{% endif %}>{{ entry.title }}</a></li>
 				{%- endfor %}
+					<li class="nav-item">
+						<button data-search-trigger style="background:none;border:none;color:var(--color);cursor:pointer;padding:0.5rem;border-radius:4px;" aria-label="Search posts">
+							🔍 Search
+						</button>
+					</li>
+					<li class="nav-item">
+						<div style="display:flex;align-items:center;gap:0.5em;">
+							<button id="dark-mode-toggle" style="background:none;border:none;color:var(--color);cursor:pointer;padding:0.25rem;border-radius:4px;font-size:1.2em;" aria-label="Toggle dark mode">
+								🌙
+							</button>
+							<select id="author-select" class="author-sync" name="author-select" style="background:none;border:1px solid var(--color);color:var(--color);min-width:6em;font-size:0.92em;padding:0.25em 0.5em;border-radius:4px;">
+								<option value="jane">Jane</option>
+								<option value="orionlw">Orion</option>
+								<option value="adesse">Adèsse</option>
+								<option value="nic">Nic</option>
+								<option value="amelia">Amelia</option>
+								<option value="abby">Abby</option>
+								<option value="ewan">Ewan</option>
+							</select>
+						</div>
+					</li>
 				</ul>
 			</nav>
 		</header>
@@ -128,24 +313,41 @@ document.documentElement.setAttribute("data-author", DEFAULT_THEME);
   <p>
     <em>Built with <a href="https://www.11ty.dev/">Eleventy v3.1.2</a></em>
   </p>
-  <div style="display:flex;align-items:center;justify-content:flex-end;margin-top:0.5em;">
-    <div class="author-theme-selector" style="display:flex;align-items:center;gap:0.25em;font-size:0.92em;opacity:0.7;">
-      <span style="font-size:1em;opacity:0.5;" aria-hidden="true">🎨</span>
-      <select id="author-select" class="author-sync" name="author-select" style="min-width:6em;font-size:0.92em;padding:0.1em 0.7em;border-radius:0.7em;">
-        <option value="jane">Jane</option>
-        <option value="orionlw">Orion</option>
-        <option value="adesse">Adèsse</option>
-        <option value="nic">Nic</option>
-        <option value="amelia">Amelia</option>
-        <option value="abby">Abby</option>
-        <option value="ewan">Ewan</option>
-      </select>
-    </div>
-  </div>
 </footer>
         </div>
 		<!-- This page `{{ page.url }}` was built on {% currentBuildDate %} -->
 		<script type="module" src="{% getBundleFileUrl "js" %}"></script>
+
+		<!-- Load search functionality -->
+		<script src="/js/search.js" defer></script>
+
+        <!-- Dark mode functionality -->
+        <script eleventy:ignore>
+        document.addEventListener('DOMContentLoaded', function() {
+          const toggle = document.getElementById('dark-mode-toggle');
+          if (!toggle) return;
+
+          let isDark = false;
+          try {
+            const saved = localStorage.getItem('nightdogs-dark-mode');
+            isDark = saved === 'true' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          } catch(e) {}
+
+          function updateToggle() {
+            toggle.innerHTML = isDark ? '☀️' : '🌙';
+            document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            try { localStorage.setItem('nightdogs-dark-mode', isDark); } catch(e) {}
+          }
+
+          toggle.addEventListener('click', function() {
+            isDark = !isDark;
+            updateToggle();
+          });
+
+          updateToggle();
+        });
+        </script>
+
         <script>
         // Sync all author selectors and theme
         (function() {

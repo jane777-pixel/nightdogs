@@ -1,0 +1,247 @@
+---
+title: Functionality Test Page
+permalink: /test-functionality/
+eleventyExcludeFromCollections: true
+layout: layouts/base.njk
+---
+
+<h1>🧪 Functionality Test Page</h1>
+
+<p>This page is for testing the author selector and dark mode functionality.</p>
+
+<div class="test-sections">
+  <section class="test-section">
+    <h2>Current Theme Status</h2>
+    <div class="theme-debug">
+      <p><strong>HTML data-author:</strong> <span id="current-author">Loading...</span></p>
+      <p><strong>HTML data-theme:</strong> <span id="current-theme">Loading...</span></p>
+      <p><strong>Background Color:</strong> <span id="current-bg">Loading...</span></p>
+      <p><strong>Text Color:</strong> <span id="current-color">Loading...</span></p>
+      <p><strong>Primary Color:</strong> <span id="current-primary">Loading...</span></p>
+    </div>
+  </section>
+
+  <section class="test-section">
+    <h2>Author Selector Test</h2>
+    <p>Use the dropdown in the footer to change themes. Watch the colors change above.</p>
+
+    <div class="author-samples">
+      <div class="author-sample" data-author="jane">
+        <h3>Jane's Theme</h3>
+        <p>This should show Jane's pink theme colors.</p>
+      </div>
+      <div class="author-sample" data-author="orionlw">
+        <h3>Orion's Theme</h3>
+        <p>This should show Orion's brown/tan theme colors.</p>
+      </div>
+      <div class="author-sample" data-author="adesse">
+        <h3>Adèsse's Theme</h3>
+        <p>This should show Adèsse's earthy theme colors.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="test-section">
+    <h2>Dark Mode Test</h2>
+    <p>Click the moon/sun button in the navigation to toggle dark mode.</p>
+
+    <div class="dark-mode-indicator">
+      <p>Current mode: <span id="mode-indicator">Loading...</span></p>
+      <button onclick="testDarkModeToggle()" style="padding: 0.5rem; margin: 0.5rem;">Test Dark Mode Toggle</button>
+    </div>
+  </section>
+
+  <section class="test-section">
+    <h2>Search Test</h2>
+    <p>Click the search button (🔍) in the navigation to test search functionality.</p>
+    <button onclick="testSearch()" style="padding: 0.5rem; margin: 0.5rem;">Test Search</button>
+  </section>
+
+  <section class="test-section">
+    <h2>JavaScript Console</h2>
+    <p>Check the browser console (F12) for debug messages. You should see:</p>
+    <ul>
+      <li>[Author Theme] messages when changing authors</li>
+      <li>[Dark Mode] messages when toggling dark mode</li>
+      <li>[Search] messages when using search</li>
+    </ul>
+    <div id="console-output"></div>
+  </section>
+</div>
+
+<style>
+.test-sections {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.test-section {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border: 2px solid var(--primary);
+  border-radius: 8px;
+  background: rgba(var(--primary), 0.05);
+}
+
+.theme-debug {
+  background: var(--background-color);
+  border: 1px solid var(--muted-color);
+  padding: 1rem;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.9rem;
+}
+
+.theme-debug span {
+  font-weight: bold;
+  color: var(--primary);
+}
+
+.author-samples {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.author-sample {
+  padding: 1rem;
+  border: 1px solid var(--primary);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.dark-mode-indicator {
+  padding: 1rem;
+  background: var(--background-color);
+  border: 1px solid var(--primary);
+  border-radius: 4px;
+  text-align: center;
+}
+
+#mode-indicator {
+  font-weight: bold;
+  color: var(--primary);
+  font-size: 1.2rem;
+}
+
+#console-output {
+  background: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 1rem;
+  font-family: monospace;
+  font-size: 0.8rem;
+  max-height: 200px;
+  overflow-y: auto;
+  color: #333;
+}
+
+[data-theme="dark"] #console-output {
+  background: #2a2a2a;
+  color: #e0e0e0;
+  border-color: #555;
+}
+</style>
+
+<script>
+// Test page functionality
+function updateThemeStatus() {
+  const html = document.documentElement;
+  const body = document.body;
+  const computedStyle = getComputedStyle(html);
+
+  // Update current status
+  document.getElementById('current-author').textContent = html.getAttribute('data-author') || 'none';
+  document.getElementById('current-theme').textContent = html.getAttribute('data-theme') || 'light';
+  document.getElementById('current-bg').textContent = computedStyle.getPropertyValue('--background-color') || 'not set';
+  document.getElementById('current-color').textContent = computedStyle.getPropertyValue('--color') || 'not set';
+  document.getElementById('current-primary').textContent = computedStyle.getPropertyValue('--primary') || 'not set';
+
+  // Update mode indicator
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  document.getElementById('mode-indicator').textContent = isDark ? '🌙 Dark Mode' : '☀️ Light Mode';
+}
+
+function testDarkModeToggle() {
+  const toggle = document.getElementById('dark-mode-toggle');
+  if (toggle) {
+    toggle.click();
+    logToConsole('Manual dark mode toggle test clicked');
+  } else {
+    logToConsole('ERROR: Dark mode toggle not found!');
+  }
+}
+
+function testSearch() {
+  const searchTrigger = document.querySelector('[data-search-trigger]');
+  if (searchTrigger) {
+    searchTrigger.click();
+    logToConsole('Manual search test clicked');
+  } else {
+    logToConsole('ERROR: Search trigger not found!');
+  }
+}
+
+function logToConsole(message) {
+  const output = document.getElementById('console-output');
+  const timestamp = new Date().toLocaleTimeString();
+  const logEntry = document.createElement('div');
+  logEntry.textContent = `[${timestamp}] ${message}`;
+  output.appendChild(logEntry);
+  output.scrollTop = output.scrollHeight;
+
+  // Also log to real console
+  console.log('[Test Page]', message);
+}
+
+// Set up observers to watch for changes
+document.addEventListener('DOMContentLoaded', function() {
+  // Initial status update
+  updateThemeStatus();
+  logToConsole('Test page initialized');
+
+  // Watch for attribute changes
+  const observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      if (mutation.type === 'attributes') {
+        updateThemeStatus();
+        logToConsole(`Attribute changed: ${mutation.attributeName} = ${mutation.target.getAttribute(mutation.attributeName)}`);
+      }
+    });
+  });
+
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['data-author', 'data-theme']
+  });
+
+  observer.observe(document.body, {
+    attributes: true,
+    attributeFilter: ['data-author', 'data-theme']
+  });
+
+  // Test both selectors exist
+  const authorSelect = document.getElementById('author-select');
+  const darkToggle = document.getElementById('dark-mode-toggle');
+  const searchTrigger = document.querySelector('[data-search-trigger]');
+
+  logToConsole(`Author selector found: ${!!authorSelect}`);
+  logToConsole(`Dark mode toggle found: ${!!darkToggle}`);
+  logToConsole(`Search trigger found: ${!!searchTrigger}`);
+
+  if (authorSelect) {
+    authorSelect.addEventListener('change', function() {
+      logToConsole(`Author selector changed to: ${this.value}`);
+    });
+  }
+
+  // Update status every 2 seconds to catch any delayed changes
+  setInterval(updateThemeStatus, 2000);
+});
+
+// Make functions globally available for manual testing
+window.updateThemeStatus = updateThemeStatus;
+window.testDarkModeToggle = testDarkModeToggle;
+window.testSearch = testSearch;
+window.logToConsole = logToConsole;
+</script>

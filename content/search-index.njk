@@ -1,0 +1,20 @@
+---
+permalink: /search-index.json
+eleventyExcludeFromCollections: true
+layout: false
+---
+[
+{%- for post in collections.posts | reverse -%}
+  {%- if not post.data.draft -%}
+  {
+    "url": "{{ post.url | safe }}",
+    "title": {{ post.data.title | dump | safe }},
+    "author": "{{ post.data.author | safe }}",
+    "date": "{{ post.data.date | dateToIso | safe }}",
+    "tags": {{ post.data.tags | dump | safe }},
+    "excerpt": {{ (post.data.description or post.templateContent | striptags | truncate(200)) | dump | safe }},
+    "content": {{ post.templateContent | striptags | replace('\n', ' ') | replace('\r', ' ') | truncate(500) | dump | safe }}
+  }{%- if not loop.last -%},{%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
+]

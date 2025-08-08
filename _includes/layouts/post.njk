@@ -12,12 +12,34 @@ per-page bundle #}
 	{% include "css/prism-diff.css" %}
 </style>
 
-{# This script is no longer needed as the data-author attribute is set in
-base.njk #} {#
-<script>
-	document.body.setAttribute("data-author", "{{ author }}");
+{# Auto-switch to post author's theme #}
+<script eleventy:ignore>
+document.addEventListener('DOMContentLoaded', function() {
+	const postAuthor = '{{ author }}';
+	const validAuthors = ['jane', 'orionlw', 'adesse', 'nic', 'amelia', 'abby', 'ewan'];
+
+	if (postAuthor && validAuthors.includes(postAuthor)) {
+		// Set author theme
+		document.documentElement.setAttribute('data-author', postAuthor);
+		document.body.setAttribute('data-author', postAuthor);
+
+		// Update author selector dropdowns to match
+		const authorSelectors = document.querySelectorAll('.author-sync');
+		authorSelectors.forEach(function(sel) {
+			sel.value = postAuthor;
+		});
+
+		// Save preference
+		try {
+			localStorage.setItem('author-theme', postAuthor);
+		} catch(e) {
+			console.warn('Could not save author preference:', e);
+		}
+
+		console.log('Auto-switched to', postAuthor, 'theme for blog post');
+	}
+});
 </script>
-#}
 
 <article class="h-entry">
 	<h1 class="post-title p-name">{{ title }}</h1>

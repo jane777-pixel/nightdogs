@@ -1,16 +1,55 @@
 import { DateTime } from "luxon";
 
 export default function (eleventyConfig) {
+	// Reading time estimation filter
+	eleventyConfig.addFilter("readingTime", function (content) {
+		if (!content || typeof content !== "string") {
+			return "0 min read";
+		}
+
+		// Strip HTML tags and get plain text
+		const plainText = content.replace(/<[^>]*>/g, "");
+
+		// Count words (split by whitespace and filter empty strings)
+		const words = plainText.split(/\s+/).filter((word) => word.length > 0);
+		const wordCount = words.length;
+
+		// Calculate reading time (assuming 200 words per minute)
+		const wordsPerMinute = 200;
+		const minutes = Math.ceil(wordCount / wordsPerMinute);
+
+		// Format the output
+		if (minutes === 1) {
+			return "1 min read";
+		} else if (minutes < 60) {
+			return `${minutes} min read`;
+		} else {
+			const hours = Math.floor(minutes / 60);
+			const remainingMinutes = minutes % 60;
+			if (remainingMinutes === 0) {
+				return `${hours}h read`;
+			} else {
+				return `${hours}h ${remainingMinutes}m read`;
+			}
+		}
+	});
+
 	eleventyConfig.addFilter("readableDate", (dateObj, format, zone) => {
 		// Formatting tokens for Luxon: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
 		return DateTime.fromJSDate(dateObj, { zone: zone || "utc" }).toFormat(
-			format || "dd LLLL yyyy"
+			format || "dd LLLL yyyy",
 		);
 	});
 
 	eleventyConfig.addFilter("htmlDateString", (dateObj) => {
 		// dateObj input: https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
 		return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("yyyy-LL-dd");
+	});
+
+	eleventyConfig.addFilter("dateToIso", (dateObj) => {
+		// Convert date to ISO 8601 format for structured data and meta tags
+		if (!dateObj) return "";
+		return DateTime.fromJSDate(dateObj, { zone: "utc" }).toISO();
 	});
 
 	// Get the first `n` elements of a collection.
@@ -40,7 +79,7 @@ export default function (eleventyConfig) {
 	});
 
 	eleventyConfig.addFilter("sortAlphabetically", (strings) =>
-		(strings || []).sort((b, a) => b.localeCompare(a))
+		(strings || []).sort((b, a) => b.localeCompare(a)),
 	);
 
 	// Webmentions

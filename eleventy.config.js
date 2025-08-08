@@ -28,7 +28,8 @@ export default async function (eleventyConfig) {
 		.addPassthroughCopy("./content/feed/pretty-atom-feed.xsl")
 		.addPassthroughCopy("content/blog/**/*.{jpg,jpeg,png,gif}")
 		.addPassthroughCopy("content/blog/**/*.{mp3,mp4,wav,ogg,m4a}")
-		.addPassthroughCopy("content/**/*.mp3"); // Passthrough copy for all mp3 files in content
+		.addPassthroughCopy("content/**/*.mp3") // Passthrough copy for all mp3 files in content
+		.addPassthroughCopy("public/js/**/*.js"); // Copy JavaScript files for search and theme functionality
 
 	// Run Eleventy when these files change:
 	// https://www.11ty.dev/docs/watch-serve/#add-your-own-watch-targets
@@ -47,6 +48,7 @@ export default async function (eleventyConfig) {
 		bundleHtmlContentFromSelector: "style",
 	});
 
+	// Bundle <script> content and adds a {% js %} paired shortcode
 	// Bundle <script> content and adds a {% js %} paired shortcode
 	eleventyConfig.addBundle("js", {
 		toFileDirectory: "dist",
@@ -90,21 +92,22 @@ export default async function (eleventyConfig) {
 
 	// Image optimization: https://www.11ty.dev/docs/plugins/image/#eleventy-transform
 	eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
-		// Output formats for each image - reducing from 3 to 2 formats for speed
-		formats: ["webp", "auto"],
+		// WebP-first optimization with AVIF for maximum compression
+		formats: ["avif", "webp", "auto"],
 
-		// Specify exact widths instead of "auto" for faster processing
-		widths: [400, 800, 1200],
+		// Responsive widths for better performance across devices
+		widths: [320, 640, 960, 1280, 1920],
 
 		failOnError: false,
 
 		// Skip processing images that are already in /img/imported/
 		transformOnHTMLParseError: false,
 
-		// Use disk cache for faster rebuilds
+		// Extended disk cache for better performance
 		cacheOptions: {
-			duration: "1d", // Cache for 1 day
+			duration: "30d", // Cache for 30 days
 			directory: "./.cache",
+			removeUrlQueryParams: false,
 		},
 
 		htmlOptions: {
@@ -112,16 +115,27 @@ export default async function (eleventyConfig) {
 				// e.g. <img loading decoding> assigned on the HTML tag will override these values.
 				loading: "lazy",
 				decoding: "async",
+				sizes: "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw",
 			},
 		},
 
 		sharpOptions: {
 			animated: false, // Disable animated processing for speed
 			jpeg: {
-				quality: 80, // Lower quality for faster processing
+				quality: 85,
+				mozjpeg: true,
 			},
 			webp: {
+				quality: 85,
+				effort: 4,
+			},
+			avif: {
 				quality: 80,
+				effort: 4,
+			},
+			png: {
+				quality: 90,
+				compressionLevel: 9,
 			},
 		},
 
@@ -160,6 +174,26 @@ export default async function (eleventyConfig) {
 
 	eleventyConfig.addFilter("unique", (arr) => Array.from(new Set(arr)));
 
+	// Add word count filter for analytics
+	eleventyConfig.addFilter("wordCount", function (content) {
+		if (!content || typeof content !== "string") return 0;
+		const plainText = content.replace(/<[^>]*>/g, "");
+		return plainText.split(/\s+/).filter((word) => word.length > 0).length;
+	});
+
+	// Add excerpt filter for better content previews
+	eleventyConfig.addFilter("excerpt", function (content, length = 160) {
+		if (!content || typeof content !== "string") return "";
+		const plainText = content.replace(/<[^>]*>/g, "").trim();
+		if (plainText.length <= length) return plainText;
+
+		const truncated = plainText.substring(0, length);
+		const lastSpace = truncated.lastIndexOf(" ");
+		return (
+			(lastSpace > 0 ? truncated.substring(0, lastSpace) : truncated) + "..."
+		);
+	});
+
 	// Features to make your build faster (when you need them)
 
 	// If your passthrough copy gets heavy and cumbersome, add this line
@@ -167,6 +201,16 @@ export default async function (eleventyConfig) {
 	// https://www.11ty.dev/docs/copy/#emulate-passthrough-copy-during-serve
 
 	eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
+
+	// Add development server options for better performance
+	eleventyConfig.setServerOptions({
+		port: 8080,
+		showAllHosts: true,
+		// Enable hot reload for CSS and JS changes
+		watch: ["css/**/*.css", "public/js/**/*.js"],
+		// Show 404 page for missing pages
+		showVersion: false,
+	});
 }
 
 export const config = {
