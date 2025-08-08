@@ -452,7 +452,7 @@ const pagination = {
               </h3>
               <div class="post-card-meta">
                 by {{ authors[post.data.author].name }} •
-                {{ post.date | date("MMM DD, YYYY") }} •
+                {{ post.date | readableDate('MMM dd, yyyy') }} •
                 {{ post.data.wordCount if post.data.wordCount else (post.templateContent | striptags | wordcount) }} words
               </div>
             </div>
