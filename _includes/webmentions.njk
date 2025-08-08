@@ -147,9 +147,9 @@ mentionType('mention-of') %} {% if mentionsForUrl.length %}
         {% if url and published %}
           <a href="{{ url }}" class="u-url">
             <time datetime="{{ published }}">
-              {% set publishedDate = (publishedRaw | date('2025-01-01')) %}
-              {% if publishedDate and publishedDate != 'Invalid DateTime' %}
-                {{ (publishedRaw | date('2025-01-01')) | readableDate }}
+              {% set dateObj = publishedRaw | dateObject %}
+              {% if dateObj %}
+                {{ dateObj | readableDate }}
               {% else %}
                 {{ published | truncate(10, true, '') | replace('-', ' ') }}
               {% endif %}

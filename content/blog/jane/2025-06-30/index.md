@@ -8,7 +8,7 @@ tags:
   - fibre arts
   - baking
 description: about jane's week, featuring nic's birthday
-date: 2025-07-30
+date: 2025-07-30T00:00:00.000Z
 author: jane
 permalink: /blog/jane/nics-23rd/
 ---

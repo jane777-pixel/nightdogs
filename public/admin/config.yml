@@ -34,7 +34,15 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Slug", name: "slug", widget: "string" }
-      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - {
+          label: "Publish Date",
+          name: "date",
+          widget: "datetime",
+          date_format: "YYYY-MM-DD",
+          time_format: "HH:mm:ss",
+          format: "YYYY-MM-DDTHH:mm:ss.000Z",
+          default: "",
+        }
       - {
           label: "Author",
           name: "author",

@@ -34,16 +34,154 @@ export default function (eleventyConfig) {
 		}
 	});
 
-	eleventyConfig.addFilter("readableDate", (dateObj, format, zone) => {
+	eleventyConfig.addFilter("readableDate", (dateInput, format, zone) => {
 		// Formatting tokens for Luxon: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
-		return DateTime.fromJSDate(dateObj, { zone: zone || "utc" }).toFormat(
-			format || "dd LLLL yyyy",
-		);
+		if (!dateInput) return "";
+
+		try {
+			let dt;
+
+			// Handle different input types
+			if (dateInput instanceof Date) {
+				// JavaScript Date object
+				dt = DateTime.fromJSDate(dateInput, { zone: zone || "utc" });
+			} else if (typeof dateInput === "string") {
+				// String input - try different parsing methods
+				if (dateInput.includes("T")) {
+					// ISO format string
+					dt = DateTime.fromISO(dateInput, { zone: zone || "utc" });
+				} else {
+					// Simple date string like "2025-07-30"
+					dt = DateTime.fromFormat(dateInput, "yyyy-MM-dd", {
+						zone: zone || "utc",
+					});
+				}
+			} else {
+				// Try to convert to string and parse
+				const dateStr = String(dateInput);
+				if (dateStr.includes("T")) {
+					dt = DateTime.fromISO(dateStr, { zone: zone || "utc" });
+				} else {
+					dt = DateTime.fromFormat(dateStr, "yyyy-MM-dd", {
+						zone: zone || "utc",
+					});
+				}
+			}
+
+			if (!dt || !dt.isValid) {
+				console.warn(
+					"Invalid date input:",
+					dateInput,
+					"Parsed as:",
+					dt?.invalidReason,
+				);
+				return "Invalid Date";
+			}
+
+			return dt.toFormat(format || "dd LLLL yyyy");
+		} catch (error) {
+			console.error("Error formatting date:", error, dateInput);
+			return "Invalid Date";
+		}
 	});
 
-	eleventyConfig.addFilter("htmlDateString", (dateObj) => {
+	eleventyConfig.addFilter("htmlDateString", (dateInput) => {
 		// dateObj input: https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
-		return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("yyyy-LL-dd");
+		if (!dateInput) return "";
+
+		try {
+			let dt;
+
+			// Handle different input types
+			if (dateInput instanceof Date) {
+				// JavaScript Date object
+				dt = DateTime.fromJSDate(dateInput, { zone: "utc" });
+			} else if (typeof dateInput === "string") {
+				// String input - try different parsing methods
+				if (dateInput.includes("T")) {
+					// ISO format string
+					dt = DateTime.fromISO(dateInput, { zone: "utc" });
+				} else {
+					// Simple date string like "2025-07-30"
+					dt = DateTime.fromFormat(dateInput, "yyyy-MM-dd", {
+						zone: "utc",
+					});
+				}
+			} else {
+				// Try to convert to string and parse
+				const dateStr = String(dateInput);
+				if (dateStr.includes("T")) {
+					dt = DateTime.fromISO(dateStr, { zone: "utc" });
+				} else {
+					dt = DateTime.fromFormat(dateStr, "yyyy-MM-dd", {
+						zone: "utc",
+					});
+				}
+			}
+
+			if (!dt || !dt.isValid) {
+				console.warn(
+					"Invalid date input in htmlDateString:",
+					dateInput,
+					"Parsed as:",
+					dt?.invalidReason,
+				);
+				return "";
+			}
+
+			return dt.toFormat("yyyy-LL-dd");
+		} catch (error) {
+			console.error("Error in htmlDateString:", error, dateInput);
+			return "";
+		}
+	});
+
+	// Add robust CMS date parser
+	eleventyConfig.addFilter("parseCMSDate", (dateInput) => {
+		if (!dateInput) return null;
+
+		try {
+			let dt;
+
+			if (dateInput instanceof Date) {
+				return dateInput;
+			}
+
+			if (typeof dateInput === "string") {
+				// Handle various CMS date formats
+				if (dateInput.includes("T")) {
+					// ISO format with timezone
+					dt = DateTime.fromISO(dateInput);
+					if (dt.isValid) {
+						return dt.toJSDate();
+					}
+				}
+
+				// Try parsing as simple date
+				dt = DateTime.fromFormat(dateInput, "yyyy-MM-dd");
+				if (dt.isValid) {
+					return dt.toJSDate();
+				}
+
+				// Try parsing with time
+				dt = DateTime.fromFormat(dateInput, "yyyy-MM-dd HH:mm:ss");
+				if (dt.isValid) {
+					return dt.toJSDate();
+				}
+
+				// Fallback to native Date parsing
+				const nativeDate = new Date(dateInput);
+				if (!isNaN(nativeDate.getTime())) {
+					return nativeDate;
+				}
+			}
+
+			console.warn("Could not parse CMS date:", dateInput);
+			return null;
+		} catch (error) {
+			console.error("Error parsing CMS date:", error, dateInput);
+			return null;
+		}
 	});
 
 	eleventyConfig.addFilter("dateToIso", (dateObj) => {
@@ -343,4 +481,97 @@ export default function (eleventyConfig) {
 		}
 		return shuffled.slice(0, count);
 	});
+
+	// Get diverse posts for Fresh Perspectives - different authors, topics, and time periods
+	eleventyConfig.addFilter(
+		"diversePosts",
+		(posts, currentAuthor, count = 3) => {
+			if (!posts || !Array.isArray(posts)) return [];
+
+			// Filter out current author's posts
+			const otherAuthorsPosts = posts.filter(
+				(post) =>
+					post.data.author &&
+					post.data.author !== currentAuthor &&
+					post.data.title &&
+					post.url,
+			);
+
+			if (otherAuthorsPosts.length === 0) return [];
+
+			// Group posts by author
+			const postsByAuthor = {};
+			otherAuthorsPosts.forEach((post) => {
+				const author = post.data.author;
+				if (!postsByAuthor[author]) {
+					postsByAuthor[author] = [];
+				}
+				postsByAuthor[author].push(post);
+			});
+
+			// Try to get one post from each author, prioritizing variety
+			const diversePosts = [];
+			const usedAuthors = new Set();
+			const usedTags = new Set();
+
+			// First pass: get one post from each author, preferring diverse tags
+			Object.keys(postsByAuthor).forEach((author) => {
+				if (diversePosts.length >= count) return;
+
+				const authorPosts = postsByAuthor[author];
+
+				// Sort by how unique their tags are
+				const scoredPosts = authorPosts
+					.map((post) => {
+						const tags = post.data.tags || [];
+						const newTags = tags.filter(
+							(tag) => !usedTags.has(tag) && tag !== "posts",
+						);
+						return {
+							post,
+							uniqueTagCount: newTags.length,
+							newTags,
+						};
+					})
+					.sort((a, b) => b.uniqueTagCount - a.uniqueTagCount);
+
+				if (scoredPosts.length > 0) {
+					const selectedPost = scoredPosts[0];
+					diversePosts.push(selectedPost.post);
+					usedAuthors.add(author);
+
+					// Mark these tags as used
+					selectedPost.newTags.forEach((tag) => usedTags.add(tag));
+				}
+			});
+
+			// Second pass: if we need more posts, get additional ones from different time periods
+			if (diversePosts.length < count) {
+				const remainingPosts = otherAuthorsPosts
+					.filter((post) => !diversePosts.includes(post))
+					.sort((a, b) => {
+						// Sort by date variety - try to get posts from different months
+						const aMonth = new Date(a.date).getMonth();
+						const bMonth = new Date(b.date).getMonth();
+						const usedMonths = diversePosts.map((p) =>
+							new Date(p.date).getMonth(),
+						);
+
+						const aIsNewMonth = !usedMonths.includes(aMonth);
+						const bIsNewMonth = !usedMonths.includes(bMonth);
+
+						if (aIsNewMonth && !bIsNewMonth) return -1;
+						if (!aIsNewMonth && bIsNewMonth) return 1;
+
+						// If both or neither are new months, prefer more recent
+						return new Date(b.date) - new Date(a.date);
+					});
+
+				const needed = count - diversePosts.length;
+				diversePosts.push(...remainingPosts.slice(0, needed));
+			}
+
+			return diversePosts.slice(0, count);
+		},
+	);
 }

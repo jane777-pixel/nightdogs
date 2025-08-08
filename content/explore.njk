@@ -444,6 +444,7 @@ const pagination = {
 
       <div class="posts-grid" id="posts-grid">
         {% for post in posts %}
+          {% if post.data.title and post.data.author and authors[post.data.author] and post.url %}
           <a href="{{ post.url }}" class="post-card" data-tags="{{ post.data.tags | join(',') }}"
              data-author="{{ post.data.author }}" data-date="{{ post.date | date('YYYY-MM-DD') }}">
             <div class="post-card-header">
@@ -452,7 +453,10 @@ const pagination = {
               </h3>
               <div class="post-card-meta">
                 by {{ authors[post.data.author].name }} •
-                {{ post.date | readableDate('MMM dd, yyyy') }} •
+                {% set parsedDate = post.date | parseCMSDate %}
+                {% if parsedDate %}
+                  {{ parsedDate | readableDate('MMM dd, yyyy') }} •
+                {% endif %}
                 {{ post.data.wordCount if post.data.wordCount else (post.templateContent | striptags | wordcount) }} words
               </div>
             </div>
@@ -475,6 +479,7 @@ const pagination = {
               </div>
             {% endif %}
           </a>
+          {% endif %}
         {% endfor %}
       </div>
 

@@ -63,21 +63,29 @@
 }
 
 .recommendation-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1rem;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 1.5rem !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
 }
 
 .recommendation-card {
-  padding: 1.5rem;
-  border: 1px solid var(--primary);
-  border-radius: 8px;
-  transition: all 0.2s ease;
-  background: var(--background-color);
-  text-decoration: none;
-  color: inherit;
-  display: block;
-  position: relative;
+  display: block !important;
+  flex: 1 1 calc(50% - 0.75rem) !important;
+  min-width: 300px !important;
+  max-width: 500px !important;
+  padding: 1.5rem !important;
+  border: 2px solid var(--primary) !important;
+  border-radius: 12px !important;
+  transition: all 0.2s ease !important;
+  background: var(--background-color) !important;
+  text-decoration: none !important;
+  color: inherit !important;
+  position: relative !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  contain: layout style !important;
 }
 
 .recommendation-card:hover {
@@ -86,6 +94,7 @@
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(0,0,0,0.1);
   text-decoration: none;
+  border-color: var(--color);
 }
 
 .recommendation-card:hover * {
@@ -93,26 +102,34 @@
 }
 
 .rec-post-title {
-  margin: 0 0 0.75rem 0;
-  font-size: 1.1rem;
-  font-weight: 600;
-  line-height: 1.3;
+  margin: 0 0 0.75rem 0 !important;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+  display: block !important;
+  width: 100% !important;
 }
 
 .rec-post-meta {
-  display: flex;
-  gap: 0.75rem;
-  font-size: 0.85rem;
-  opacity: 0.8;
-  margin-bottom: 0.75rem;
-  flex-wrap: wrap;
+  display: block !important;
+  font-size: 0.85rem !important;
+  opacity: 0.8 !important;
+  margin-bottom: 0.75rem !important;
+  width: 100% !important;
+}
+
+.rec-post-meta span {
+  display: inline !important;
+  margin-right: 0.75rem !important;
 }
 
 .rec-post-excerpt {
-  font-size: 0.9rem;
-  line-height: 1.5;
-  margin: 0;
-  opacity: 0.9;
+  font-size: 0.9rem !important;
+  line-height: 1.5 !important;
+  margin: 0 0 1rem 0 !important;
+  opacity: 0.9 !important;
+  display: block !important;
+  width: 100% !important;
 }
 
 .rec-author-link {
@@ -125,24 +142,86 @@
   text-decoration: underline;
 }
 
+.recommendation-card:hover .rec-author-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.recommendation-card:hover .rec-author-link:hover {
+  text-decoration: underline;
+}
+
 .shared-tags {
-  display: flex;
-  gap: 0.25rem;
-  margin-top: 0.5rem;
-  flex-wrap: wrap;
+  display: flex !important;
+  gap: 0.25rem !important;
+  margin-top: 0.5rem !important;
+  flex-wrap: wrap !important;
+  width: 100% !important;
 }
 
 .shared-tag {
-  background: var(--muted-color);
-  color: var(--background-color);
-  padding: 0.1rem 0.4rem;
-  border-radius: 8px;
-  font-size: 0.7rem;
-  font-weight: 500;
+  background: var(--muted-color) !important;
+  color: var(--background-color) !important;
+  padding: 0.1rem 0.4rem !important;
+  border-radius: 8px !important;
+  font-size: 0.7rem !important;
+  font-weight: 500 !important;
+  display: inline-block !important;
 }
 
 .recommendation-card:hover .shared-tag {
   background: rgba(255,255,255,0.3);
+}
+
+/* Remove h-card styling from author links within recommendation cards */
+.recommendation-card .h-card,
+.recommendation-card .rec-author-link.h-card,
+.recommendations-widget .h-card {
+  border: none !important;
+  background: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  display: inline !important;
+  position: static !important;
+  overflow: visible !important;
+  contain: none !important;
+}
+
+/* Ensure author links are properly contained within cards */
+.recommendation-card .rec-post-meta span {
+  display: inline !important;
+  margin-right: 0.75rem !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  max-width: 100% !important;
+}
+
+.recommendation-card .rec-author-link {
+  display: inline !important;
+  color: inherit !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  max-width: 200px !important;
+  vertical-align: baseline !important;
+}
+
+/* Force all recommendation card content to stay contained */
+.recommendation-card * {
+  box-sizing: border-box !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  position: relative !important;
+}
+
+/* Ensure proper card structure and prevent element separation */
+.recommendation-card {
+  contain: layout style paint !important;
+  isolation: isolate !important;
 }
 
 .view-more-section {
@@ -176,6 +255,11 @@
 .view-more-link:hover {
   transform: translateY(-1px);
   box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  text-decoration: none;
+}
+
+.view-more-link:hover * {
+  color: inherit;
 }
 
 .algorithm-note {
@@ -198,7 +282,17 @@
   }
 
   .recommendation-grid {
-    grid-template-columns: 1fr;
+    display: block !important;
+  }
+
+  .recommendation-card {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 0 1rem 0 !important;
+    min-width: unset !important;
+    max-width: none !important;
+    flex: none !important;
+    padding: 1rem !important;
   }
 
   .view-more-links {
@@ -237,10 +331,16 @@
         <div class="recommendation-grid">
           {% for related in relatedByTags %}
             {% set post = related.post %}
+            {% if post.data.title and post.data.author and authors[post.data.author] and post.url %}
             <a href="{{ post.url }}" class="recommendation-card">
               <h4 class="rec-post-title">{{ post.data.title }}</h4>
               <div class="rec-post-meta">
-                <span>{{ post.date | readableDate }}</span>
+                {% if post.date %}
+                  {% set parsedDate = post.date | parseCMSDate %}
+                  {% if parsedDate %}
+                    <span>{{ parsedDate | readableDate }}</span>
+                  {% endif %}
+                {% endif %}
                 <span>by <span class="rec-author-link">{{ authors[post.data.author].name }}</span></span>
                 {% if post.data.readingTime %}
                   <span>{{ post.data.readingTime.text }}</span>
@@ -257,6 +357,7 @@
                 </div>
               {% endif %}
             </a>
+            {% endif %}
           {% endfor %}
         </div>
       </div>
@@ -274,10 +375,16 @@
           </h3>
           <div class="recommendation-grid">
             {% for post in otherAuthorPosts %}
+              {% if post.data.title and post.data.author and authors[post.data.author] and post.url %}
               <a href="{{ post.url }}" class="recommendation-card">
                 <h4 class="rec-post-title">{{ post.data.title }}</h4>
                 <div class="rec-post-meta">
-                  <span>{{ post.date | readableDate }}</span>
+                  {% if post.date %}
+                    {% set parsedDate = post.date | parseCMSDate %}
+                    {% if parsedDate %}
+                      <span>{{ parsedDate | readableDate }}</span>
+                    {% endif %}
+                  {% endif %}
                   {% if post.data.readingTime %}
                     <span>{{ post.data.readingTime.text }}</span>
                   {% endif %}
@@ -286,6 +393,7 @@
                   <p class="rec-post-excerpt">{{ post.data.description | truncate(120) }}</p>
                 {% endif %}
               </a>
+              {% endif %}
             {% endfor %}
           </div>
         </div>
@@ -293,7 +401,7 @@
     {% endif %}
 
     <!-- Fresh Perspectives (Other Authors) -->
-    {% set otherAuthorsPosts = collections.posts | reject("data.author", author) | reverse | head(2) %}
+    {% set otherAuthorsPosts = collections.posts | diversePosts(author, 3) %}
     {% if otherAuthorsPosts.length > 0 %}
       <div class="recommendation-section">
         <h3 class="section-header">
@@ -302,11 +410,19 @@
         </h3>
         <div class="recommendation-grid">
           {% for post in otherAuthorsPosts %}
+            {% if post.data.title and post.data.author and authors[post.data.author] and post.url %}
             <a href="{{ post.url }}" class="recommendation-card">
               <h4 class="rec-post-title">{{ post.data.title }}</h4>
               <div class="rec-post-meta">
-                <span>{{ post.date | readableDate }}</span>
-                <span>by <a href="/authors/{{ post.data.author }}/" class="rec-author-link">{{ authors[post.data.author].name }}</a></span>
+                {% if post.date %}
+                  {% set parsedDate = post.date | parseCMSDate %}
+                  {% if parsedDate %}
+                    <span>{{ parsedDate | readableDate }}</span>
+                  {% endif %}
+                {% endif %}
+                {% if post.data.author and authors[post.data.author] %}
+                  <span>by <a href="/authors/{{ post.data.author }}/" class="rec-author-link">{{ authors[post.data.author].name }}</a></span>
+                {% endif %}
                 {% if post.data.readingTime %}
                   <span>{{ post.data.readingTime.text }}</span>
                 {% endif %}
@@ -314,7 +430,17 @@
               {% if post.data.description %}
                 <p class="rec-post-excerpt">{{ post.data.description | truncate(120) }}</p>
               {% endif %}
+              {% if post.data.tags %}
+                <div class="shared-tags">
+                  {% for tag in post.data.tags | head(3) %}
+                    {% if tag != "posts" %}
+                      <span class="shared-tag">#{{ tag }}</span>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              {% endif %}
             </a>
+            {% endif %}
           {% endfor %}
         </div>
       </div>
@@ -331,10 +457,16 @@
           </h3>
           <div class="recommendation-grid">
             {% for post in randomPosts %}
+              {% if post.data.title and post.data.author and authors[post.data.author] and post.url %}
               <a href="{{ post.url }}" class="recommendation-card">
                 <h4 class="rec-post-title">{{ post.data.title }}</h4>
                 <div class="rec-post-meta">
-                  <span>{{ post.date | readableDate }}</span>
+                  {% if post.date %}
+                    {% set parsedDate = post.date | parseCMSDate %}
+                    {% if parsedDate %}
+                      <span>{{ parsedDate | readableDate }}</span>
+                    {% endif %}
+                  {% endif %}
                   <span>by <a href="/authors/{{ post.data.author }}/" class="rec-author-link">{{ authors[post.data.author].name }}</a></span>
                   {% if post.data.readingTime %}
                     <span>{{ post.data.readingTime.text }}</span>
@@ -344,6 +476,7 @@
                   <p class="rec-post-excerpt">{{ post.data.description | truncate(120) }}</p>
                 {% endif %}
               </a>
+              {% endif %}
             {% endfor %}
           </div>
         </div>
@@ -369,7 +502,7 @@
       </a>
       <a href="/authors/" class="view-more-link">
         <span>👥</span>
-        Meet Authors
+        Authors
       </a>
     </div>
 

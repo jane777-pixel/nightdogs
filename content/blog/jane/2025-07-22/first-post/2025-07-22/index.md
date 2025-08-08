@@ -5,7 +5,7 @@ tags:
   - fibre arts
   - swimming
 description: welcome to nightdogs
-date: 2025-07-22
+date: 2025-07-22T00:00:00.000Z
 author: jane
 permalink: /blog/jane/first-post/
 ---

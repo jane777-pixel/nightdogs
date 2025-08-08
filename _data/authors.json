@@ -198,15 +198,15 @@
 		"theme": {
 			"light": {
 				"background": "#92cbff",
-				"color": "#1e3a5a",
-				"primary": "#8bbeff",
-				"muted": "#1e40bf"
+				"color": "#0a1a2a",
+				"primary": "#2563eb",
+				"muted": "#1e3a8a"
 			},
 			"dark": {
 				"background": "#1b3a8a",
-				"color": "#91cbcf",
-				"primary": "#8bbgff",
-				"muted": "#deeafe"
+				"color": "#f0f8ff",
+				"primary": "#87ceeb",
+				"muted": "#b0d4f1"
 			},
 			"fonts": {
 				"body": "\"Fira Sans\", sans-serif",

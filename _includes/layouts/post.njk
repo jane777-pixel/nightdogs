@@ -44,9 +44,12 @@ document.addEventListener('DOMContentLoaded', function() {
 <article class="h-entry">
 	<h1 class="post-title p-name">{{ title }}</h1>
 	<div class="post-meta">
-		<time class="dt-published" datetime="{{ page.date | htmlDateString }}">{{
-			page.date | readableDate
-		}}</time>
+		<time class="dt-published" datetime="{{ page.date | htmlDateString }}">
+			{% set parsedDate = page.date | parseCMSDate %}
+			{% if parsedDate %}
+				{{ parsedDate | readableDate }}
+			{% endif %}
+		</time>
 		{%- if author -%}
 		<span class="post-author" style="margin-left: 1em">
 			by
@@ -75,24 +78,60 @@ document.addEventListener('DOMContentLoaded', function() {
 		{{ content | safe }}
 	</div>
 
-	{%- include "recommendations.njk" -%}
+	{%- if author and collections.posts %}
+	{%- set authorPosts = collections.posts | filterByAuthor(author) | reverse %}
+	{%- set currentIndex = -1 %}
+	{%- for post in authorPosts %}
+		{%- if post.url == page.url %}
+			{%- set currentIndex = loop.index0 %}
+		{%- endif %}
+	{%- endfor %}
+
+	{%- if currentIndex >= 0 and authorPosts.length > 1 %}
+	<div style="margin: 3rem 0 2rem 0; padding: 1.5rem; border: 2px solid var(--primary); border-radius: 8px; background: var(--background-color);">
+		<h3 style="margin: 0 0 1rem 0; font-size: 1.2rem;">More from {{ authors[author].name }}</h3>
+		<ul class="links-nextprev">
+			{%- set nextAuthorPost = authorPosts[currentIndex - 1] %}
+			{%- if nextAuthorPost %}
+			<li class="links-nextprev-next">
+				<strong>Next by {{ authors[author].name }}</strong>:
+				<a href="{{ nextAuthorPost.url }}">{{ nextAuthorPost.data.title }}</a>
+			</li>
+			{%- endif %}
+
+			{%- set prevAuthorPost = authorPosts[currentIndex + 1] %}
+			{%- if prevAuthorPost %}
+			<li class="links-nextprev-previous">
+				<strong>Previous by {{ authors[author].name }}</strong>:
+				<a href="{{ prevAuthorPost.url }}">{{ prevAuthorPost.data.title }}</a>
+			</li>
+			{%- endif %}
+		</ul>
+	</div>
+	{%- endif %}
+	{%- endif %}
 
 	{%- if collections.posts %}
-	<ul class="links-nextprev">
-		{%- set nextPost = collections.posts | getNextCollectionItem(page) %} {%- if
-		nextPost %}
-		<li class="links-nextprev-next">
-			<strong>Next</strong>:
-			<a href="{{ nextPost.url }}">{{ nextPost.data.title }}</a>
-		</li>
-		{% endif %} {%- set previousPost = collections.posts |
-		getPreviousCollectionItem(page) %} {%- if previousPost %}
-		<li class="links-nextprev-previous">
-			<strong>Previous</strong>:
-			<a href="{{ previousPost.url }}">{{ previousPost.data.title }}</a>
-		</li>
-		{% endif %}
-	</ul>
+	<div style="margin: 2rem 0; padding: 1.5rem; border: 2px solid var(--primary); border-radius: 8px; background: var(--background-color);">
+		<h3 style="margin: 0 0 1rem 0; font-size: 1.2rem;">Navigate All Posts</h3>
+		<ul class="links-nextprev">
+			{%- set nextPost = collections.posts | getNextCollectionItem(page) %}
+			{%- if nextPost %}
+			<li class="links-nextprev-next">
+				<strong>Next</strong>:
+				<a href="{{ nextPost.url }}">{{ nextPost.data.title }}</a>
+			</li>
+			{%- endif %}
+
+			{%- set previousPost = collections.posts | getPreviousCollectionItem(page) %}
+			{%- if previousPost %}
+			<li class="links-nextprev-previous">
+				<strong>Previous</strong>:
+				<a href="{{ previousPost.url }}">{{ previousPost.data.title }}</a>
+			</li>
+			{%- endif %}
+		</ul>
+	</div>
 	{%- endif %}
 {% set webmentionsUrl = page.url %}
 {% include "webmentions.njk" %}

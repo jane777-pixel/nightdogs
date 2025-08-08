@@ -1,11 +1,17 @@
 [build]
-	publish = "_site"
-	command = "npm run build"
+publish = "_site"
+command = "npm run build"
 
 [build.environment]
-  NODE_VERSION = "22"
+NODE_VERSION = "22"
+
+[[plugins]]
+package = "netlify-plugin-cache"
+
+[plugins.inputs]
+paths = [".cache", "node_modules"]
 
 [[redirects]]
-  from = "/admin/*"
-  to = "/admin/index.html"
-  status = 200
+from = "/admin/*"
+to = "/admin/index.html"
+status = 200

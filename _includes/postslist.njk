@@ -25,7 +25,10 @@
 		<time
 			class="postlist-date"
 			datetime="{{ post.date | htmlDateString }}"
-			>{{ post.date | readableDate("LLLL yyyy") }}</time
+			>{% set parsedDate = post.date | parseCMSDate %}
+			{% if parsedDate %}
+				{{ parsedDate | readableDate("LLLL yyyy") }}
+			{% endif %}</time
 		>&nbsp; {%- if post.data.author -%} {%- set author =
 		authors[post.data.author] -%}
 		<span class="postlist-author">
