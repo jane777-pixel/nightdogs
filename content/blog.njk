@@ -5,91 +5,603 @@ const eleventyNavigation = {
 };
 ---
 
-<h1>Archive</h1>
+<style>
+.blog-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
 
-<div class="filters" style="display: flex; gap: 1em; align-items: center; margin-bottom: 1em;">
-	<div class="author-selector">
-		<label for="author-filter">Filter by author:</label>
-		<select id="author-filter" class="author-sync">
-			<option value="all">All Authors</option>
-			{% for authorKey, authorData in authors %}
-			<option value="{{ authorKey }}">{{ authorData.name }}</option>
-			{% endfor %}
-		</select>
-	</div>
-	<div class="tag-selector">
-		<label for="tag-filter">Filter by tag:</label>
-		<select id="tag-filter">
-			<option value="all">All Tags</option>
-			{# Collect all unique tags except 'posts' #}
-			{% set allTags = [] %}
-			{% for post in collections.posts %}
-				{% for tag in post.data.tags %}
-					{% if tag != "posts" and tag not in allTags %}
-						{% set allTags = allTags.concat([tag]) %}
-					{% endif %}
-				{% endfor %}
-			{% endfor %}
-			{% for tag in allTags | sort %}
-			<option value="{{ tag }}">{{ tag }}</option>
-			{% endfor %}
-		</select>
-	</div>
-	<div class="year-selector">
-		<label for="year-filter">Filter by year:</label>
-		<select id="year-filter">
-			<option value="all">All Years</option>
-			{# Collect all unique years from post dates #}
-			{% set allYears = [] %}
-			{% for post in collections.posts %}
-				{% set year = post.date | date("yyyy") %}
-				{% if year not in allYears %}
-					{% set allYears = allYears.concat([year]) %}
-				{% endif %}
-			{% endfor %}
-			{% for year in allYears | sort(true) %}
-			<option value="{{ year }}">{{ year }}</option>
-			{% endfor %}
-		</select>
-	</div>
+.page-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.page-title {
+  font-size: 3rem;
+  margin: 0 0 1rem 0;
+  color: var(--color);
+}
+
+.page-subtitle {
+  font-size: 1.2rem;
+  color: var(--muted-color);
+  margin: 0 0 2rem 0;
+}
+
+.blog-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  margin-bottom: 3rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.blog-stat {
+  text-align: center;
+  padding: 1.5rem;
+  background: var(--background-color);
+  border: 2px solid var(--primary);
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.blog-stat:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.stat-number {
+  display: block;
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--primary);
+  margin-bottom: 0.25rem;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: var(--color);
+  margin: 0;
+}
+
+.filters-section {
+  background: var(--background-color);
+  border: 2px solid var(--primary);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 3rem;
+}
+
+.filters-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.filters-header h2 {
+  margin: 0 0 0.5rem 0;
+  color: var(--color);
+  font-size: 1.5rem;
+}
+
+.filters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.filter-label {
+  font-weight: 600;
+  color: var(--color);
+  font-size: 0.95rem;
+}
+
+.filter-select {
+  padding: 0.6rem;
+  border: 1px solid var(--primary);
+  border-radius: 6px;
+  background: var(--background-color);
+  color: var(--color);
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: var(--color);
+  box-shadow: 0 0 0 2px rgba(0,0,0,0.1);
+}
+
+.quick-search {
+  grid-column: 1 / -1;
+  margin-top: 1rem;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--primary);
+  border-radius: 8px;
+  background: var(--background-color);
+  color: var(--color);
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--color);
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.1);
+}
+
+.filter-stats {
+  text-align: center;
+  padding: 1rem;
+  background: rgba(255,255,255,0.1);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: var(--muted-color);
+}
+
+.posts-container {
+  margin-bottom: 3rem;
+}
+
+.posts-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.posts-count {
+  font-size: 1.1rem;
+  color: var(--muted-color);
+}
+
+.sort-options {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.sort-button {
+  padding: 0.4rem 0.8rem;
+  background: none;
+  border: 1px solid var(--primary);
+  color: var(--color);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.sort-button.active {
+  background: var(--primary);
+  color: var(--background-color);
+}
+
+.sort-button:hover {
+  background: var(--primary);
+  color: var(--background-color);
+}
+
+.no-results {
+  text-align: center;
+  padding: 3rem;
+  color: var(--muted-color);
+  font-size: 1.1rem;
+}
+
+.clear-filters {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--muted-color);
+  color: var(--background-color);
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  transition: all 0.2s ease;
+}
+
+.clear-filters:hover {
+  background: var(--color);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .blog-page {
+    padding: 1rem;
+  }
+
+  .page-title {
+    font-size: 2.5rem;
+  }
+
+  .filters-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .blog-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .posts-header {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+
+  .sort-options {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+</style>
+
+<div class="blog-page">
+  <div class="page-header">
+    <h1 class="page-title">📚 Blog Archive</h1>
+    <p class="page-subtitle">
+      Explore all posts from the nightdogs community
+    </p>
+
+    {% set totalPosts = collections.blog.length %}
+    {% set totalWords = collections.blog | totalWordCount %}
+    {% set allTags = collections.blog | getAllTags %}
+    {% set uniqueAuthors = collections.blog | getUniqueAuthors %}
+
+    <div class="blog-stats">
+      <div class="blog-stat">
+        <span class="stat-number">{{ totalPosts }}</span>
+        <p class="stat-label">Posts</p>
+      </div>
+      <div class="blog-stat">
+        <span class="stat-number">{{ uniqueAuthors.length }}</span>
+        <p class="stat-label">Authors</p>
+      </div>
+      <div class="blog-stat">
+        <span class="stat-number">{{ allTags.length }}</span>
+        <p class="stat-label">Tags</p>
+      </div>
+      <div class="blog-stat">
+        <span class="stat-number">{{ (totalWords / 200) | round }}</span>
+        <p class="stat-label">Min Read</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="filters-section">
+    <div class="filters-header">
+      <h2>🔍 Filter & Search</h2>
+      <p style="margin: 0; color: var(--muted-color); font-size: 0.95rem;">
+        Find exactly what you're looking for
+      </p>
+    </div>
+
+    <div class="filters-grid">
+      <div class="filter-group">
+        <label for="author-filter" class="filter-label">👤 Author:</label>
+        <select id="author-filter" class="filter-select author-sync">
+          <option value="all">All Authors</option>
+          {% for authorKey, authorData in authors %}
+          <option value="{{ authorKey }}">{{ authorData.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="tag-filter" class="filter-label">🏷️ Tag:</label>
+        <select id="tag-filter" class="filter-select">
+          <option value="all">All Tags</option>
+          {% for tag in allTags %}
+          <option value="{{ tag }}">{{ tag }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="year-filter" class="filter-label">📅 Year:</label>
+        <select id="year-filter" class="filter-select">
+          <option value="all">All Years</option>
+          {% set allYears = [] %}
+          {% for post in collections.blog %}
+            {% set year = post.date | date("yyyy") %}
+            {% if year not in allYears %}
+              {% set allYears = allYears.concat([year]) %}
+            {% endif %}
+          {% endfor %}
+          {% for year in allYears | sort(true) %}
+          <option value="{{ year }}">{{ year }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="quick-search">
+        <label for="quick-search-input" class="filter-label">🔍 Quick Search:</label>
+        <input type="text" id="quick-search-input" class="search-input"
+               placeholder="Search titles, content, authors, or tags...">
+      </div>
+    </div>
+
+    <div class="filter-stats" id="filter-stats">
+      Showing all {{ totalPosts }} posts
+    </div>
+
+    <div style="text-align: center; margin-top: 1rem;">
+      <button id="clear-filters" class="clear-filters" style="display: none;">
+        ✖️ Clear All Filters
+      </button>
+    </div>
+  </div>
+
+  <div class="posts-container">
+    <div class="posts-header">
+      <div class="posts-count" id="posts-count">
+        {{ totalPosts }} posts found
+      </div>
+      <div class="sort-options">
+        <span style="font-size: 0.9rem; color: var(--muted-color); margin-right: 0.5rem;">Sort:</span>
+        <button class="sort-button active" data-sort="date-desc">Newest</button>
+        <button class="sort-button" data-sort="date-asc">Oldest</button>
+        <button class="sort-button" data-sort="title">A-Z</button>
+        <button class="sort-button" data-sort="author">Author</button>
+      </div>
+    </div>
+
+    <div id="posts-list">
+      {% set postslist = collections.blog %}
+      {% include "postslist.njk" %}
+    </div>
+
+    <div id="no-results" class="no-results" style="display: none;">
+      <h3>🔍 No posts found</h3>
+      <p>Try adjusting your filters or search terms</p>
+      <button id="clear-filters-alt" class="clear-filters">
+        ✖️ Clear All Filters
+      </button>
+    </div>
+  </div>
+
+  <div style="text-align: center; margin-top: 3rem;">
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a href="/authors/" style="padding: 0.75rem 1.5rem; background: var(--primary); color: var(--background-color); text-decoration: none; border-radius: 8px; font-weight: 500;">
+        👥 Browse Authors
+      </a>
+      <a href="/tags/" style="padding: 0.75rem 1.5rem; background: var(--primary); color: var(--background-color); text-decoration: none; border-radius: 8px; font-weight: 500;">
+        🏷️ Explore Tags
+      </a>
+    </div>
+  </div>
 </div>
 
-{% set postslist = collections.posts %} {% include "postslist.njk" %}
-
 <script>
-const authorFilter = document.getElementById("author-filter");
-const tagFilter = document.getElementById("tag-filter");
-const yearFilter = document.getElementById("year-filter");
-const postItems = document.querySelectorAll(".postlist-item");
+document.addEventListener('DOMContentLoaded', function() {
+  // DOM elements
+  const authorFilter = document.getElementById("author-filter");
+  const tagFilter = document.getElementById("tag-filter");
+  const yearFilter = document.getElementById("year-filter");
+  const searchInput = document.getElementById("quick-search-input");
+  const postItems = document.querySelectorAll(".postlist-item");
+  const postsCount = document.getElementById("posts-count");
+  const filterStats = document.getElementById("filter-stats");
+  const noResults = document.getElementById("no-results");
+  const clearFiltersBtn = document.getElementById("clear-filters");
+  const clearFiltersAlt = document.getElementById("clear-filters-alt");
+  const sortButtons = document.querySelectorAll(".sort-button");
 
-authorFilter.addEventListener("change", filterPosts);
-tagFilter.addEventListener("change", filterPosts);
-yearFilter.addEventListener("change", filterPosts);
+  let currentSort = 'date-desc';
+  let filteredPosts = Array.from(postItems);
 
-function filterPosts() {
-	const selectedAuthor = authorFilter.value;
-	const selectedTag = tagFilter.value;
-	const selectedYear = yearFilter.value;
+  // Event listeners
+  authorFilter.addEventListener("change", performFilter);
+  tagFilter.addEventListener("change", performFilter);
+  yearFilter.addEventListener("change", performFilter);
+  searchInput.addEventListener("input", performFilter);
+  clearFiltersBtn.addEventListener("click", clearAllFilters);
+  clearFiltersAlt.addEventListener("click", clearAllFilters);
 
-	let anyVisible = false;
-	let firstVisibleAuthor = null;
+  // Sort functionality
+  sortButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      sortButtons.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      currentSort = this.dataset.sort;
+      sortPosts();
+    });
+  });
 
-	postItems.forEach((item) => {
-		const itemAuthor = item.getAttribute("data-author");
-		const itemTags = (item.getAttribute("data-tags") || "").split(",");
-		const itemYear = item.getAttribute("data-year");
-		const authorMatch = selectedAuthor === "all" || itemAuthor === selectedAuthor;
-		const tagMatch = selectedTag === "all" || itemTags.includes(selectedTag);
-		const yearMatch = selectedYear === "all" || itemYear === selectedYear;
-		if (authorMatch && tagMatch && yearMatch) {
-			item.style.display = "";
-			if (!anyVisible) {
-				firstVisibleAuthor = itemAuthor;
-				anyVisible = true;
-			}
-		} else {
-			item.style.display = "none";
-		}
-	});
-}
+  function performFilter() {
+    const selectedAuthor = authorFilter.value;
+    const selectedTag = tagFilter.value;
+    const selectedYear = yearFilter.value;
+    const searchQuery = searchInput.value.toLowerCase().trim();
+
+    let visibleCount = 0;
+    filteredPosts = [];
+
+    postItems.forEach((item) => {
+      const itemAuthor = item.getAttribute("data-author");
+      const itemTags = (item.getAttribute("data-tags") || "").split(",");
+      const itemYear = item.getAttribute("data-year");
+      const itemTitle = (item.querySelector(".postlist-link")?.textContent || "").toLowerCase();
+      const itemContent = (item.textContent || "").toLowerCase();
+
+      // Filter checks
+      const authorMatch = selectedAuthor === "all" || itemAuthor === selectedAuthor;
+      const tagMatch = selectedTag === "all" || itemTags.includes(selectedTag);
+      const yearMatch = selectedYear === "all" || itemYear === selectedYear;
+      const searchMatch = !searchQuery || itemTitle.includes(searchQuery) || itemContent.includes(searchQuery);
+
+      const isVisible = authorMatch && tagMatch && yearMatch && searchMatch;
+
+      if (isVisible) {
+        item.style.display = "";
+        visibleCount++;
+        filteredPosts.push(item);
+      } else {
+        item.style.display = "none";
+      }
+    });
+
+    // Update UI
+    updateFilterStats(visibleCount);
+    updateClearButton();
+    sortPosts();
+
+    // Show/hide no results message
+    noResults.style.display = visibleCount === 0 ? "block" : "none";
+    document.getElementById("posts-list").style.display = visibleCount === 0 ? "none" : "block";
+  }
+
+  function sortPosts() {
+    const postsContainer = document.getElementById("posts-list");
+    const sortedPosts = [...filteredPosts];
+
+    sortedPosts.sort((a, b) => {
+      switch(currentSort) {
+        case 'date-desc':
+          return new Date(b.querySelector('time')?.getAttribute('datetime') || 0) -
+                 new Date(a.querySelector('time')?.getAttribute('datetime') || 0);
+        case 'date-asc':
+          return new Date(a.querySelector('time')?.getAttribute('datetime') || 0) -
+                 new Date(b.querySelector('time')?.getAttribute('datetime') || 0);
+        case 'title':
+          return (a.querySelector('.postlist-link')?.textContent || "").localeCompare(
+                 b.querySelector('.postlist-link')?.textContent || "");
+        case 'author':
+          return (a.getAttribute('data-author') || "").localeCompare(
+                 b.getAttribute('data-author') || "");
+        default:
+          return 0;
+      }
+    });
+
+    // Reorder DOM elements
+    sortedPosts.forEach(post => {
+      postsContainer.appendChild(post);
+    });
+  }
+
+  function updateFilterStats(visibleCount) {
+    const totalPosts = postItems.length;
+    postsCount.textContent = `${visibleCount} post${visibleCount !== 1 ? 's' : ''} found`;
+
+    if (visibleCount === totalPosts) {
+      filterStats.textContent = `Showing all ${totalPosts} posts`;
+    } else {
+      filterStats.textContent = `Showing ${visibleCount} of ${totalPosts} posts`;
+    }
+  }
+
+  function updateClearButton() {
+    const hasFilters = authorFilter.value !== "all" ||
+                      tagFilter.value !== "all" ||
+                      yearFilter.value !== "all" ||
+                      searchInput.value.trim() !== "";
+
+    clearFiltersBtn.style.display = hasFilters ? "inline-flex" : "none";
+  }
+
+  function clearAllFilters() {
+    authorFilter.value = "all";
+    tagFilter.value = "all";
+    yearFilter.value = "all";
+    searchInput.value = "";
+    performFilter();
+  }
+
+  // URL parameter handling for deep linking
+  function updateURL() {
+    const params = new URLSearchParams();
+    if (authorFilter.value !== "all") params.set('author', authorFilter.value);
+    if (tagFilter.value !== "all") params.set('tag', tagFilter.value);
+    if (yearFilter.value !== "all") params.set('year', yearFilter.value);
+    if (searchInput.value.trim()) params.set('search', searchInput.value.trim());
+    if (currentSort !== 'date-desc') params.set('sort', currentSort);
+
+    const newURL = params.toString() ? `${window.location.pathname}?${params.toString()}` : window.location.pathname;
+    window.history.replaceState(null, '', newURL);
+  }
+
+  function loadFromURL() {
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.get('author')) authorFilter.value = params.get('author');
+    if (params.get('tag')) tagFilter.value = params.get('tag');
+    if (params.get('year')) yearFilter.value = params.get('year');
+    if (params.get('search')) searchInput.value = params.get('search');
+    if (params.get('sort')) {
+      currentSort = params.get('sort');
+      sortButtons.forEach(b => {
+        b.classList.toggle('active', b.dataset.sort === currentSort);
+      });
+    }
+
+    performFilter();
+  }
+
+  // Add URL updates to filter changes
+  [authorFilter, tagFilter, yearFilter, searchInput].forEach(element => {
+    element.addEventListener('change', updateURL);
+    element.addEventListener('input', updateURL);
+  });
+
+  sortButtons.forEach(button => {
+    button.addEventListener('click', updateURL);
+  });
+
+  // Load initial state from URL
+  loadFromURL();
+
+  // Keyboard shortcuts
+  document.addEventListener('keydown', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
+
+    if (e.key === '/' || (e.ctrlKey && e.key === 'f')) {
+      e.preventDefault();
+      searchInput.focus();
+    }
+
+    if (e.key === 'Escape') {
+      searchInput.blur();
+      if (searchInput.value || hasActiveFilters()) {
+        clearAllFilters();
+      }
+    }
+  });
+
+  function hasActiveFilters() {
+    return authorFilter.value !== "all" ||
+           tagFilter.value !== "all" ||
+           yearFilter.value !== "all";
+  }
+
+  // Analytics
+  if (window.analytics) {
+    window.analytics.track('blog_archive_view', {
+      total_posts: {{ totalPosts }},
+      total_authors: {{ uniqueAuthors.length }},
+      total_tags: {{ allTags.length }}
+    });
+  }
+
+  // Initial filter execution
+  performFilter();
+});
 </script>

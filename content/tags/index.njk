@@ -1,0 +1,413 @@
+---
+title: "Tags - nightdogs"
+layout: layouts/base.njk
+permalink: /tags/
+eleventyNavigation:
+  key: Tags
+  order: 4
+---
+
+<style>
+.tags-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.page-title {
+  font-size: 3rem;
+  margin: 0 0 1rem 0;
+  color: var(--color);
+}
+
+.page-subtitle {
+  font-size: 1.2rem;
+  color: var(--muted-color);
+  margin: 0;
+}
+
+.tags-overview {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.overview-stat {
+  text-align: center;
+  padding: 1.5rem;
+  background: var(--background-color);
+  border: 2px solid var(--primary);
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.overview-stat:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.overview-number {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.overview-label {
+  font-size: 1rem;
+  color: var(--color);
+  margin: 0;
+}
+
+.tag-cloud-section {
+  margin-bottom: 4rem;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2rem;
+  margin: 0 0 2rem 0;
+  color: var(--color);
+}
+
+.tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 2rem;
+  background: var(--background-color);
+  border: 2px solid var(--primary);
+  border-radius: 12px;
+  min-height: 200px;
+}
+
+.tag-cloud-item {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  background: var(--primary);
+  color: var(--background-color);
+  text-decoration: none;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+}
+
+.tag-cloud-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.tag-cloud-item:hover::before {
+  left: 100%;
+}
+
+.tag-cloud-item:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 10;
+}
+
+.tag-cloud-item.size-xs { font-size: 0.8rem; opacity: 0.7; }
+.tag-cloud-item.size-sm { font-size: 0.9rem; opacity: 0.8; }
+.tag-cloud-item.size-md { font-size: 1rem; opacity: 0.9; }
+.tag-cloud-item.size-lg { font-size: 1.2rem; opacity: 1; }
+.tag-cloud-item.size-xl { font-size: 1.4rem; opacity: 1; font-weight: bold; }
+
+.popular-tags {
+  margin-bottom: 3rem;
+}
+
+.tags-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.tag-card {
+  background: var(--background-color);
+  border: 1px solid var(--primary);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.tag-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  border-color: var(--color);
+  text-decoration: none;
+}
+
+.tag-card:hover * {
+  color: inherit;
+}
+
+.tag-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.tag-card-name {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--color);
+  margin: 0;
+}
+
+.tag-card-count {
+  background: var(--primary);
+  color: var(--background-color);
+  padding: 0.3rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.tag-card-authors {
+  font-size: 0.9rem;
+  color: var(--muted-color);
+  margin-bottom: 1rem;
+}
+
+.tag-card-preview {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--color);
+  opacity: 0.8;
+}
+
+.view-all-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 3rem;
+  padding: 1rem 2rem;
+  background: var(--primary);
+  color: var(--background-color);
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.view-all-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+@media (max-width: 768px) {
+  .tags-page {
+    padding: 1rem;
+  }
+
+  .page-title {
+    font-size: 2.5rem;
+  }
+
+  .tags-overview {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .tags-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tag-cloud {
+    padding: 1.5rem;
+  }
+
+  .tag-cloud-item {
+    font-size: 0.9rem !important;
+  }
+}
+</style>
+
+<div class="tags-page">
+  <div class="page-header">
+    <h1 class="page-title">🏷️ Explore by Tags</h1>
+    <p class="page-subtitle">
+      Discover content organized by topics, themes, and interests
+    </p>
+  </div>
+
+  {% set allTags = collections.blog | getAllTags %}
+  {% set tagStats = collections.blog | getTagStats %}
+  {% set totalPosts = collections.blog.length %}
+
+  <div class="tags-overview">
+    <div class="overview-stat">
+      <span class="overview-number">{{ allTags.length }}</span>
+      <p class="overview-label">Unique Tags</p>
+    </div>
+    <div class="overview-stat">
+      <span class="overview-number">{{ totalPosts }}</span>
+      <p class="overview-label">Tagged Posts</p>
+    </div>
+    <div class="overview-stat">
+      <span class="overview-number">{{ (tagStats | mostUsedTag).count if tagStats.length > 0 else 0 }}</span>
+      <p class="overview-label">Most Used</p>
+    </div>
+    <div class="overview-stat">
+      <span class="overview-number">{{ authors | getKeys | length }}</span>
+      <p class="overview-label">Contributors</p>
+    </div>
+  </div>
+
+  <div class="tag-cloud-section">
+    <h2 class="section-title">Tag Cloud</h2>
+    <p style="text-align: center; margin-bottom: 2rem; color: var(--muted-color);">
+      Larger tags indicate more posts. Click any tag to explore related content.
+    </p>
+    <div class="tag-cloud">
+      {% for tagInfo in tagStats | head(30) %}
+        {% set sizeClass = tagInfo | getTagSizeClass %}
+        {% set tagDesc = tagDescriptions.tags[tagInfo.tag] %}
+        <a href="/tags/{{ tagInfo.tag }}/" class="tag-cloud-item {{ sizeClass }}"
+           {% if tagDesc and tagDesc.color %}style="background: {{ tagDesc.color }};"{% endif %}>
+          {% if tagDesc and tagDesc.icon %}{{ tagDesc.icon }} {% endif %}#{{ tagInfo.tag }}
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="popular-tags">
+    <h2 class="section-title">Popular Tags</h2>
+    <div class="tags-grid">
+      {% for tagInfo in tagStats | head(12) %}
+        {% set taggedPosts = collections.blog | filterByTag(tagInfo.tag) %}
+        {% set uniqueAuthors = taggedPosts | getUniqueAuthors %}
+        {% set recentPost = taggedPosts | reverse | head(1) | first %}
+
+        {% set tagDesc = tagDescriptions.tags[tagInfo.tag] %}
+        <a href="/tags/{{ tagInfo.tag }}/" class="tag-card"
+           {% if tagDesc and tagDesc.color %}style="border-color: {{ tagDesc.color }};"{% endif %}>
+          <div class="tag-card-header">
+            <h3 class="tag-card-name">
+              {% if tagDesc and tagDesc.icon %}{{ tagDesc.icon }} {% endif %}#{{ tagInfo.tag }}
+            </h3>
+            <span class="tag-card-count"
+                 {% if tagDesc and tagDesc.color %}style="background: {{ tagDesc.color }};"{% endif %}>
+              {{ tagInfo.count }}
+            </span>
+          </div>
+          <div class="tag-card-authors">
+            {% if uniqueAuthors.length == 1 %}
+              by {{ authors[uniqueAuthors[0]].name }}
+            {% elif uniqueAuthors.length == 2 %}
+              by {{ authors[uniqueAuthors[0]].name }} & {{ authors[uniqueAuthors[1]].name }}
+            {% else %}
+              by {{ uniqueAuthors.length }} authors
+            {% endif %}
+          </div>
+          {% if tagDesc and tagDesc.description %}
+            <p class="tag-card-preview">{{ tagDesc.description }}</p>
+          {% elif recentPost and recentPost.data.description %}
+            <p class="tag-card-preview">
+              "{{ recentPost.data.description | striptags | truncate(100) }}"
+            </p>
+          {% endif %}
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div style="text-align: center;">
+    <a href="/blog/" class="view-all-link">
+      📚 View All Posts
+    </a>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Add tag cloud animation on load
+  const tagItems = document.querySelectorAll('.tag-cloud-item');
+  tagItems.forEach((item, index) => {
+    item.style.opacity = '0';
+    item.style.transform = 'translateY(20px)';
+
+    setTimeout(() => {
+      item.style.transition = 'all 0.4s ease';
+      item.style.opacity = '1';
+      item.style.transform = 'translateY(0)';
+    }, index * 50);
+  });
+
+  // Add search functionality for tags
+  const tagSearch = document.createElement('div');
+  tagSearch.innerHTML = `
+    <div style="text-align: center; margin: 2rem 0;">
+      <input type="text" id="tag-search" placeholder="🔍 Search tags..."
+             style="padding: 0.75rem; border: 2px solid var(--primary); border-radius: 8px;
+                    background: var(--background-color); color: var(--color); font-size: 1rem;
+                    width: 100%; max-width: 400px; transition: all 0.2s ease;">
+    </div>
+  `;
+
+  const tagCloudSection = document.querySelector('.tag-cloud-section');
+  tagCloudSection.appendChild(tagSearch);
+
+  // Enhanced search input styling
+  const searchInput = document.getElementById('tag-search');
+  searchInput.addEventListener('focus', function() {
+    this.style.borderColor = 'var(--color)';
+    this.style.boxShadow = '0 0 0 3px rgba(0,0,0,0.1)';
+  });
+
+  searchInput.addEventListener('blur', function() {
+    this.style.borderColor = 'var(--primary)';
+    this.style.boxShadow = 'none';
+  });
+
+  // Tag search functionality
+  const searchInput = document.getElementById('tag-search');
+  searchInput.addEventListener('input', function() {
+    const query = this.value.toLowerCase();
+    const tagItems = document.querySelectorAll('.tag-cloud-item, .tag-card');
+
+    tagItems.forEach(item => {
+      const tagText = item.textContent.toLowerCase();
+      const matches = tagText.includes(query);
+      item.style.display = matches ? '' : 'none';
+
+      if (matches && query.length > 0) {
+        item.style.transform = 'scale(1.05)';
+        item.style.opacity = '1';
+      } else {
+        item.style.transform = '';
+        item.style.opacity = query.length > 0 && !matches ? '0.3' : '';
+      }
+    });
+  });
+
+  // Analytics tracking
+  if (window.analytics) {
+    window.analytics.track('tags_page_view', {
+      total_tags: {{ allTags.length }},
+      total_posts: {{ totalPosts }}
+    });
+  }
+});
+</script>

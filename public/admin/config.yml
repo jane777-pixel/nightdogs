@@ -137,6 +137,196 @@ collections:
           widget: "text",
           required: false,
         }
+  - name: "tags"
+    label: "Tag Management"
+    files:
+      - label: "Tag Descriptions"
+        name: "tag-descriptions"
+        file: "_data/tag-descriptions.json"
+        fields:
+          - {
+              label: "Tag Descriptions",
+              name: "tags",
+              widget: "object",
+              fields:
+                [
+                  {
+                    label: "Technology",
+                    name: "technology",
+                    widget: "object",
+                    fields:
+                      [
+                        {
+                          label: "Description",
+                          name: "description",
+                          widget: "text",
+                        },
+                        {
+                          label: "Icon",
+                          name: "icon",
+                          widget: "string",
+                          default: "💻",
+                        },
+                        {
+                          label: "Color",
+                          name: "color",
+                          widget: "string",
+                          default: "#007acc",
+                        },
+                      ],
+                  },
+                  {
+                    label: "Music",
+                    name: "music",
+                    widget: "object",
+                    fields:
+                      [
+                        {
+                          label: "Description",
+                          name: "description",
+                          widget: "text",
+                        },
+                        {
+                          label: "Icon",
+                          name: "icon",
+                          widget: "string",
+                          default: "🎵",
+                        },
+                        {
+                          label: "Color",
+                          name: "color",
+                          widget: "string",
+                          default: "#ff6b6b",
+                        },
+                      ],
+                  },
+                  {
+                    label: "Life",
+                    name: "life",
+                    widget: "object",
+                    fields:
+                      [
+                        {
+                          label: "Description",
+                          name: "description",
+                          widget: "text",
+                        },
+                        {
+                          label: "Icon",
+                          name: "icon",
+                          widget: "string",
+                          default: "🌱",
+                        },
+                        {
+                          label: "Color",
+                          name: "color",
+                          widget: "string",
+                          default: "#4ecdc4",
+                        },
+                      ],
+                  },
+                  {
+                    label: "Creative",
+                    name: "creative",
+                    widget: "object",
+                    fields:
+                      [
+                        {
+                          label: "Description",
+                          name: "description",
+                          widget: "text",
+                        },
+                        {
+                          label: "Icon",
+                          name: "icon",
+                          widget: "string",
+                          default: "🎨",
+                        },
+                        {
+                          label: "Color",
+                          name: "color",
+                          widget: "string",
+                          default: "#ffe66d",
+                        },
+                      ],
+                  },
+                  {
+                    label: "Personal",
+                    name: "personal",
+                    widget: "object",
+                    fields:
+                      [
+                        {
+                          label: "Description",
+                          name: "description",
+                          widget: "text",
+                        },
+                        {
+                          label: "Icon",
+                          name: "icon",
+                          widget: "string",
+                          default: "💭",
+                        },
+                        {
+                          label: "Color",
+                          name: "color",
+                          widget: "string",
+                          default: "#a8e6cf",
+                        },
+                      ],
+                  },
+                  {
+                    label: "Tutorial",
+                    name: "tutorial",
+                    widget: "object",
+                    fields:
+                      [
+                        {
+                          label: "Description",
+                          name: "description",
+                          widget: "text",
+                        },
+                        {
+                          label: "Icon",
+                          name: "icon",
+                          widget: "string",
+                          default: "📚",
+                        },
+                        {
+                          label: "Color",
+                          name: "color",
+                          widget: "string",
+                          default: "#ffd93d",
+                        },
+                      ],
+                  },
+                  {
+                    label: "Review",
+                    name: "review",
+                    widget: "object",
+                    fields:
+                      [
+                        {
+                          label: "Description",
+                          name: "description",
+                          widget: "text",
+                        },
+                        {
+                          label: "Icon",
+                          name: "icon",
+                          widget: "string",
+                          default: "⭐",
+                        },
+                        {
+                          label: "Color",
+                          name: "color",
+                          widget: "string",
+                          default: "#ff8b94",
+                        },
+                      ],
+                  },
+                ],
+            }
   - name: "authors"
     label: "Authors"
     files:

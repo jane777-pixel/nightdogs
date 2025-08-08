@@ -1,0 +1,104 @@
+{
+  "tags": {
+    "technology": {
+      "description": "Posts about programming, web development, software, and digital innovation",
+      "icon": "💻",
+      "color": "#007acc"
+    },
+    "music": {
+      "description": "Musical thoughts, album reviews, artist spotlights, and sonic explorations",
+      "icon": "🎵",
+      "color": "#ff6b6b"
+    },
+    "life": {
+      "description": "Personal reflections, life experiences, and philosophical musings",
+      "icon": "🌱",
+      "color": "#4ecdc4"
+    },
+    "creative": {
+      "description": "Art, design, creativity, and artistic processes and inspirations",
+      "icon": "🎨",
+      "color": "#ffe66d"
+    },
+    "personal": {
+      "description": "Individual stories, personal experiences, and intimate thoughts",
+      "icon": "💭",
+      "color": "#a8e6cf"
+    },
+    "tutorial": {
+      "description": "Step-by-step guides, how-to articles, and educational content",
+      "icon": "📚",
+      "color": "#ffd93d"
+    },
+    "review": {
+      "description": "Reviews of books, movies, music, games, and other media",
+      "icon": "⭐",
+      "color": "#ff8b94"
+    },
+    "travel": {
+      "description": "Adventures, destinations, and stories from around the world",
+      "icon": "✈️",
+      "color": "#74c0fc"
+    },
+    "food": {
+      "description": "Culinary adventures, recipes, restaurant reviews, and food culture",
+      "icon": "🍽️",
+      "color": "#ffa94d"
+    },
+    "gaming": {
+      "description": "Video games, board games, gaming culture, and interactive experiences",
+      "icon": "🎮",
+      "color": "#51cf66"
+    },
+    "books": {
+      "description": "Literary discussions, book reviews, reading recommendations, and bookish thoughts",
+      "icon": "📖",
+      "color": "#845ef7"
+    },
+    "photography": {
+      "description": "Visual storytelling, photo techniques, and captured moments",
+      "icon": "📸",
+      "color": "#fd7e14"
+    },
+    "nature": {
+      "description": "The outdoors, environmental topics, wildlife, and natural beauty",
+      "icon": "🌿",
+      "color": "#40c057"
+    },
+    "wellness": {
+      "description": "Mental health, self-care, fitness, and overall well-being",
+      "icon": "🧘",
+      "color": "#fab005"
+    },
+    "community": {
+      "description": "Social connections, group activities, and collective experiences",
+      "icon": "👥",
+      "color": "#339af0"
+    },
+    "thoughts": {
+      "description": "Random musings, shower thoughts, and spontaneous reflections",
+      "icon": "💡",
+      "color": "#f783ac"
+    },
+    "nightdogs": {
+      "description": "Meta posts about the nightdogs community and blog itself",
+      "icon": "🐕",
+      "color": "#495057"
+    },
+    "humor": {
+      "description": "Funny observations, jokes, and lighthearted content",
+      "icon": "😄",
+      "color": "#ffd43b"
+    },
+    "culture": {
+      "description": "Cultural commentary, social observations, and societal reflections",
+      "icon": "🏛️",
+      "color": "#e599f7"
+    },
+    "science": {
+      "description": "Scientific discoveries, research, and STEM-related discussions",
+      "icon": "🔬",
+      "color": "#20c997"
+    }
+  }
+}

@@ -179,4 +179,119 @@ export default function (eleventyConfig) {
 		if (text.length <= length) return text;
 		return text.substring(0, length).trim() + "...";
 	});
+
+	// Filter posts by tag
+	eleventyConfig.addFilter("filterByTag", (posts, tag) => {
+		if (!posts || !tag) return [];
+		return posts.filter((post) => {
+			const tags = post.data.tags || [];
+			return tags.includes(tag);
+		});
+	});
+
+	// Get unique authors from a list of posts
+	eleventyConfig.addFilter("getUniqueAuthors", (posts) => {
+		if (!posts || !Array.isArray(posts)) return [];
+		const authors = new Set();
+		posts.forEach((post) => {
+			if (post.data.author) {
+				authors.add(post.data.author);
+			}
+		});
+		return Array.from(authors).sort();
+	});
+
+	// Get tags that often appear together with the current tag
+	eleventyConfig.addFilter("getRelatedTags", (posts, currentTag, limit = 6) => {
+		if (!posts || !currentTag) return [];
+
+		const tagCooccurrence = {};
+		const excludeTags = new Set(["posts", "blog", "all", currentTag]);
+
+		// Count tag co-occurrences
+		posts.forEach((post) => {
+			const tags = (post.data.tags || []).filter(
+				(tag) => !excludeTags.has(tag),
+			);
+			if (tags.includes(currentTag)) {
+				tags.forEach((tag) => {
+					if (tag !== currentTag) {
+						tagCooccurrence[tag] = (tagCooccurrence[tag] || 0) + 1;
+					}
+				});
+			}
+		});
+
+		// Sort by frequency and return top results
+		return Object.entries(tagCooccurrence)
+			.map(([tag, count]) => ({ tag, count }))
+			.sort((a, b) => b.count - a.count)
+			.slice(0, limit);
+	});
+
+	// Get all unique tags from blog posts
+	eleventyConfig.addFilter("getAllTags", (posts) => {
+		if (!posts || !Array.isArray(posts)) return [];
+		const allTags = new Set();
+		const excludeTags = new Set(["posts", "blog", "all"]);
+
+		posts.forEach((post) => {
+			const tags = post.data.tags || [];
+			tags.forEach((tag) => {
+				if (!excludeTags.has(tag)) {
+					allTags.add(tag);
+				}
+			});
+		});
+
+		return Array.from(allTags).sort();
+	});
+
+	// Get tag statistics with counts
+	eleventyConfig.addFilter("getTagStats", (tags) => {
+		if (!tags || !Array.isArray(tags)) return [];
+
+		const tagCounts = {};
+		const excludeTags = new Set(["posts", "blog", "all"]);
+
+		// Get all blog posts
+		const blogPosts = tags; // This will be blog posts when called from template
+
+		// Count tag occurrences
+		if (Array.isArray(blogPosts)) {
+			blogPosts.forEach((post) => {
+				const postTags = post.data?.tags || [];
+				postTags.forEach((tag) => {
+					if (!excludeTags.has(tag)) {
+						tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+					}
+				});
+			});
+		}
+
+		// Convert to array and sort by count
+		return Object.entries(tagCounts)
+			.map(([tag, count]) => ({ tag, count }))
+			.sort((a, b) => b.count - a.count);
+	});
+
+	// Get the most used tag
+	eleventyConfig.addFilter("mostUsedTag", (tagStats) => {
+		if (!tagStats || !Array.isArray(tagStats) || tagStats.length === 0) {
+			return { tag: "", count: 0 };
+		}
+		return tagStats[0];
+	});
+
+	// Get CSS size class for tag cloud based on frequency
+	eleventyConfig.addFilter("getTagSizeClass", (tagInfo) => {
+		if (!tagInfo || !tagInfo.count) return "size-xs";
+
+		const count = tagInfo.count;
+		if (count >= 10) return "size-xl";
+		if (count >= 7) return "size-lg";
+		if (count >= 4) return "size-md";
+		if (count >= 2) return "size-sm";
+		return "size-xs";
+	});
 }
