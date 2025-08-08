@@ -75,6 +75,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		{{ content | safe }}
 	</div>
 
+	{%- include "recommendations.njk" -%}
+
 	{%- if collections.posts %}
 	<ul class="links-nextprev">
 		{%- set nextPost = collections.posts | getNextCollectionItem(page) %} {%- if

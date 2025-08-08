@@ -1,0 +1,497 @@
+{# Content Recommendations Widget #}
+{# This include should be called with: {% include "recommendations.njk" %} #}
+
+<style>
+.recommendations-widget {
+  margin: 4rem 0 2rem 0;
+  padding: 2rem;
+  background: var(--background-color);
+  border: 2px solid var(--primary);
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.recommendations-widget::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--color), var(--primary));
+}
+
+.recommendations-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.recommendations-title {
+  font-size: 1.8rem;
+  margin: 0 0 0.5rem 0;
+  color: var(--color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.recommendations-subtitle {
+  font-size: 1rem;
+  color: var(--muted-color);
+  margin: 0;
+}
+
+.recommendation-sections {
+  display: grid;
+  gap: 2rem;
+}
+
+.recommendation-section {
+  margin-bottom: 2rem;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color);
+}
+
+.recommendation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.recommendation-card {
+  padding: 1.5rem;
+  border: 1px solid var(--primary);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  background: var(--background-color);
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  position: relative;
+}
+
+.recommendation-card:hover {
+  background: var(--primary);
+  color: var(--background-color);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  text-decoration: none;
+}
+
+.recommendation-card:hover * {
+  color: inherit;
+}
+
+.rec-post-title {
+  margin: 0 0 0.75rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.rec-post-meta {
+  display: flex;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.rec-post-excerpt {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0;
+  opacity: 0.9;
+}
+
+.rec-author-link {
+  color: inherit;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.rec-author-link:hover {
+  text-decoration: underline;
+}
+
+.shared-tags {
+  display: flex;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.shared-tag {
+  background: var(--muted-color);
+  color: var(--background-color);
+  padding: 0.1rem 0.4rem;
+  border-radius: 8px;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.recommendation-card:hover .shared-tag {
+  background: rgba(255,255,255,0.3);
+}
+
+.view-more-section {
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--primary);
+}
+
+.view-more-links {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.view-more-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background: var(--primary);
+  color: var(--background-color);
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.view-more-link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.algorithm-note {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.8rem;
+  color: var(--muted-color);
+  opacity: 0.7;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .recommendations-widget {
+    padding: 1.5rem;
+    margin: 3rem 0 1rem 0;
+  }
+
+  .recommendations-title {
+    font-size: 1.5rem;
+  }
+
+  .recommendation-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .view-more-links {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .view-more-link {
+    width: 100%;
+    max-width: 250px;
+    justify-content: center;
+  }
+}
+</style>
+
+<div class="recommendations-widget">
+  <div class="recommendations-header">
+    <h2 class="recommendations-title">
+      <span>🔍</span>
+      Discover More
+    </h2>
+    <p class="recommendations-subtitle">
+      Curated content based on this post's topics and author
+    </p>
+  </div>
+
+  <div class="recommendation-sections">
+    <!-- Related Posts by Tags -->
+    {% set relatedByTags = collections.posts | relatedPosts(page, 3) %}
+    {% if relatedByTags.length > 0 %}
+      <div class="recommendation-section">
+        <h3 class="section-header">
+          <span>🏷️</span>
+          Similar Topics
+        </h3>
+        <div class="recommendation-grid">
+          {% for related in relatedByTags %}
+            {% set post = related.post %}
+            <a href="{{ post.url }}" class="recommendation-card">
+              <h4 class="rec-post-title">{{ post.data.title }}</h4>
+              <div class="rec-post-meta">
+                <span>{{ post.date | readableDate }}</span>
+                <span>by <span class="rec-author-link">{{ authors[post.data.author].name }}</span></span>
+                {% if post.data.readingTime %}
+                  <span>{{ post.data.readingTime.text }}</span>
+                {% endif %}
+              </div>
+              {% if post.data.description %}
+                <p class="rec-post-excerpt">{{ post.data.description | truncate(120) }}</p>
+              {% endif %}
+              {% if related.sharedTags.length > 0 %}
+                <div class="shared-tags">
+                  {% for tag in related.sharedTags | head(3) %}
+                    <span class="shared-tag">#{{ tag }}</span>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+
+    <!-- More from Same Author -->
+    {% if author %}
+      {% set authorPosts = collections.posts | filterByAuthor(author) | reverse %}
+      {% set otherAuthorPosts = authorPosts | reject("url", page.url) | head(2) %}
+      {% if otherAuthorPosts.length > 0 %}
+        <div class="recommendation-section">
+          <h3 class="section-header">
+            <span>✍️</span>
+            More from {{ authors[author].name }}
+          </h3>
+          <div class="recommendation-grid">
+            {% for post in otherAuthorPosts %}
+              <a href="{{ post.url }}" class="recommendation-card">
+                <h4 class="rec-post-title">{{ post.data.title }}</h4>
+                <div class="rec-post-meta">
+                  <span>{{ post.date | readableDate }}</span>
+                  {% if post.data.readingTime %}
+                    <span>{{ post.data.readingTime.text }}</span>
+                  {% endif %}
+                </div>
+                {% if post.data.description %}
+                  <p class="rec-post-excerpt">{{ post.data.description | truncate(120) }}</p>
+                {% endif %}
+              </a>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    {% endif %}
+
+    <!-- Fresh Perspectives (Other Authors) -->
+    {% set otherAuthorsPosts = collections.posts | reject("data.author", author) | reverse | head(2) %}
+    {% if otherAuthorsPosts.length > 0 %}
+      <div class="recommendation-section">
+        <h3 class="section-header">
+          <span>🌟</span>
+          Fresh Perspectives
+        </h3>
+        <div class="recommendation-grid">
+          {% for post in otherAuthorsPosts %}
+            <a href="{{ post.url }}" class="recommendation-card">
+              <h4 class="rec-post-title">{{ post.data.title }}</h4>
+              <div class="rec-post-meta">
+                <span>{{ post.date | readableDate }}</span>
+                <span>by <a href="/authors/{{ post.data.author }}/" class="rec-author-link">{{ authors[post.data.author].name }}</a></span>
+                {% if post.data.readingTime %}
+                  <span>{{ post.data.readingTime.text }}</span>
+                {% endif %}
+              </div>
+              {% if post.data.description %}
+                <p class="rec-post-excerpt">{{ post.data.description | truncate(120) }}</p>
+              {% endif %}
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+
+    <!-- Random Discovery (if not enough related content) -->
+    {% if relatedByTags.length < 2 %}
+      {% set randomPosts = collections.posts | reject("url", page.url) | randomSample(2) %}
+      {% if randomPosts.length > 0 %}
+        <div class="recommendation-section">
+          <h3 class="section-header">
+            <span>🎲</span>
+            Random Discovery
+          </h3>
+          <div class="recommendation-grid">
+            {% for post in randomPosts %}
+              <a href="{{ post.url }}" class="recommendation-card">
+                <h4 class="rec-post-title">{{ post.data.title }}</h4>
+                <div class="rec-post-meta">
+                  <span>{{ post.date | readableDate }}</span>
+                  <span>by <a href="/authors/{{ post.data.author }}/" class="rec-author-link">{{ authors[post.data.author].name }}</a></span>
+                  {% if post.data.readingTime %}
+                    <span>{{ post.data.readingTime.text }}</span>
+                  {% endif %}
+                </div>
+                {% if post.data.description %}
+                  <p class="rec-post-excerpt">{{ post.data.description | truncate(120) }}</p>
+                {% endif %}
+              </a>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    {% endif %}
+  </div>
+
+  <div class="view-more-section">
+    <div class="view-more-links">
+      <a href="/blog/" class="view-more-link">
+        <span>📚</span>
+        View All Posts
+      </a>
+      {% if author %}
+        <a href="/authors/{{ author }}/" class="view-more-link">
+          <span>👤</span>
+          {{ authors[author].name }}'s Profile
+        </a>
+      {% endif %}
+      <a href="/tags/" class="view-more-link">
+        <span>🏷️</span>
+        Browse Tags
+      </a>
+      <a href="/authors/" class="view-more-link">
+        <span>👥</span>
+        Meet Authors
+      </a>
+    </div>
+
+    <p class="algorithm-note">
+      Recommendations powered by tag similarity, author affinity, and discovery algorithms
+    </p>
+  </div>
+</div>
+
+<script>
+// Recommendation widget functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const recommendationCards = document.querySelectorAll('.recommendation-card');
+
+  // Add keyboard navigation
+  recommendationCards.forEach((card, index) => {
+    card.setAttribute('tabindex', '0');
+
+    card.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        window.location.href = this.href;
+      }
+
+      // Arrow key navigation
+      if (e.key === 'ArrowRight' && index < recommendationCards.length - 1) {
+        e.preventDefault();
+        recommendationCards[index + 1].focus();
+      }
+
+      if (e.key === 'ArrowLeft' && index > 0) {
+        e.preventDefault();
+        recommendationCards[index - 1].focus();
+      }
+    });
+  });
+
+  // Analytics tracking for recommendations
+  recommendationCards.forEach(card => {
+    card.addEventListener('click', function() {
+      if (window.analytics) {
+        const section = this.closest('.recommendation-section').querySelector('.section-header').textContent.trim();
+        window.analytics.track('recommendation_click', {
+          section: section,
+          target_url: this.href,
+          source_url: window.location.href
+        });
+      }
+    });
+  });
+
+  // Lazy load recommendation images if any
+  if ('IntersectionObserver' in window) {
+    const imageObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          if (img.dataset.src) {
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+            imageObserver.unobserve(img);
+          }
+        }
+      });
+    });
+
+    document.querySelectorAll('img[data-src]').forEach(img => {
+      imageObserver.observe(img);
+    });
+  }
+
+  // Add hover effect with author theme preview
+  recommendationCards.forEach(card => {
+    card.addEventListener('mouseenter', function() {
+      // Get author from the card
+      const authorLink = this.querySelector('.rec-author-link');
+      if (authorLink) {
+        const authorName = authorLink.textContent.trim();
+        // Find author key by name
+        const authors = {
+          {% for authorKey, authorData in authors %}
+            "{{ authorData.name }}": "{{ authorKey }}"{% if not loop.last %},{% endif %}
+          {% endfor %}
+        };
+
+        const authorKey = authors[authorName];
+        if (authorKey) {
+          // Briefly preview the author's theme
+          const currentAuthor = document.documentElement.getAttribute('data-author');
+          const authorSelectors = document.querySelectorAll('.author-sync');
+
+          // Store original for restoration
+          this.dataset.originalAuthor = currentAuthor;
+
+          // Preview new author theme
+          authorSelectors.forEach(selector => {
+            selector.value = authorKey;
+            selector.dispatchEvent(new Event('change'));
+          });
+        }
+      }
+    });
+
+    card.addEventListener('mouseleave', function() {
+      // Restore original author theme
+      if (this.dataset.originalAuthor) {
+        const authorSelectors = document.querySelectorAll('.author-sync');
+        authorSelectors.forEach(selector => {
+          selector.value = this.dataset.originalAuthor;
+          selector.dispatchEvent(new Event('change'));
+        });
+        delete this.dataset.originalAuthor;
+      }
+    });
+  });
+
+  // Track widget view
+  if (window.analytics) {
+    window.analytics.track('recommendations_widget_view', {
+      post_url: window.location.href,
+      recommendations_shown: recommendationCards.length
+    });
+  }
+});
+</script>

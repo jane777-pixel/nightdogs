@@ -3,6 +3,14 @@ const eleventyNavigation = {
 	key: "Archive",
 	order: 2
 };
+
+// Pagination configuration
+const pagination = {
+	data: "collections.posts",
+	size: 12,
+	alias: "posts",
+	reverse: true
+};
 ---
 
 <style>
@@ -261,10 +269,10 @@ const eleventyNavigation = {
       Explore all posts from the nightdogs community
     </p>
 
-    {% set totalPosts = collections.blog.length %}
-    {% set totalWords = collections.blog | totalWordCount %}
-    {% set allTags = collections.blog | getAllTags %}
-    {% set uniqueAuthors = collections.blog | getUniqueAuthors %}
+    {% set totalPosts = collections.posts.length %}
+    {% set totalWords = collections.posts | totalWordCount %}
+    {% set allTags = collections.posts | getAllTags %}
+    {% set uniqueAuthors = collections.posts | getUniqueAuthors %}
 
     <div class="blog-stats">
       <div class="blog-stat">
@@ -320,7 +328,7 @@ const eleventyNavigation = {
         <select id="year-filter" class="filter-select">
           <option value="all">All Years</option>
           {% set allYears = [] %}
-          {% for post in collections.blog %}
+          {% for post in collections.posts %}
             {% set year = post.date | date("yyyy") %}
             {% if year not in allYears %}
               {% set allYears = allYears.concat([year]) %}
@@ -355,18 +363,43 @@ const eleventyNavigation = {
       <div class="posts-count" id="posts-count">
         {{ totalPosts }} posts found
       </div>
-      <div class="sort-options">
-        <span style="font-size: 0.9rem; color: var(--muted-color); margin-right: 0.5rem;">Sort:</span>
-        <button class="sort-button active" data-sort="date-desc">Newest</button>
-        <button class="sort-button" data-sort="date-asc">Oldest</button>
-        <button class="sort-button" data-sort="title">A-Z</button>
-        <button class="sort-button" data-sort="author">Author</button>
+      <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+        <div class="sort-options">
+          <span style="font-size: 0.9rem; color: var(--muted-color); margin-right: 0.5rem;">Sort:</span>
+          <button class="sort-button active" data-sort="date-desc">Newest</button>
+          <button class="sort-button" data-sort="date-asc">Oldest</button>
+          <button class="sort-button" data-sort="title">A-Z</button>
+          <button class="sort-button" data-sort="author">Author</button>
+        </div>
+        <div class="pagination-options">
+          <label for="page-size" style="font-size: 0.9rem; color: var(--muted-color);">Show:</label>
+          <select id="page-size" class="filter-select" style="padding: 0.3rem; font-size: 0.85rem;">
+            <option value="6">6 per page</option>
+            <option value="12" selected>12 per page</option>
+            <option value="24">24 per page</option>
+            <option value="all">Show all</option>
+          </select>
+        </div>
       </div>
     </div>
 
     <div id="posts-list">
-      {% set postslist = collections.blog %}
+      {% set postslist = collections.posts %}
       {% include "postslist.njk" %}
+    </div>
+
+    <div id="pagination-controls" style="text-align: center; margin-top: 3rem;">
+      <div style="display: flex; gap: 1rem; justify-content: center; align-items: center; flex-wrap: wrap;">
+        <button id="load-more" style="padding: 0.75rem 2rem; background: var(--primary); color: var(--background-color); border: none; border-radius: 8px; font-size: 1rem; cursor: pointer; transition: all 0.2s ease; display: none;">
+          📚 Load More Posts
+        </button>
+        <div id="pagination-info" style="font-size: 0.9rem; color: var(--muted-color);"></div>
+      </div>
+      <div style="margin-top: 1rem;">
+        <button id="show-all" style="padding: 0.5rem 1rem; background: none; border: 1px solid var(--primary); color: var(--color); border-radius: 6px; font-size: 0.9rem; cursor: pointer; transition: all 0.2s ease;">
+          Show All Posts
+        </button>
+      </div>
     </div>
 
     <div id="no-results" class="no-results" style="display: none;">
@@ -404,9 +437,15 @@ document.addEventListener('DOMContentLoaded', function() {
   const clearFiltersBtn = document.getElementById("clear-filters");
   const clearFiltersAlt = document.getElementById("clear-filters-alt");
   const sortButtons = document.querySelectorAll(".sort-button");
+  const pageSizeSelect = document.getElementById("page-size");
+  const loadMoreBtn = document.getElementById("load-more");
+  const showAllBtn = document.getElementById("show-all");
+  const paginationInfo = document.getElementById("pagination-info");
 
   let currentSort = 'date-desc';
   let filteredPosts = Array.from(postItems);
+  let currentPageSize = 12;
+  let currentPage = 1;
 
   // Event listeners
   authorFilter.addEventListener("change", performFilter);
@@ -415,6 +454,9 @@ document.addEventListener('DOMContentLoaded', function() {
   searchInput.addEventListener("input", performFilter);
   clearFiltersBtn.addEventListener("click", clearAllFilters);
   clearFiltersAlt.addEventListener("click", clearAllFilters);
+  pageSizeSelect.addEventListener("change", handlePageSizeChange);
+  loadMoreBtn.addEventListener("click", loadMorePosts);
+  showAllBtn.addEventListener("click", showAllPosts);
 
   // Sort functionality
   sortButtons.forEach(button => {
@@ -463,6 +505,7 @@ document.addEventListener('DOMContentLoaded', function() {
     updateFilterStats(visibleCount);
     updateClearButton();
     sortPosts();
+    resetPagination();
 
     // Show/hide no results message
     noResults.style.display = visibleCount === 0 ? "block" : "none";
@@ -524,6 +567,73 @@ document.addEventListener('DOMContentLoaded', function() {
     yearFilter.value = "all";
     searchInput.value = "";
     performFilter();
+  }
+
+  function handlePageSizeChange() {
+    const newSize = pageSizeSelect.value;
+    currentPageSize = newSize === 'all' ? filteredPosts.length : parseInt(newSize);
+    resetPagination();
+    updatePagination();
+  }
+
+  function resetPagination() {
+    currentPage = 1;
+    updatePagination();
+  }
+
+  function updatePagination() {
+    if (currentPageSize >= filteredPosts.length) {
+      // Show all posts
+      filteredPosts.forEach(post => post.style.display = "");
+      loadMoreBtn.style.display = "none";
+      showAllBtn.style.display = "none";
+      paginationInfo.textContent = "";
+      return;
+    }
+
+    const totalPages = Math.ceil(filteredPosts.length / currentPageSize);
+    const startIndex = 0;
+    const endIndex = currentPage * currentPageSize;
+
+    // Hide all posts first
+    filteredPosts.forEach(post => post.style.display = "none");
+
+    // Show posts for current pages
+    filteredPosts.slice(startIndex, endIndex).forEach(post => {
+      post.style.display = "";
+    });
+
+    // Update pagination controls
+    const hasMore = endIndex < filteredPosts.length;
+    loadMoreBtn.style.display = hasMore ? "inline-block" : "none";
+    showAllBtn.style.display = hasMore ? "inline-block" : "none";
+
+    if (hasMore) {
+      const remaining = filteredPosts.length - endIndex;
+      loadMoreBtn.textContent = `📚 Load ${Math.min(currentPageSize, remaining)} More Posts`;
+      paginationInfo.textContent = `Showing ${endIndex} of ${filteredPosts.length} posts`;
+    } else {
+      paginationInfo.textContent = `Showing all ${filteredPosts.length} posts`;
+    }
+  }
+
+  function loadMorePosts() {
+    currentPage++;
+    updatePagination();
+
+    // Smooth scroll to new content
+    setTimeout(() => {
+      const newPosts = document.querySelectorAll('.postlist-item:nth-last-child(-n+' + currentPageSize + ')');
+      if (newPosts.length > 0) {
+        newPosts[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
+  }
+
+  function showAllPosts() {
+    currentPageSize = filteredPosts.length;
+    pageSizeSelect.value = 'all';
+    updatePagination();
   }
 
   // URL parameter handling for deep linking
@@ -603,5 +713,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Initial filter execution
   performFilter();
+
+  // Initialize pagination
+  updatePagination();
 });
 </script>

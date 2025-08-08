@@ -233,7 +233,7 @@ eleventyNavigation:
     </p>
   </div>
 
-  {% set allBlogPosts = collections.blog %}
+  {% set allBlogPosts = collections.posts %}
   {% set totalPosts = allBlogPosts.length %}
   {% set totalWords = allBlogPosts | totalWordCount %}
 
@@ -261,7 +261,7 @@ eleventyNavigation:
 
   <div class="authors-grid">
     {% for authorKey, authorData in authors %}
-      {% set authorPosts = collections.blog | filterByAuthor(authorKey) %}
+      {% set authorPosts = collections.posts | filterByAuthor(authorKey) %}
       {% set postCount = authorPosts.length %}
       {% set authorWords = authorPosts | totalWordCount %}
 

@@ -252,9 +252,9 @@ eleventyNavigation:
     </p>
   </div>
 
-  {% set allTags = collections.blog | getAllTags %}
-  {% set tagStats = collections.blog | getTagStats %}
-  {% set totalPosts = collections.blog.length %}
+  {% set allTags = collections.posts | getAllTags %}
+  {% set tagStats = collections.posts | getTagStats %}
+  {% set totalPosts = collections.posts.length %}
 
   <div class="tags-overview">
     <div class="overview-stat">
@@ -296,7 +296,7 @@ eleventyNavigation:
     <h2 class="section-title">Popular Tags</h2>
     <div class="tags-grid">
       {% for tagInfo in tagStats | head(12) %}
-        {% set taggedPosts = collections.blog | filterByTag(tagInfo.tag) %}
+        {% set taggedPosts = collections.posts | filterByTag(tagInfo.tag) %}
         {% set uniqueAuthors = taggedPosts | getUniqueAuthors %}
         {% set recentPost = taggedPosts | reverse | head(1) | first %}
 

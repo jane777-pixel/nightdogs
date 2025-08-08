@@ -141,11 +141,24 @@ export default function (eleventyConfig) {
 			if (post.data.readingTime && post.data.readingTime.words) {
 				return total + post.data.readingTime.words;
 			}
-			// Fallback: estimate from content
-			const content = post.content || post.templateContent || "";
-			const plainText = content.replace(/<[^>]*>/g, "");
-			const words = plainText.split(/\s+/).filter((word) => word.length > 0);
-			return total + words.length;
+			// Fallback: estimate from content safely
+			try {
+				const content = post.content || "";
+				if (content) {
+					const plainText = content.replace(/<[^>]*>/g, "");
+					const words = plainText
+						.split(/\s+/)
+						.filter((word) => word.length > 0);
+					return total + words.length;
+				}
+			} catch (e) {
+				// If content isn't available, skip this post
+				console.warn(
+					"Could not access content for word count:",
+					post.inputPath,
+				);
+			}
+			return total;
 		}, 0);
 	});
 
@@ -293,5 +306,35 @@ export default function (eleventyConfig) {
 		if (count >= 4) return "size-md";
 		if (count >= 2) return "size-sm";
 		return "size-xs";
+	});
+
+	// Reject items that match a property value
+	eleventyConfig.addFilter("reject", (array, property, value) => {
+		if (!array || !Array.isArray(array)) return [];
+		return array.filter((item) => {
+			if (property.includes(".")) {
+				// Handle nested properties like "data.author"
+				const props = property.split(".");
+				let obj = item;
+				for (const prop of props) {
+					obj = obj?.[prop];
+				}
+				return obj !== value;
+			}
+			return item[property] !== value;
+		});
+	});
+
+	// Get random sample from array
+	eleventyConfig.addFilter("randomSample", (array, count = 3) => {
+		if (!array || !Array.isArray(array)) return [];
+		if (array.length <= count) return array;
+
+		const shuffled = [...array];
+		for (let i = shuffled.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+		}
+		return shuffled.slice(0, count);
 	});
 }
