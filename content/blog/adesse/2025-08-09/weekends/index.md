@@ -8,6 +8,8 @@ tags:
   - cats
   - folkart
 ---
+⋇⊶⊰❣⊱⊷⋇✧⋇⊶⊰❣⊱⊷⋇
+
 lately weekends have been jam packed! i am at the concrete house today, i've missed being here in the quiet.
 
 ![](img_3824.jpg "lynchian grate and floors")
@@ -20,9 +22,9 @@ this weekend is abby's birthday get-together, some like it hot, and a car show m
 
 the folk art fest was crazy and fun, there was of course much folk art to be admired. my favourite was folk art that others might not consider folk art.
 
-![](img_3739.jpg "\"marble head\" (lion) and \"reflection\" (frog)")
+![](img_3739.jpg "\\"marble head\\" (lion) and \\"reflection\\" (frog)")
 
-![](img_3741.jpg "\"amber eye\"")
+![](img_3741.jpg "\\"amber eye\\"")
 
 we are going to miss seeing amelia every week!!!!!!!!!!!!! she invited us over for board games at rev. nicole's, we played botany it was very fun and i enjoyed the trinkets and collecting/sorting, also the aesthetics, which is allowed.
 
@@ -39,3 +41,5 @@ more on cats: we went to the jazz jam in chester at the f'ocs'le, and upon leavi
 this is what i get to see when i wake up early on a sunny morning. a moment of serenity before my brain starts thinking.
 
 ![](img_3723.jpg "sun shining thru sun and trees")
+
+⋇⊶⊰❣⊱⊷⋇✧⋇⊶⊰❣⊱⊷⋇
