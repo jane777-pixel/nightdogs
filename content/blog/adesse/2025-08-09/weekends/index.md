@@ -1,7 +1,7 @@
 ---
 title: weekends
 slug: wknds
-date: 2025-08-09T13:42:00.000-03:00
+date: 2025-08-09T15:14:00.000-03:00
 author: adesse
 tags:
   - posts
