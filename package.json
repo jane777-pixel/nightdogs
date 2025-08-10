@@ -4,15 +4,15 @@
 	"description": "A starter repository for a blog web site using the Eleventy site generator.",
 	"type": "module",
 	"scripts": {
-		"build": "npx @11ty/eleventy",
-		"build-fast": "ELEVENTY_ENV=production npx @11ty/eleventy",
-		"build-nocolor": "cross-env NODE_DISABLE_COLORS=1 npx @11ty/eleventy",
-		"build-ghpages": "npx @11ty/eleventy --pathprefix=/eleventy-base-blog/",
-		"start": "npx @11ty/eleventy --serve",
-		"start-ghpages": "npx @11ty/eleventy --pathprefix=/eleventy-base-blog/ --serve --quiet",
-		"debug": "cross-env DEBUG=Eleventy* npx @11ty/eleventy",
-		"debugstart": "cross-env DEBUG=Eleventy* npx @11ty/eleventy --serve --quiet",
-		"benchmark": "cross-env DEBUG=Eleventy:Benchmark* npx @11ty/eleventy"
+		"build": "eleventy",
+		"build-fast": "ELEVENTY_ENV=production eleventy",
+		"build-nocolor": "cross-env NODE_DISABLE_COLORS=1 eleventy",
+		"build-ghpages": "eleventy --pathprefix=/eleventy-base-blog/",
+		"start": "eleventy --serve",
+		"start-ghpages": "eleventy --pathprefix=/eleventy-base-blog/ --serve --quiet",
+		"debug": "cross-env DEBUG=Eleventy* eleventy",
+		"debugstart": "cross-env DEBUG=Eleventy* eleventy --serve --quiet",
+		"benchmark": "cross-env DEBUG=Eleventy:Benchmark* eleventy"
 	},
 	"repository": {
 		"type": "git",
