@@ -14,17 +14,18 @@ lately weekends have been jam packed! i am at the concrete house today, i've mis
 
 ![](img_3824.jpg "lynchian grate and floors")
 
-this weekend is abby's birthday get-together, some like it hot, and a car show my dad wants me to go to in uniacke. jane and i made abby a salad, i'm really glad she liked it. 
+this weekend is abby's birthday get-together, some like it hot, and a car show my dad wants me to go to in uniacke. jane and i made abby a salad, i'm really glad she liked it.
 
 ![](img_3808.jpg "jane putting flowers on the salad")
 
 ![](img_3816.jpg "yarn bowl")
 
 the folk art fest was crazy and fun, there was of course much folk art to be admired. my favourite was folk art that others might not consider folk art.
+{{INSERTED_CODE}}
 
-![](img_3739.jpg "\\"marble head\\" (lion) and \\"reflection\\" (frog)")
+![](img_3739.jpg "\"marble head\" (lion) and \"reflection\" (frog)")
 
-![](img_3741.jpg "\\"amber eye\\"")
+![](img_3741.jpg "\"amber eye\"")
 
 we are going to miss seeing amelia every week!!!!!!!!!!!!! she invited us over for board games at rev. nicole's, we played botany it was very fun and i enjoyed the trinkets and collecting/sorting, also the aesthetics, which is allowed.
 
