@@ -9,7 +9,7 @@ const API_URL = `https://webmention.io/api/mentions.json?domain=${DOMAIN}&token=
 export default async function () {
 	if (!API_TOKEN) {
 		console.warn(
-			"⚠️ Missing WEBMENTION_IO_TOKEN environment variable. Skipping webmention fetch."
+			"⚠️ Missing WEBMENTION_IO_TOKEN environment variable. Skipping webmention fetch.",
 		);
 		return {
 			mentions: [],
@@ -48,7 +48,7 @@ export default async function () {
 		const reposts = mentions.filter((m) => m["wm-property"] === "repost-of");
 		const replies = mentions.filter(
 			(m) =>
-				m["wm-property"] === "in-reply-to" || m["wm-property"] === "mention-of"
+				m["wm-property"] === "in-reply-to" || m["wm-property"] === "mention-of",
 		);
 
 		const webmentions = {

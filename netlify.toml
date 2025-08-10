@@ -1,15 +1,18 @@
 [build]
 publish = "_site"
-command = "npm ci && npm run build"
+command = "npm ci && npm run build-fast"
 
 [build.environment]
 NODE_VERSION = "22"
+ELEVENTY_ENV = "development"
+# Skip installing optional dependencies for faster builds
+NPM_FLAGS = "--omit=optional"
 
 [[plugins]]
 package = "netlify-plugin-cache"
 
 [plugins.inputs]
-paths = [".cache", "node_modules"]
+paths = [".cache"]
 
 [[redirects]]
 from = "/admin/*"

@@ -4,8 +4,10 @@
 	"description": "A starter repository for a blog web site using the Eleventy site generator.",
 	"type": "module",
 	"scripts": {
-		"build": "eleventy",
-		"build-fast": "ELEVENTY_ENV=production eleventy",
+		"build": "cross-env ELEVENTY_ENV=production eleventy",
+		"build-dev": "eleventy",
+		"build-fast": "cross-env ELEVENTY_ENV=development eleventy",
+		"optimize-images": "node scripts/optimize-images.js",
 		"build-nocolor": "cross-env NODE_DISABLE_COLORS=1 eleventy",
 		"build-ghpages": "eleventy --pathprefix=/eleventy-base-blog/",
 		"start": "eleventy --serve",
@@ -37,8 +39,10 @@
 	"homepage": "https://github.com/11ty/eleventy-base-blog#readme",
 	"devDependencies": {
 		"cross-env": "^7.0.3",
+		"glob": "^11.0.0",
 		"netlify-plugin-cache": "^1.0.3",
 		"prismjs": "^1.30.0",
+		"sharp": "^0.33.5",
 		"zod": "^3.25.67",
 		"zod-validation-error": "^3.5.2"
 	},

@@ -92,66 +92,76 @@ export default async function (eleventyConfig) {
 	});
 
 	// Image optimization: https://www.11ty.dev/docs/plugins/image/#eleventy-transform
-	eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
-		// WebP-first optimization with AVIF for maximum compression
-		formats: ["avif", "webp", "auto"],
+	// Use different settings based on environment
+	const isProduction =
+		process.env.ELEVENTY_ENV === "production" ||
+		process.env.NODE_ENV === "production";
+	const isDevelopment = process.env.ELEVENTY_RUN_MODE === "serve";
 
-		// Responsive widths for better performance across devices
-		widths: [320, 640, 960, 1280, 1920],
+	if (!isDevelopment) {
+		eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
+			// Production: Optimized for quality
+			formats: isProduction ? ["avif", "webp", "auto"] : ["webp", "auto"],
 
-		failOnError: false,
+			// Production: Full responsive widths, Development: Minimal
+			widths: isProduction ? [320, 640, 960, 1280, 1920] : [640, 1280],
 
-		// Skip processing images that are already in /img/imported/
-		transformOnHTMLParseError: false,
+			failOnError: false,
+			transformOnHTMLParseError: false,
 
-		// Extended disk cache for better performance
-		cacheOptions: {
-			duration: "30d", // Cache for 30 days
-			directory: "./.cache",
-			removeUrlQueryParams: false,
-		},
-
-		htmlOptions: {
-			imgAttributes: {
-				// e.g. <img loading decoding> assigned on the HTML tag will override these values.
-				loading: "lazy",
-				decoding: "async",
-				sizes: "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw",
+			// Extended disk cache for better performance
+			cacheOptions: {
+				duration: "30d", // Cache for 30 days
+				directory: "./.cache",
+				removeUrlQueryParams: false,
 			},
-		},
 
-		sharpOptions: {
-			animated: false, // Disable animated processing for speed
-			jpeg: {
-				quality: 85,
-				mozjpeg: true,
+			htmlOptions: {
+				imgAttributes: {
+					loading: "lazy",
+					decoding: "async",
+					sizes: isProduction
+						? "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+						: "(max-width: 768px) 100vw, 50vw",
+				},
 			},
-			webp: {
-				quality: 85,
-				effort: 4,
-			},
-			avif: {
-				quality: 80,
-				effort: 4,
-			},
-			png: {
-				quality: 90,
-				compressionLevel: 9,
-			},
-		},
 
-		// Add a function to skip certain images
-		skipImages: (src) => {
-			return (
-				src.includes("/img/imported/") ||
-				src.endsWith(".mp3") ||
-				src.endsWith(".mp4") ||
-				src.endsWith(".wav") ||
-				src.endsWith(".ogg") ||
-				src.endsWith(".m4a")
-			);
-		},
-	});
+			sharpOptions: {
+				animated: false,
+				jpeg: {
+					quality: isProduction ? 85 : 75,
+					mozjpeg: true,
+				},
+				webp: {
+					quality: isProduction ? 85 : 75,
+					effort: isProduction ? 4 : 2,
+				},
+				avif: isProduction
+					? {
+							quality: 80,
+							effort: 4,
+						}
+					: undefined,
+				png: {
+					quality: isProduction ? 90 : 80,
+					compressionLevel: isProduction ? 9 : 6,
+				},
+			},
+
+			// Skip external images and media files
+			skipImages: (src) => {
+				return (
+					src.includes("/img/imported/") ||
+					src.startsWith("https://") || // Skip external images like webmention avatars
+					src.endsWith(".mp3") ||
+					src.endsWith(".mp4") ||
+					src.endsWith(".wav") ||
+					src.endsWith(".ogg") ||
+					src.endsWith(".m4a")
+				);
+			},
+		});
+	}
 
 	// Filters
 	eleventyConfig.addPlugin(pluginFilters);
