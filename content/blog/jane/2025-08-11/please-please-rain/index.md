@@ -92,7 +92,7 @@ my favourite print I made was a cyanotype that i fixed on expired photo paper. I
 
 ## reading
 
-the past few days I have been listening to audiobooks all day long at work. novellas are nice because I can finish them in a day. maybe it will trying to recover from my bout of illiteracy. does listening count as reading? definitely a different kind of attention but it's been a nice practice for noticing my mind wandering and returning my focus before I miss any sentences. my mind has been wandering in unpleasant ways lately so I welcome this new distraction. like my art projects, I have multiple books on the go. 
+the past few days I have been listening to audiobooks all day long at work. novellas are nice because I can finish them in a day. maybe it will help me recover from my bout of illiteracy. does listening count as reading? definitely a different kind of attention but it's been a nice practice for noticing my mind wandering and returning my focus before I miss any sentences. my mind has been wandering in unpleasant ways lately so I welcome this new distraction. like my art projects, I have multiple books on the go. 
 
 finished:
 
