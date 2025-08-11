@@ -7,6 +7,7 @@ tags:
   - concrete
   - fibre arts
   - baking
+  - music
 description: about jane's week, featuring nic's birthday
 date: 2025-07-30T00:00:00.000Z
 author: jane
