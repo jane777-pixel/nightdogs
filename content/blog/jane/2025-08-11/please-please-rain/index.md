@@ -112,7 +112,7 @@ this is a plea to the universe for rain. all the yellow is breaking my heart; it
 
 even though most of us deal with climate anxiety, it is hard to talk about somehow. we say "wow it's never been this hot" and try not to say "will it ever be normal again?" 
 
-now that it's illegal to go in the woods in nova scotia, i realize how policy will only pull us, the working-class, further away from nature instead of holding all the guilty bourgeoise corporations responsible. I know how desperate we are not to set this province on fire and yet people can still drive through the woods, throwing cigs out their window, we just can't bike or hike, or any other type of non-polluting transportation. 
+now that it's illegal to go in the woods in nova scotia, i realize how policy will only pull us, the working-class, further away from nature instead of holding all the guilty bourgeoise corporations responsible. I know how desperate we are not to set this province on fire and yet people can still drive through the woods, throwing cigs out their window, we just can't bike or hike through the woods, or any other type of non-polluting transportation. somehow in all this drought, while we try our best to ration water, the golf courses stay green.
 
 If this, hiding on asphalt, is the only way we know how to deal with wildfire season (read: we reject other ways that teach us to be part of the ecosystem like indigenous fire stewardship, or ummmm banning cigarettes and building infrastructure that isn't car-centric), I wonder what kind of relationship the next generation will be able to have with the land, after being banned from spending time with it. 
 
