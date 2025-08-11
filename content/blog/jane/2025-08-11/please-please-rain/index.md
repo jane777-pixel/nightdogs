@@ -1,10 +1,18 @@
 ---
-title: please please rain
+title: please please rain ⛆
 slug: pleaserain
 date: 2025-08-10T21:23:00.000-03:00
 author: jane
+description: abby's birthday, cyanotypes, new tattoo, and more!
 tags:
   - posts
+  - fibre arts
+  - cats
+  - birthday
+  - complaints
+  - art
+  - reading
+  - politics
 ---
 ## abby's birthday! yay!
 
