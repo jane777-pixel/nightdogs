@@ -1,7 +1,7 @@
 ---
 title: "hyperhydrosis and apotheosis "
 slug: "hyperhydrosis "
-date: 2025-08-15T14:25:00.000-03:00
+date: 2025-08-15T14:37:00.000-03:00
 author: nic
 tags:
   - posts
