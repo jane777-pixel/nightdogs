@@ -1,0 +1,219 @@
+<section class="newsletter-signup" id="newsletter-signup">
+	<div class="newsletter-container">
+		<h3>🫘 Beans in Your Inbox</h3>
+		<p>Sounds, signals, and other transmissions. Delivered occasionally.</p>
+
+		<form class="newsletter-form" id="newsletter-form">
+			<div class="form-group">
+				<label for="email" class="sr-only">Email address</label>
+				<input
+					type="email"
+					id="email"
+					name="email"
+					placeholder="your.email@example.com"
+					required
+					class="email-input"
+				/>
+				<button type="submit" class="subscribe-btn" id="subscribe-btn">
+					<span class="btn-text">Subscribe</span>
+					<span class="btn-loading" style="display: none">...</span>
+				</button>
+			</div>
+			<div class="form-message" id="form-message" style="display: none"></div>
+		</form>
+
+		<p class="newsletter-disclaimer">
+			Unsubscribe anytime. No spam, just beans.
+		</p>
+	</div>
+</section>
+
+<style>
+	.newsletter-signup {
+		background: linear-gradient(135deg, #1a1a2e, #16213e);
+		color: white;
+		padding: 2rem 1rem;
+		margin: 2rem 0;
+		border-radius: 12px;
+		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+	}
+
+	.newsletter-container {
+		max-width: 600px;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	.newsletter-signup h3 {
+		font-size: 1.5rem;
+		margin-bottom: 0.5rem;
+		color: #ffd700;
+	}
+
+	.newsletter-signup p {
+		margin-bottom: 1.5rem;
+		opacity: 0.9;
+		line-height: 1.6;
+	}
+
+	.newsletter-form {
+		margin-bottom: 1rem;
+	}
+
+	.form-group {
+		display: flex;
+		gap: 0.5rem;
+		max-width: 400px;
+		margin: 0 auto;
+		flex-wrap: wrap;
+	}
+
+	.email-input {
+		flex: 1;
+		min-width: 200px;
+		padding: 0.75rem 1rem;
+		border: 2px solid transparent;
+		border-radius: 8px;
+		font-size: 1rem;
+		background: rgba(255, 255, 255, 0.9);
+		transition: all 0.3s ease;
+	}
+
+	.email-input:focus {
+		outline: none;
+		border-color: #ffd700;
+		background: white;
+	}
+
+	.subscribe-btn {
+		padding: 0.75rem 1.5rem;
+		background: #ffd700;
+		color: #1a1a2e;
+		border: none;
+		border-radius: 8px;
+		font-weight: bold;
+		font-size: 1rem;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		min-width: 120px;
+	}
+
+	.subscribe-btn:hover {
+		background: #ffed4e;
+		transform: translateY(-2px);
+	}
+
+	.subscribe-btn:disabled {
+		opacity: 0.7;
+		cursor: not-allowed;
+		transform: none;
+	}
+
+	.form-message {
+		margin-top: 1rem;
+		padding: 0.75rem;
+		border-radius: 6px;
+		font-size: 0.9rem;
+	}
+
+	.form-message.success {
+		background: rgba(34, 197, 94, 0.2);
+		color: #22c55e;
+		border: 1px solid rgba(34, 197, 94, 0.3);
+	}
+
+	.form-message.error {
+		background: rgba(239, 68, 68, 0.2);
+		color: #ef4444;
+		border: 1px solid rgba(239, 68, 68, 0.3);
+	}
+
+	.newsletter-disclaimer {
+		font-size: 0.8rem;
+		opacity: 0.7;
+		margin-bottom: 0;
+	}
+
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+
+	@media (max-width: 480px) {
+		.form-group {
+			flex-direction: column;
+		}
+
+		.email-input {
+			min-width: unset;
+		}
+	}
+</style>
+
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		const form = document.getElementById("newsletter-form");
+		const emailInput = document.getElementById("email");
+		const submitBtn = document.getElementById("subscribe-btn");
+		const btnText = submitBtn.querySelector(".btn-text");
+		const btnLoading = submitBtn.querySelector(".btn-loading");
+		const messageEl = document.getElementById("form-message");
+
+		form.addEventListener("submit", async function (e) {
+			e.preventDefault();
+
+			const email = emailInput.value.trim();
+			if (!email) return;
+
+			// Update button state
+			submitBtn.disabled = true;
+			btnText.style.display = "none";
+			btnLoading.style.display = "inline";
+
+			// Hide previous messages
+			messageEl.style.display = "none";
+
+			try {
+				const response = await fetch("/api/newsletter/subscribe", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({ email }),
+				});
+
+				const data = await response.json();
+
+				if (response.ok) {
+					showMessage("🫘 You're in. Check your email.", "success");
+					emailInput.value = "";
+				} else {
+					showMessage(
+						data.error || "Something went wrong. Try again.",
+						"error",
+					);
+				}
+			} catch (error) {
+				showMessage("Network error. Check your connection.", "error");
+			} finally {
+				// Reset button state
+				submitBtn.disabled = false;
+				btnText.style.display = "inline";
+				btnLoading.style.display = "none";
+			}
+		});
+
+		function showMessage(text, type) {
+			messageEl.textContent = text;
+			messageEl.className = `form-message ${type}`;
+			messageEl.style.display = "block";
+		}
+	});
+</script>

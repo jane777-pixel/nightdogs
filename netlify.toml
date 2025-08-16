@@ -7,6 +7,7 @@ NODE_VERSION = "22"
 ELEVENTY_ENV = "development"
 # Skip installing optional dependencies for faster builds
 NPM_FLAGS = "--omit=optional"
+URL = "https://nightdogs.xyz"
 
 [[plugins]]
 package = "netlify-plugin-cache"
@@ -18,3 +19,22 @@ paths = [".cache"]
 from = "/admin/*"
 to = "/admin/index.html"
 status = 200
+
+[[redirects]]
+from = "/api/newsletter/subscribe"
+to = "/.netlify/functions/newsletter-subscribe"
+status = 200
+
+[[redirects]]
+from = "/api/newsletter/unsubscribe"
+to = "/.netlify/functions/newsletter-unsubscribe"
+status = 200
+
+# Security headers for admin pages
+[[headers]]
+for = "/admin/*"
+[headers.values]
+X-Frame-Options = "DENY"
+X-XSS-Protection = "1; mode=block"
+X-Content-Type-Options = "nosniff"
+Referrer-Policy = "strict-origin-when-cross-origin"

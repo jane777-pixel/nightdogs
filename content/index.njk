@@ -20,7 +20,11 @@ morePosts = postsCount - numberOfLatestPostsToShow %} {% if morePosts > 0 %}
 	{{ morePosts }} more post{% if morePosts != 1 %}s{% endif %} can be found by
 	<a href="/explore/">exploring our content</a>.
 </p>
-{% endif %} {# List every content page in the project #} {#
+{% endif %}
+
+{% include "newsletter-signup.html" %}
+
+{# List every content page in the project #} {#
 <ul>
 	{%- for entry in collections.all %}
 	<li>
