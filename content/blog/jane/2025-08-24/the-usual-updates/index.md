@@ -1,6 +1,6 @@
 ---
-title: the usual updates
-slug: theusual
+title: goodbye dog days
+slug: dogdays
 date: 2025-08-24T13:39:00.000-03:00
 author: jane
 tags:
@@ -34,8 +34,6 @@ finished these [shorts](https://www.ravelry.com/projects/jay777marie/230-3-b-pra
 
 ![](screenshot-2025-08-24-at-12.44.29 pm.png)
 
-
-
 ![](screenshot-2025-08-24-at-12.58.12 pm.png)
 
 ### progress on stripe-y cardigan
@@ -66,7 +64,7 @@ I also attended a workshop on somatic practices for people who work with horses.
 
 ![](screenshot-2025-08-24-at-1.07.33 pm.png)
 
-\# other news
+## other news
 
 finally sent out some long overdue birthday cards that have been weighing on my conscience 
 
