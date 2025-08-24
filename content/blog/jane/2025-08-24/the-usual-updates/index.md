@@ -8,7 +8,7 @@ tags:
 ---
 ## new 'do
 
-Adèsse gave me my fav haircut ever. Iggy supervised. It feels so me! I got to watch out the window as people stopped by for honey, and a few bumble bees bumped against the glass. Can’t imagine a better salon experience. If you want to steal my look, ask for "mick jagger with 2 rattails" 
+Adèsse gave me my fav haircut ever. Iggy supervised. It feels so me! I got to watch out the window as people stopped by for honey, and a few bumbling bees bumped against the glass. Can’t imagine a better salon experience. If you want to steal my look, ask for "mick jagger with 2 rattails" 
 
 ![hairdo](screenshot-2025-08-24-at-12.11.21 pm.png)
 
