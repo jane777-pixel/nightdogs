@@ -51,14 +51,21 @@ export const handler = async (event, context) => {
 			try {
 				// Try to list audiences to test API connectivity
 				const audiences = await resend.audiences.list();
+				console.log("Resend API response:", audiences);
+
+				const audienceList = audiences.data || audiences;
+				const audienceCount = Array.isArray(audienceList)
+					? audienceList.length
+					: "unknown";
+
 				testResults.tests.resendApi = {
 					status: "PASS",
-					message: `Successfully connected to Resend API. Found ${audiences.data.length} audience(s)`,
+					message: `Successfully connected to Resend API. Found ${audienceCount} audience(s)`,
 				};
 
 				// Test 3: Check if our specific audience exists
-				if (process.env.RESEND_AUDIENCE_ID) {
-					const targetAudience = audiences.data.find(
+				if (process.env.RESEND_AUDIENCE_ID && Array.isArray(audienceList)) {
+					const targetAudience = audienceList.find(
 						(audience) => audience.id === process.env.RESEND_AUDIENCE_ID,
 					);
 
@@ -73,6 +80,12 @@ export const handler = async (event, context) => {
 							message: "Target audience not found in Resend account",
 						};
 					}
+				} else if (process.env.RESEND_AUDIENCE_ID) {
+					testResults.tests.audience = {
+						status: "WARN",
+						message:
+							"Could not verify audience - unexpected API response format",
+					};
 				}
 			} catch (apiError) {
 				testResults.tests.resendApi = {
