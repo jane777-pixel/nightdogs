@@ -330,7 +330,6 @@ function generateDigestEmail({
         </div>
 
         <p style="font-size: 14px; opacity: 0.7; margin-bottom: 0;">
-          Jane Marie Bach<br>
           Nightdogs
         </p>
       </div>
