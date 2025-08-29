@@ -312,38 +312,52 @@ let articles = [];
 
 // Initialize Netlify Identity with robust loading
 function initializeIdentity() {
-  console.log('Initializing Netlify Identity...');
+  console.log('🔍 [Newsletter Admin] Initializing Netlify Identity...');
   
-  if (window.netlifyIdentity) {
-    // Set up event listeners
-    window.netlifyIdentity.on("init", user => {
-      console.log('Identity init event fired, user:', user);
-      if (user) {
-        console.log('User found on init:', user.email);
-        handleLogin(user);
-      } else {
-        console.log('No user found on init');
-      }
-    });
-    
-    window.netlifyIdentity.on("login", user => {
-      console.log('Login event fired:', user.email);
+  if (!window.netlifyIdentity) {
+    console.log('❌ [Newsletter Admin] Netlify Identity widget not found');
+    return;
+  }
+  
+  console.log('✅ [Newsletter Admin] Netlify Identity widget found');
+  
+  // Set up event listeners - these will fire when widget is ready
+  window.netlifyIdentity.on("init", user => {
+    console.log('🎯 [Newsletter Admin] Identity init event fired, user:', user ? user.email : 'null');
+    if (user) {
+      console.log('👤 [Newsletter Admin] User found on init:', user.email);
+      console.log('🔐 [Newsletter Admin] Token present:', !!user.token);
       handleLogin(user);
-    });
-    
-    window.netlifyIdentity.on("logout", () => {
-      console.log('Logout event fired');
-      handleLogout();
-    });
-    
-    // Check for already logged in user immediately
-    const currentUser = window.netlifyIdentity.currentUser();
-    if (currentUser) {
-      console.log('Found current user immediately:', currentUser.email);
-      handleLogin(currentUser);
+    } else {
+      console.log('🚫 [Newsletter Admin] No user found on init - auth form should be visible');
+      ensureAuthSectionVisible();
     }
-  } else {
-    console.log('Netlify Identity widget not available');
+  });
+  
+  window.netlifyIdentity.on("login", user => {
+    console.log('🚪 [Newsletter Admin] Login event fired:', user.email);
+    handleLogin(user);
+  });
+  
+  window.netlifyIdentity.on("logout", () => {
+    console.log('👋 [Newsletter Admin] Logout event fired');
+    handleLogout();
+  });
+  
+  console.log('📝 [Newsletter Admin] Event listeners registered, waiting for init event...');
+}
+
+function ensureAuthSectionVisible() {
+  const authSection = document.getElementById('auth-section');
+  const adminInterface = document.getElementById('admin-interface');
+  
+  if (authSection) {
+    authSection.classList.remove('hidden');
+    console.log('👁️ [Newsletter Admin] Auth section made visible');
+  }
+  if (adminInterface) {
+    adminInterface.classList.add('hidden');
+    console.log('🙈 [Newsletter Admin] Admin interface hidden');
   }
 }
 
@@ -362,20 +376,32 @@ if (document.readyState === 'loading') {
 
 // Additional fallback for window load event
 window.addEventListener('load', function() {
-  console.log('Window fully loaded, checking identity again...');
-  // Only re-initialize if user isn't already logged in
-  if (!currentUser && window.netlifyIdentity) {
-    const user = window.netlifyIdentity.currentUser();
-    if (user) {
-      console.log('Found user on window load:', user.email);
-      handleLogin(user);
+  console.log('🌐 [Newsletter Admin] Window fully loaded, checking identity again...');
+  
+  // Wait for potential init events, then fallback check
+  setTimeout(() => {
+    if (!currentUser && window.netlifyIdentity) {
+      console.log('⏰ [Newsletter Admin] Fallback: No user found yet, checking currentUser()...');
+      const user = window.netlifyIdentity.currentUser();
+      if (user) {
+        console.log('🎯 [Newsletter Admin] Fallback: Found user via currentUser():', user.email);
+        handleLogin(user);
+      } else {
+        console.log('🚫 [Newsletter Admin] Fallback: No user found, ensuring auth form is visible');
+        ensureAuthSectionVisible();
+      }
+    } else if (currentUser) {
+      console.log('✅ [Newsletter Admin] User already logged in:', currentUser.email);
+    } else {
+      console.log('❌ [Newsletter Admin] Identity widget not available');
     }
-  }
+  }, 1000); // Wait 1 second for init events
 });
 
 // Handle login
 function handleLogin(user) {
-  console.log('Handling login for:', user.email);
+  console.log('🎉 [Newsletter Admin] Handling login for:', user.email);
+  console.log('🔑 [Newsletter Admin] User token:', user.token ? 'Present' : 'Missing');
   currentUser = user;
   
   // Hide auth section and show admin interface
@@ -384,16 +410,35 @@ function handleLogin(user) {
   const userInfo = document.getElementById('user-info');
   const userEmail = document.getElementById('user-email');
   
-  if (authSection) authSection.classList.add('hidden');
-  if (adminInterface) adminInterface.classList.remove('hidden');
+  console.log('🎯 [Newsletter Admin] Updating UI elements...');
+  
+  if (authSection) {
+    authSection.classList.add('hidden');
+    console.log('🙈 [Newsletter Admin] Auth section hidden');
+  } else {
+    console.log('❌ [Newsletter Admin] Auth section not found');
+  }
+  
+  if (adminInterface) {
+    adminInterface.classList.remove('hidden');
+    console.log('👁️ [Newsletter Admin] Admin interface made visible');
+  } else {
+    console.log('❌ [Newsletter Admin] Admin interface not found');
+  }
+  
   if (userInfo) {
     userInfo.style.display = 'flex';
     userInfo.style.justifyContent = 'space-between';
     userInfo.style.alignItems = 'center';
+    console.log('👤 [Newsletter Admin] User info displayed');
   }
-  if (userEmail) userEmail.textContent = user.email;
   
-  console.log('Admin interface should now be visible');
+  if (userEmail) {
+    userEmail.textContent = user.email;
+    console.log('📧 [Newsletter Admin] User email set');
+  }
+  
+  console.log('✅ [Newsletter Admin] Login complete, loading admin data...');
   loadStats();
   loadDraft();
 }
