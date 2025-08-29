@@ -1,7 +1,7 @@
 <section class="newsletter-signup" id="newsletter-signup">
 	<div class="newsletter-container">
-		<h3>🫘 Beans in Your Inbox</h3>
-		<p>Sounds, signals, and other transmissions. Delivered occasionally.</p>
+		<h3>Beans in Your Inbox</h3>
+		<p>Bespoke nightdogs beans transmitted directly to your inbox.</p>
 
 		<form class="newsletter-form" id="newsletter-form">
 			<div class="form-group">
@@ -21,10 +21,6 @@
 			</div>
 			<div class="form-message" id="form-message" style="display: none"></div>
 		</form>
-
-		<p class="newsletter-disclaimer">
-			Unsubscribe anytime. No spam, just beans.
-		</p>
 	</div>
 </section>
 
@@ -192,7 +188,7 @@
 				const data = await response.json();
 
 				if (response.ok) {
-					showMessage("🫘 You're in. Check your email.", "success");
+					showMessage("You're in. Check your email.", "success");
 					emailInput.value = "";
 				} else {
 					showMessage(
