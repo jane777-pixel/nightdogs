@@ -268,54 +268,24 @@ eleventyExcludeFromCollections: true
 let currentUser = null;
 let articles = [];
 
-// Simple initialization following DecapCMS pattern
+// Handle Netlify Identity events for proper integration (same as DecapCMS)
 if (window.netlifyIdentity) {
-  console.log('🔍 [Simple Admin] Setting up Netlify Identity event listeners...');
-  
   window.netlifyIdentity.on("init", (user) => {
-    console.log('🎯 [Simple Admin] Identity init event fired, user:', user ? user.email : 'null');
     if (user) {
-      console.log('👤 [Simple Admin] User found on init:', user.email);
-      console.log('🔐 [Simple Admin] Token present:', !!user.token);
       handleLogin(user);
-    } else {
-      console.log('🚫 [Simple Admin] No user found on init - auth form should be visible');
-      ensureAuthSectionVisible();
     }
   });
   
   window.netlifyIdentity.on("login", (user) => {
-    console.log('🚪 [Simple Admin] Login event fired:', user.email);
     handleLogin(user);
   });
   
   window.netlifyIdentity.on("logout", () => {
-    console.log('👋 [Simple Admin] Logout event fired');
     handleLogout();
   });
-
-  console.log('📝 [Simple Admin] Event listeners registered, waiting for init event...');
-} else {
-  console.log('❌ [Simple Admin] Netlify Identity widget not available');
-}
-
-function ensureAuthSectionVisible() {
-  const authSection = document.getElementById('auth-section');
-  const adminInterface = document.getElementById('admin-interface');
-  
-  if (authSection) {
-    authSection.classList.remove('hidden');
-    console.log('👁️ [Simple Admin] Auth section made visible');
-  }
-  if (adminInterface) {
-    adminInterface.classList.add('hidden');
-    console.log('🙈 [Simple Admin] Admin interface hidden');
-  }
 }
 
 function handleLogin(user) {
-  console.log('🎉 [Simple Admin] Handling login for:', user.email);
-  console.log('🔑 [Simple Admin] User token:', user.token ? 'Present' : 'Missing');
   currentUser = user;
   
   // Hide auth section, show admin interface
@@ -323,26 +293,9 @@ function handleLogin(user) {
   const adminInterface = document.getElementById('admin-interface');
   const userEmail = document.getElementById('user-email');
   
-  console.log('🎯 [Simple Admin] Updating UI elements...');
-  
-  if (authSection) {
-    authSection.classList.add('hidden');
-    console.log('🙈 [Simple Admin] Auth section hidden');
-  } else {
-    console.log('❌ [Simple Admin] Auth section not found');
-  }
-  
-  if (adminInterface) {
-    adminInterface.classList.remove('hidden');
-    console.log('👁️ [Simple Admin] Admin interface made visible');
-  } else {
-    console.log('❌ [Simple Admin] Admin interface not found');
-  }
-  
-  if (userEmail) {
-    userEmail.textContent = user.email;
-    console.log('📧 [Simple Admin] User email set');
-  }
+  if (authSection) authSection.classList.add('hidden');
+  if (adminInterface) adminInterface.classList.remove('hidden');
+  if (userEmail) userEmail.textContent = user.email;
   
   // Load saved draft if exists
   loadDraft();
@@ -354,22 +307,14 @@ function handleLogin(user) {
 }
 
 function handleLogout() {
-  console.log('🔓 [Simple Admin] Handling logout');
   currentUser = null;
   
   // Show auth section, hide admin interface
   const authSection = document.getElementById('auth-section');
   const adminInterface = document.getElementById('admin-interface');
   
-  if (authSection) {
-    authSection.classList.remove('hidden');
-    console.log('👁️ [Simple Admin] Auth section made visible');
-  }
-  
-  if (adminInterface) {
-    adminInterface.classList.add('hidden');
-    console.log('🙈 [Simple Admin] Admin interface hidden');
-  }
+  if (authSection) authSection.classList.remove('hidden');
+  if (adminInterface) adminInterface.classList.add('hidden');
   
   // Clear form
   clearForm();
@@ -664,26 +609,5 @@ document.getElementById('digest-form').addEventListener('submit', function(e) {
   sendDigest();
 });
 
-console.log('🚀 [Simple Admin] Newsletter admin (simple) loaded');
-
-// Add window load fallback
-window.addEventListener('load', function() {
-  console.log('🌐 [Simple Admin] Window fully loaded, checking identity...');
-  
-  setTimeout(() => {
-    if (!currentUser && window.netlifyIdentity) {
-      console.log('⏰ [Simple Admin] Fallback: No user found yet, checking currentUser()...');
-      const user = window.netlifyIdentity.currentUser();
-      if (user) {
-        console.log('🎯 [Simple Admin] Fallback: Found user via currentUser():', user.email);
-        handleLogin(user);
-      } else {
-        console.log('🚫 [Simple Admin] Fallback: No user found, ensuring auth form is visible');
-        ensureAuthSectionVisible();
-      }
-    } else if (currentUser) {
-      console.log('✅ [Simple Admin] User already logged in:', currentUser.email);
-    }
-  }, 1000);
-});
+console.log('Newsletter admin (simple) loaded');
 </script>
