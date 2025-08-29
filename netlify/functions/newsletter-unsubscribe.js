@@ -159,7 +159,7 @@ function generateGoodbyeEmail(email) {
     <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
 
       <div style="text-align: center; margin-bottom: 30px;">
-        <h1 style="color: #1a1a2e; margin-bottom: 10px;">🫘 You're out</h1>
+        <h1 style="color: #1a1a2e; margin-bottom: 10px;">You're out</h1>
         <p style="color: #666; font-size: 18px;">No more beans</p>
       </div>
 
@@ -178,7 +178,6 @@ function generateGoodbyeEmail(email) {
           <a href="https://nightdogs.xyz" style="color: #1a1a2e;">Visit</a>
         </p>
         <p style="margin-top: 20px;">
-          Jane Marie Bach<br>
           Nightdogs
         </p>
       </div>

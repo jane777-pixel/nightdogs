@@ -114,7 +114,7 @@ export const handler = async (event, context) => {
 			const emailResult = await resend.emails.send({
 				from: "newsletter@nightdogs.xyz",
 				to: email,
-				subject: "🫘 Welcome to the beans",
+				subject: "Beans in your inbox",
 				html: generateWelcomeEmail(email),
 			});
 			console.log("Welcome email sent successfully:", emailResult.id);
@@ -189,7 +189,7 @@ function generateWelcomeEmail(email) {
     <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
 
       <div style="text-align: center; margin-bottom: 30px;">
-        <h1 style="color: #1a1a2e; margin-bottom: 10px;">🫘 You're in</h1>
+        <h1 style="color: #1a1a2e; margin-bottom: 10px;">Welcome to Nightdogs</h1>
         <p style="color: #666; font-size: 18px;">Beans in Your Inbox</p>
       </div>
 
@@ -209,7 +209,6 @@ function generateWelcomeEmail(email) {
           <a href="{{unsubscribe_url}}" style="color: #666;">Unsubscribe</a>
         </p>
         <p style="margin-top: 20px;">
-          Jane Marie Bach<br>
           Nightdogs
         </p>
       </div>
