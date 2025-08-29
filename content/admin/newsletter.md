@@ -310,42 +310,102 @@ eleventyExcludeFromCollections: true
 let currentUser = null;
 let articles = [];
 
-// Initialize Netlify Identity
-if (window.netlifyIdentity) {
+// Initialize Netlify Identity with robust loading
+function initializeIdentity() {
+  console.log('Initializing Netlify Identity...');
+  
+  if (!window.netlifyIdentity) {
+    console.log('Netlify Identity not ready, retrying...');
+    setTimeout(initializeIdentity, 100);
+    return;
+  }
+  
+  console.log('Netlify Identity widget loaded');
+  
+  // Set up event listeners
   window.netlifyIdentity.on("init", user => {
-    if (!user) {
-      window.netlifyIdentity.on("login", user => {
-        handleLogin(user);
-      });
-    } else {
+    console.log('Identity init event fired, user:', user);
+    if (user) {
+      console.log('User found on init:', user.email);
       handleLogin(user);
+    } else {
+      console.log('No user found on init');
     }
   });
   
+  window.netlifyIdentity.on("login", user => {
+    console.log('Login event fired:', user.email);
+    handleLogin(user);
+  });
+  
   window.netlifyIdentity.on("logout", () => {
+    console.log('Logout event fired');
     handleLogout();
   });
+  
+  // Check for already logged in user
+  setTimeout(() => {
+    const user = window.netlifyIdentity.currentUser();
+    console.log('Checking current user after delay:', user);
+    if (user) {
+      console.log('Found current user:', user.email);
+      handleLogin(user);
+    }
+  }, 200);
+}
+
+// Start initialization when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('DOM loaded, starting identity initialization...');
+  initializeIdentity();
+});
+
+// Also try initialization immediately in case DOM is already loaded
+if (document.readyState === 'loading') {
+  // DOM is still loading
+} else {
+  // DOM is already loaded
+  console.log('DOM already loaded, starting identity initialization...');
+  initializeIdentity();
 }
 
 // Handle login
 function handleLogin(user) {
+  console.log('Handling login for:', user.email);
   currentUser = user;
-  document.getElementById('auth-section').classList.add('hidden');
-  document.getElementById('admin-interface').classList.remove('hidden');
-  document.getElementById('user-info').style.display = 'flex';
-  document.getElementById('user-info').style.justifyContent = 'space-between';
-  document.getElementById('user-info').style.alignItems = 'center';
-  document.getElementById('user-email').textContent = user.email;
+  
+  // Hide auth section and show admin interface
+  const authSection = document.getElementById('auth-section');
+  const adminInterface = document.getElementById('admin-interface');
+  const userInfo = document.getElementById('user-info');
+  const userEmail = document.getElementById('user-email');
+  
+  if (authSection) authSection.classList.add('hidden');
+  if (adminInterface) adminInterface.classList.remove('hidden');
+  if (userInfo) {
+    userInfo.style.display = 'flex';
+    userInfo.style.justifyContent = 'space-between';
+    userInfo.style.alignItems = 'center';
+  }
+  if (userEmail) userEmail.textContent = user.email;
+  
+  console.log('Admin interface should now be visible');
   loadStats();
   loadDraft();
 }
 
 // Handle logout
 function handleLogout() {
+  console.log('Handling logout');
   currentUser = null;
-  document.getElementById('auth-section').classList.remove('hidden');
-  document.getElementById('admin-interface').classList.add('hidden');
-  document.getElementById('user-info').style.display = 'none';
+  
+  const authSection = document.getElementById('auth-section');
+  const adminInterface = document.getElementById('admin-interface');
+  const userInfo = document.getElementById('user-info');
+  
+  if (authSection) authSection.classList.remove('hidden');
+  if (adminInterface) adminInterface.classList.add('hidden');
+  if (userInfo) userInfo.style.display = 'none';
 }
 
 // Logout function

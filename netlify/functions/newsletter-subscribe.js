@@ -30,10 +30,13 @@ export const handler = async (event, context) => {
 	}
 
 	try {
+		console.log("Newsletter subscription request received");
 		const { email } = JSON.parse(event.body);
+		console.log("Email to subscribe:", email);
 
 		// Validate email
 		if (!email || !isValidEmail(email)) {
+			console.log("Invalid email provided:", email);
 			return {
 				statusCode: 400,
 				headers: {
@@ -58,7 +61,6 @@ export const handler = async (event, context) => {
 		}
 
 		// Add contact to Resend audience
-		// Note: You'll need to create an audience in Resend dashboard first
 		const audienceId = process.env.RESEND_AUDIENCE_ID;
 
 		if (!audienceId) {
@@ -73,20 +75,54 @@ export const handler = async (event, context) => {
 			};
 		}
 
+		console.log("Adding contact to Resend audience:", audienceId);
+
 		// Add contact to audience
-		const contact = await resend.contacts.create({
-			email: email,
-			audienceId: audienceId,
-			unsubscribed: false,
-		});
+		let contact;
+		try {
+			contact = await resend.contacts.create({
+				email: email,
+				audienceId: audienceId,
+				unsubscribed: false,
+			});
+			console.log("Contact created successfully:", contact.id);
+		} catch (contactError) {
+			console.error("Error creating contact:", contactError);
+
+			// Handle duplicate contact error specifically
+			if (
+				contactError.message?.includes("already exists") ||
+				contactError.message?.includes("duplicate")
+			) {
+				return {
+					statusCode: 409,
+					headers: {
+						"Access-Control-Allow-Origin": "*",
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						error: "Email already subscribed to newsletter",
+					}),
+				};
+			}
+			throw contactError;
+		}
 
 		// Send welcome email
-		await resend.emails.send({
-			from: "Jane Marie Bach <newsletter@nightdogs.xyz>",
-			to: email,
-			subject: "🫘 Welcome to the beans",
-			html: generateWelcomeEmail(email),
-		});
+		console.log("Sending welcome email to:", email);
+		try {
+			const emailResult = await resend.emails.send({
+				from: "newsletter@nightdogs.xyz",
+				to: email,
+				subject: "🫘 Welcome to the beans",
+				html: generateWelcomeEmail(email),
+			});
+			console.log("Welcome email sent successfully:", emailResult.id);
+		} catch (emailError) {
+			console.error("Error sending welcome email:", emailError);
+			// Don't fail the whole subscription if email fails
+			console.log("Subscription successful but welcome email failed");
+		}
 
 		return {
 			statusCode: 200,
@@ -102,6 +138,11 @@ export const handler = async (event, context) => {
 		};
 	} catch (error) {
 		console.error("Newsletter subscription error:", error);
+		console.error("Error details:", {
+			message: error.message,
+			stack: error.stack,
+			name: error.name,
+		});
 
 		// Handle specific Resend errors
 		if (error.message?.includes("already exists")) {
@@ -123,7 +164,10 @@ export const handler = async (event, context) => {
 				"Access-Control-Allow-Origin": "*",
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ error: "Failed to subscribe to newsletter" }),
+			body: JSON.stringify({
+				error: "Failed to subscribe to newsletter",
+				details: error.message,
+			}),
 		};
 	}
 };
