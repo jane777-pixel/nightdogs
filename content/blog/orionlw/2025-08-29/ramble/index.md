@@ -60,3 +60,9 @@ At the same time, insomnia is a very human experience, so I can take comfort tha
 I've been enjoying The Finals on my PC lately. It's a fast-paced skill-based FPS, with a lot of neat features and destruction physics. Reminds me a lot of fond childhood memories of Battlefield BC2 and even Brink which was probably the last game I preordered (learned by lesson).
 
 Also getting back into chess has been fun, but maybe a little too much in a way. Don't wanna be thinking of moves late at night you know.
+
+# Other stuff
+
+Adèsse is back from their trip so that's nice. I don't have work lined up for September which is scary but it'll also be nice to catch up with people and work on things I've been neglecting.
+
+Until next time!
