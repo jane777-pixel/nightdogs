@@ -63,6 +63,6 @@ Also getting back into chess has been fun, but maybe a little too much in a way.
 
 # Other stuff
 
-Adèsse is back from their trip so that's nice. I don't have work lined up for September which is scary but it'll also be nice to catch up with people and work on things I've been neglecting.
+Adèsse is back from their trip so that's nice to have them back. I don't have work lined up for September which is scary but it'll also be nice to catch up with people and work on things I've been neglecting.
 
 Until next time!
