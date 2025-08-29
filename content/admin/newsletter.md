@@ -314,60 +314,64 @@ let articles = [];
 function initializeIdentity() {
   console.log('Initializing Netlify Identity...');
   
-  if (!window.netlifyIdentity) {
-    console.log('Netlify Identity not ready, retrying...');
-    setTimeout(initializeIdentity, 100);
-    return;
+  if (window.netlifyIdentity) {
+    // Set up event listeners
+    window.netlifyIdentity.on("init", user => {
+      console.log('Identity init event fired, user:', user);
+      if (user) {
+        console.log('User found on init:', user.email);
+        handleLogin(user);
+      } else {
+        console.log('No user found on init');
+      }
+    });
+    
+    window.netlifyIdentity.on("login", user => {
+      console.log('Login event fired:', user.email);
+      handleLogin(user);
+    });
+    
+    window.netlifyIdentity.on("logout", () => {
+      console.log('Logout event fired');
+      handleLogout();
+    });
+    
+    // Check for already logged in user immediately
+    const currentUser = window.netlifyIdentity.currentUser();
+    if (currentUser) {
+      console.log('Found current user immediately:', currentUser.email);
+      handleLogin(currentUser);
+    }
+  } else {
+    console.log('Netlify Identity widget not available');
   }
-  
-  console.log('Netlify Identity widget loaded');
-  
-  // Set up event listeners
-  window.netlifyIdentity.on("init", user => {
-    console.log('Identity init event fired, user:', user);
-    if (user) {
-      console.log('User found on init:', user.email);
-      handleLogin(user);
-    } else {
-      console.log('No user found on init');
-    }
-  });
-  
-  window.netlifyIdentity.on("login", user => {
-    console.log('Login event fired:', user.email);
-    handleLogin(user);
-  });
-  
-  window.netlifyIdentity.on("logout", () => {
-    console.log('Logout event fired');
-    handleLogout();
-  });
-  
-  // Check for already logged in user
-  setTimeout(() => {
-    const user = window.netlifyIdentity.currentUser();
-    console.log('Checking current user after delay:', user);
-    if (user) {
-      console.log('Found current user:', user.email);
-      handleLogin(user);
-    }
-  }, 200);
 }
 
 // Start initialization when DOM is ready
-document.addEventListener('DOMContentLoaded', function() {
-  console.log('DOM loaded, starting identity initialization...');
-  initializeIdentity();
-});
-
-// Also try initialization immediately in case DOM is already loaded
+// Initialize immediately if DOM is ready, otherwise wait for DOMContentLoaded
 if (document.readyState === 'loading') {
-  // DOM is still loading
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, starting identity initialization...');
+    initializeIdentity();
+  });
 } else {
   // DOM is already loaded
   console.log('DOM already loaded, starting identity initialization...');
   initializeIdentity();
 }
+
+// Additional fallback for window load event
+window.addEventListener('load', function() {
+  console.log('Window fully loaded, checking identity again...');
+  // Only re-initialize if user isn't already logged in
+  if (!currentUser && window.netlifyIdentity) {
+    const user = window.netlifyIdentity.currentUser();
+    if (user) {
+      console.log('Found user on window load:', user.email);
+      handleLogin(user);
+    }
+  }
+});
 
 // Handle login
 function handleLogin(user) {
