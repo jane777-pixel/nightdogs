@@ -436,7 +436,9 @@ a[href]:active {
 
 /* Remove h-card styling from inline author names */
 .post-author .h-card,
-.post-metadata .h-card {
+.post-metadata .h-card,
+.webmention-content .h-card,
+.webmentions .h-card {
 	border: none;
 	background: none;
 	padding: 0;
@@ -449,7 +451,9 @@ a[href]:active {
 /* Remove h-card styling from recommendation cards */
 .recommendations-widget .h-card,
 .recommendation-card .h-card,
-.recommendation-card .rec-author-link.h-card {
+.recommendation-card .rec-author-link.h-card,
+.webmention-content .h-card,
+.webmentions .h-card {
 	border: none !important;
 	background: none !important;
 	padding: 0 !important;
