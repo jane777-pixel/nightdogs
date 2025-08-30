@@ -58,6 +58,7 @@
 		"@11ty/eleventy-plugin-rss": "^2.0.4",
 		"@11ty/eleventy-plugin-syntaxhighlight": "^5.0.1",
 		"@zachleat/heading-anchors": "^1.0.3",
+		"gray-matter": "^4.0.3",
 		"axios": "^1.11.0",
 		"luxon": "^3.6.1",
 		"resend": "^6.0.1",

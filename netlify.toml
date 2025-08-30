@@ -30,6 +30,11 @@ from = "/api/newsletter/unsubscribe"
 to = "/.netlify/functions/newsletter-unsubscribe"
 status = 200
 
+[[redirects]]
+from = "/api/newsletter/trigger-digest"
+to = "/.netlify/functions/trigger-monthly-digest"
+status = 200
+
 # Security headers for admin pages
 [[headers]]
 for = "/admin/*"
@@ -38,3 +43,10 @@ X-Frame-Options = "DENY"
 X-XSS-Protection = "1; mode=block"
 X-Content-Type-Options = "nosniff"
 Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Scheduled Functions
+[functions]
+
+# Monthly digest - runs every Sunday at 9 AM UTC, function determines if it's last Sunday
+[functions.monthly-digest]
+schedule = "0 9 * * 0"
