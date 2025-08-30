@@ -275,11 +275,11 @@ function generateDigestContent(postsByAuthor) {
 	const monthName = currentDate.toLocaleString("default", { month: "long" });
 	const year = currentDate.getFullYear();
 
-	const subject = `🫘 ${monthName} ${year} Beans Digest - Monthly Roundup from nightdogs`;
+	const subject = `${monthName} ${year} Beans Digest - Monthly Roundup from nightdogs`;
 
 	const introduction = `
 		<p>Welcome to the ${monthName} ${year} edition of Beans in Your Inbox!</p>
-		<p>This month, the nightdogs pack has been busy creating, sharing, and exploring. Here's everything that happened in the ${monthName} archives:</p>
+		<p>Here's the beans in your inbox for ${monthName}:</p>
 	`;
 
 	// Generate structured content grouped by author
@@ -414,7 +414,7 @@ function generateDigestHtml({
 				<div style="margin-bottom: 40px;">
 					<div style="background: linear-gradient(135deg, ${theme.background}, ${theme.primary}); color: ${theme.color}; padding: 20px; border-radius: 12px 12px 0 0; margin-bottom: 0;">
 						<h3 style="margin: 0; font-size: 1.4em; color: ${theme.color};">
-							✍️ ${section.authorName}'s Posts
+							${section.authorName}'s Posts
 						</h3>
 						<p style="margin: 5px 0 0 0; opacity: 0.8; font-size: 14px;">
 							${section.posts.length} post${section.posts.length !== 1 ? "s" : ""} this month
@@ -440,7 +440,7 @@ function generateDigestHtml({
 
 			<!-- Header -->
 			<div style="background: linear-gradient(135deg, #1a1a2e, #16213e); color: white; padding: 30px 20px; text-align: center;">
-				<h1 style="margin: 0; font-size: 28px; color: #ffd700;">🫘 Monthly Nightdogs Digest</h1>
+				<h1 style="margin: 0; font-size: 28px; color: #ffd700;">Monthly Nightdogs Digest</h1>
 				<p style="margin: 10px 0 0 0; opacity: 0.9; font-size: 16px;">${currentDate}</p>
 			</div>
 
