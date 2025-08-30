@@ -179,7 +179,7 @@ eleventyExcludeFromCollections: true
 
 <div class="test-container">
   <h1>🫘 Newsletter Digest Test</h1>
-  <p>Test the automated monthly digest generation and sending functionality.</p>
+  <p>Test the automated monthly digest system. This replaces the manual admin panels with a fully automated monthly newsletter that generates and sends on the last Sunday of each month.</p>
 
   <!-- Test Options -->
   <div class="test-section">

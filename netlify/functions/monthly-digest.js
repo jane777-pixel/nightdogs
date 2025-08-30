@@ -192,6 +192,20 @@ async function getMonthlyPosts() {
 							postDate.getMonth() === currentMonth &&
 							postDate.getFullYear() === currentYear
 						) {
+							// Extract content preview (first 200 characters of markdown content)
+							let contentPreview = "";
+							if (parsed.content) {
+								contentPreview = parsed.content
+									.replace(/[#*_`\[\]]/g, "") // Remove markdown syntax
+									.replace(/\n\s*\n/g, " ") // Replace double newlines with space
+									.replace(/\s+/g, " ") // Collapse whitespace
+									.trim()
+									.substring(0, 300);
+								if (contentPreview.length === 300) {
+									contentPreview += "...";
+								}
+							}
+
 							allPosts.push({
 								title: frontmatter.title || "Untitled",
 								author: frontmatter.author || authorDir.name,
@@ -200,7 +214,9 @@ async function getMonthlyPosts() {
 								description:
 									frontmatter.description ||
 									parsed.excerpt ||
+									contentPreview ||
 									"Click to read this post.",
+								preview: contentPreview,
 								tags: frontmatter.tags || [],
 								slug: postDir.name,
 							});
@@ -266,40 +282,28 @@ function generateDigestContent(postsByAuthor) {
 		<p>This month, the nightdogs pack has been busy creating, sharing, and exploring. Here's everything that happened in the ${monthName} archives:</p>
 	`;
 
-	// Generate articles array for each author's posts
-	const articles = [];
+	// Generate structured content grouped by author
+	const authorSections = [];
 	Object.entries(postsByAuthor).forEach(([authorKey, authorData]) => {
-		// Add a section header for each author
-		articles.push({
-			title: `📝 ${authorData.name}'s ${monthName} Posts`,
-			url: `https://nightdogs.xyz/authors/${authorKey}/`,
-			source: `${authorData.posts.length} post${
-				authorData.posts.length !== 1 ? "s" : ""
-			} this month`,
-			description: `Catch up on everything ${authorData.name} shared this month.`,
-		});
-
-		// Add individual posts
-		authorData.posts.forEach((post) => {
-			articles.push({
+		authorSections.push({
+			authorKey,
+			authorName: authorData.name,
+			posts: authorData.posts.map((post) => ({
 				title: post.title,
 				url: `https://nightdogs.xyz${post.url}`,
-				source: `by ${authorData.name}`,
-				description: post.description || "Click to read the full post.",
-			});
+				description: post.description,
+				preview: post.preview,
+				date: post.date,
+			})),
 		});
 	});
 
-	const footer_note = `
-		That's a wrap on ${monthName} ${year}! The nightdogs pack has been creating amazing content,
-		and we're excited to share what's coming next month. Keep an eye out for more stories,
-		insights, and creative explorations from all our authors.
-	`;
+	const footer_note = null; // Removed the awful footer blurb
 
 	return {
 		subject,
 		introduction,
-		articles,
+		authorSections,
 		footer_note,
 		sounds: null, // Could be added later if desired
 	};
@@ -361,30 +365,67 @@ async function sendMonthlyDigest(digestContent, subscribers) {
 }
 
 // Generate HTML for the digest email
-function generateDigestHtml({ subject, introduction, articles, footer_note }) {
+function generateDigestHtml({
+	subject,
+	introduction,
+	authorSections,
+	footer_note,
+}) {
 	const currentDate = new Date().toLocaleDateString("en-US", {
 		year: "numeric",
 		month: "long",
 		day: "numeric",
 	});
 
-	const articlesHtml = articles
-		.map(
-			(article) => `
-		<div style="background: white; border-radius: 8px; padding: 20px; margin-bottom: 20px; border-left: 4px solid #ffd700;">
-			<h3 style="margin-top: 0; color: #1a1a2e;">
-				<a href="${article.url}" style="color: #1a1a2e; text-decoration: none;">${article.title}</a>
-			</h3>
-			<p style="color: #666; margin-bottom: 10px; font-size: 14px;">
-				${article.source ? `${article.source}` : ""}
-			</p>
-			<p style="margin-bottom: 15px; line-height: 1.6;">${article.description}</p>
-			<a href="${article.url}" style="color: #1a1a2e; font-weight: bold; text-decoration: none; border-bottom: 2px solid #ffd700;">
-				Read more →
-			</a>
-		</div>
-	`,
-		)
+	// Author theme colors
+	const authorThemes = {
+		jane: { background: "#ffd6e0", primary: "#b8002e", color: "#8b0020" },
+		orionlw: { background: "#1a1a1a", primary: "#00ff00", color: "#ffffff" },
+		adesse: { background: "#2c1810", primary: "#d4af37", color: "#f5f5dc" },
+		nic: { background: "#f0f8ff", primary: "#4169e1", color: "#191970" },
+		amelia: { background: "#f5f5dc", primary: "#8b4513", color: "#654321" },
+		abby: { background: "#e6e6fa", primary: "#9370db", color: "#4b0082" },
+		ewan: { background: "#f0fff0", primary: "#228b22", color: "#006400" },
+	};
+
+	const authorSectionsHtml = authorSections
+		.map((section) => {
+			const theme = authorThemes[section.authorKey] || authorThemes.jane;
+			const postsHtml = section.posts
+				.map(
+					(post) => `
+					<div style="background: white; border-radius: 8px; padding: 20px; margin-bottom: 15px; border-left: 4px solid ${theme.primary}; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+						<h4 style="margin-top: 0; color: ${theme.color}; font-size: 1.2em;">
+							<a href="${post.url}" style="color: ${theme.color}; text-decoration: none;">${post.title}</a>
+						</h4>
+						<p style="color: #666; margin-bottom: 5px; font-size: 12px;">
+							${post.date.toLocaleDateString("en-US", { month: "long", day: "numeric" })}
+						</p>
+						${post.preview ? `<p style="margin-bottom: 15px; line-height: 1.6; color: #333; font-size: 14px;">${post.preview}</p>` : ""}
+						<a href="${post.url}" style="color: ${theme.primary}; font-weight: bold; text-decoration: none; border-bottom: 2px solid ${theme.primary}; padding-bottom: 1px;">
+							Read full post →
+						</a>
+					</div>
+				`,
+				)
+				.join("");
+
+			return `
+				<div style="margin-bottom: 40px;">
+					<div style="background: linear-gradient(135deg, ${theme.background}, ${theme.primary}); color: ${theme.color}; padding: 20px; border-radius: 12px 12px 0 0; margin-bottom: 0;">
+						<h3 style="margin: 0; font-size: 1.4em; color: ${theme.color};">
+							✍️ ${section.authorName}'s Posts
+						</h3>
+						<p style="margin: 5px 0 0 0; opacity: 0.8; font-size: 14px;">
+							${section.posts.length} post${section.posts.length !== 1 ? "s" : ""} this month
+						</p>
+					</div>
+					<div style="border: 2px solid ${theme.primary}; border-top: none; border-radius: 0 0 12px 12px; padding: 20px; background: #fafafa;">
+						${postsHtml}
+					</div>
+				</div>
+			`;
+		})
 		.join("");
 
 	return `
@@ -411,10 +452,10 @@ function generateDigestHtml({ subject, introduction, articles, footer_note }) {
 					${introduction}
 				</div>
 
-				<!-- Articles Section -->
+				<!-- Author Sections -->
 				<div style="margin-bottom: 30px;">
 					<h2 style="color: #1a1a2e; border-bottom: 2px solid #ffd700; padding-bottom: 10px;">This Month's Posts</h2>
-					${articlesHtml}
+					${authorSectionsHtml}
 				</div>
 
 				<!-- Footer Note -->

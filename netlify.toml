@@ -50,3 +50,7 @@ Referrer-Policy = "strict-origin-when-cross-origin"
 # Monthly digest - runs every Sunday at 9 AM UTC, function determines if it's last Sunday
 [functions.monthly-digest]
 schedule = "0 9 * * 0"
+
+# Daily build trigger - runs every day at 2 AM UTC to refresh webmentions
+[functions.daily-build]
+schedule = "0 2 * * *"
