@@ -2,11 +2,6 @@ import { Resend } from "resend";
 import { promises as fs } from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { fileURLToPath } from "url";
-import { dirname } from "path";
-
-const __triggerFilename = fileURLToPath(import.meta.url);
-const __triggerDirname = dirname(__triggerFilename);
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -165,23 +160,14 @@ async function getMonthlyPosts(includePreviousMonth = false) {
 
 	try {
 		// Read actual blog posts from the filesystem
-		let contentDir = path.join(__triggerDirname, "..", "..", "content", "blog");
+		let contentDir = path.join(process.cwd(), "content", "blog");
 
 		// Check if content directory exists
 		try {
 			await fs.access(contentDir);
 		} catch {
-			console.log(
-				"Blog content directory not found, trying alternative paths...",
-			);
-			const altContentDir = path.join(process.cwd(), "content", "blog");
-			try {
-				await fs.access(altContentDir);
-				contentDir = altContentDir;
-			} catch {
-				console.log("No blog content found");
-				return [];
-			}
+			console.log("Blog content directory not found");
+			return [];
 		}
 
 		// Read all author directories
