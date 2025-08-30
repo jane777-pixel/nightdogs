@@ -99,6 +99,7 @@ This will show you what posts would be created without actually posting them.
 
 ### Running the Bot
 
+**Continuous Mode (Local/Server):**
 ```bash
 npm start
 ```
@@ -108,6 +109,26 @@ The bot will:
 2. Immediately check for new posts
 3. Schedule regular checks based on your `CHECK_INTERVAL`
 4. Continue running until you stop it with Ctrl+C
+
+**Single Run Mode (GitHub Actions/Manual):**
+```bash
+npm run check-once
+```
+
+This mode:
+1. Checks for new posts once
+2. Posts any new content found
+3. Exits immediately (perfect for GitHub Actions)
+
+**Historical Backfill (Post All Previous Content):**
+```bash
+npm run backfill
+```
+
+This mode:
+1. Posts all existing blog content chronologically
+2. Respects rate limits with configurable delays
+3. Can be run in batches and resumed
 
 ### Development Mode
 
@@ -119,9 +140,9 @@ npm run dev
 
 ## Deployment Options
 
-### Option 1: VPS/Server
+### Option 1: VPS/Server (Continuous)
 
-Run the bot on a VPS or server:
+Run the bot on a VPS or server for continuous monitoring:
 
 ```bash
 # Install PM2 for process management
@@ -137,34 +158,27 @@ pm2 save
 pm2 startup
 ```
 
-### Option 2: GitHub Actions
+### Option 2: GitHub Actions (Automated - Recommended)
 
-Create `.github/workflows/mastodon-bot.yml`:
+**Already set up!** The workflow is in `.github/workflows/mastodon-bot.yml`
 
-```yaml
-name: Mastodon Bot
-on:
-  schedule:
-    - cron: '*/30 * * * *'  # Every 30 minutes
-  workflow_dispatch:
+**Features:**
+- ✅ Runs every 30 minutes automatically
+- ✅ Caches `posted-items.json` to prevent reposts
+- ✅ Uses single-run mode (doesn't hang)
+- ✅ No server maintenance required
 
-jobs:
-  post:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-      - run: cd mastodon-bot && npm ci
-      - run: cd mastodon-bot && npm start
-        env:
-          MASTODON_URL: ${{ secrets.MASTODON_URL }}
-          MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
-          FEED_URL: https://nightdogs.xyz/feed/feed.xml
-```
+**Setup:**
+1. Add secrets in GitHub: Settings → Secrets → Actions
+   - `MASTODON_URL`: Your Mastodon instance URL
+   - `MASTODON_ACCESS_TOKEN`: Your bot's access token
+   - `AUTHOR_HANDLES` (optional): Author handle mappings
 
-Then add your secrets in GitHub: Settings → Secrets → Actions.
+**Caching:**
+The workflow automatically caches the `posted-items.json` file using the content hash of your blog posts. This means:
+- ✅ No duplicate posts even across workflow runs
+- ✅ Cache updates when blog content changes
+- ✅ Efficient and reliable state management
 
 ### Option 3: Railway/Render/Similar
 
@@ -191,6 +205,9 @@ https://nightdogs.xyz/blog/author/2025-01-01/post-slug/
 ## Files Created
 
 - `posted-items.json` - Tracks which items have been posted (don't delete this!)
+- `backfill-state.json` - Tracks historical backfill progress (temporary)
+- `check-once.js` - Single-run version for GitHub Actions
+- `backfill.js` - Historical content posting script
 
 ## Troubleshooting
 
@@ -205,6 +222,8 @@ https://nightdogs.xyz/blog/author/2025-01-01/post-slug/
 - Check the feed URL is accessible: `curl https://nightdogs.xyz/feed/feed.xml`
 - Look for new posts that haven't been posted before
 - Check the `posted-items.json` file
+- In GitHub Actions, check the workflow logs for errors
+- Verify your GitHub secrets are set correctly
 
 ### Posts are truncated
 
@@ -214,7 +233,9 @@ https://nightdogs.xyz/blog/author/2025-01-01/post-slug/
 ### Rate limiting
 
 - The bot includes delays between posts
-- If you hit rate limits, increase `CHECK_INTERVAL`
+- If you hit rate limits, increase `CHECK_INTERVAL` (continuous mode)
+- For GitHub Actions, the 30-minute interval should prevent rate limits
+- Use `BACKFILL_DELAY` to control backfill posting speed
 
 ## Contributing
 

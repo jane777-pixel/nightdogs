@@ -9,6 +9,7 @@ yarn-error.log*
 
 # Runtime state files
 posted-items.json
+backfill-state.json
 
 # Logs
 *.log
