@@ -3,7 +3,7 @@ name: Mastodon Bot
 on:
   schedule:
     # Run every 30 minutes
-    - cron: '*/30 * * * *'
+    - cron: "*/30 * * * *"
 
   # Allow manual triggering
   workflow_dispatch:
@@ -19,16 +19,24 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'npm'
+          node-version: "18"
+          cache: "npm"
           cache-dependency-path: mastodon-bot/package-lock.json
 
       - name: Install dependencies
         run: npm ci
         working-directory: mastodon-bot
 
-      - name: Run bot check
-        run: node index.js
+      - name: Restore posted items cache
+        uses: actions/cache@v3
+        with:
+          path: mastodon-bot/posted-items.json
+          key: posted-items-${{ hashFiles('nightdogs/content/blog/**/*.md') }}
+          restore-keys: |
+            posted-items-
+
+      - name: Run bot check (single run)
+        run: node check-once.js
         working-directory: mastodon-bot
         env:
           MASTODON_URL: ${{ secrets.MASTODON_URL }}
@@ -36,13 +44,11 @@ jobs:
           FEED_URL: https://nightdogs.xyz/feed/feed.xml
           DRY_RUN: false
           POST_LIMIT: 280
-          CHECK_INTERVAL: "0 0 * * *"  # This won't be used in GitHub Actions
+          CHECK_INTERVAL: "0 0 * * *" # This won't be used in GitHub Actions
           AUTHOR_HANDLES: ${{ secrets.AUTHOR_HANDLES }}
 
-      - name: Cache posted items
+      - name: Save posted items cache
         uses: actions/cache@v3
         with:
           path: mastodon-bot/posted-items.json
-          key: posted-items-${{ github.run_id }}
-          restore-keys: |
-            posted-items-
+          key: posted-items-${{ hashFiles('nightdogs/content/blog/**/*.md') }}
