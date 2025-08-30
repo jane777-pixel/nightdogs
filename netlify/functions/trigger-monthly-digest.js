@@ -5,8 +5,8 @@ import matter from "gray-matter";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __triggerFilename = fileURLToPath(import.meta.url);
+const __triggerDirname = dirname(__triggerFilename);
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -21,10 +21,13 @@ export const handler = async (event, context) => {
 		}
 
 		// Parse query parameters for options
-		const { test_email, force_send, include_previous_month } = event.queryStringParameters || {};
+		const { test_email, force_send, include_previous_month } =
+			event.queryStringParameters || {};
 
 		console.log("📚 Collecting posts...");
-		const monthlyPosts = await getMonthlyPosts(include_previous_month === 'true');
+		const monthlyPosts = await getMonthlyPosts(
+			include_previous_month === "true",
+		);
 
 		if (monthlyPosts.length === 0) {
 			console.log("📭 No posts found");
@@ -36,7 +39,7 @@ export const handler = async (event, context) => {
 				},
 				body: JSON.stringify({
 					message: "No posts found for digest",
-					tip: "Try adding ?include_previous_month=true to get last month's posts"
+					tip: "Try adding ?include_previous_month=true to get last month's posts",
 				}),
 			};
 		}
@@ -47,7 +50,10 @@ export const handler = async (event, context) => {
 		const postsByAuthor = groupPostsByAuthor(monthlyPosts);
 
 		// Generate digest content
-		const digestContent = generateDigestContent(postsByAuthor, include_previous_month === 'true');
+		const digestContent = generateDigestContent(
+			postsByAuthor,
+			include_previous_month === "true",
+		);
 
 		let subscribers = [];
 		let emailResult = {};
@@ -57,7 +63,7 @@ export const handler = async (event, context) => {
 			console.log(`📧 Sending test digest to: ${test_email}`);
 			emailResult = await sendMonthlyDigest(digestContent, [test_email]);
 			subscribers = [test_email];
-		} else if (force_send === 'true') {
+		} else if (force_send === "true") {
 			// Send to all subscribers
 			console.log("👥 Fetching all newsletter subscribers...");
 			subscribers = await getSubscribers();
@@ -70,7 +76,7 @@ export const handler = async (event, context) => {
 						"Content-Type": "application/json",
 					},
 					body: JSON.stringify({
-						message: "No subscribers found"
+						message: "No subscribers found",
 					}),
 				};
 			}
@@ -93,7 +99,7 @@ export const handler = async (event, context) => {
 			body: JSON.stringify({
 				success: true,
 				message: "Manual digest trigger completed",
-				preview: !test_email && force_send !== 'true',
+				preview: !test_email && force_send !== "true",
 				stats: {
 					postsIncluded: monthlyPosts.length,
 					authorsIncluded: Object.keys(postsByAuthor).length,
@@ -106,18 +112,19 @@ export const handler = async (event, context) => {
 					articlesCount: digestContent.articles.length,
 					hasFooterNote: !!digestContent.footer_note,
 				},
-				posts: monthlyPosts.map(post => ({
+				posts: monthlyPosts.map((post) => ({
 					title: post.title,
 					author: post.author,
-					date: post.date.toISOString().split('T')[0],
+					date: post.date.toISOString().split("T")[0],
 					url: post.url,
 				})),
 				usage: {
 					preview: "Visit this URL to preview the digest",
 					testEmail: "Add ?test_email=your@email.com to send a test",
 					forceSend: "Add ?force_send=true to send to all subscribers",
-					previousMonth: "Add ?include_previous_month=true to include last month's posts"
-				}
+					previousMonth:
+						"Add ?include_previous_month=true to include last month's posts",
+				},
 			}),
 		};
 	} catch (error) {
@@ -144,7 +151,11 @@ async function getMonthlyPosts(includePreviousMonth = false) {
 
 	let targetMonth, targetYear;
 	if (includePreviousMonth) {
-		const lastMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
+		const lastMonth = new Date(
+			currentDate.getFullYear(),
+			currentDate.getMonth() - 1,
+			1,
+		);
 		targetMonth = lastMonth.getMonth();
 		targetYear = lastMonth.getFullYear();
 	} else {
@@ -154,13 +165,15 @@ async function getMonthlyPosts(includePreviousMonth = false) {
 
 	try {
 		// Read actual blog posts from the filesystem
-		let contentDir = path.join(__dirname, "..", "..", "content", "blog");
+		let contentDir = path.join(__triggerDirname, "..", "..", "content", "blog");
 
 		// Check if content directory exists
 		try {
 			await fs.access(contentDir);
 		} catch {
-			console.log("Blog content directory not found, trying alternative paths...");
+			console.log(
+				"Blog content directory not found, trying alternative paths...",
+			);
 			const altContentDir = path.join(process.cwd(), "content", "blog");
 			try {
 				await fs.access(altContentDir);
@@ -205,7 +218,11 @@ async function getMonthlyPosts(includePreviousMonth = false) {
 							// Try to parse from directory structure
 							const dateMatch = postDir.name.match(/^(\d{4})-(\d{2})-(\d{2})/);
 							if (dateMatch) {
-								postDate = new Date(dateMatch[1], dateMatch[2] - 1, dateMatch[3]);
+								postDate = new Date(
+									dateMatch[1],
+									dateMatch[2] - 1,
+									dateMatch[3],
+								);
 							} else {
 								continue; // Skip posts without valid dates
 							}
@@ -221,7 +238,10 @@ async function getMonthlyPosts(includePreviousMonth = false) {
 								author: frontmatter.author || authorDir.name,
 								date: postDate,
 								url: `/blog/${authorDir.name}/${yearDir.name}/${postDir.name}/`,
-								description: frontmatter.description || parsed.excerpt || "Click to read this post.",
+								description:
+									frontmatter.description ||
+									parsed.excerpt ||
+									"Click to read this post.",
 								tags: frontmatter.tags || [],
 								slug: postDir.name,
 							});
@@ -280,7 +300,11 @@ function generateDigestContent(postsByAuthor, includePreviousMonth = false) {
 	let targetDate;
 
 	if (includePreviousMonth) {
-		targetDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
+		targetDate = new Date(
+			currentDate.getFullYear(),
+			currentDate.getMonth() - 1,
+			1,
+		);
 	} else {
 		targetDate = currentDate;
 	}

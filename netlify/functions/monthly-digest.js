@@ -5,8 +5,8 @@ import matter from "gray-matter";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __monthlyFilename = fileURLToPath(import.meta.url);
+const __monthlyDirname = dirname(__monthlyFilename);
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -136,7 +136,13 @@ async function getMonthlyPosts() {
 
 	try {
 		// Read actual blog posts from the filesystem
-		const contentDir = path.join(__dirname, "..", "..", "content", "blog");
+		const contentDir = path.join(
+			__monthlyDirname,
+			"..",
+			"..",
+			"content",
+			"blog",
+		);
 
 		const allPosts = [];
 

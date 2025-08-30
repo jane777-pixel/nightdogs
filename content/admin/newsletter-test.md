@@ -200,9 +200,9 @@ eleventyExcludeFromCollections: true
     </div>
 
     <div>
-      <button class="btn btn-primary" onclick="previewDigest()">👀 Preview Digest</button>
-      <button class="btn btn-secondary" onclick="sendTestDigest()">📧 Send Test</button>
-      <button class="btn btn-danger" onclick="sendToAllSubscribers()">📢 Send to All Subscribers</button>
+      <button class="btn btn-primary" id="preview-btn">👀 Preview Digest</button>
+      <button class="btn btn-secondary" id="test-btn">📧 Send Test</button>
+      <button class="btn btn-danger" id="send-all-btn">📢 Send to All Subscribers</button>
     </div>
 
     <p><small><strong>Note:</strong> Preview mode shows what would be sent without actually sending emails.</small></p>
@@ -228,142 +228,144 @@ eleventyExcludeFromCollections: true
 </div>
 
 <script>
-let isLoading = false;
-
-async function previewDigest() {
-  if (isLoading) return;
-  
-  const monthOption = document.getElementById('month-option').value;
-  const includePrevious = monthOption === 'previous';
-  
-  await callDigestFunction({
-    include_previous_month: includePrevious
-  }, 'Preview');
-}
-
-async function sendTestDigest() {
-  if (isLoading) return;
-  
-  const testEmail = document.getElementById('test-email').value;
-  if (!testEmail) {
-    alert('Please enter a test email address');
-    return;
-  }
-  
-  const monthOption = document.getElementById('month-option').value;
-  const includePrevious = monthOption === 'previous';
-  
-  await callDigestFunction({
-    test_email: testEmail,
-    include_previous_month: includePrevious
-  }, 'Test Send');
-}
-
-async function sendToAllSubscribers() {
-  if (isLoading) return;
-  
-  if (!confirm('This will send the digest to ALL newsletter subscribers. Are you sure?')) {
-    return;
-  }
-  
-  const monthOption = document.getElementById('month-option').value;
-  const includePrevious = monthOption === 'previous';
-  
-  await callDigestFunction({
-    force_send: 'true',
-    include_previous_month: includePrevious
-  }, 'Send to All');
-}
-
-async function callDigestFunction(params, actionName) {
-  isLoading = true;
-  
-  // Show loading state
-  const resultDiv = document.getElementById('result-content');
-  const resultsSection = document.getElementById('results');
-  
-  resultDiv.className = 'result info loading';
-  resultDiv.textContent = `${actionName} in progress`;
-  resultsSection.style.display = 'block';
-  
-  try {
-    // Build query string
-    const queryParams = new URLSearchParams(params).toString();
-    const url = `/.netlify/functions/trigger-monthly-digest?${queryParams}`;
-    
-    const response = await fetch(url);
-    const data = await response.json();
-    
-    // Show results
-    resultDiv.className = response.ok ? 'result success' : 'result error';
-    resultDiv.textContent = JSON.stringify(data, null, 2);
-    
-    // Show statistics if available
-    if (data.stats) {
-      showStats(data.stats);
-    }
-    
-    // Show posts if available
-    if (data.posts && data.posts.length > 0) {
-      showPosts(data.posts);
-    }
-    
-  } catch (error) {
-    resultDiv.className = 'result error';
-    resultDiv.textContent = `Error: ${error.message}`;
-  } finally {
-    isLoading = false;
-    resultDiv.classList.remove('loading');
-  }
-}
-
-function showStats(stats) {
-  const statsSection = document.getElementById('stats-section');
-  const statsGrid = document.getElementById('stats-grid');
-  
-  statsGrid.innerHTML = `
-    <div class="stat-card">
-      <div class="stat-number">${stats.postsIncluded || 0}</div>
-      <div class="stat-label">Posts Included</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-number">${stats.authorsIncluded || 0}</div>
-      <div class="stat-label">Authors Featured</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-number">${stats.subscribersFound || 0}</div>
-      <div class="stat-label">Subscribers</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-number">${stats.emailsSent || 0}</div>
-      <div class="stat-label">Emails Sent</div>
-    </div>
-  `;
-  
-  statsSection.style.display = 'block';
-}
-
-function showPosts(posts) {
-  const postsSection = document.getElementById('posts-section');
-  const postList = document.getElementById('post-list');
-  
-  const postsHtml = posts.map(post => `
-    <div class="post-item">
-      <div class="post-title">${post.title}</div>
-      <div class="post-meta">
-        by ${post.author} • ${post.date} • 
-        <a href="https://nightdogs.xyz${post.url}" target="_blank">View Post</a>
-      </div>
-    </div>
-  `).join('');
-  
-  postList.innerHTML = postsHtml;
-  postsSection.style.display = 'block';
-}
-
-// Set default test email to current user if available
 document.addEventListener('DOMContentLoaded', function() {
-  // Could be enhanced to detect current user email from identity
   console.log('Newsletter digest test page loaded');
+  
+  let isLoading = false;
+
+  // Button event listeners
+  document.getElementById('preview-btn').addEventListener('click', previewDigest);
+  document.getElementById('test-btn').addEventListener('click', sendTestDigest);
+  document.getElementById('send-all-btn').addEventListener('click', sendToAllSubscribers);
+
+  async function previewDigest() {
+    if (isLoading) return;
+    
+    const monthOption = document.getElementById('month-option').value;
+    const includePrevious = monthOption === 'previous';
+    
+    await callDigestFunction({
+      include_previous_month: includePrevious
+    }, 'Preview');
+  }
+
+  async function sendTestDigest() {
+    if (isLoading) return;
+    
+    const testEmail = document.getElementById('test-email').value;
+    if (!testEmail) {
+      alert('Please enter a test email address');
+      return;
+    }
+    
+    const monthOption = document.getElementById('month-option').value;
+    const includePrevious = monthOption === 'previous';
+    
+    await callDigestFunction({
+      test_email: testEmail,
+      include_previous_month: includePrevious
+    }, 'Test Send');
+  }
+
+  async function sendToAllSubscribers() {
+    if (isLoading) return;
+    
+    if (!confirm('This will send the digest to ALL newsletter subscribers. Are you sure?')) {
+      return;
+    }
+    
+    const monthOption = document.getElementById('month-option').value;
+    const includePrevious = monthOption === 'previous';
+    
+    await callDigestFunction({
+      force_send: 'true',
+      include_previous_month: includePrevious
+    }, 'Send to All');
+  }
+
+  async function callDigestFunction(params, actionName) {
+    isLoading = true;
+    
+    // Show loading state
+    const resultDiv = document.getElementById('result-content');
+    const resultsSection = document.getElementById('results');
+    
+    resultDiv.className = 'result info loading';
+    resultDiv.textContent = actionName + ' in progress';
+    resultsSection.style.display = 'block';
+    
+    try {
+      // Build query string
+      const queryParams = new URLSearchParams(params).toString();
+      const url = '/.netlify/functions/trigger-monthly-digest?' + queryParams;
+      
+      const response = await fetch(url);
+      const data = await response.json();
+      
+      // Show results
+      resultDiv.className = response.ok ? 'result success' : 'result error';
+      resultDiv.textContent = JSON.stringify(data, null, 2);
+      
+      // Show statistics if available
+      if (data.stats) {
+        showStats(data.stats);
+      }
+      
+      // Show posts if available
+      if (data.posts && data.posts.length > 0) {
+        showPosts(data.posts);
+      }
+      
+    } catch (error) {
+      resultDiv.className = 'result error';
+      resultDiv.textContent = 'Error: ' + error.message;
+    } finally {
+      isLoading = false;
+      resultDiv.classList.remove('loading');
+    }
+  }
+
+  function showStats(stats) {
+    const statsSection = document.getElementById('stats-section');
+    const statsGrid = document.getElementById('stats-grid');
+    
+    statsGrid.innerHTML = 
+      '<div class="stat-card">' +
+        '<div class="stat-number">' + (stats.postsIncluded || 0) + '</div>' +
+        '<div class="stat-label">Posts Included</div>' +
+      '</div>' +
+      '<div class="stat-card">' +
+        '<div class="stat-number">' + (stats.authorsIncluded || 0) + '</div>' +
+        '<div class="stat-label">Authors Featured</div>' +
+      '</div>' +
+      '<div class="stat-card">' +
+        '<div class="stat-number">' + (stats.subscribersFound || 0) + '</div>' +
+        '<div class="stat-label">Subscribers</div>' +
+      '</div>' +
+      '<div class="stat-card">' +
+        '<div class="stat-number">' + (stats.emailsSent || 0) + '</div>' +
+        '<div class="stat-label">Emails Sent</div>' +
+      '</div>';
+    
+    statsSection.style.display = 'block';
+  }
+
+  function showPosts(posts) {
+    const postsSection = document.getElementById('posts-section');
+    const postList = document.getElementById('post-list');
+    
+    const postsHtml = posts.map(function(post) {
+      return '<div class="post-item">' +
+        '<div class="post-title">' + post.title + '</div>' +
+        '<div class="post-meta">' +
+          'by ' + post.author + ' • ' + post.date + ' • ' +
+          '<a href="https://nightdogs.xyz' + post.url + '" target="_blank">View Post</a>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+    
+    postList.innerHTML = postsHtml;
+    postsSection.style.display = 'block';
+  }
 });
 </script>
