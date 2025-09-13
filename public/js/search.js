@@ -229,19 +229,74 @@
 		}
 	}
 
+	// Error boundary for search functionality
+	function handleSearchError(error, context = "search") {
+		console.warn(`[Search Error] ${context}:`, error);
+
+		// Try to gracefully degrade - hide search UI if it breaks
+		const overlay = document.getElementById("search-overlay");
+		if (overlay) {
+			overlay.style.display = "none";
+		}
+
+		// Hide search triggers to prevent further errors
+		const triggers = document.querySelectorAll("[data-search-trigger]");
+		triggers.forEach((trigger) => {
+			trigger.style.display = "none";
+		});
+
+		// Optional: Show fallback message
+		const fallback = document.createElement("div");
+		fallback.className = "search-error-fallback";
+		fallback.innerHTML =
+			"<p><small>Search temporarily unavailable. Try refreshing the page.</small></p>";
+		fallback.style.display = "none"; // Hidden by default, can be shown if needed
+		document.body.appendChild(fallback);
+	}
+
+	// Graceful degradation - check for required features
+	function checkFeatureSupport() {
+		const required = {
+			fetch: typeof fetch !== "undefined",
+			localStorage:
+				typeof localStorage !== "undefined" && localStorage !== null,
+			querySelector: typeof document.querySelector !== "undefined",
+			addEventListener: typeof document.addEventListener !== "undefined",
+		};
+
+		const missing = Object.keys(required).filter(
+			(feature) => !required[feature],
+		);
+		if (missing.length > 0) {
+			console.warn("[Search] Missing required features:", missing);
+			return false;
+		}
+		return true;
+	}
+
 	// Initialize when DOM is ready
 	document.addEventListener("DOMContentLoaded", function () {
-		// Only initialize if search triggers exist
-		if (document.querySelector("[data-search-trigger]")) {
-			const search = new SimpleSearch();
-			search
-				.init()
-				.then(() => {
-					window.nightdogsSearch = search;
-				})
-				.catch((error) => {
-					console.warn("Search initialization failed:", error);
-				});
+		try {
+			// Check if browser supports required features
+			if (!checkFeatureSupport()) {
+				handleSearchError("Browser lacks required features", "feature-check");
+				return;
+			}
+
+			// Only initialize if search triggers exist
+			if (document.querySelector("[data-search-trigger]")) {
+				const search = new SimpleSearch();
+				search
+					.init()
+					.then(() => {
+						window.nightdogsSearch = search;
+					})
+					.catch((error) => {
+						handleSearchError(error, "initialization");
+					});
+			}
+		} catch (error) {
+			handleSearchError(error, "dom-ready");
 		}
 	});
 })();

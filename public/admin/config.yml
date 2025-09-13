@@ -31,9 +31,21 @@ collections:
     path: "{{author}}/{{year}}-{{month}}-{{day}}/{{slug}}/index"
     media_folder: ""
     public_folder: ""
+    editor:
+      preview: true
     fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Slug", name: "slug", widget: "string" }
+      - {
+          label: "Title",
+          name: "title",
+          widget: "string",
+          hint: "Main title of your post",
+        }
+      - {
+          label: "Slug",
+          name: "slug",
+          widget: "string",
+          hint: "URL-friendly version of title (lowercase, hyphens)",
+        }
       - {
           label: "Publish Date",
           name: "date",
@@ -42,6 +54,7 @@ collections:
           time_format: "HH:mm:ss",
           format: "YYYY-MM-DDTHH:mm:ss.000Z",
           default: "",
+          hint: "When this post should be published",
         }
       - {
           label: "Author",
@@ -57,9 +70,79 @@ collections:
               { label: "Nic", value: "nic" },
               { label: "Ewan", value: "ewan" },
             ],
+          hint: "Select the author of this post",
         }
-      - { label: "Tags", name: "tags", widget: "list", default: ["posts"] }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - {
+          label: "Tags",
+          name: "tags",
+          widget: "list",
+          default: ["posts"],
+          hint: "Add relevant tags. 'posts' is required. Try: music, life, creative, technology, personal, tutorial, review",
+        }
+      - {
+          label: "Featured Image",
+          name: "featuredImage",
+          widget: "image",
+          required: false,
+          hint: "Optional main image for the post. Will be optimized automatically.",
+        }
+      - {
+          label: "Image Alt Text",
+          name: "featuredImageAlt",
+          widget: "string",
+          required: false,
+          hint: "Describe the featured image for accessibility",
+        }
+      - {
+          label: "Excerpt",
+          name: "excerpt",
+          widget: "text",
+          required: false,
+          hint: "Short description for social sharing and search results (optional - will auto-generate if empty)",
+        }
+      - {
+          label: "Body",
+          name: "body",
+          widget: "markdown",
+          hint: "Main content of your post. Tip: Place images in the same folder as this post for best optimization.",
+        }
+      - {
+          label: "Collaborators",
+          name: "collaborators",
+          widget: "list",
+          required: false,
+          hint: "Other authors who contributed to this post",
+          field:
+            {
+              label: "Author",
+              name: "author",
+              widget: "select",
+              options:
+                [
+                  { label: "Jane", value: "jane" },
+                  { label: "Abby", value: "abby" },
+                  { label: "Adèsse", value: "adesse" },
+                  { label: "Orion", value: "orionlw" },
+                  { label: "Amelia", value: "amelia" },
+                  { label: "Nic", value: "nic" },
+                  { label: "Ewan", value: "ewan" },
+                ],
+            },
+        }
+      - {
+          label: "Post Series",
+          name: "series",
+          widget: "string",
+          required: false,
+          hint: "If this post is part of a series, enter the series name",
+        }
+      - {
+          label: "Part Number",
+          name: "seriesPart",
+          widget: "number",
+          required: false,
+          hint: "Which part of the series is this? (1, 2, 3, etc.)",
+        }
   - name: "author-profiles"
     label: "Author Profiles"
     folder: "content/authors"

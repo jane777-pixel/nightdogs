@@ -7,18 +7,18 @@
 class ThemeSwitcher {
 	constructor(options = {}) {
 		this.options = {
-			storageKey: 'nightdogs-theme',
-			toggleSelector: '[data-theme-toggle]',
-			bodyAttribute: 'data-theme',
-			authorAttribute: 'data-author',
-			systemPreferenceQuery: '(prefers-color-scheme: dark)',
+			storageKey: "nightdogs-theme",
+			toggleSelector: "[data-theme-toggle]",
+			bodyAttribute: "data-theme",
+			authorAttribute: "data-author",
+			systemPreferenceQuery: "(prefers-color-scheme: dark)",
 			transitions: true,
-			...options
+			...options,
 		};
 
-		this.themes = ['auto', 'light', 'dark'];
-		this.currentTheme = 'auto';
-		this.systemPreference = 'light';
+		this.themes = ["auto", "light", "dark"];
+		this.currentTheme = "auto";
+		this.systemPreference = "light";
 		this.mediaQuery = null;
 
 		this.init();
@@ -40,22 +40,22 @@ class ThemeSwitcher {
 		// Set up page visibility handling
 		this.setupVisibilityHandling();
 
-		console.log('[Theme] Initialized with theme:', this.currentTheme);
+		console.log("[Theme] Initialized with theme:", this.currentTheme);
 	}
 
 	setupSystemDetection() {
 		// Check if the browser supports prefers-color-scheme
 		if (window.matchMedia) {
 			this.mediaQuery = window.matchMedia(this.options.systemPreferenceQuery);
-			this.systemPreference = this.mediaQuery.matches ? 'dark' : 'light';
+			this.systemPreference = this.mediaQuery.matches ? "dark" : "light";
 
 			// Listen for system preference changes
-			this.mediaQuery.addEventListener('change', (e) => {
-				this.systemPreference = e.matches ? 'dark' : 'light';
+			this.mediaQuery.addEventListener("change", (e) => {
+				this.systemPreference = e.matches ? "dark" : "light";
 
 				// If user is on auto mode, update the theme
-				if (this.currentTheme === 'auto') {
-					this.applyTheme('auto');
+				if (this.currentTheme === "auto") {
+					this.applyTheme("auto");
 				}
 			});
 		}
@@ -68,7 +68,7 @@ class ThemeSwitcher {
 				this.currentTheme = saved;
 			}
 		} catch (error) {
-			console.warn('[Theme] Could not load theme preference:', error);
+			console.warn("[Theme] Could not load theme preference:", error);
 		}
 	}
 
@@ -76,28 +76,30 @@ class ThemeSwitcher {
 		try {
 			localStorage.setItem(this.options.storageKey, this.currentTheme);
 		} catch (error) {
-			console.warn('[Theme] Could not save theme preference:', error);
+			console.warn("[Theme] Could not save theme preference:", error);
 		}
 	}
 
 	setupControls() {
 		// Find theme toggle buttons
-		const toggleButtons = document.querySelectorAll(this.options.toggleSelector);
+		const toggleButtons = document.querySelectorAll(
+			this.options.toggleSelector,
+		);
 
-		toggleButtons.forEach(button => {
+		toggleButtons.forEach((button) => {
 			// Set initial state
 			this.updateToggleButton(button);
 
 			// Add click handler
-			button.addEventListener('click', (e) => {
+			button.addEventListener("click", (e) => {
 				e.preventDefault();
 				this.toggleTheme();
 			});
 		});
 
 		// Keyboard shortcut (Ctrl/Cmd + Shift + D for Dark mode)
-		document.addEventListener('keydown', (e) => {
-			if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'D') {
+		document.addEventListener("keydown", (e) => {
+			if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === "D") {
 				e.preventDefault();
 				this.toggleTheme();
 			}
@@ -106,9 +108,9 @@ class ThemeSwitcher {
 
 	setupVisibilityHandling() {
 		// Re-apply theme when page becomes visible (handles system changes while page was hidden)
-		document.addEventListener('visibilitychange', () => {
-			if (!document.hidden && this.currentTheme === 'auto') {
-				this.applyTheme('auto');
+		document.addEventListener("visibilitychange", () => {
+			if (!document.hidden && this.currentTheme === "auto") {
+				this.applyTheme("auto");
 			}
 		});
 	}
@@ -123,7 +125,7 @@ class ThemeSwitcher {
 
 	setTheme(theme) {
 		if (!this.themes.includes(theme)) {
-			console.warn('[Theme] Invalid theme:', theme);
+			console.warn("[Theme] Invalid theme:", theme);
 			return;
 		}
 
@@ -161,7 +163,7 @@ class ThemeSwitcher {
 	}
 
 	resolveTheme(theme) {
-		if (theme === 'auto') {
+		if (theme === "auto") {
 			return this.systemPreference;
 		}
 		return theme;
@@ -172,14 +174,19 @@ class ThemeSwitcher {
 		let themeColorMeta = document.querySelector('meta[name="theme-color"]');
 
 		if (!themeColorMeta) {
-			themeColorMeta = document.createElement('meta');
-			themeColorMeta.name = 'theme-color';
+			themeColorMeta = document.createElement("meta");
+			themeColorMeta.name = "theme-color";
 			document.head.appendChild(themeColorMeta);
 		}
 
 		// Get the current author to determine colors
-		const currentAuthor = document.body.getAttribute(this.options.authorAttribute);
-		const themeColor = this.getThemeColorForAuthor(currentAuthor, resolvedTheme);
+		const currentAuthor = document.body.getAttribute(
+			this.options.authorAttribute,
+		);
+		const themeColor = this.getThemeColorForAuthor(
+			currentAuthor,
+			resolvedTheme,
+		);
 
 		themeColorMeta.content = themeColor;
 	}
@@ -187,14 +194,14 @@ class ThemeSwitcher {
 	getThemeColorForAuthor(author, theme) {
 		// Default colors
 		const defaultColors = {
-			light: '#ffffff',
-			dark: '#1a1a1a'
+			light: "#ffffff",
+			dark: "#1a1a1a",
 		};
 
 		// Try to get author-specific colors from CSS custom properties
 		if (author) {
 			const computedStyle = getComputedStyle(document.documentElement);
-			const bgColor = computedStyle.getPropertyValue('--color-bg').trim();
+			const bgColor = computedStyle.getPropertyValue("--color-bg").trim();
 			if (bgColor) {
 				return bgColor;
 			}
@@ -209,49 +216,57 @@ class ThemeSwitcher {
 		const root = document.documentElement;
 
 		// Add a CSS class for the current resolved theme
-		root.classList.remove('theme-light', 'theme-dark');
+		root.classList.remove("theme-light", "theme-dark");
 		root.classList.add(`theme-${resolvedTheme}`);
 	}
 
 	updateControls() {
-		const toggleButtons = document.querySelectorAll(this.options.toggleSelector);
-		toggleButtons.forEach(button => this.updateToggleButton(button));
+		const toggleButtons = document.querySelectorAll(
+			this.options.toggleSelector,
+		);
+		toggleButtons.forEach((button) => this.updateToggleButton(button));
 	}
 
 	updateToggleButton(button) {
 		// Update button text/icon based on current theme
 		const themeNames = {
-			auto: 'Auto',
-			light: 'Light',
-			dark: 'Dark'
+			auto: "Auto",
+			light: "Light",
+			dark: "Dark",
 		};
 
 		const themeIcons = {
-			auto: '🌓',
-			light: '☀️',
-			dark: '🌙'
+			auto: "🌓",
+			light: "☀️",
+			dark: "🌙",
 		};
 
 		// Update text content if button has text
-		const textElement = button.querySelector('.theme-text');
+		const textElement = button.querySelector(".theme-text");
 		if (textElement) {
 			textElement.textContent = themeNames[this.currentTheme];
-		} else if (!button.querySelector('svg, img')) {
+		} else if (!button.querySelector("svg, img")) {
 			// Only update if button doesn't have custom icons
 			button.textContent = `${themeIcons[this.currentTheme]} ${themeNames[this.currentTheme]}`;
 		}
 
 		// Update aria-label for accessibility
-		button.setAttribute('aria-label', `Switch theme (current: ${themeNames[this.currentTheme]})`);
+		button.setAttribute(
+			"aria-label",
+			`Switch theme (current: ${themeNames[this.currentTheme]})`,
+		);
 
 		// Update data attributes
-		button.setAttribute('data-current-theme', this.currentTheme);
-		button.setAttribute('data-resolved-theme', this.resolveTheme(this.currentTheme));
+		button.setAttribute("data-current-theme", this.currentTheme);
+		button.setAttribute(
+			"data-resolved-theme",
+			this.resolveTheme(this.currentTheme),
+		);
 	}
 
 	disableTransitions() {
-		const style = document.createElement('style');
-		style.id = 'disable-theme-transitions';
+		const style = document.createElement("style");
+		style.id = "disable-theme-transitions";
 		style.textContent = `
 			*,
 			*::before,
@@ -264,19 +279,19 @@ class ThemeSwitcher {
 	}
 
 	enableTransitions() {
-		const style = document.getElementById('disable-theme-transitions');
+		const style = document.getElementById("disable-theme-transitions");
 		if (style) {
 			style.remove();
 		}
 	}
 
 	dispatchThemeChangeEvent() {
-		const event = new CustomEvent('themechange', {
+		const event = new CustomEvent("themechange", {
 			detail: {
 				theme: this.currentTheme,
 				resolvedTheme: this.resolveTheme(this.currentTheme),
-				systemPreference: this.systemPreference
-			}
+				systemPreference: this.systemPreference,
+			},
 		});
 
 		document.dispatchEvent(event);
@@ -304,16 +319,16 @@ class ThemeSwitcher {
 // Utility function to create theme toggle button
 function createThemeToggle(options = {}) {
 	const {
-		className = 'theme-toggle',
-		position = 'top-right',
-		showText = true
+		className = "theme-toggle",
+		position = "top-right",
+		showText = true,
 	} = options;
 
-	const button = document.createElement('button');
+	const button = document.createElement("button");
 	button.className = className;
-	button.setAttribute('data-theme-toggle', '');
-	button.setAttribute('type', 'button');
-	button.setAttribute('aria-label', 'Toggle theme');
+	button.setAttribute("data-theme-toggle", "");
+	button.setAttribute("type", "button");
+	button.setAttribute("aria-label", "Toggle theme");
 
 	if (showText) {
 		button.innerHTML = `
@@ -329,25 +344,25 @@ function createThemeToggle(options = {}) {
 
 	// Add positioning styles if specified
 	if (position) {
-		button.style.position = 'fixed';
-		button.style.zIndex = '1000';
+		button.style.position = "fixed";
+		button.style.zIndex = "1000";
 
 		switch (position) {
-			case 'top-right':
-				button.style.top = '1rem';
-				button.style.right = '1rem';
+			case "top-right":
+				button.style.top = "1rem";
+				button.style.right = "1rem";
 				break;
-			case 'top-left':
-				button.style.top = '1rem';
-				button.style.left = '1rem';
+			case "top-left":
+				button.style.top = "1rem";
+				button.style.left = "1rem";
 				break;
-			case 'bottom-right':
-				button.style.bottom = '1rem';
-				button.style.right = '1rem';
+			case "bottom-right":
+				button.style.bottom = "1rem";
+				button.style.right = "1rem";
 				break;
-			case 'bottom-left':
-				button.style.bottom = '1rem';
-				button.style.left = '1rem';
+			case "bottom-left":
+				button.style.bottom = "1rem";
+				button.style.left = "1rem";
 				break;
 		}
 	}
@@ -355,38 +370,76 @@ function createThemeToggle(options = {}) {
 	return button;
 }
 
+// Error boundary for theme switcher
+function handleThemeError(error, context = "theme") {
+	console.warn(`[Theme Error] ${context}:`, error);
+
+	// Fallback to basic theme functionality
+	try {
+		// Ensure at least basic theme is applied
+		document.body.setAttribute("data-theme", "light");
+		document.documentElement.classList.add("theme-light");
+
+		// Hide broken theme toggles
+		const toggles = document.querySelectorAll("[data-theme-toggle]");
+		toggles.forEach((toggle) => {
+			toggle.style.display = "none";
+		});
+	} catch (fallbackError) {
+		console.warn("[Theme Error] Fallback also failed:", fallbackError);
+	}
+}
+
 // Initialize theme switcher when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-	// Initialize the theme switcher
-	window.themeSwitcher = new ThemeSwitcher();
+document.addEventListener("DOMContentLoaded", () => {
+	try {
+		// Check for required features
+		const hasLocalStorage =
+			typeof localStorage !== "undefined" && localStorage !== null;
+		const hasMatchMedia = typeof window.matchMedia !== "undefined";
 
-	// Create toggle button if none exists
-	if (!document.querySelector('[data-theme-toggle]')) {
-		const toggle = createThemeToggle({ showText: false });
-		document.body.appendChild(toggle);
+		if (!hasLocalStorage) {
+			console.warn(
+				"[Theme] localStorage not available, theme preferences won't persist",
+			);
+		}
 
-		// Update the toggle button after switcher is initialized
-		window.themeSwitcher.updateControls();
+		// Initialize the theme switcher
+		window.themeSwitcher = new ThemeSwitcher();
+
+		// Create toggle button if none exists
+		if (!document.querySelector("[data-theme-toggle]")) {
+			const toggle = createThemeToggle({ showText: false });
+			document.body.appendChild(toggle);
+
+			// Update the toggle button after switcher is initialized
+			window.themeSwitcher.updateControls();
+		}
+	} catch (error) {
+		handleThemeError(error, "initialization");
 	}
 });
 
 // Apply theme immediately to prevent flash (inline script alternative)
-(function() {
+(function () {
 	try {
-		const saved = localStorage.getItem('nightdogs-theme') || 'auto';
-		const systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-		const resolvedTheme = saved === 'auto' ? (systemDark ? 'dark' : 'light') : saved;
+		const saved = localStorage.getItem("nightdogs-theme") || "auto";
+		const systemDark =
+			window.matchMedia &&
+			window.matchMedia("(prefers-color-scheme: dark)").matches;
+		const resolvedTheme =
+			saved === "auto" ? (systemDark ? "dark" : "light") : saved;
 
 		document.documentElement.classList.add(`theme-${resolvedTheme}`);
-		document.body.setAttribute('data-theme', resolvedTheme);
+		document.body.setAttribute("data-theme", resolvedTheme);
 	} catch (e) {
 		// Fallback to light theme
-		document.documentElement.classList.add('theme-light');
-		document.body.setAttribute('data-theme', 'light');
+		document.documentElement.classList.add("theme-light");
+		document.body.setAttribute("data-theme", "light");
 	}
 })();
 
 // Export for module usage
-if (typeof module !== 'undefined' && module.exports) {
+if (typeof module !== "undefined" && module.exports) {
 	module.exports = { ThemeSwitcher, createThemeToggle };
 }

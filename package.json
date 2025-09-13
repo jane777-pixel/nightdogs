@@ -16,7 +16,12 @@
 		"start-ghpages": "eleventy --pathprefix=/eleventy-base-blog/ --serve --quiet",
 		"debug": "cross-env DEBUG=Eleventy* eleventy",
 		"debugstart": "cross-env DEBUG=Eleventy* eleventy --serve --quiet",
-		"benchmark": "cross-env DEBUG=Eleventy:Benchmark* eleventy"
+		"benchmark": "cross-env DEBUG=Eleventy:Benchmark* eleventy",
+		"test": "node test/run-tests.js",
+		"test:build": "node test/build.test.js",
+		"test:content": "node test/content-validation.test.js",
+		"pretest": "echo 'Running nightdogs.xyz test suite...'",
+		"posttest": "echo 'Tests completed.'"
 	},
 	"repository": {
 		"type": "git",

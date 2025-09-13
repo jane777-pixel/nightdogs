@@ -50,15 +50,48 @@ document.addEventListener('DOMContentLoaded', function() {
 				{{ parsedDate | readableDate }}
 			{% endif %}
 		</time>
+
+		{# Main author #}
 		{%- if author -%}
 		<span class="post-author" style="margin-left: 1em">
 			by
 			<a href="/authors/{{ author }}/" class="h-card p-author">{{
-				author
+				authors[author].name or author
 			}}</a>
 		</span>
 		{%- endif -%}
+
+		{# Collaborators #}
+		{%- if collaborators and collaborators.length -%}
+		<span class="post-collaborators" style="margin-left: 0.5em">
+			with
+			{%- for collaborator in collaborators %}
+				<a href="/authors/{{ collaborator }}/" class="h-card">{{ authors[collaborator].name or collaborator }}</a>{% if not loop.last %}, {% endif %}
+			{%- endfor %}
+		</span>
+		{%- endif -%}
+
+		{# Reading time #}
+		{%- if content %}
+		<span class="post-reading-time" style="margin-left: 1em; color: var(--color-text-secondary, #666);">
+			{{ content | wordCount }} words • {{ (content | wordCount / 200) | round }} min read
+		</span>
+		{%- endif -%}
 	</div>
+
+	{# Series information #}
+	{%- if series -%}
+	<div class="post-series" style="margin: 1rem 0; padding: 1rem; background: var(--color-bg-secondary, #f8f9fa); border-left: 4px solid var(--color-primary, #007bff); border-radius: 0.25rem;">
+		<h4 style="margin: 0 0 0.5rem 0; font-size: 0.9rem; color: var(--color-text-secondary, #666); text-transform: uppercase; letter-spacing: 0.05em;">
+			📚 Part of a Series
+		</h4>
+		<p style="margin: 0; font-weight: 600;">
+			{{ series }}
+			{%- if seriesPart %} - Part {{ seriesPart }}{% endif %}
+		</p>
+		{# TODO: Add links to other parts of the series #}
+	</div>
+	{%- endif -%}
 
 	{%- if tags and tags.length -%}
 	{%- set uniqueTags = tags | unique -%}
@@ -78,8 +111,50 @@ document.addEventListener('DOMContentLoaded', function() {
 		{{ content | safe }}
 	</div>
 
-{% set webmentionsUrl = page.url %}
-{% include "webmentions.njk" %}
+	{# Cross-author recommendations #}
+	{%- if collections.posts %}
+	{%- set crossAuthorRecs = collections.posts | crossAuthorRecommendations(page) %}
+	{%- if crossAuthorRecs and crossAuthorRecs.length > 0 %}
+	<div class="cross-author-recommendations" style="margin: 3rem 0 2rem 0; padding: 2rem; background: var(--color-bg-secondary, #f8f9fa); border: 1px solid var(--color-border, #e9ecef); border-radius: 0.5rem;">
+		<h3 style="margin: 0 0 1.5rem 0; font-size: 1.2rem; color: var(--color-text-primary, #333);">
+			<span style="margin-right: 0.5rem;" aria-hidden="true">🔍</span>
+			Discover Other Authors
+		</h3>
+		<div class="cross-author-grid" style="display: grid; gap: 1.5rem;">
+			{%- for post in crossAuthorRecs %}
+			<article class="cross-author-post" style="display: flex; gap: 1rem; padding: 1rem; background: white; border-radius: 0.375rem; border: 1px solid var(--color-border, #e9ecef);" data-author="{{ post.data.author }}">
+				<div class="author-avatar" style="flex-shrink: 0;">
+					<a href="/authors/{{ post.data.author }}/" style="display: block; width: 48px; height: 48px; border-radius: 50%; background: var(--{{ post.data.author }}-primary, #007bff); display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; font-weight: bold; font-size: 1.2rem;">
+						{{ (authors[post.data.author].name or post.data.author) | slice(0, 1) | upper }}
+					</a>
+				</div>
+				<div class="post-info" style="flex: 1; min-width: 0;">
+					<h4 style="margin: 0 0 0.25rem 0; font-size: 1rem;">
+						<a href="{{ post.url }}" style="color: var(--color-text-primary, #333); text-decoration: none;">{{ post.data.title }}</a>
+					</h4>
+					<p style="margin: 0 0 0.5rem 0; font-size: 0.875rem; color: var(--color-text-secondary, #666);">
+						by <a href="/authors/{{ post.data.author }}/" style="color: var(--{{ post.data.author }}-primary, #007bff); text-decoration: none; font-weight: 500;">{{ authors[post.data.author].name or post.data.author }}</a>
+						• {{ post.data.date | readableDate }}
+					</p>
+					{%- if post.data.excerpt %}
+					<p style="margin: 0; font-size: 0.875rem; color: var(--color-text-primary, #333); line-height: 1.4;">
+						{{ post.data.excerpt | truncate(120) }}
+					</p>
+					{%- endif %}
+				</div>
+			</article>
+			{%- endfor %}
+		</div>
+	</div>
+	{%- endif %}
+	{%- endif %}
+
+	{# Social sharing #}
+	<div data-social-share></div>
+
+	{# Webmentions #}
+	{% set webmentionsUrl = page.url %}
+	{% include "webmentions.njk" %}
 
 	{%- if author and collections.posts %}
 	{%- set authorPosts = collections.posts | filterByAuthor(author) | reverse %}

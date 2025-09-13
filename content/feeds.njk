@@ -1,0 +1,124 @@
+---
+title: RSS Feeds
+layout: layouts/base.njk
+---
+
+<h1>RSS Feeds</h1>
+
+<p>Subscribe to nightdogs content through RSS feeds. We offer both a main feed with all posts and individual feeds for each author.</p>
+
+<section class="feeds-section">
+	<h2>Main Feed</h2>
+	<div class="feed-item">
+		<h3><a href="/feed/feed.xml">All Posts</a></h3>
+		<p>The complete nightdogs feed with posts from all authors.</p>
+		<code>/feed/feed.xml</code>
+	</div>
+</section>
+
+<section class="feeds-section">
+	<h2>Author Feeds</h2>
+	<p>Follow your favorite authors individually:</p>
+
+	<div class="author-feeds">
+		{% for authorSlug, author in authors %}
+		<div class="feed-item" data-author="{{ authorSlug }}">
+			<h3><a href="/feed/{{ authorSlug }}.xml">{{ author.name }}</a></h3>
+			<p>{{ author.bio | safe }}</p>
+			<code>/feed/{{ authorSlug }}.xml</code>
+			{% if author.note %}
+			<div class="author-note">{{ author.note }}</div>
+			{% endif %}
+		</div>
+		{% endfor %}
+	</div>
+</section>
+
+<section class="feeds-section">
+	<h2>How to Use RSS Feeds</h2>
+	<p>RSS feeds allow you to follow nightdogs posts in your favorite RSS reader. Here are some popular options:</p>
+
+	<ul>
+		<li><strong>Web-based:</strong> Feedly, Inoreader, NewsBlur</li>
+		<li><strong>Desktop:</strong> NetNewsWire (Mac), Thunderbird (cross-platform)</li>
+		<li><strong>Mobile:</strong> Reeder (iOS), gReader (Android)</li>
+	</ul>
+
+	<p>Simply copy the feed URL and add it to your RSS reader to start receiving updates.</p>
+</section>
+
+<style>
+	.feeds-section {
+		margin-bottom: 2rem;
+	}
+
+	.feed-item {
+		background: var(--color-bg-secondary, #f8f9fa);
+		border: 1px solid var(--color-border, #e9ecef);
+		border-radius: 0.375rem;
+		padding: 1rem;
+		margin-bottom: 1rem;
+	}
+
+	.feed-item h3 {
+		margin: 0 0 0.5rem 0;
+	}
+
+	.feed-item p {
+		margin-bottom: 0.5rem;
+		color: var(--color-text-secondary, #6c757d);
+	}
+
+	.feed-item code {
+		background: var(--color-bg-code, #f1f3f4);
+		padding: 0.125rem 0.25rem;
+		border-radius: 0.25rem;
+		font-size: 0.875rem;
+		font-family: var(--font-mono, 'Courier New', monospace);
+	}
+
+	.author-note {
+		font-size: 1.2rem;
+		margin-top: 0.5rem;
+	}
+
+	.author-feeds {
+		display: grid;
+		gap: 1rem;
+	}
+
+	@media (min-width: 768px) {
+		.author-feeds {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	/* Author-specific theming for feed items */
+	.feed-item[data-author="jane"] {
+		border-left: 4px solid var(--jane-primary, #b8002e);
+	}
+
+	.feed-item[data-author="orionlw"] {
+		border-left: 4px solid var(--orionlw-primary, #6e4b1f);
+	}
+
+	.feed-item[data-author="adesse"] {
+		border-left: 4px solid var(--adesse-primary, #deb8c4);
+	}
+
+	.feed-item[data-author="nic"] {
+		border-left: 4px solid var(--nic-primary, #2563eb);
+	}
+
+	.feed-item[data-author="amelia"] {
+		border-left: 4px solid var(--amelia-primary, #8b2d9e);
+	}
+
+	.feed-item[data-author="ewan"] {
+		border-left: 4px solid var(--ewan-primary, #2563eb);
+	}
+
+	.feed-item[data-author="abby"] {
+		border-left: 4px solid var(--abby-primary, #1e7e1e);
+	}
+</style>

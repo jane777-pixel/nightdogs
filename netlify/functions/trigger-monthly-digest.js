@@ -359,7 +359,10 @@ async function getSubscribers() {
 			audienceId: audienceId,
 		});
 
-		return contacts.data
+		// The API returns data nested under contacts.data.data
+		const contactsList = contacts.data?.data || [];
+
+		return contactsList
 			.filter((contact) => !contact.unsubscribed)
 			.map((contact) => contact.email);
 	} catch (error) {
