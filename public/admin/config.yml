@@ -534,6 +534,140 @@ collections:
                   },
                 ],
             }
+  - name: "newsletters"
+    label: "Newsletters"
+    folder: "content/newsletters"
+    create: true
+    slug: "{{year}}-{{month}}-{{title}}"
+    editor:
+      preview: false
+    fields:
+      - {
+          label: "Title",
+          name: "title",
+          widget: "string",
+          hint: "Newsletter title (e.g., 'September 2025 Digest')"
+        }
+      - {
+          label: "Subject Line",
+          name: "subject",
+          widget: "string",
+          hint: "Email subject line - this will be sent to subscribers"
+        }
+      - {
+          label: "Month",
+          name: "month",
+          widget: "select",
+          options: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+        }
+      - {
+          label: "Year",
+          name: "year",
+          widget: "number",
+          default: 2025,
+          value_type: "int"
+        }
+      - {
+          label: "Status",
+          name: "status",
+          widget: "select",
+          options: ["draft", "ready", "sent"],
+          default: "draft",
+          hint: "Draft = work in progress, Ready = ready to send, Sent = already sent"
+        }
+      - {
+          label: "Auto-populate Posts",
+          name: "autoPopulate",
+          widget: "boolean",
+          default: true,
+          hint: "Automatically include posts from the selected month"
+        }
+      - {
+          label: "Introduction",
+          name: "introduction",
+          widget: "markdown",
+          hint: "Opening message for the newsletter"
+        }
+      - {
+          label: "Editorial Sections",
+          name: "editorialSections",
+          widget: "list",
+          required: false,
+          hint: "Add custom sections between author posts",
+          fields: [
+            {
+              label: "Section Title",
+              name: "title",
+              widget: "string"
+            },
+            {
+              label: "Content",
+              name: "content",
+              widget: "markdown"
+            },
+            {
+              label: "Insert After Author",
+              name: "insertAfter",
+              widget: "select",
+              options: ["jane", "orionlw", "adesse", "nic", "amelia", "abby", "ewan", "beginning", "end"],
+              hint: "Where to place this section"
+            }
+          ]
+        }
+      - {
+          label: "Featured Posts",
+          name: "featuredPosts",
+          widget: "list",
+          required: false,
+          hint: "Manually highlight specific posts",
+          fields: [
+            {
+              label: "Post Title",
+              name: "title",
+              widget: "string"
+            },
+            {
+              label: "Author",
+              name: "author",
+              widget: "select",
+              options: ["jane", "orionlw", "adesse", "nic", "amelia", "abby", "ewan"]
+            },
+            {
+              label: "Post URL",
+              name: "url",
+              widget: "string",
+              hint: "Relative URL (e.g., /blog/jane/2025-09-01/post-title/)"
+            },
+            {
+              label: "Custom Description",
+              name: "description",
+              widget: "text",
+              required: false,
+              hint: "Override default post description"
+            }
+          ]
+        }
+      - {
+          label: "Exclude Authors",
+          name: "excludeAuthors",
+          widget: "list",
+          required: false,
+          hint: "Authors to skip in this newsletter"
+        }
+      - {
+          label: "Closing Message",
+          name: "closingMessage",
+          widget: "markdown",
+          required: false,
+          hint: "Final message before footer"
+        }
+      - {
+          label: "Send Notes",
+          name: "sendNotes",
+          widget: "text",
+          required: false,
+          hint: "Internal notes about sending (tracking, analytics, etc.)"
+        }
           - {
               label: "Abby",
               name: "abby",
