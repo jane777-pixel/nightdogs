@@ -8,7 +8,7 @@ tags:
 ---
 hey, it's been a while...
 
-currently in the library "studying" and thought a new blog post might be a fantastic method of procrastination
+currently in the library "studying" and thought a new blog post might be a fantastic method of procrastination. probably not my most museful ramblings here, but I would love to share some pictures from the fall.
 
 ## knitting
 
@@ -73,3 +73,29 @@ I also got to attend a workshop with [Shelby Dennis](https://www.facebook.com/mi
 ## hallowe'en
 
 was very happy to be volunteering at SMILE on halloween so I got to see all the participants' costumes and show off my own. we did the monster mash many times. at choir rehearsal, the conductor's dog came dressed as a hotdog. I made myself a flower hat and wire wings. no decorations this year for Nic and I, unfortunately (although to be honest, I find pumpkin carving to be a sensory nightmare).
+
+![](screenshot-2025-11-18-at-3.50.44 pm.png)
+
+![](screenshot-2025-11-18-at-3.51.05 pm.png)
+
+![](screenshot-2025-11-18-at-3.51.53 pm.png)
+
+![](screenshot-2025-11-18-at-3.51.30 pm.png)
+
+## blue cottage
+
+oh, blue cottage, i love you so. i spent 4 days there the first weekend of November. One night with Adèsse there too, two nights alone. when I got there, it was just before dinner and the sun was nearly set. Adèsse's yellow rainjacket hanging in front of the window looked so bright against the window that showed only shades of blue. You know, the kind of dusk that fades into shades of fountain pen blues, not succumbing to grey. I could see my breath most days there and the fog only cleared from the windows when the fire went out. The days feel so long there but they are easily filled by reading, making music, cooking, and tending to the fire.
+
+Besides the fire crackling and rain water dripping on the concrete floors, it was the kind of quiet that is like squinting into the horizon, very close to the mythical (and impossible) idea of "silence." The wind and rain woke me up often in the night. It made me think of the last owner of the cottage, the Whitmans, and I think [the story](https://centreville-kings-county.com/wp-content/uploads/March-2017-CP-Web.pdf) goes that they stayed during a storm and his Mrs. Whitman got so rattled she swore never to come back. The mist reminded me of an old picture of the cottages being built (see below).
+
+![](screenshot-2025-11-18-at-3.52.17 pm.png "macdonald (red) cottage")
+
+![](screenshot-2025-11-18-at-3.54.41 pm.png)
+
+![](screenshot-2025-11-18-at-3.53.17 pm.png "solar prints")
+
+![](screenshot-2025-11-18-at-3.56.41 pm.png)
+
+![](screenshot-2025-11-18-at-3.54.56 pm.png)
+
+![](screenshot-2025-11-18-at-3.54.06 pm.png)
