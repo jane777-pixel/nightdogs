@@ -48,6 +48,8 @@ while in the area, we went to Lunenberg for a day and I picked up some records:
 
 \- Elliott Smith, Elliott Smith
 
+\- Foggy Mountain Breakdown, Flatt & Scruggs (nic finally obtained a banjo and has been feeling the Scruggs spirit)
+
 ![](screenshot-2025-11-18-at-12.31.42 pm.png "pie credits to Adèsse")
 
 ![](screenshot-2025-11-18-at-12.31.13 pm.png)
@@ -55,3 +57,15 @@ while in the area, we went to Lunenberg for a day and I picked up some records:
 ![](screenshot-2025-11-18-at-12.29.59 pm.png)
 
 ![](screenshot-2025-11-18-at-12.30.59 pm.png)
+
+Goat Life and Death
+
+said hello to two baby goats and goodbye to Prince the goat - feeling closer to the circle of goat life than ever. pigs and goats alike seem to be thrilled about all the pumpkins left over from Halloween. Sheep and horses are starting to fluff up for the cold weather approaching.
+
+I also got to attend a workshop with [Shelby Dennis](https://www.facebook.com/milestoneequestrian96) talking about positive reinforcement with horses. there's such a need for things to shift with the culture of horsemanship, horses deserve better!
+
+![](screenshot-2025-11-18-at-12.43.10 pm.png)
+
+![](screenshot-2025-11-18-at-12.42.20 pm.png)
+
+![](screenshot-2025-11-18-at-12.42.03 pm.png)
