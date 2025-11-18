@@ -1,10 +1,11 @@
 ---
 title: rip Prince
 slug: ripprincegoat
-date: 2025-11-18T19:24:00.000-04:00
+date: 2025-11-18T16:50:00.000-04:00
 author: jane
 tags:
   - posts
+featuredImage: screenshot-2025-11-18-at-3.54.06 pm.png
 ---
 hey, it's been a while...
 
@@ -12,11 +13,15 @@ currently in the library "studying" and thought a new blog post might be a fanta
 
 ## knitting
 
-finished [Nic's socks](https://www.ravelry.com/projects/jay777marie/dk-weight-vanilla-socks) (I think the day after my last post?). Ran out of orange yarn so he gets a funky toe. DK socks are fun... fingering weight not so much. I guess I am a little impatient haha.
+finished [Nic's socks](https://www.ravelry.com/projects/jay777marie/dk-weight-vanilla-socks) (I think the day after my last post?). Ran out of orange yarn so he gets a funky toe. DK socks are fun... fingering weight not so much. I guess I am a little impatient haha. also made a bandana and pair of mittens. the mittens were done up in malbrigio rasta which is so soft and bulky; it was the closest to instant gratification you can get with knitting. I'm working on my first colourwork project now! (see birdy gauge swatch)
 
-Since it's gotten cold, I've been getting a lot of wear out of the sweaters I've made. Would love to cast on another over winter break
+Since it's gotten cold, I've been getting a lot of wear out of the sweaters I've made. Would love to cast on another over winter break.
 
 ![](screenshot-2025-11-18-at-12.23.28 pm.png)
+
+![](screenshot-2025-11-18-at-4.33.47 pm.png)
+
+![](screenshot-2025-11-18-at-3.53.31 pm.png)
 
 ## swimming
 
@@ -84,9 +89,9 @@ was very happy to be volunteering at SMILE on halloween so I got to see all the 
 
 ## blue cottage
 
-oh, blue cottage, i love you so. i spent 4 days there the first weekend of November. One night with Adèsse there too, two nights alone. when I got there, it was just before dinner and the sun was nearly set. Adèsse's yellow rainjacket hanging in front of the window looked so bright against the window that showed only shades of blue. You know, the kind of dusk that fades into shades of fountain pen blues, not succumbing to grey. I could see my breath most days there and the fog only cleared from the windows when the fire went out. The days feel so long there but they are easily filled by reading, making music, cooking, and tending to the fire.
+oh, blue cottage, i love you so. i spent 4 days there the first weekend of November. One night with Adèsse there too, two nights alone. when I got there, it was just before dinner and the sun was nearly set, and I was feeling hazy after 3 consecutive days of migraines. Adèsse's yellow rain jacket hanging in front of the window looked so bright against the window that showed only shades of blue. You know, the kind of dusk that fades into shades of fountain pen blues, not succumbing to grey. I could see my breath most days there and the fog only cleared from the windows when the fire went out. The days feel so long there but they are easily filled by reading, making music, cooking, and tending to the fire.
 
-Besides the fire crackling and rain water dripping on the concrete floors, it was the kind of quiet that is like squinting into the horizon, very close to the mythical (and impossible) idea of "silence." The wind and rain woke me up often in the night. It made me think of the last owner of the cottage, the Whitmans, and I think [the story](https://centreville-kings-county.com/wp-content/uploads/March-2017-CP-Web.pdf) goes that they stayed during a storm and his Mrs. Whitman got so rattled she swore never to come back. The mist reminded me of an old picture of the cottages being built (see below).
+Besides the fire crackling and rain water dripping on the concrete floors, it was the kind of quiet that is like squinting into the horizon, very close to the mythical (impossible) idea of "silence." The wind and rain woke me up often in the night. It made me think of the last owner of the cottage, the Whitmans, and I think [the story](https://centreville-kings-county.com/wp-content/uploads/March-2017-CP-Web.pdf) goes that they stayed during a storm and his Mrs. Whitman got so rattled she swore never to come back. The mist reminded me of an old picture of the cottages being built (see pic #6 below).
 
 ![](screenshot-2025-11-18-at-3.52.17 pm.png "macdonald (red) cottage")
 
@@ -99,3 +104,31 @@ Besides the fire crackling and rain water dripping on the concrete floors, it wa
 ![](screenshot-2025-11-18-at-3.54.56 pm.png)
 
 ![](screenshot-2025-11-18-at-3.54.06 pm.png)
+
+## media
+
+### books in progress this Fall
+
+finished the Pynchon but the rest is still pending
+
+\- The Treasure Hunters Club, Tom Ryan (a cliché but cozy Nova Scotia mystery)
+
+\- The Crying of Lot 49, Thomas Pynchon (holy fuck, I won't even try to summarize)
+
+\- The Listening Book, W.A. Mathieu (he gets it, music is so cool)
+
+
+
+### most played albums this Fall
+
+honestly, listening more for comfort and familiarity than exploration these days, but i suspect that will change when finals pass
+
+\- you want it darker, leonord cohen 
+
+\- colour green, sibyelle baier
+
+\- beacause i was in love, sharon van etten
+
+
+
+that's it for now! wish me luck as I enter my penultimate finals season.
