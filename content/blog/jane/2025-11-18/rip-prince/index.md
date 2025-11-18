@@ -32,4 +32,26 @@ on a ridiculously warm october day, Willow and I went for a lovely swim between 
 
 my next swim was much colder... but serves as a segue into the next heading
 
-amelia's cottage
+## amelia's cottage
+
+spent reading week at Amelia's cottage with Orion, Adèsse, and, for a brief period, Nic. can't imagine a better place to study than by a big window looking over a lake. I kayaked and made a purple-velvet cake with toothpaste-coloured icing. it was a very luxurious getaway with terrific company and fancy soups.
+
+while in the area, we went to Lunenberg for a day and I picked up some records:
+
+\- The Time of the Foxgloves, micheal Hurley
+
+\- Sweetkorn, Micheal Hurley
+
+\- Stuff Like That There, Yo La Tengo
+
+\- Souvenirs, Emahoy Tsege Mariam Gebru
+
+\- Elliott Smith, Elliott Smith
+
+![](screenshot-2025-11-18-at-12.31.42 pm.png "pie credits to Adèsse")
+
+![](screenshot-2025-11-18-at-12.31.13 pm.png)
+
+![](screenshot-2025-11-18-at-12.29.59 pm.png)
+
+![](screenshot-2025-11-18-at-12.30.59 pm.png)
