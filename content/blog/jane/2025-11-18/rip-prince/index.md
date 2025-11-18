@@ -5,7 +5,7 @@ date: 2025-11-18T16:50:00.000-04:00
 author: jane
 tags:
   - posts
-featuredImage: screenshot-2025-11-18-at-3.54.06 pm.png
+featuredImage: ""
 ---
 hey, it's been a while...
 
