@@ -58,7 +58,7 @@ while in the area, we went to Lunenberg for a day and I picked up some records:
 
 ![](screenshot-2025-11-18-at-12.30.59 pm.png)
 
-Goat Life and Death
+## Goat Life and Death
 
 said hello to two baby goats and goodbye to Prince the goat - feeling closer to the circle of goat life than ever. pigs and goats alike seem to be thrilled about all the pumpkins left over from Halloween. Sheep and horses are starting to fluff up for the cold weather approaching.
 
@@ -69,3 +69,7 @@ I also got to attend a workshop with [Shelby Dennis](https://www.facebook.com/mi
 ![](screenshot-2025-11-18-at-12.42.20 pm.png)
 
 ![](screenshot-2025-11-18-at-12.42.03 pm.png)
+
+## hallowe'en
+
+was very happy to be volunteering at SMILE on halloween so I got to see all the participants' costumes and show off my own. we did the monster mash many times. at choir rehearsal, the conductor's dog came dressed as a hotdog. I made myself a flower hat and wire wings. no decorations this year for Nic and I, unfortunately (although to be honest, I find pumpkin carving to be a sensory nightmare).
