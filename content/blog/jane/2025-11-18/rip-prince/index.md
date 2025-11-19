@@ -4,6 +4,11 @@ slug: ripprincegoat
 date: 2025-11-18T16:50:00.000-04:00
 author: jane
 tags:
+  - concrete
+  - swimming
+  - fibre arts
+  - music
+  - farm animals
   - posts
 featuredImage: ""
 ---
