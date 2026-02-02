@@ -7,6 +7,7 @@ tags:
   - posts
   - eggs
   - baskets
+excerpt: WATCH THAT BASKET
 ---
 Hi everyone this funny quote popped up in a book I'm reading for a class, *Pudd'nhead Wilson* by Mark Twain. I wanted to post it here because it made me chuckle.  
 
