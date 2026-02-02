@@ -1,5 +1,5 @@
 ---
-title: reading reading reading
+title: Filled with Words
 slug: eggsandbaskets
 date: 2026-02-02T17:09:00.000-04:00
 author: nic
