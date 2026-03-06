@@ -16,11 +16,15 @@ twice this week I dreamed that I had been abducted by aliens. I've never had thi
 
 ![](screenshot-2026-03-06-at-5.03.35 pm.png)
 
-a catching-up list
+## two videos
+
+[some rolls of film from a few years ago, mysteries now unveiled](https://www.youtube.com/watch?v=u8uPMTvoceM&t=606s)
+
+[a montage from the cruise](https://www.youtube.com/watch?v=1TnKnzY76wA)
+
+## a catching-up list
 
 okay, I don't want to do the normal structure of summarizing my life since it's been so long, so here are some highlights since I've posted last:
-
-
 
 I sang my last couple concerts with Acadia singers, we had a whole procession with candles and a harpist. there was a very snowy bus ride where every window had iced over. i had no idea where we were going but I won $100 on a scratch ticket while en route
 
@@ -40,8 +44,4 @@ I SPENT A WEEK AT SEA WITH MY GRANDPARENTS. was very spoiled. swam in a river in
 
 ![](screenshot-2026-03-06-at-5.05.32 pm.png)
 
-two videos
-
-[some rolls of film from a few years ago, mysteries now unveiled](https://www.youtube.com/watch?v=u8uPMTvoceM&t=606s)
-
-[a montage from the cruise](https://www.youtube.com/watch?v=1TnKnzY76wA)
+ok bye for now[](https://www.youtube.com/watch?v=1TnKnzY76wA)
