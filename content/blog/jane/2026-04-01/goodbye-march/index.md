@@ -4,6 +4,8 @@ slug: byemarch
 date: 2026-04-01T00:08:00.000-03:00
 author: jane
 tags:
+  - video
+  - music
   - posts
 excerpt: march vlog link
 ---
