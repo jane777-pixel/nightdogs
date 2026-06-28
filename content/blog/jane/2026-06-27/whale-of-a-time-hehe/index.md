@@ -10,7 +10,7 @@ how long have a dreamed of seeing a whale? probably since before I imagined it w
 
 ![](p1070200.jpeg)
 
-we wore bright orange suits on a boat of people sitting in silence, listening beyond the of raindrops and dampening fog that held the sound of rain close against us. I was impressed at how the group kept quieter than most kids playing hide and seek, couples at the movie theatre, or patrons at the library. They told us blows from humpback whales can be heard a kilometre away. there was so much fog that the whole world looked monochrome, especially next to the rainbow striped hand warmers rhi wore (which she had knit with glow-in-the-dark star beads!)
+we wore bright orange suits on a boat of people sitting in silence, listening beyond the dampening fog that held the sound of rain close against us. I was impressed at how the group kept quieter than most kids playing hide and seek, couples at the movie theatre, or patrons at the library. They told us blows from humpback whales can be heard a kilometre away. there was so much fog that the whole world looked monochrome, especially next to the rainbow striped hand warmers rhi wore (which she had knit with glow-in-the-dark star beads!)
 
 ![](p1070221.jpeg)
 
