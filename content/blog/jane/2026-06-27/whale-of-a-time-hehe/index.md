@@ -42,4 +42,6 @@ dare to dream that your new friends will become old friends (like rhiannon) or y
 
 
 
-Still, I don’t mind if I continue to stumble on dreams more easily than I seek them out. Today when my friends were gathered around a concrete deer making silly music while I rug hooked, I thought ‘who would have figured?’ … who would have figured? surely not any past version of me, Rhiannon knows this best and yet I think she always knew.
+Still, I don’t mind if I continue to stumble on dreams more easily than I seek them out. Today when my friends were gathered around a concrete deer making silly music while I rug hooked, I thought ‘who would have figured?’ … who would have figured? surely not any past version of me, Rhiannon knows this best and yet I think she always knew. 
+
+![](p1070189.jpeg)
