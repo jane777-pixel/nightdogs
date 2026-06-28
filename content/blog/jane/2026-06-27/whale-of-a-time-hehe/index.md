@@ -6,7 +6,7 @@ author: jane
 tags:
   - posts
 ---
-how long have a dreamed of seeing a whale? probably since before I imagined it was an option in this lifetime. it's almost too mystical of an encounter to even dream of being actualized... or at least too big for a younger jane who was watching high rises grow taller around her each day in southern ontario. a couple years ago Paul asked me if I had any summer plans and “I want to see a whale” was all I could come up with. Even though I only had one ‘summer plan’ it was somehow overtaken by other obligations and forgotten... until Rhiannon messaged me that she was coming to Nova Scotia and wanted to go whale watching!
+how long have I dreamed of seeing a whale? probably since before I imagined it was an option in this lifetime. it's almost too mystical of an encounter to even dream of being actualized... or at least too big a dream for a younger jane who was watching high rises grow taller around her each day in southern ontario. a couple years ago Paul asked me if I had any summer plans and “I want to see a whale” was all I could come up with. Even though I only had one ‘summer plan’ it was somehow overtaken by other obligations and forgotten... until Rhiannon messaged me that she was coming to Nova Scotia and wanted to go whale watching!
 
 ![](p1070200.jpeg)
 
@@ -18,7 +18,7 @@ I couldn’t believe it when I saw them (the whales). that part I can’t quite 
 
 ![](p1070214.jpeg)
 
-after we saw the humpbacks, the sky could not keep being so coy and gave us the first hint of blue we’d seen since passing through digby neck. still, there was another curtain of fog waiting in front of the shore, as if a parting shower was a right of passage to return to the other dimension from which we’d left!
+after we saw the humpbacks, the sky could not keep on being so coy and gave us the first hint of blue we’d seen since passing through digby neck. still, there was another curtain of fog waiting in front of the shore, as if a parting shower was a right of passage to return to the other dimension from which we’d left!
 
 ![](p1070231.jpeg)
 
@@ -36,17 +36,17 @@ when rhi left my apartment later that night, I took out my guitar to play the so
 
 anyway, how long have a dreamed of seeing a whale? those of you who listen to me ramble often know that I’ve been wondering about dreams lately. 
 
-questions: as someone who dreams vividly (and often terrifyingly), if I must be shown nightmares after dark, can’t I at least know a sweet dream or two in the daytime? how does a nightmare unfulfilled compare to a dream come true? can I fear or value one without feeling the same about the other? where is the line between dreams and nightmares? can one become the other? 
+questions: as someone who dreams vividly (and often terrifyingly), if I must be shown nightmares after dark, can’t I at least know a sweet dream or two in the daytime? how does a nightmare unfulfilled compare to a dream come true? can I fear or value one without feeling the same about the other? where is the line between dreams and nightmares? can't one become the other? 
 
 ![](p1070175.jpeg)
 
-dare to dream that you will see a whale or own a home someday or even that your new friends will become lifelong friends (like rhiannon). What’s the risk? Life will be unpredictable whether you dream or not. I’ll try to stay curious about wise hope and radical uncertainty. I’ll even dare dream that every dream (or nightmare) unfulfilled will be forgotten and replaced by a million new dreams before its absence is ever known to me.
+dare to dream that you will see a whale, or own a home someday, or even dream that your new friends will become lifelong friends (like rhiannon). What’s the risk? Life will be unpredictable whether you dream or not. I’ll try to stay curious about wise hope and radical uncertainty. I’ll even dare dream that every dream (or nightmare) unfulfilled will be forgotten and replaced by a million new dreams before its absence is ever known to me.
 
 ![](p1070195.jpeg)
 
 ![](p1070235.jpeg)
 
-Still, I don’t mind if I continue to stumble on dreams more easily than I seek them out. Today when my friends were gathered around a concrete deer making silly music while I rug hooked, and I thought ‘who would have figured?’ … who would have figured? surely not any past version of me, Rhiannon knows this best and yet I think she always knew. 
+Still, **I don’t mind if I continue to stumble on dreams more easily than I seek them out**. Today when my friends were gathered around a concrete deer making silly music while I rug hooked, and I thought ‘who would have figured?’ … who would have figured? surely not any past version of me... Rhiannon knows that best. Yet, I think she always 'would have figured'. 
 
 ![](p1070189.jpeg)
 
