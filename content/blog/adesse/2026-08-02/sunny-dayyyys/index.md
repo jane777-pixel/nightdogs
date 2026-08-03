@@ -16,6 +16,8 @@ full circle was such a special time once again with lots of friends and music an
 
 ![](https://drive.google.com/file/d/1wU5CZYUPV350Vtrp1O8FFH6DYakDOvVC/view?usp=drive_link "screen printed merch! at the concrete house, with orion's help ")
 
+![](https://drive.google.com/file/d/1gdWfj2R8jSZl1lOrY0v4EW4hQyTdyhuK/view?usp=drive_link "jane helped me tie dye things! it was a good day for it")
+
 ![](https://drive.google.com/file/d/1LEwbUxy07NM6G-0LbUdiIEWuIqda-rAI/view?usp=drive_link "tacha and i dyed bandanas in the museum kitchen ")
 
 ![](https://drive.google.com/file/d/1zkzndRF8-SFKGt-aB3IptDXhvI-z-d7g/view?usp=drive_link "the greens were all differnt and very cute!")
@@ -71,5 +73,13 @@ spring and summer has also given lots of opportunities to be with friends. yay! 
 ![](https://drive.google.com/file/d/1roP9k3IQ8vVR0P1tgR7fBudYvzzB-XAR/view?usp=drive_link "Amelia hosted us after orion and ewan's cmw performance (which was super cool and fun). we had so much food it was great, including strawberry shortcake!! it was so nice to have the gang together and catch up. feat. sam soundtrack")
 
 ![](https://drive.google.com/file/d/1cjV_A4L74e2O3Eyb2q-McsF2Lc_t1d5y/view?usp=drive_link "amelia and i took this picture solely to document blonde cat!!!!!!!!!!!!")
+
+
+
+
+
+
+
+
 
 \-ˋˏ ༻❁༺ ˎˊ-ˋˏ ༻❁༺ ˎˊ-ˋˏ ༻❁༺ ˎˊ-
