@@ -66,7 +66,7 @@ spring and summer has also given lots of opportunities to be with friends. yay! 
 
 ![](https://drive.google.com/file/d/1-m3-LDjHKA9oBfMbs1-wK6hKlZQ0ljjd/view?usp=drive_link "charlie chicken time!! so happy to have a chicken on my leg tee hee. lou was so great :)  ")
 
-
+![](https://drive.google.com/file/d/1PE5qGZdxgDkcKuOL1i8wU_SwSTKoD5JW/view?usp=drive_link "it was soooo hot out so jane and i went to uniacke for a swim in 'the cove', a place i was missing lately. it was a perfect night and no one around and only like two horse flies. and made it just in time for withrows ice cream :)")
 
 
 
