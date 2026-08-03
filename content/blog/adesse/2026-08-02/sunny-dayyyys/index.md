@@ -12,60 +12,88 @@ i'm back hehe :)
 
 it has been both a busy summer and also not, cuz internship and work is slow but other hobbies and things have picked up. which means lots of fun things! i have sooooooo many photos so get ready lol
 
+
+
 full circle was such a special time once again with lots of friends and music and nice people.
 
-![](img_6392.jpeg "screen printed merch! at the concrete house, with orion's help ")
+screen printed merch! at the concrete house, with orion's help
 
-![](https://drive.google.com/file/d/1gdWfj2R8jSZl1lOrY0v4EW4hQyTdyhuK/view?usp=drive_link "jane helped me tie dye things! it was a good day for it")
+and jane helped me tie dye :)
 
-![](https://drive.google.com/file/d/1LEwbUxy07NM6G-0LbUdiIEWuIqda-rAI/view?usp=drive_link "tacha and i dyed bandanas in the museum kitchen ")
+tacha and i dyed bandanas in the museum kitchen
 
-![](https://drive.google.com/file/d/1zkzndRF8-SFKGt-aB3IptDXhvI-z-d7g/view?usp=drive_link "the greens were all differnt and very cute!")
+the greens were all different and very cute!
 
-![](https://drive.google.com/file/d/1LAsm_g9rq_4zDTzld7jX1_GGSzWm28C4/view?usp=drive_link "has a quiet morning to myself before other campers started setting up")
+had a quiet morning to myself before other campers started setting up
 
-![](https://drive.google.com/file/d/1oY_X5XS_sKAjpsotvsO5Ov7oA8FbmdBw/view?usp=drive_link "picturesque")
+picturesque
 
-![](https://drive.google.com/file/d/1puk2ZrI5SzbjYJD9ozUlx9w6XH-goe99/view?usp=drive_link "pasta salad lunch ft. orion's beer cans, jane's shoes, and nic's grog")
+pasta salad ft. orion's beer cans, jane's shoes, and nic's grog
 
-![](https://drive.google.com/file/d/1_ExUE8qeYtbj8nXbh85ygOT2iuT2lHw6/view?usp=drive_link "aquakultre! an extra special show")
+aquakultre! an extra special show
 
-![](https://drive.google.com/file/d/1lylxPypa1CGVcFiFV9zNt7Bmq8383S_u/view?usp=drive_link "lotus wight tunin' up")
+lotus wight tunin' up
 
-![](https://drive.google.com/file/d/1eIguYJHXoYqa3YWMQArHfyd41iARdx3a/view?usp=drive_link "last day on my way to pancakes hehe i was anxious hoping the pancake situation would not be chaotic and it went suprisingly well")
+last festival morn on my way to pancakes hehe
+
+
+
+༻❁༺༻❁༺༻❁༺
 
 all this lack of work also means i can take care of the bees more independently this summer! it has been fun. just came back from a beekeeping conference on pei, it was kinda rainy but it was still a good conference. the presenters & demonstrators had a much more positive outlook on the field and folks were overall more hopeful and eager to be in a room with each other, making connections.
 
-![](https://drive.google.com/file/d/1SRoGU0Jnn59q2Lc2ORzwYwQWhxWr7WuN/view?usp=drive_link "the two secret hives tucked away in tangled garden")
+the two secret hives tucked away in tangled garden
 
-![](https://drive.google.com/file/d/1lOaTrOd0J2Sfzmw-hYdOwVKR20HJQNmf/view?usp=drive_link "the hives at the cottage (my house). the skinny ones are nucs (nucleus hives) that are new colonies with young queens. I am tryign to raise those ones on my own with minimal help from my dad to try and learn from my mistakes (I already made one but they are still alive haha yikes)")
+the hives at the cottage (my house). from a month ago - the skinny ones are nucs (nucleus hives) that are new colonies with young queens. I am trying to raise those ones on my own with minimal help from my dad to try and learn from my mistakes.
 
-![](https://drive.google.com/file/d/1L3NrEBypbFtzqJoFR3nbaISLX0nKPIWN/view?usp=drive_link "karen thurlow, master beekeeper (over 40 years) was very cool and had lots of good insight. sometimes beekeepers are so stuck in their ways that they don't accept other ways of doing things - but she likes to experiment and keep developing her practice. cool as heck")
 
-![](https://drive.google.com/file/d/1eryGr-g_fOKEt-yPD-Y56mTjQT3ew9S5/view?usp=drive_link "learned about operation pollinator, an organization granting seeds and comepnsation for farmers to encourage planting 2 acres of forage for pollinators of all sorts. maybe i'll start bugging farmers around here to do this too. this was at the organic meadery/winery")
 
-![](https://drive.google.com/file/d/1ulOSnCTR9qR9Ygn4_dDw8NOmd662Wpel/view?usp=drive_link "one of my fave signs. yes it is very important plz don't bring diseases here!! apparently in the 80s american foulbrood got so bad the province ordered beekeepers to burn infected hives...... it is not that bad anymore thank goodness")
+today - nuc #2 queen is not laying here is what a queen cell looks like! the bees will raise a new queen if theirs is not doing well. 
 
-![](https://drive.google.com/file/d/1OFVW8iCB-Fz2-KPc5HBzWyDKyWKKwoF3/view?usp=drive_link "a very nice frame of honey a few weeks before we took honey boxes off!")
 
-![](https://drive.google.com/file/d/1Jv-ekKxKI6v0rsT9E8sIPSzoXQom4UU4/view?usp=drive_link "we sold out of honey in one day 👀 nice to see people excited about it :))")
+
+you can find the queen down at the bottom of this frame - if bees like their queen they will be around her grooming her, but she is running around anxiously and the bees are basically ignoring her. i hope this hive survives the winter :(
+
+karen thurlow, master beekeeper (over 40 years) was very competent and had lots of good insight. sometimes beekeepers are so stuck in their ways and don't accept other/new ways of doing things - but karen seems to always be experimenting and learning and developing her practice. hell yeah
+
+learned about operation pollinator, an organization that grants farms seeds and and compensation to farmers to encourage planting acres of forage plants for pollinators of all sorts. maybe i'll start bugging farmers around here to do this haha. this was at an organic meadery/winery
+
+one of my fave signs. don't want diseases! in the 80s beekeepers could be ordered to burn their hives if they were infested with american foulbrood. don't want things to get like that again no matter what disease/virus
+
+a very nice frame of honey a week or two before we took the honey boxes off to extract
+
+i sold out of the cottage honey cases in one day!!
+
+
+
+༻❁༺༻❁༺༻❁༺
 
 spring and summer has also given lots of opportunities to be with friends. yay! it has been nice to hang out and do fun things :)
 
-![](https://drive.google.com/file/d/1pIbiRTVDVTTVaqBD23GvfX0Agr0cAel9/view?usp=drive_link "freya, amelia and I went to clayground in spring and i found the last pumpkin to paint")
+when it was still cold out, freya, amelia and i went to clayground and i found the last pumpkin :)
 
-![](https://drive.google.com/file/d/1AE9RMtcefI82EqzZIybSJzDvIWpNlRu7/view?usp=drive_link "lots of friends here.........")
+lots of friends here.................
 
-![](https://drive.google.com/file/d/1HdfZ8LMAZ5A9JFRQ5LGIPJM3CVhrYO1l/view?usp=drive_link "JANE BDAY!! there was a struggle to open the josh but she succeeded 💪")
+JANE BDAY!! a struggle to open josh but she succeeded
 
-![](https://drive.google.com/file/d/1JmfQ2ozr7QY48olnT7sV3m5L-r2NMmOM/view?usp=drive_link "late night lads")
+late night lads
 
-![](https://drive.google.com/file/d/1-m3-LDjHKA9oBfMbs1-wK6hKlZQ0ljjd/view?usp=drive_link "charlie chicken time!! so happy to have a chicken on my leg tee hee. lou was so great :)  ")
+charlie chicken time!! so happy to have a chicken on my leg tee hee
 
-![](https://drive.google.com/file/d/1PE5qGZdxgDkcKuOL1i8wU_SwSTKoD5JW/view?usp=drive_link "it was soooo hot out so jane and i went to uniacke for a swim in 'the cove', a place i was missing lately. it was a perfect night and no one around and only like two horse flies. and made it just in time for withrows ice cream :)")
+it was sooooooo hot out so jane and i went to uniacke for a swim in 'the cove', a place i frequented qhen i lived there and have been missing lately. it was a perfect night and no one was around. we got to withrow's just in time to get ice cream before close
 
-![](https://drive.google.com/file/d/1roP9k3IQ8vVR0P1tgR7fBudYvzzB-XAR/view?usp=drive_link "Amelia hosted us after orion and ewan's cmw performance (which was super cool and fun). we had so much food it was great, including strawberry shortcake!! it was so nice to have the gang together and catch up. feat. sam soundtrack")
+Amelia hosted us after orion and ewan's cmw performance (which was super cool and fun). we had so much food it was lovely including strawberry shortcake!! was really nice to catch up with the gang. soundtrack of the night: a picture of sam
 
-![](https://drive.google.com/file/d/1cjV_A4L74e2O3Eyb2q-McsF2Lc_t1d5y/view?usp=drive_link "amelia and i took this picture solely to document blonde cat!!!!!!!!!!!!")
+amelia and i took this picture solely to document blonde catto!!!
+
+
+
+
+
+
+
+༻❁༺༻❁༺༻❁༺
+
+
 
 \-ˋˏ ༻❁༺ ˎˊ-ˋˏ ༻❁༺ ˎˊ-ˋˏ ༻❁༺ ˎˊ-
