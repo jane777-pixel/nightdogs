@@ -40,4 +40,8 @@ all this lack of work also means i can take care of the bees more independently 
 
 ![](https://drive.google.com/file/d/1lOaTrOd0J2Sfzmw-hYdOwVKR20HJQNmf/view?usp=drive_link "the hives at the cottage (my house). the skinny ones are nucs (nucleus hives) that are new colonies with young queens. I am tryign to raise those ones on my own with minimal help from my dad to try and learn from my mistakes (I already made one but they are still alive haha yikes)")
 
+![](https://drive.google.com/file/d/1L3NrEBypbFtzqJoFR3nbaISLX0nKPIWN/view?usp=drive_link "karen thurlow, master beekeeper (over 40 years) was very cool and had lots of good insight. sometimes beekeepers are so stuck in their ways that they don't accept other ways of doing things - but she likes to experiment and keep developing her practice. cool as heck")
+
+
+
 \-ˋˏ ༻❁༺ ˎˊ-ˋˏ ༻❁༺ ˎˊ-ˋˏ ༻❁༺ ˎˊ-
