@@ -5,6 +5,9 @@ date: 2026-08-03T13:22:00.000-03:00
 author: adesse
 tags:
   - posts
+excerpt: it has been both a busy summer and also not, cuz internship and work is
+  slow but other hobbies and things have picked up. which means lots of fun
+  things! i have sooooooo many photos so get ready lol
 ---
 \-ˋˏ ༻❁༺ ˎˊ-ˋˏ ༻❁༺ ˎˊ-ˋˏ ༻❁༺ ˎˊ-
 
