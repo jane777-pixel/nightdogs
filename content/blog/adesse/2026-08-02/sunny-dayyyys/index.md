@@ -68,7 +68,7 @@ spring and summer has also given lots of opportunities to be with friends. yay! 
 
 ![](https://drive.google.com/file/d/1PE5qGZdxgDkcKuOL1i8wU_SwSTKoD5JW/view?usp=drive_link "it was soooo hot out so jane and i went to uniacke for a swim in 'the cove', a place i was missing lately. it was a perfect night and no one around and only like two horse flies. and made it just in time for withrows ice cream :)")
 
-
+![](https://drive.google.com/file/d/1roP9k3IQ8vVR0P1tgR7fBudYvzzB-XAR/view?usp=drive_link "Amelia hosted us after orion and ewan's cmw performance (which was super cool and fun). we had so much food it was great, including strawberry shortcake!! it was so nice to have the gang together and catch up. feat. sam soundtrack")
 
 
 
