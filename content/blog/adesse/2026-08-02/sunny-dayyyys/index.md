@@ -62,6 +62,12 @@ spring and summer has also given lots of opportunities to be with friends. yay! 
 
 ![](https://drive.google.com/file/d/1JmfQ2ozr7QY48olnT7sV3m5L-r2NMmOM/view?usp=drive_link "late night lads")
 
+![](https://drive.google.com/file/d/1-m3-LDjHKA9oBfMbs1-wK6hKlZQ0ljjd/view?usp=drive_link "charlie chicken time!! so happy to have a chicken on my leg tee hee. lou was so great :)  ")
+
+
+
+
+
 
 
 \-ˋˏ ༻❁༺ ˎˊ-ˋˏ ༻❁༺ ˎˊ-ˋˏ ༻❁༺ ˎˊ-
