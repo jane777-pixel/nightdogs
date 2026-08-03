@@ -12,8 +12,6 @@ i'm back hehe :)
 
 it has been both a busy summer and also not, cuz internship and work is slow but other hobbies and things have picked up. which means lots of fun things! i have sooooooo many photos so get ready lol
 
-
-
 full circle was such a special time once again with lots of friends and music and nice people.
 
 screen printed merch! at the concrete house, with orion's help
@@ -36,8 +34,6 @@ lotus wight tunin' up
 
 last festival morn on my way to pancakes hehe
 
-
-
 ༻❁༺༻❁༺༻❁༺
 
 all this lack of work also means i can take care of the bees more independently this summer! it has been fun. just came back from a beekeeping conference on pei, it was kinda rainy but it was still a good conference. the presenters & demonstrators had a much more positive outlook on the field and folks were overall more hopeful and eager to be in a room with each other, making connections.
@@ -46,11 +42,7 @@ the two secret hives tucked away in tangled garden
 
 the hives at the cottage (my house). from a month ago - the skinny ones are nucs (nucleus hives) that are new colonies with young queens. I am trying to raise those ones on my own with minimal help from my dad to try and learn from my mistakes.
 
-
-
 today - nuc #2 queen is not laying here is what a queen cell looks like! the bees will raise a new queen if theirs is not doing well. 
-
-
 
 you can find the queen down at the bottom of this frame - if bees like their queen they will be around her grooming her, but she is running around anxiously and the bees are basically ignoring her. i hope this hive survives the winter :(
 
@@ -63,8 +55,6 @@ one of my fave signs. don't want diseases! in the 80s beekeepers could be ordere
 a very nice frame of honey a week or two before we took the honey boxes off to extract
 
 i sold out of the cottage honey cases in one day!!
-
-
 
 ༻❁༺༻❁༺༻❁༺
 
@@ -86,14 +76,6 @@ Amelia hosted us after orion and ewan's cmw performance (which was super cool an
 
 amelia and i took this picture solely to document blonde catto!!!
 
-
-
-
-
-
-
 ༻❁༺༻❁༺༻❁༺
-
-
 
 \-ˋˏ ༻❁༺ ˎˊ-ˋˏ ༻❁༺ ˎˊ-ˋˏ ༻❁༺ ˎˊ-
