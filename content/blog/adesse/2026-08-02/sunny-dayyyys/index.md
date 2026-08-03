@@ -48,6 +48,8 @@ all this lack of work also means i can take care of the bees more independently 
 
 ![](https://drive.google.com/file/d/1ulOSnCTR9qR9Ygn4_dDw8NOmd662Wpel/view?usp=drive_link "one of my fave signs. yes it is very important plz don't bring diseases here!! apparently in the 80s american foulbrood got so bad the province ordered beekeepers to burn infected hives...... it is not that bad anymore thank goodness")
 
+![](https://drive.google.com/file/d/1OFVW8iCB-Fz2-KPc5HBzWyDKyWKKwoF3/view?usp=drive_link "a very nice frame of honey a few weeks before we took honey boxes off!")
+
 ![](https://drive.google.com/file/d/1Jv-ekKxKI6v0rsT9E8sIPSzoXQom4UU4/view?usp=drive_link "we sold out of honey in one day 👀 nice to see people excited about it :))")
 
 
