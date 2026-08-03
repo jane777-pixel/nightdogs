@@ -58,7 +58,7 @@ spring and summer has also given lots of opportunities to be with friends. yay! 
 
 ![](https://drive.google.com/file/d/1AE9RMtcefI82EqzZIybSJzDvIWpNlRu7/view?usp=drive_link "lots of friends here.........")
 
-
+![](https://drive.google.com/file/d/1HdfZ8LMAZ5A9JFRQ5LGIPJM3CVhrYO1l/view?usp=drive_link "JANE BDAY!! there was a struggle to open the josh but she succeeded 💪")
 
 
 
