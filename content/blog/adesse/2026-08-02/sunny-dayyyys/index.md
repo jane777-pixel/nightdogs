@@ -42,6 +42,12 @@ all this lack of work also means i can take care of the bees more independently 
 
 ![](https://drive.google.com/file/d/1L3NrEBypbFtzqJoFR3nbaISLX0nKPIWN/view?usp=drive_link "karen thurlow, master beekeeper (over 40 years) was very cool and had lots of good insight. sometimes beekeepers are so stuck in their ways that they don't accept other ways of doing things - but she likes to experiment and keep developing her practice. cool as heck")
 
+
+
 ![](https://drive.google.com/file/d/1eryGr-g_fOKEt-yPD-Y56mTjQT3ew9S5/view?usp=drive_link "learned about operation pollinator, an organization granting seeds and comepnsation for farmers to encourage planting 2 acres of forage for pollinators of all sorts. maybe i'll start bugging farmers around here to do this too. this was at the organic meadery/winery")
+
+![](https://drive.google.com/file/d/1ulOSnCTR9qR9Ygn4_dDw8NOmd662Wpel/view?usp=drive_link "one of my fave signs. yes it is very important plz don't bring diseases here!! in the 80s american foulbrood got so bad the province ordered beekeepers to burn infected hives...... it is not that bad anymore thank goodness")
+
+
 
 \-ˋˏ ༻❁༺ ˎˊ-ˋˏ ༻❁༺ ˎˊ-ˋˏ ༻❁༺ ˎˊ-
