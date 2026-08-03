@@ -5,6 +5,7 @@ date: 2026-08-03T13:22:00.000-03:00
 author: adesse
 tags:
   - posts
+featuredImage: ""
 excerpt: it has been both a busy summer and also not, cuz internship and work is
   slow but other hobbies and things have picked up. which means lots of fun
   things! i have sooooooo many photos so get ready lol
@@ -15,7 +16,7 @@ i'm back hehe :)
 
 it has been both a busy summer and also not, cuz internship and work is slow but other hobbies and things have picked up. which means lots of fun things! i have sooooooo many photos so get ready lol
 
-
+![](https://drive.google.com/file/d/1wU5CZYUPV350Vtrp1O8FFH6DYakDOvVC/view?usp=drive_link)
 
 full circle was such a special time once again with lots of friends and music and nice people.
 
