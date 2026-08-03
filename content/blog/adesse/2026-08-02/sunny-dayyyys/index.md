@@ -80,6 +80,4 @@ spring and summer has also given lots of opportunities to be with friends. yay! 
 
 
 
-
-
 \-ˋˏ ༻❁༺ ˎˊ-ˋˏ ༻❁༺ ˎˊ-ˋˏ ༻❁༺ ˎˊ-
