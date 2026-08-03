@@ -34,4 +34,10 @@ full circle was such a special time once again with lots of friends and music an
 
 
 
+all this lack of work also means i can take care of the bees more independently this summer! it has been fun. just came back from a beekeeping conference on pei, it was kinda rainy but it was still a good conference. the presenters & demonstrators had a much more positive outlook on the field and folks were overall more hopeful and eager to be in a room with each other, making connections.
+
+![](https://drive.google.com/file/d/1SRoGU0Jnn59q2Lc2ORzwYwQWhxWr7WuN/view?usp=drive_link "the two secret hives tucked away in tangled garden")
+
+![](https://drive.google.com/file/d/1lOaTrOd0J2Sfzmw-hYdOwVKR20HJQNmf/view?usp=drive_link "the hives at the cottage (my house). the skinny ones are nucs (nucleus hives) that are new colonies with young queens. I am tryign to raise those ones on my own with minimal help from my dad to try and learn from my mistakes (I already made one but they are still alive haha yikes)")
+
 \-ˋˏ ༻❁༺ ˎˊ-ˋˏ ༻❁༺ ˎˊ-ˋˏ ༻❁༺ ˎˊ-
