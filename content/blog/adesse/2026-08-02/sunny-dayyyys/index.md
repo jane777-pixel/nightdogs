@@ -34,8 +34,6 @@ full circle was such a special time once again with lots of friends and music an
 
 ![](https://drive.google.com/file/d/1eIguYJHXoYqa3YWMQArHfyd41iARdx3a/view?usp=drive_link "last day on my way to pancakes hehe i was anxious hoping the pancake situation would not be chaotic and it went suprisingly well")
 
-
-
 all this lack of work also means i can take care of the bees more independently this summer! it has been fun. just came back from a beekeeping conference on pei, it was kinda rainy but it was still a good conference. the presenters & demonstrators had a much more positive outlook on the field and folks were overall more hopeful and eager to be in a room with each other, making connections.
 
 ![](https://drive.google.com/file/d/1SRoGU0Jnn59q2Lc2ORzwYwQWhxWr7WuN/view?usp=drive_link "the two secret hives tucked away in tangled garden")
@@ -44,8 +42,6 @@ all this lack of work also means i can take care of the bees more independently 
 
 ![](https://drive.google.com/file/d/1L3NrEBypbFtzqJoFR3nbaISLX0nKPIWN/view?usp=drive_link "karen thurlow, master beekeeper (over 40 years) was very cool and had lots of good insight. sometimes beekeepers are so stuck in their ways that they don't accept other ways of doing things - but she likes to experiment and keep developing her practice. cool as heck")
 
-
-
 ![](https://drive.google.com/file/d/1eryGr-g_fOKEt-yPD-Y56mTjQT3ew9S5/view?usp=drive_link "learned about operation pollinator, an organization granting seeds and comepnsation for farmers to encourage planting 2 acres of forage for pollinators of all sorts. maybe i'll start bugging farmers around here to do this too. this was at the organic meadery/winery")
 
 ![](https://drive.google.com/file/d/1ulOSnCTR9qR9Ygn4_dDw8NOmd662Wpel/view?usp=drive_link "one of my fave signs. yes it is very important plz don't bring diseases here!! apparently in the 80s american foulbrood got so bad the province ordered beekeepers to burn infected hives...... it is not that bad anymore thank goodness")
@@ -53,8 +49,6 @@ all this lack of work also means i can take care of the bees more independently 
 ![](https://drive.google.com/file/d/1OFVW8iCB-Fz2-KPc5HBzWyDKyWKKwoF3/view?usp=drive_link "a very nice frame of honey a few weeks before we took honey boxes off!")
 
 ![](https://drive.google.com/file/d/1Jv-ekKxKI6v0rsT9E8sIPSzoXQom4UU4/view?usp=drive_link "we sold out of honey in one day 👀 nice to see people excited about it :))")
-
-
 
 spring and summer has also given lots of opportunities to be with friends. yay! it has been nice to hang out and do fun things :)
 
@@ -73,11 +67,5 @@ spring and summer has also given lots of opportunities to be with friends. yay! 
 ![](https://drive.google.com/file/d/1roP9k3IQ8vVR0P1tgR7fBudYvzzB-XAR/view?usp=drive_link "Amelia hosted us after orion and ewan's cmw performance (which was super cool and fun). we had so much food it was great, including strawberry shortcake!! it was so nice to have the gang together and catch up. feat. sam soundtrack")
 
 ![](https://drive.google.com/file/d/1cjV_A4L74e2O3Eyb2q-McsF2Lc_t1d5y/view?usp=drive_link "amelia and i took this picture solely to document blonde cat!!!!!!!!!!!!")
-
-
-
-
-
-
 
 \-ˋˏ ༻❁༺ ˎˊ-ˋˏ ༻❁༺ ˎˊ-ˋˏ ༻❁༺ ˎˊ-
