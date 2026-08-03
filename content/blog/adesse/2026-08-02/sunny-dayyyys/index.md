@@ -10,7 +10,7 @@ tags:
 
 i'm back hehe :) 
 
-it has been both a busy summer and not cuz internship and work is slow but other hobbies and things have picked up. which means lots of fun things!
+it has been both a busy summer and also not, cuz internship and work is slow but other hobbies and things have picked up. which means lots of fun things! i have sooooooo many photos so get ready lol
 
 full circle was such a special time once again with lots of friends and music and nice people.
 
@@ -70,6 +70,6 @@ spring and summer has also given lots of opportunities to be with friends. yay! 
 
 ![](https://drive.google.com/file/d/1roP9k3IQ8vVR0P1tgR7fBudYvzzB-XAR/view?usp=drive_link "Amelia hosted us after orion and ewan's cmw performance (which was super cool and fun). we had so much food it was great, including strawberry shortcake!! it was so nice to have the gang together and catch up. feat. sam soundtrack")
 
-
+![](https://drive.google.com/file/d/1cjV_A4L74e2O3Eyb2q-McsF2Lc_t1d5y/view?usp=drive_link "amelia and i took this picture solely to document blonde cat!!!!!!!!!!!!")
 
 \-ˋˏ ༻❁༺ ˎˊ-ˋˏ ༻❁༺ ˎˊ-ˋˏ ༻❁༺ ˎˊ-
