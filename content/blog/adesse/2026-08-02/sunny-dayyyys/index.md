@@ -14,7 +14,7 @@ it has been both a busy summer and also not, cuz internship and work is slow but
 
 full circle was such a special time once again with lots of friends and music and nice people.
 
-![](https://drive.google.com/file/d/1wU5CZYUPV350Vtrp1O8FFH6DYakDOvVC/view?usp=drive_link "screen printed merch! at the concrete house, with orion's help ")
+![](https://nextcloud.orionrealm.xyz/s/ZnJ4NEJiFAtgPXw "screen printed merch! at the concrete house, with orion's help ")
 
 ![](https://drive.google.com/file/d/1gdWfj2R8jSZl1lOrY0v4EW4hQyTdyhuK/view?usp=drive_link "jane helped me tie dye things! it was a good day for it")
 
