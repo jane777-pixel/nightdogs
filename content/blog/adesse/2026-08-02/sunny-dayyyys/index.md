@@ -52,4 +52,10 @@ all this lack of work also means i can take care of the bees more independently 
 
 
 
+spring and summer has also given lots of opportunities to be with friends. yay! it has been nice to hang out and do fun things :)
+
+![](https://drive.google.com/file/d/1pIbiRTVDVTTVaqBD23GvfX0Agr0cAel9/view?usp=drive_link "freya, amelia and I went to clayground in spring and i found the last pumpkin to paint")
+
+
+
 \-ˋˏ ༻❁༺ ˎˊ-ˋˏ ༻❁༺ ˎˊ-ˋˏ ༻❁༺ ˎˊ-
