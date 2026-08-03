@@ -56,6 +56,12 @@ spring and summer has also given lots of opportunities to be with friends. yay! 
 
 ![](https://drive.google.com/file/d/1pIbiRTVDVTTVaqBD23GvfX0Agr0cAel9/view?usp=drive_link "freya, amelia and I went to clayground in spring and i found the last pumpkin to paint")
 
+![](https://drive.google.com/file/d/1AE9RMtcefI82EqzZIybSJzDvIWpNlRu7/view?usp=drive_link "lots of friends here.........")
+
+
+
+
+
 
 
 \-ˋˏ ༻❁༺ ˎˊ-ˋˏ ༻❁༺ ˎˊ-ˋˏ ༻❁༺ ˎˊ-
