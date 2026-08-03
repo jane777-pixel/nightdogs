@@ -30,4 +30,8 @@ full circle was such a special time once again with lots of friends and music an
 
 ![](https://drive.google.com/file/d/1lylxPypa1CGVcFiFV9zNt7Bmq8383S_u/view?usp=drive_link "lotus wight tunin' up")
 
+![](https://drive.google.com/file/d/1eIguYJHXoYqa3YWMQArHfyd41iARdx3a/view?usp=drive_link "last day on my way to pancakes hehe i was anxious hoping the pancake situation would not be chaotic and it went suprisingly well")
+
+
+
 \-ˋˏ ༻❁༺ ˎˊ-ˋˏ ༻❁༺ ˎˊ-ˋˏ ༻❁༺ ˎˊ-
