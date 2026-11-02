@@ -10,6 +10,9 @@ import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import { DateTime } from "luxon";
 import pluginFilters from "./_config/filters.js";
 import pluginRelatedPosts from "./_config/related-posts.js";
+import markdownPhotos from "./_config/markdown.js";
+import pluginImages from "./_config/images.js";
+import tagDescriptions from "./_data/tag-descriptions.json" with { type: "json" };
 
 /** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
 export default async function (eleventyConfig) {
@@ -27,10 +30,17 @@ export default async function (eleventyConfig) {
 			"./public/": "/",
 		})
 		.addPassthroughCopy("./content/feed/pretty-atom-feed.xsl")
-		.addPassthroughCopy("content/blog/**/*.{jpg,jpeg,png,gif}")
-		.addPassthroughCopy("content/blog/**/*.{mp3,mp4,wav,ogg,m4a}")
-		.addPassthroughCopy("content/**/*.mp3") // Passthrough copy for all mp3 files in content
-		.addPassthroughCopy("public/js/**/*.js"); // Copy JavaScript files for search and theme functionality
+		// Post images are handled by the image transform below; only copy
+		// audio/video files as-is.
+		.addPassthroughCopy("content/**/*.{mp3,mp4,wav,ogg,m4a}");
+
+	// The dev server skips image processing, so serve the originals instead
+	if (process.env.ELEVENTY_RUN_MODE === "serve") {
+		eleventyConfig.addPassthroughCopy("content/blog/**/*.{jpg,jpeg,png,gif,webp,JPG,JPEG,PNG}");
+	}
+
+	// Figures, visible captions and photo galleries in Markdown posts
+	eleventyConfig.amendLibrary("md", (md) => md.use(markdownPhotos));
 
 	// Run Eleventy when these files change:
 	// https://www.11ty.dev/docs/watch-serve/#add-your-own-watch-targets
@@ -49,14 +59,6 @@ export default async function (eleventyConfig) {
 		bundleHtmlContentFromSelector: "style",
 	});
 
-	// Bundle <script> content and adds a {% js %} paired shortcode
-	// Bundle <script> content and adds a {% js %} paired shortcode
-	eleventyConfig.addBundle("js", {
-		toFileDirectory: "dist",
-		// Add all <script> content to the `js` bundle (use <script eleventy:ignore> to opt-out)
-		// Supported selectors: https://www.npmjs.com/package/posthtml-match-helper
-		bundleHtmlContentFromSelector: "script",
-	});
 
 	// Official plugins
 	eleventyConfig.addPlugin(pluginSyntaxHighlight, {
@@ -70,12 +72,6 @@ export default async function (eleventyConfig) {
 		type: "atom", // or "rss", "json"
 		outputPath: "/feed/feed.xml",
 		stylesheet: "pretty-atom-feed.xsl",
-		templateData: {
-			eleventyNavigation: {
-				key: "Feed",
-				order: 5,
-			},
-		},
 		collection: {
 			name: "posts",
 			limit: 10,
@@ -92,80 +88,48 @@ export default async function (eleventyConfig) {
 	});
 
 	// Image optimization: https://www.11ty.dev/docs/plugins/image/#eleventy-transform
-	// Use different settings based on environment
-	const isProduction =
-		process.env.ELEVENTY_ENV === "production" ||
-		process.env.NODE_ENV === "production";
-	const isDevelopment = process.env.ELEVENTY_RUN_MODE === "serve";
-
-	if (!isDevelopment) {
+	// Skipped while running the dev server so `npm start` stays fast.
+	// Generated images are cached between Netlify builds (see netlify.toml),
+	// so only new photos are processed on each deploy.
+	if (process.env.ELEVENTY_RUN_MODE !== "serve") {
 		eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
-			// Production: Optimized for quality
-			formats: isProduction ? ["avif", "webp", "auto"] : ["webp", "auto"],
-
-			// Production: Full responsive widths, Development: Minimal
-			widths: isProduction ? [320, 640, 960, 1280, 1920] : [640, 1280],
-
+			// WebP for modern browsers with a JPEG fallback. Images with
+			// transparency skip the JPEG (see eleventy-img formatFiltering).
+			formats: ["webp", "jpeg"],
+			widths: [480, 960, 1600],
+			// One shared folder so Netlify can cache it between builds
+			urlPath: "/img/",
+			outputDir: "./_site/img/",
 			failOnError: false,
 			transformOnHTMLParseError: false,
-
-			// Extended disk cache for better performance
 			cacheOptions: {
-				duration: "30d", // Cache for 30 days
+				duration: "30d",
 				directory: "./.cache",
-				removeUrlQueryParams: false,
 			},
-
 			htmlOptions: {
 				imgAttributes: {
 					loading: "lazy",
 					decoding: "async",
-					sizes: isProduction
-						? "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-						: "(max-width: 768px) 100vw, 50vw",
+					// Overridden per image by _config/markdown.js
+					sizes: "(max-width: 860px) 100vw, 800px",
 				},
 			},
-
+			// Keep animated GIFs animated
 			sharpOptions: {
-				animated: false,
-				jpeg: {
-					quality: isProduction ? 85 : 75,
-					mozjpeg: true,
-				},
-				webp: {
-					quality: isProduction ? 85 : 75,
-					effort: isProduction ? 4 : 2,
-				},
-				avif: isProduction
-					? {
-							quality: 80,
-							effort: 4,
-						}
-					: undefined,
-				png: {
-					quality: isProduction ? 90 : 80,
-					compressionLevel: isProduction ? 9 : 6,
-				},
+				animated: true,
 			},
-
-			// Skip external images and media files
-			skipImages: (src) => {
-				return (
-					src.includes("/img/imported/") ||
-					src.startsWith("https://") || // Skip external images like webmention avatars
-					src.endsWith(".mp3") ||
-					src.endsWith(".mp4") ||
-					src.endsWith(".wav") ||
-					src.endsWith(".ogg") ||
-					src.endsWith(".m4a")
-				);
-			},
+			sharpJpegOptions: { quality: 80, mozjpeg: true, progressive: true },
+			sharpWebpOptions: { quality: 78 },
 		});
 	}
+
+	// _data/tag-descriptions.json, under a name templates can use
+	eleventyConfig.addGlobalData("tagDescriptions", tagDescriptions);
 
 	// Filters
 	eleventyConfig.addPlugin(pluginFilters);
 	eleventyConfig.addPlugin(pluginRelatedPosts);
+	eleventyConfig.addPlugin(pluginImages);
 
 	eleventyConfig.addPlugin(IdAttributePlugin, {
 		// by default we use Eleventy’s built-in `slugify` filter:
@@ -177,7 +141,6 @@ export default async function (eleventyConfig) {
 		return new Date().toISOString();
 	});
 
-	eleventyConfig.addFilter("contentImgUrlFilter", contentImgUrlFilter);
 
 	// Add dateToFormat filter
 	eleventyConfig.addFilter("dateToFormat", (dateObj, format) => {
@@ -257,25 +220,3 @@ export const config = {
 
 	// pathPrefix: "/",
 };
-
-// Author: Seramis
-// https://github.com/11ty/eleventy-img/issues/278
-import path from "node:path";
-import Image from "@11ty/eleventy-img";
-async function contentImgUrlFilter(src) {
-	const inputDir = path.dirname(this.page.inputPath);
-	const imagePath = path.resolve(inputDir, src);
-	const outputDir = path.dirname(this.page.outputPath);
-	const urlPath = this.page.url;
-
-	const stats = await Image(imagePath, {
-		widths: [1200], // Width for Open Graph image
-		formats: ["jpg", "png"],
-		outputDir: outputDir, // Output directory
-		urlPath: urlPath, // Public URL path
-		filenameFormat: function (hash, src, width, format) {
-			return `${hash}-${width}.${format}`;
-		},
-	});
-	return stats.jpeg[0].url; // Return the URL of the processed image
-}

@@ -3,6 +3,7 @@ title: just pictures
 slug: justpictures
 date: 2026-05-25T20:01:00.000-03:00
 author: jane
+photoLayout: grid
 tags:
   - pictures
   - posts
@@ -11,7 +12,7 @@ I got a camera (Lumix GX1) from my dad and I have been having so much fun. maybe
 
 Anyway, I wanted to post just some pictures from this weekend-ish -- sans blah blah blah -- because I have such a backlog of pics that I want to share. I've gotten myself into a bit of a pickle with 3 semi-finished blog posts in my drafts (I'm long-winded as you probably know well), so I'll be back soon to talk and share some videos about my recent paintings, birthday bonanza, and backpacking trip. 
 
-Here ya go (hover mouse over pics for captions):
+Here ya go:
 
 ![](p1060740.jpeg "snuck away from paddy's trivia at dusk")
 

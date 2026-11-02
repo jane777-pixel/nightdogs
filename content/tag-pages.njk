@@ -18,8 +18,12 @@ const eleventyComputed = {
 };
 ---
 <h1>Tagged “{{ tag }}”</h1>
+{%- set tagInfo = tagDescriptions.tags[tag] %}
+{%- if tagInfo %}
+<p class="intro">{{ tagInfo.icon }} {{ tagInfo.description }}</p>
+{%- endif %}
 
 {% set postslist = collections[ tag ] %}
 {% include "postslist.njk" %}
 
-<p>See <a href="tags.njk">all tags</a>.</p>
+<p>See <a href="/explore/">all posts and tags</a>.</p>

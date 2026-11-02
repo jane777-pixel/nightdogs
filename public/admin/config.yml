@@ -1,1348 +1,186 @@
+# Sveltia CMS configuration: https://sveltiacms.app/en/docs
+# Authors sign in with their GitHub account (see docs/CMS.md).
+
 backend:
-  name: git-gateway
+  name: github
+  repo: jane777-pixel/nightdogs
   branch: main
-publish_mode: editorial_workflow
-media_folder: "public/img"
-public_folder: "/img"
+  base_url: https://nightdogs.xyz
+  auth_endpoint: api/cms-auth
+  commit_messages:
+    create: "New post: {{slug}} (by {{author-name}})"
+    update: "Update {{collection}} “{{slug}}”"
+    delete: "Delete {{collection}} “{{slug}}”"
+    uploadMedia: "Upload “{{path}}”"
+    deleteMedia: "Delete “{{path}}”"
+
+site_url: https://nightdogs.xyz
+display_url: https://nightdogs.xyz
+logo_url: /favicon.svg
+
+# Uploads go next to the post they belong to (set per collection below).
+# This shared folder is only used by the "Assets" library.
+media_folder: public/img/uploads
+public_folder: /img/uploads
+
+media_libraries:
+  default:
+    config:
+      slugify_filename: true
+      max_file_size: 26214400 # 25 MB
+      transformations:
+        # Phone photos (including iPhone HEIC) are converted to WebP and
+        # resized before upload, so posts stay quick to load.
+        raster_image:
+          format: webp
+          quality: 82
+          width: 2400
+          height: 2400
+
+slug:
+  encoding: ascii
+  clean_accents: true
+
 collections:
-  - name: "settings"
-    label: "Settings"
-    files:
-      - label: "Global Metadata"
-        name: "metadata"
-        file: "_data/metadata.json"
-        fields:
-          - { label: "Site Title", name: "title", widget: "string" }
-          - { label: "Site URL", name: "url", widget: "string" }
-          - { label: "Language", name: "language", widget: "string" }
-          - { label: "Description", name: "description", widget: "string" }
-          - label: "Author"
-            name: "author"
-            widget: "object"
-            fields:
-              - { label: "Name", name: "name", widget: "string" }
-              - { label: "Email", name: "email", widget: "string" }
-              - { label: "URL", name: "url", widget: "string" }
   - name: "blog"
-    label: "Blog Posts"
+    label: "Blog posts"
+    label_singular: "Blog post"
+    description: "Write a new post or edit an old one. Photos you add here are stored with the post."
     folder: "content/blog"
     create: true
-    slug: "{{slug}}"
     path: "{{author}}/{{year}}-{{month}}-{{day}}/{{slug}}/index"
+    slug: "{{title}}"
     media_folder: ""
     public_folder: ""
-    editor:
-      preview: true
-    fields:
-      - {
-          label: "Title",
-          name: "title",
-          widget: "string",
-          hint: "Main title of your post",
-        }
-      - {
-          label: "Slug",
-          name: "slug",
-          widget: "string",
-          hint: "URL-friendly version of title (lowercase, hyphens)",
-        }
-      - {
-          label: "Publish Date",
-          name: "date",
-          widget: "datetime",
-          date_format: "YYYY-MM-DD",
-          time_format: "HH:mm:ss",
-          format: "YYYY-MM-DDTHH:mm:ss.000Z",
-          default: "",
-          hint: "When this post should be published",
-        }
-      - {
-          label: "Author",
-          name: "author",
-          widget: "select",
-          options:
-            [
-              { label: "Jane", value: "jane" },
-              { label: "Abby", value: "abby" },
-              { label: "Adèsse", value: "adesse" },
-              { label: "Orion", value: "orionlw" },
-              { label: "Amelia", value: "amelia" },
-              { label: "Nic", value: "nic" },
-              { label: "Ewan", value: "ewan" },
-            ],
-          hint: "Select the author of this post",
-        }
-      - {
-          label: "Tags",
-          name: "tags",
-          widget: "list",
-          default: ["posts"],
-          hint: "Add relevant tags. 'posts' is required. Try: music, life, creative, technology, personal, tutorial, review",
-        }
-      - {
-          label: "Featured Image",
-          name: "featuredImage",
-          widget: "image",
-          required: false,
-          hint: "Optional main image for the post. Will be optimized automatically.",
-        }
-      - {
-          label: "Image Alt Text",
-          name: "featuredImageAlt",
-          widget: "string",
-          required: false,
-          hint: "Describe the featured image for accessibility",
-        }
-      - {
-          label: "Excerpt",
-          name: "excerpt",
-          widget: "text",
-          required: false,
-          hint: "Short description for social sharing and search results (optional - will auto-generate if empty)",
-        }
-      - {
-          label: "Body",
-          name: "body",
-          widget: "markdown",
-          hint: "Main content of your post. Tip: Place images in the same folder as this post for best optimization.",
-        }
-      - {
-          label: "Collaborators",
-          name: "collaborators",
-          widget: "list",
-          required: false,
-          hint: "Other authors who contributed to this post",
-          field:
-            {
-              label: "Author",
-              name: "author",
-              widget: "select",
-              options:
-                [
-                  { label: "Jane", value: "jane" },
-                  { label: "Abby", value: "abby" },
-                  { label: "Adèsse", value: "adesse" },
-                  { label: "Orion", value: "orionlw" },
-                  { label: "Amelia", value: "amelia" },
-                  { label: "Nic", value: "nic" },
-                  { label: "Ewan", value: "ewan" },
-                ],
-            },
-        }
-      - {
-          label: "Post Series",
-          name: "series",
-          widget: "string",
-          required: false,
-          hint: "If this post is part of a series, enter the series name",
-        }
-      - {
-          label: "Part Number",
-          name: "seriesPart",
-          widget: "number",
-          required: false,
-          hint: "Which part of the series is this? (1, 2, 3, etc.)",
-        }
-  - name: "author-profiles"
-    label: "Author Profiles"
-    folder: "content/authors"
-    create: true
-    slug: "{{slug}}"
+    sortable_fields: ["date", "title", "author"]
+    view_groups:
+      - { label: "Author", field: "author" }
+    summary: "{{title}} · {{author}} · {{date | date('YYYY-MM-DD')}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - {
-          label: "Author",
-          name: "author",
-          widget: "select",
-          options:
-            [
-              { label: "Jane", value: "jane" },
-              { label: "Abby", value: "abby" },
-              { label: "Adèsse", value: "adesse" },
-              { label: "Orion", value: "orionlw" },
-              { label: "Amelia", value: "amelia" },
-              { label: "Nic", value: "nic" },
-              { label: "Ewan", value: "ewan" },
-            ],
-        }
-      - {
-          label: "Featured Image",
-          name: "image",
-          widget: "image",
-          required: false,
-        }
-      - {
-          label: "Extended Bio",
-          name: "extendedBio",
-          widget: "markdown",
-          required: false,
-        }
-      - {
-          label: "Achievements",
-          name: "achievements",
-          widget: "list",
-          required: false,
-          fields:
-            [
-              { label: "Achievement", name: "text", widget: "string" },
-              {
-                label: "Date",
-                name: "date",
-                widget: "datetime",
-                required: false,
-              },
-            ],
-        }
-      - {
-          label: "Favorite Posts",
-          name: "favoritePosts",
-          widget: "list",
-          required: false,
-          fields:
-            [
-              { label: "Post Title", name: "title", widget: "string" },
-              { label: "Post URL", name: "url", widget: "string" },
-              {
-                label: "Why it's favorite",
-                name: "reason",
-                widget: "text",
-                required: false,
-              },
-            ],
-        }
-      - {
-          label: "Fun Facts",
-          name: "funFacts",
-          widget: "list",
-          required: false,
-        }
-      - {
-          label: "Currently Reading",
-          name: "currentlyReading",
-          widget: "string",
-          required: false,
-        }
-      - {
-          label: "Favorite Quote",
-          name: "favoriteQuote",
-          widget: "text",
-          required: false,
-        }
-  - name: "tags"
-    label: "Tag Management"
+      - label: "Author"
+        name: "author"
+        widget: "select"
+        options: &author_options
+          - { label: "Jane", value: "jane" }
+          - { label: "Abby", value: "abby" }
+          - { label: "Adèsse", value: "adesse" }
+          - { label: "Orion", value: "orionlw" }
+          - { label: "Amelia", value: "amelia" }
+          - { label: "Nic", value: "nic" }
+          - { label: "Ewan", value: "ewan" }
+      - label: "Date"
+        name: "date"
+        widget: "datetime"
+        hint: "Defaults to now. The post's web address uses this date."
+      - label: "Draft"
+        name: "draft"
+        widget: "boolean"
+        default: false
+        required: false
+        hint: "Turn on to save without publishing. Turn off when you're ready for it to go live."
+      - label: "Photo layout"
+        name: "photoLayout"
+        widget: "select"
+        default: "column"
+        required: false
+        options:
+          - { label: "Column — one photo after another, full width", value: "column" }
+          - { label: "Grid — thumbnails side by side, tap to enlarge", value: "grid" }
+        hint: "Grid works well for posts with lots of photos."
+      - label: "Tags"
+        name: "tags"
+        widget: "list"
+        required: false
+        hint: "Optional. Tags already in use: music, pictures, fibre arts, concrete, swimming, cats, horses, farm animals, complaints, politics, capitalism, birthday, art, painting, folkart, reading, gardening, baking, video, trips, friends, eggs, baskets"
+      - label: "Short description"
+        name: "description"
+        widget: "text"
+        required: false
+        hint: "Optional. One or two sentences shown in previews and when the post is shared."
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+        hint: >-
+          To add a photo, use the image button in the toolbar.
+          “Alt text” describes the photo for people who can't see it (e.g. “a grey cat asleep on a wool blanket”).
+          “Title” becomes a caption shown under the photo.
+          Photos placed one after another are grouped together.
+
+  - name: "pages"
+    label: "Site settings"
     files:
-      - label: "Tag Descriptions"
-        name: "tag-descriptions"
-        file: "_data/tag-descriptions.json"
-        fields:
-          - {
-              label: "Tag Descriptions",
-              name: "tags",
-              widget: "object",
-              fields:
-                [
-                  {
-                    label: "Technology",
-                    name: "technology",
-                    widget: "object",
-                    fields:
-                      [
-                        {
-                          label: "Description",
-                          name: "description",
-                          widget: "text",
-                        },
-                        {
-                          label: "Icon",
-                          name: "icon",
-                          widget: "string",
-                          default: "💻",
-                        },
-                        {
-                          label: "Color",
-                          name: "color",
-                          widget: "string",
-                          default: "#007acc",
-                        },
-                      ],
-                  },
-                  {
-                    label: "Music",
-                    name: "music",
-                    widget: "object",
-                    fields:
-                      [
-                        {
-                          label: "Description",
-                          name: "description",
-                          widget: "text",
-                        },
-                        {
-                          label: "Icon",
-                          name: "icon",
-                          widget: "string",
-                          default: "🎵",
-                        },
-                        {
-                          label: "Color",
-                          name: "color",
-                          widget: "string",
-                          default: "#ff6b6b",
-                        },
-                      ],
-                  },
-                  {
-                    label: "Life",
-                    name: "life",
-                    widget: "object",
-                    fields:
-                      [
-                        {
-                          label: "Description",
-                          name: "description",
-                          widget: "text",
-                        },
-                        {
-                          label: "Icon",
-                          name: "icon",
-                          widget: "string",
-                          default: "🌱",
-                        },
-                        {
-                          label: "Color",
-                          name: "color",
-                          widget: "string",
-                          default: "#4ecdc4",
-                        },
-                      ],
-                  },
-                  {
-                    label: "Creative",
-                    name: "creative",
-                    widget: "object",
-                    fields:
-                      [
-                        {
-                          label: "Description",
-                          name: "description",
-                          widget: "text",
-                        },
-                        {
-                          label: "Icon",
-                          name: "icon",
-                          widget: "string",
-                          default: "🎨",
-                        },
-                        {
-                          label: "Color",
-                          name: "color",
-                          widget: "string",
-                          default: "#ffe66d",
-                        },
-                      ],
-                  },
-                  {
-                    label: "Personal",
-                    name: "personal",
-                    widget: "object",
-                    fields:
-                      [
-                        {
-                          label: "Description",
-                          name: "description",
-                          widget: "text",
-                        },
-                        {
-                          label: "Icon",
-                          name: "icon",
-                          widget: "string",
-                          default: "💭",
-                        },
-                        {
-                          label: "Color",
-                          name: "color",
-                          widget: "string",
-                          default: "#a8e6cf",
-                        },
-                      ],
-                  },
-                  {
-                    label: "Tutorial",
-                    name: "tutorial",
-                    widget: "object",
-                    fields:
-                      [
-                        {
-                          label: "Description",
-                          name: "description",
-                          widget: "text",
-                        },
-                        {
-                          label: "Icon",
-                          name: "icon",
-                          widget: "string",
-                          default: "📚",
-                        },
-                        {
-                          label: "Color",
-                          name: "color",
-                          widget: "string",
-                          default: "#ffd93d",
-                        },
-                      ],
-                  },
-                  {
-                    label: "Review",
-                    name: "review",
-                    widget: "object",
-                    fields:
-                      [
-                        {
-                          label: "Description",
-                          name: "description",
-                          widget: "text",
-                        },
-                        {
-                          label: "Icon",
-                          name: "icon",
-                          widget: "string",
-                          default: "⭐",
-                        },
-                        {
-                          label: "Color",
-                          name: "color",
-                          widget: "string",
-                          default: "#ff8b94",
-                        },
-                      ],
-                  },
-                ],
-            }
-  - name: "newsletters"
-    label: "Newsletters"
-    folder: "content/newsletters"
-    create: true
-    slug: "{{year}}-{{month}}-{{title}}"
-    editor:
-      preview: false
-    fields:
-      - {
-          label: "Title",
-          name: "title",
-          widget: "string",
-          hint: "Newsletter title (e.g., 'September 2025 Digest')",
-        }
-      - {
-          label: "Subject Line",
-          name: "subject",
-          widget: "string",
-          hint: "Email subject line - this will be sent to subscribers",
-        }
-      - {
-          label: "Month",
-          name: "month",
-          widget: "select",
-          options:
-            [
-              "January",
-              "February",
-              "March",
-              "April",
-              "May",
-              "June",
-              "July",
-              "August",
-              "September",
-              "October",
-              "November",
-              "December",
-            ],
-        }
-      - {
-          label: "Year",
-          name: "year",
-          widget: "number",
-          default: 2025,
-          value_type: "int",
-        }
-      - {
-          label: "Status",
-          name: "status",
-          widget: "select",
-          options: ["draft", "ready", "sent"],
-          default: "draft",
-          hint: "Draft = work in progress, Ready = ready to send, Sent = already sent",
-        }
-      - {
-          label: "Auto-populate Posts",
-          name: "autoPopulate",
-          widget: "boolean",
-          default: true,
-          hint: "Automatically include posts from the selected month",
-        }
-      - {
-          label: "Introduction",
-          name: "introduction",
-          widget: "markdown",
-          hint: "Opening message for the newsletter",
-        }
-      - {
-          label: "Editorial Sections",
-          name: "editorialSections",
-          widget: "list",
-          required: false,
-          hint: "Add custom sections between author posts",
-          fields:
-            [
-              { label: "Section Title", name: "title", widget: "string" },
-              { label: "Content", name: "content", widget: "markdown" },
-              {
-                label: "Insert After Author",
-                name: "insertAfter",
-                widget: "select",
-                options:
-                  [
-                    "jane",
-                    "orionlw",
-                    "adesse",
-                    "nic",
-                    "amelia",
-                    "abby",
-                    "ewan",
-                    "beginning",
-                    "end",
-                  ],
-                hint: "Where to place this section",
-              },
-            ],
-        }
-      - {
-          label: "Featured Posts",
-          name: "featuredPosts",
-          widget: "list",
-          required: false,
-          hint: "Manually highlight specific posts",
-          fields:
-            [
-              { label: "Post Title", name: "title", widget: "string" },
-              {
-                label: "Author",
-                name: "author",
-                widget: "select",
-                options:
-                  [
-                    "jane",
-                    "orionlw",
-                    "adesse",
-                    "nic",
-                    "amelia",
-                    "abby",
-                    "ewan",
-                  ],
-              },
-              {
-                label: "Post URL",
-                name: "url",
-                widget: "string",
-                hint: "Relative URL (e.g., /blog/jane/2025-09-01/post-title/)",
-              },
-              {
-                label: "Custom Description",
-                name: "description",
-                widget: "text",
-                required: false,
-                hint: "Override default post description",
-              },
-            ],
-        }
-      - {
-          label: "Exclude Authors",
-          name: "excludeAuthors",
-          widget: "list",
-          required: false,
-          hint: "Authors to skip in this newsletter",
-        }
-      - {
-          label: "Closing Message",
-          name: "closingMessage",
-          widget: "markdown",
-          required: false,
-          hint: "Final message before footer",
-        }
-      - {
-          label: "Send Notes",
-          name: "sendNotes",
-          widget: "text",
-          required: false,
-          hint: "Internal notes about sending (tracking, analytics, etc.)",
-        }
-  - name: "authors"
-    label: "Authors"
-    files:
-      - label: "Author Data"
+      - label: "Authors"
         name: "authors"
         file: "_data/authors.json"
+        description: "Names, bios, links and colours for each author."
         fields:
-          - {
-              label: "Jane",
-              name: "jane",
-              widget: "object",
-              fields:
-                [
-                  { label: "Name", name: "name", widget: "string" },
-                  { label: "Bio", name: "bio", widget: "string" },
-                  { label: "Note", name: "note", widget: "string" },
-                  {
-                    label: "Links",
-                    name: "links",
-                    widget: "list",
+          - label: "Jane Marie Bach"
+            name: "jane"
+            widget: "object"
+            collapsed: true
+            fields: &author_fields
+              - { label: "Display name", name: "name", widget: "string" }
+              - { label: "Bio", name: "bio", widget: "text", required: false, hint: "A few lines about you. Shown on your author page." }
+              - { label: "Note", name: "note", widget: "string", required: false, hint: "A few emoji or a short tagline" }
+              - { label: "Dog person?", name: "isDogPerson", widget: "boolean", required: false, default: false, hint: "Turns the Cat page into a Dog page when your theme is picked." }
+              - label: "Links"
+                name: "links"
+                widget: "list"
+                required: false
+                summary: "{{fields.label}}"
+                fields:
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "URL", name: "url", widget: "string" }
+              - label: "Colours & fonts"
+                name: "theme"
+                widget: "object"
+                collapsed: true
+                hint: "Keep text readable: aim for strong contrast between Background and Text/Links."
+                fields:
+                  - label: "Light mode"
+                    name: "light"
+                    widget: "object"
+                    fields: &color_fields
+                      - { label: "Background", name: "background", widget: "color" }
+                      - { label: "Text", name: "color", widget: "color" }
+                      - { label: "Links & buttons", name: "primary", widget: "color" }
+                      - { label: "Dates & muted text", name: "muted", widget: "color" }
+                  - { label: "Dark mode", name: "dark", widget: "object", fields: *color_fields }
+                  - label: "Fonts"
+                    name: "fonts"
+                    widget: "object"
                     fields:
-                      [
-                        { label: "URL", name: "url", widget: "string" },
-                        { label: "Label", name: "label", widget: "string" },
-                      ],
-                  },
-                  {
-                    label: "Theme",
-                    name: "theme",
-                    widget: "object",
-                    fields:
-                      [
-                        {
-                          label: "Light Mode",
-                          name: "light",
-                          widget: "object",
-                          fields:
-                            [
-                              {
-                                label: "Background",
-                                name: "background",
-                                widget: "string",
-                              },
-                              {
-                                label: "Color",
-                                name: "color",
-                                widget: "string",
-                              },
-                              {
-                                label: "Primary",
-                                name: "primary",
-                                widget: "string",
-                              },
-                              {
-                                label: "Muted",
-                                name: "muted",
-                                widget: "string",
-                              },
-                            ],
-                        },
-                        {
-                          label: "Dark Mode",
-                          name: "dark",
-                          widget: "object",
-                          fields:
-                            [
-                              {
-                                label: "Background",
-                                name: "background",
-                                widget: "string",
-                              },
-                              {
-                                label: "Color",
-                                name: "color",
-                                widget: "string",
-                              },
-                              {
-                                label: "Primary",
-                                name: "primary",
-                                widget: "string",
-                              },
-                              {
-                                label: "Muted",
-                                name: "muted",
-                                widget: "string",
-                              },
-                            ],
-                        },
-                        {
-                          label: "Fonts",
-                          name: "fonts",
-                          widget: "object",
-                          fields:
-                            [
-                              {
-                                label: "Body Font",
-                                name: "body",
-                                widget: "string",
-                              },
-                              {
-                                label: "Header Font",
-                                name: "header",
-                                widget: "string",
-                              },
-                              {
-                                label: "Mono Font",
-                                name: "mono",
-                                widget: "string",
-                                required: false,
-                              },
-                            ],
-                        },
-                      ],
-                  },
-                ],
-            }
-          - {
-              label: "Abby",
-              name: "abby",
-              widget: "object",
-              fields:
-                [
-                  { label: "Name", name: "name", widget: "string" },
-                  { label: "Bio", name: "bio", widget: "string" },
-                  { label: "Note", name: "note", widget: "string" },
-                  {
-                    label: "Links",
-                    name: "links",
-                    widget: "list",
-                    fields:
-                      [
-                        { label: "URL", name: "url", widget: "string" },
-                        { label: "Label", name: "label", widget: "string" },
-                      ],
-                  },
-                  {
-                    label: "Theme",
-                    name: "theme",
-                    widget: "object",
-                    fields:
-                      [
-                        {
-                          label: "Light Mode",
-                          name: "light",
-                          widget: "object",
-                          fields:
-                            [
-                              {
-                                label: "Background",
-                                name: "background",
-                                widget: "string",
-                              },
-                              {
-                                label: "Color",
-                                name: "color",
-                                widget: "string",
-                              },
-                              {
-                                label: "Primary",
-                                name: "primary",
-                                widget: "string",
-                              },
-                              {
-                                label: "Muted",
-                                name: "muted",
-                                widget: "string",
-                              },
-                            ],
-                        },
-                        {
-                          label: "Dark Mode",
-                          name: "dark",
-                          widget: "object",
-                          fields:
-                            [
-                              {
-                                label: "Background",
-                                name: "background",
-                                widget: "string",
-                              },
-                              {
-                                label: "Color",
-                                name: "color",
-                                widget: "string",
-                              },
-                              {
-                                label: "Primary",
-                                name: "primary",
-                                widget: "string",
-                              },
-                              {
-                                label: "Muted",
-                                name: "muted",
-                                widget: "string",
-                              },
-                            ],
-                        },
-                        {
-                          label: "Fonts",
-                          name: "fonts",
-                          widget: "object",
-                          fields:
-                            [
-                              {
-                                label: "Body Font",
-                                name: "body",
-                                widget: "string",
-                              },
-                              {
-                                label: "Header Font",
-                                name: "header",
-                                widget: "string",
-                              },
-                              {
-                                label: "Mono Font",
-                                name: "mono",
-                                widget: "string",
-                                required: false,
-                              },
-                            ],
-                        },
-                      ],
-                  },
-                ],
-            }
-          - {
-              label: "Adèsse",
-              name: "adesse",
-              widget: "object",
-              fields:
-                [
-                  { label: "Name", name: "name", widget: "string" },
-                  { label: "Bio", name: "bio", widget: "string" },
-                  { label: "Note", name: "note", widget: "string" },
-                  {
-                    label: "Links",
-                    name: "links",
-                    widget: "list",
-                    fields:
-                      [
-                        { label: "URL", name: "url", widget: "string" },
-                        { label: "Label", name: "label", widget: "string" },
-                      ],
-                  },
-                  {
-                    label: "Theme",
-                    name: "theme",
-                    widget: "object",
-                    fields:
-                      [
-                        {
-                          label: "Light Mode",
-                          name: "light",
-                          widget: "object",
-                          fields:
-                            [
-                              {
-                                label: "Background",
-                                name: "background",
-                                widget: "string",
-                              },
-                              {
-                                label: "Color",
-                                name: "color",
-                                widget: "string",
-                              },
-                              {
-                                label: "Primary",
-                                name: "primary",
-                                widget: "string",
-                              },
-                              {
-                                label: "Muted",
-                                name: "muted",
-                                widget: "string",
-                              },
-                            ],
-                        },
-                        {
-                          label: "Dark Mode",
-                          name: "dark",
-                          widget: "object",
-                          fields:
-                            [
-                              {
-                                label: "Background",
-                                name: "background",
-                                widget: "string",
-                              },
-                              {
-                                label: "Color",
-                                name: "color",
-                                widget: "string",
-                              },
-                              {
-                                label: "Primary",
-                                name: "primary",
-                                widget: "string",
-                              },
-                              {
-                                label: "Muted",
-                                name: "muted",
-                                widget: "string",
-                              },
-                            ],
-                        },
-                        {
-                          label: "Fonts",
-                          name: "fonts",
-                          widget: "object",
-                          fields:
-                            [
-                              {
-                                label: "Body Font",
-                                name: "body",
-                                widget: "string",
-                              },
-                              {
-                                label: "Header Font",
-                                name: "header",
-                                widget: "string",
-                              },
-                              {
-                                label: "Mono Font",
-                                name: "mono",
-                                widget: "string",
-                                required: false,
-                              },
-                            ],
-                        },
-                      ],
-                  },
-                ],
-            }
-          - {
-              label: "Orion",
-              name: "orionlw",
-              widget: "object",
-              fields:
-                [
-                  { label: "Name", name: "name", widget: "string" },
-                  { label: "Bio", name: "bio", widget: "string" },
-                  { label: "Note", name: "note", widget: "string" },
-                  {
-                    label: "Links",
-                    name: "links",
-                    widget: "list",
-                    fields:
-                      [
-                        { label: "URL", name: "url", widget: "string" },
-                        { label: "Label", name: "label", widget: "string" },
-                      ],
-                  },
-                  {
-                    label: "Theme",
-                    name: "theme",
-                    widget: "object",
-                    fields:
-                      [
-                        {
-                          label: "Light Mode",
-                          name: "light",
-                          widget: "object",
-                          fields:
-                            [
-                              {
-                                label: "Background",
-                                name: "background",
-                                widget: "string",
-                              },
-                              {
-                                label: "Color",
-                                name: "color",
-                                widget: "string",
-                              },
-                              {
-                                label: "Primary",
-                                name: "primary",
-                                widget: "string",
-                              },
-                              {
-                                label: "Muted",
-                                name: "muted",
-                                widget: "string",
-                              },
-                            ],
-                        },
-                        {
-                          label: "Dark Mode",
-                          name: "dark",
-                          widget: "object",
-                          fields:
-                            [
-                              {
-                                label: "Background",
-                                name: "background",
-                                widget: "string",
-                              },
-                              {
-                                label: "Color",
-                                name: "color",
-                                widget: "string",
-                              },
-                              {
-                                label: "Primary",
-                                name: "primary",
-                                widget: "string",
-                              },
-                              {
-                                label: "Muted",
-                                name: "muted",
-                                widget: "string",
-                              },
-                            ],
-                        },
-                        {
-                          label: "Fonts",
-                          name: "fonts",
-                          widget: "object",
-                          fields:
-                            [
-                              {
-                                label: "Body Font",
-                                name: "body",
-                                widget: "string",
-                              },
-                              {
-                                label: "Header Font",
-                                name: "header",
-                                widget: "string",
-                              },
-                              {
-                                label: "Mono Font",
-                                name: "mono",
-                                widget: "string",
-                                required: false,
-                              },
-                            ],
-                        },
-                      ],
-                  },
-                ],
-            }
-          - {
-              label: "Amelia",
-              name: "amelia",
-              widget: "object",
-              fields:
-                [
-                  { label: "Name", name: "name", widget: "string" },
-                  { label: "Bio", name: "bio", widget: "string" },
-                  { label: "Note", name: "note", widget: "string" },
-                  {
-                    label: "Links",
-                    name: "links",
-                    widget: "list",
-                    fields:
-                      [
-                        { label: "URL", name: "url", widget: "string" },
-                        { label: "Label", name: "label", widget: "string" },
-                      ],
-                  },
-                  {
-                    label: "Theme",
-                    name: "theme",
-                    widget: "object",
-                    fields:
-                      [
-                        {
-                          label: "Light Mode",
-                          name: "light",
-                          widget: "object",
-                          fields:
-                            [
-                              {
-                                label: "Background",
-                                name: "background",
-                                widget: "string",
-                              },
-                              {
-                                label: "Color",
-                                name: "color",
-                                widget: "string",
-                              },
-                              {
-                                label: "Primary",
-                                name: "primary",
-                                widget: "string",
-                              },
-                              {
-                                label: "Muted",
-                                name: "muted",
-                                widget: "string",
-                              },
-                            ],
-                        },
-                        {
-                          label: "Dark Mode",
-                          name: "dark",
-                          widget: "object",
-                          fields:
-                            [
-                              {
-                                label: "Background",
-                                name: "background",
-                                widget: "string",
-                              },
-                              {
-                                label: "Color",
-                                name: "color",
-                                widget: "string",
-                              },
-                              {
-                                label: "Primary",
-                                name: "primary",
-                                widget: "string",
-                              },
-                              {
-                                label: "Muted",
-                                name: "muted",
-                                widget: "string",
-                              },
-                            ],
-                        },
-                        {
-                          label: "Fonts",
-                          name: "fonts",
-                          widget: "object",
-                          fields:
-                            [
-                              {
-                                label: "Body Font",
-                                name: "body",
-                                widget: "string",
-                              },
-                              {
-                                label: "Header Font",
-                                name: "header",
-                                widget: "string",
-                              },
-                              {
-                                label: "Mono Font",
-                                name: "mono",
-                                widget: "string",
-                                required: false,
-                              },
-                            ],
-                        },
-                      ],
-                  },
-                ],
-            }
-          - {
-              label: "Nic",
-              name: "nic",
-              widget: "object",
-              fields:
-                [
-                  { label: "Name", name: "name", widget: "string" },
-                  { label: "Bio", name: "bio", widget: "string" },
-                  { label: "Note", name: "note", widget: "string" },
-                  {
-                    label: "Links",
-                    name: "links",
-                    widget: "list",
-                    fields:
-                      [
-                        { label: "URL", name: "url", widget: "string" },
-                        { label: "Label", name: "label", widget: "string" },
-                      ],
-                  },
-                  {
-                    label: "Theme",
-                    name: "theme",
-                    widget: "object",
-                    fields:
-                      [
-                        {
-                          label: "Light Mode",
-                          name: "light",
-                          widget: "object",
-                          fields:
-                            [
-                              {
-                                label: "Background",
-                                name: "background",
-                                widget: "string",
-                              },
-                              {
-                                label: "Color",
-                                name: "color",
-                                widget: "string",
-                              },
-                              {
-                                label: "Primary",
-                                name: "primary",
-                                widget: "string",
-                              },
-                              {
-                                label: "Muted",
-                                name: "muted",
-                                widget: "string",
-                              },
-                            ],
-                        },
-                        {
-                          label: "Dark Mode",
-                          name: "dark",
-                          widget: "object",
-                          fields:
-                            [
-                              {
-                                label: "Background",
-                                name: "background",
-                                widget: "string",
-                              },
-                              {
-                                label: "Color",
-                                name: "color",
-                                widget: "string",
-                              },
-                              {
-                                label: "Primary",
-                                name: "primary",
-                                widget: "string",
-                              },
-                              {
-                                label: "Muted",
-                                name: "muted",
-                                widget: "string",
-                              },
-                            ],
-                        },
-                        {
-                          label: "Fonts",
-                          name: "fonts",
-                          widget: "object",
-                          fields:
-                            [
-                              {
-                                label: "Body Font",
-                                name: "body",
-                                widget: "string",
-                              },
-                              {
-                                label: "Header Font",
-                                name: "header",
-                                widget: "string",
-                              },
-                              {
-                                label: "Mono Font",
-                                name: "mono",
-                                widget: "string",
-                                required: false,
-                              },
-                            ],
-                        },
-                      ],
-                  },
-                ],
-            }
-          - {
-              label: "Ewan",
-              name: "ewan",
-              widget: "object",
-              fields:
-                [
-                  { label: "Name", name: "name", widget: "string" },
-                  { label: "Bio", name: "bio", widget: "string" },
-                  { label: "Note", name: "note", widget: "string" },
-                  {
-                    label: "Links",
-                    name: "links",
-                    widget: "list",
-                    fields:
-                      [
-                        { label: "URL", name: "url", widget: "string" },
-                        { label: "Label", name: "label", widget: "string" },
-                      ],
-                  },
-                  {
-                    label: "Theme",
-                    name: "theme",
-                    widget: "object",
-                    fields:
-                      [
-                        {
-                          label: "Light Mode",
-                          name: "light",
-                          widget: "object",
-                          fields:
-                            [
-                              {
-                                label: "Background",
-                                name: "background",
-                                widget: "string",
-                              },
-                              {
-                                label: "Color",
-                                name: "color",
-                                widget: "string",
-                              },
-                              {
-                                label: "Primary",
-                                name: "primary",
-                                widget: "string",
-                              },
-                              {
-                                label: "Muted",
-                                name: "muted",
-                                widget: "string",
-                              },
-                            ],
-                        },
-                        {
-                          label: "Dark Mode",
-                          name: "dark",
-                          widget: "object",
-                          fields:
-                            [
-                              {
-                                label: "Background",
-                                name: "background",
-                                widget: "string",
-                              },
-                              {
-                                label: "Color",
-                                name: "color",
-                                widget: "string",
-                              },
-                              {
-                                label: "Primary",
-                                name: "primary",
-                                widget: "string",
-                              },
-                              {
-                                label: "Muted",
-                                name: "muted",
-                                widget: "string",
-                              },
-                            ],
-                        },
-                        {
-                          label: "Fonts",
-                          name: "fonts",
-                          widget: "object",
-                          fields:
-                            [
-                              {
-                                label: "Body Font",
-                                name: "body",
-                                widget: "string",
-                              },
-                              {
-                                label: "Header Font",
-                                name: "header",
-                                widget: "string",
-                              },
-                              {
-                                label: "Mono Font",
-                                name: "mono",
-                                widget: "string",
-                                required: false,
-                              },
-                            ],
-                        },
-                      ],
-                  },
-                ],
-            }
+                      - { label: "Body", name: "body", widget: "string" }
+                      - { label: "Headings", name: "header", widget: "string" }
+                      - { label: "Code", name: "mono", widget: "string", required: false }
+          - label: "Abby Rhynold"
+            name: "abby"
+            widget: "object"
+            collapsed: true
+            fields: *author_fields
+          - label: "Adèsse Brown"
+            name: "adesse"
+            widget: "object"
+            collapsed: true
+            fields: *author_fields
+          - label: "Orion Leidl Wilson"
+            name: "orionlw"
+            widget: "object"
+            collapsed: true
+            fields: *author_fields
+          - label: "Amelia Wheeler"
+            name: "amelia"
+            widget: "object"
+            collapsed: true
+            fields: *author_fields
+          - label: "Nic Leighton"
+            name: "nic"
+            widget: "object"
+            collapsed: true
+            fields: *author_fields
+          - label: "Ewan MacLean"
+            name: "ewan"
+            widget: "object"
+            collapsed: true
+            fields: *author_fields

@@ -1,42 +1,27 @@
-<ol
-	reversed
-	class="postlist"
-	style="--postlist-index: {{ (postslistCounter or postslist.length) + 1 }}"
->
+{#- A list of posts with date, author, a short excerpt and a thumbnail.
+    Set `postslist` before including. #}
+<ol class="postlist" reversed>
 	{%- for post in postslist | reverse %}
-	<li
-		class="postlist-item{% if post.url == url %} postlist-item-active{% endif %}"
-		{%
-		if
-		post.data.author
-		%}data-author="{{ post.data.author }}"
-		{%
-		endif
-		%}
-		{%- if post.data.tags -%}data-tags="{{ post.data.tags | join(',') }}"{%- endif -%}
-		data-year="{{ post.date | date('yyyy') }}"
-	>
-		<a href="{{ post.url }}" class="postlist-link"
-			>{% if post.data.title %}{{ post.data.title }}{% else %}<code>{{
-				post.url
-			}}</code
-			>{% endif %}</a
-		>
-		<time
-			class="postlist-date"
-			datetime="{{ post.date | htmlDateString }}"
-			>{% set parsedDate = post.date | parseCMSDate %}
-			{% if parsedDate %}
-				{{ parsedDate | readableDate("LLLL yyyy") }}
-			{% endif %}</time
-		>&nbsp; {%- if post.data.author -%} {%- set author =
-		authors[post.data.author] -%}
-		<span class="postlist-author">
-			by {% if author and author.name %}{{ author.name }}{% else %}{{
-				post.data.author
-			}}{% endif %}</span
-		>
-		{%- endif -%}
+	{%- set person = authors[post.data.author] %}
+	{%- set thumb = post.inputPath | firstImage(post.data.featuredImage) %}
+	{%- set postDate = post.date | parseCMSDate %}
+	<li class="postlist-item" data-author="{{ post.data.author }}">
+		<div>
+			<a href="{{ post.url }}" class="postlist-link">{{ post.data.title or post.url }}</a>
+			<p class="postlist-meta">
+				{%- if postDate %}<time datetime="{{ post.date | htmlDateString }}">{{ postDate | readableDate("d LLLL yyyy") }}</time>{% endif %}
+				{%- if person %} · {{ person.name }}{% endif %}
+			</p>
+			{%- set summary = post.data.description or (post.templateContent | excerptText(140)) %}
+			{%- if summary | trim %}
+			<p class="postlist-excerpt">{{ summary }}</p>
+			{%- endif %}
+		</div>
+		{%- if thumb %}
+		<a href="{{ post.url }}" class="postlist-thumb" tabindex="-1" aria-hidden="true">
+			<img src="{{ thumb.src }}" alt="" sizes="112px" loading="lazy" decoding="async">
+		</a>
+		{%- endif %}
 	</li>
 	{%- endfor %}
 </ol>

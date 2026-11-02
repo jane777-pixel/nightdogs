@@ -6,14 +6,16 @@ layout: false
 [
 {%- for post in collections.posts | reverse -%}
   {%- if not post.data.draft -%}
+  {%- set text = post.templateContent | excerptText(4000) -%}
   {
-    "url": "{{ post.url | safe }}",
+    "url": {{ post.url | dump | safe }},
     "title": {{ post.data.title | dump | safe }},
-    "author": "{{ post.data.author | safe }}",
-    "date": "{{ post.data.date | dateToIso | safe }}",
-    "tags": {{ post.data.tags | dump | safe }},
-    "excerpt": {{ (post.data.description or post.templateContent | striptags | truncate(200)) | dump | safe }},
-    "content": {{ post.templateContent | striptags | replace('\n', ' ') | replace('\r', ' ') | truncate(500) | dump | safe }}
+    "author": {{ post.data.author | dump | safe }},
+    "authorName": {{ (authors[post.data.author].name or post.data.author) | dump | safe }},
+    "date": {{ post.date | dateToIso | dump | safe }},
+    "tags": {{ (post.data.tags | filterTagList) | dump | safe }},
+    "excerpt": {{ (post.data.description or post.templateContent | excerptText(180)) | dump | safe }},
+    "content": {{ text | dump | safe }}
   }{%- if not loop.last -%},{%- endif -%}
   {%- endif -%}
 {%- endfor -%}

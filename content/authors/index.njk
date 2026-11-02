@@ -1,5 +1,5 @@
 ---
-title: "Authors - nightdogs"
+title: "Authors"
 layout: layouts/base.njk
 permalink: /authors/
 eleventyNavigation:
@@ -104,14 +104,12 @@ eleventyNavigation:
 .card-note {
   font-size: 1.2rem;
   margin: 0 0 1rem 0;
-  opacity: 0.8;
 }
 
 .card-bio {
   font-size: 0.95rem;
   line-height: 1.5;
   margin-bottom: 1.5rem;
-  opacity: 0.9;
 }
 
 .card-stats {
@@ -137,7 +135,6 @@ eleventyNavigation:
 
 .stat-label {
   display: block;
-  opacity: 0.8;
   margin-top: 0.25rem;
 }
 
@@ -193,7 +190,6 @@ eleventyNavigation:
 .overall-stat-label {
   display: block;
   margin-top: 0.5rem;
-  opacity: 0.8;
 }
 
 @media (max-width: 768px) {
@@ -235,7 +231,7 @@ eleventyNavigation:
 
   {% set allBlogPosts = collections.posts %}
   {% set totalPosts = allBlogPosts.length %}
-  {% set totalWords = totalPosts * 450 %}
+  {% set totalWords = allBlogPosts | wordsInPosts %}
 
   <div class="authors-stats">
     <h2>🐾 Our Community</h2>
@@ -263,7 +259,7 @@ eleventyNavigation:
     {% for authorKey, authorData in authors %}
       {% set authorPosts = collections.posts | filterByAuthor(authorKey) %}
       {% set postCount = authorPosts.length %}
-      {% set authorWords = postCount * 450 %}
+      {% set authorWords = authorPosts | wordsInPosts %}
 
       <a href="/authors/{{ authorKey }}/" class="author-card">
         <div class="card-avatar">
@@ -295,7 +291,7 @@ eleventyNavigation:
           <div class="color-swatch" style="background: {{ authorData.theme.dark.primary }};"></div>
         </div>
 
-        <div style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.7;">
+        <div style="margin-top: 1rem; font-size: 0.8rem;">
           {% if authorData.isDogPerson %}🐕{% else %}🐱{% endif %}
           {{ "Dog" if authorData.isDogPerson else "Cat" }} person •
           Click to explore
@@ -321,38 +317,14 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
 
-    // Preview author theme on hover
+    // Preview this author's colours while hovering their card
     card.addEventListener('mouseenter', function() {
       const authorSlug = this.href.split('/authors/')[1].replace('/', '');
-      const authorSelectors = document.querySelectorAll('.author-sync');
-
-      // Temporarily preview this author's theme
-      authorSelectors.forEach(selector => {
-        if (selector.value !== authorSlug) {
-          selector.value = authorSlug;
-          selector.dispatchEvent(new Event('change'));
-        }
-      });
+      if (window.nightdogs) window.nightdogs.previewAuthor(authorSlug);
     });
-  });
-
-  // Restore original theme when not hovering over any card
-  document.addEventListener('mouseover', function(e) {
-    if (!e.target.closest('.author-card')) {
-      // Restore the original author theme after a short delay
-      setTimeout(() => {
-        if (!document.querySelector('.author-card:hover')) {
-          const originalAuthor = localStorage.getItem('author-theme') || 'jane';
-          const authorSelectors = document.querySelectorAll('.author-sync');
-          authorSelectors.forEach(selector => {
-            if (selector.value !== originalAuthor) {
-              selector.value = originalAuthor;
-              selector.dispatchEvent(new Event('change'));
-            }
-          });
-        }
-      }, 100);
-    }
+    card.addEventListener('mouseleave', function() {
+      if (window.nightdogs) window.nightdogs.restoreAuthor();
+    });
   });
 });
 </script>

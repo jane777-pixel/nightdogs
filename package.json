@@ -1,72 +1,54 @@
 {
-	"name": "eleventy-base-blog",
-	"version": "9.0.0",
-	"description": "A starter repository for a blog web site using the Eleventy site generator.",
+	"name": "nightdogs",
+	"version": "2.0.0",
+	"private": true,
+	"description": "nightdogs.xyz — a multi-author blog built with Eleventy",
 	"type": "module",
 	"scripts": {
-		"build": "npm run optimize-images && cross-env ELEVENTY_ENV=production eleventy",
-		"build-dev": "npm run optimize-images && eleventy",
-		"build-fast": "npm run optimize-images && cross-env ELEVENTY_ENV=development eleventy",
+		"build": "cross-env ELEVENTY_ENV=production eleventy",
+		"build-dev": "eleventy",
+		"build-fast": "cross-env ELEVENTY_ENV=development eleventy",
 		"optimize-images": "node scripts/optimize-images.js",
-		"optimize-new-images": "node scripts/optimize-new-images.js",
-		"optimize-recent": "node scripts/optimize-new-images.js --recent",
 		"build-nocolor": "cross-env NODE_DISABLE_COLORS=1 eleventy",
-		"build-ghpages": "eleventy --pathprefix=/eleventy-base-blog/",
 		"start": "eleventy --serve",
-		"start-ghpages": "eleventy --pathprefix=/eleventy-base-blog/ --serve --quiet",
 		"debug": "cross-env DEBUG=Eleventy* eleventy",
 		"debugstart": "cross-env DEBUG=Eleventy* eleventy --serve --quiet",
 		"benchmark": "cross-env DEBUG=Eleventy:Benchmark* eleventy",
 		"test": "node test/run-tests.js",
 		"test:build": "node test/build.test.js",
-		"test:content": "node test/content-validation.test.js",
-		"pretest": "echo 'Running nightdogs.xyz test suite...'",
-		"posttest": "echo 'Tests completed.'"
+		"test:content": "node test/content-validation.test.js"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git://github.com/11ty/eleventy-base-blog.git"
+		"url": "git+https://github.com/jane777-pixel/nightdogs.git"
 	},
 	"author": {
-		"name": "Zach Leatherman",
-		"email": "zachleatherman@gmail.com",
-		"url": "https://zachleat.com/"
+		"name": "Jane Marie Bach",
+		"url": "https://nightdogs.xyz/"
 	},
 	"license": "MIT",
+	"homepage": "https://nightdogs.xyz/",
 	"engines": {
-		"node": ">=18"
-	},
-	"funding": {
-		"type": "opencollective",
-		"url": "https://opencollective.com/11ty"
-	},
-	"bugs": {
-		"url": "https://github.com/11ty/eleventy-base-blog/issues"
-	},
-	"homepage": "https://github.com/11ty/eleventy-base-blog#readme",
-	"devDependencies": {
-		"cross-env": "^7.0.3",
-		"glob": "^11.0.0",
-		"netlify-plugin-cache": "^1.0.3",
-		"prismjs": "^1.30.0",
-		"sharp": "^0.33.5",
-		"zod": "^3.25.67",
-		"zod-validation-error": "^3.5.2"
+		"node": ">=20"
 	},
 	"dependencies": {
-		"@11ty/eleventy": "^3.1.2",
-		"@11ty/eleventy-cache-assets": "^2.3.0",
-		"@11ty/eleventy-fetch": "^5.1.0",
-		"@11ty/eleventy-img": "^6.0.4",
-		"@11ty/eleventy-navigation": "^1.0.4",
-		"@11ty/eleventy-plugin-bundle": "^3.0.6",
-		"@11ty/eleventy-plugin-rss": "^2.0.4",
-		"@11ty/eleventy-plugin-syntaxhighlight": "^5.0.1",
-		"@zachleat/heading-anchors": "^1.0.3",
+		"@11ty/eleventy": "^3.1.7",
+		"@11ty/eleventy-fetch": "^6.0.1",
+		"@11ty/eleventy-img": "^7.1.1",
+		"@11ty/eleventy-navigation": "^1.0.5",
+		"@11ty/eleventy-plugin-rss": "^3.1.0",
+		"@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
+		"@zachleat/heading-anchors": "^1.0.5",
 		"gray-matter": "^4.0.3",
-		"axios": "^1.12.1",
-		"luxon": "^3.6.1",
-		"resend": "^6.0.1",
-		"rss-parser": "^3.13.0"
+		"luxon": "^3.7.2"
+	},
+	"devDependencies": {
+		"cross-env": "^10.1.0",
+		"glob": "^14.0.3",
+		"netlify-plugin-cache": "^1.0.3",
+		"prismjs": "^1.30.0",
+		"sharp": "^0.35.5",
+		"zod": "^3.25.67",
+		"zod-validation-error": "^3.5.2"
 	}
 }

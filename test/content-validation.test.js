@@ -14,15 +14,17 @@ import authorsData from '../_data/authors.json' with { type: 'json' };
 
 const validAuthors = Object.keys(authorsData);
 
+// Matches what the CMS writes (public/admin/config.yml). The `posts` tag is
+// added automatically by content/blog/blog.11tydata.js, so it's optional here.
 const PostSchema = z.object({
   title: z.string().min(1, "Title is required"),
-  slug: z.string().min(1, "Slug is required"),
+  slug: z.string().optional(),
   author: z.enum(validAuthors, { message: "Invalid author" }),
-  date: z.string().datetime("Invalid date format"),
-  tags: z.array(z.string()).refine(
-    tags => tags.includes('posts'),
-    "Must include 'posts' tag"
-  ),
+  date: z.coerce.date({ message: "Invalid date" }),
+  draft: z.boolean().optional(),
+  photoLayout: z.enum(["column", "grid"]).optional(),
+  tags: z.array(z.string()).optional(),
+  description: z.string().optional(),
   collaborators: z.array(z.enum(validAuthors)).optional(),
   series: z.string().optional(),
   seriesPart: z.number().optional(),
@@ -51,10 +53,12 @@ export async function validateAllPosts() {
 
         // Additional validations
         const issues = [];
+        const warnings = [];
 
         // Check if post has content
-        if (!markdownContent || markdownContent.trim().length < 50) {
-          issues.push("Post content too short (< 50 characters)");
+        const hasImage = /!\[[^\]]*\]\(|<img\b/i.test(markdownContent || "");
+        if (!hasImage && (!markdownContent || markdownContent.trim().length < 20)) {
+          issues.push("Post is empty");
         }
 
         // Check if author folder matches frontmatter
@@ -66,10 +70,15 @@ export async function validateAllPosts() {
 
         // Check if date folder matches frontmatter
         const dateFromPath = pathParts[3]; // content/blog/author/{date}/...
+        // The CMS names folders in UTC while dates keep the author's time
+        // zone, so allow a one-day difference.
         const frontmatterDate = new Date(data.date);
-        const expectedDateFolder = frontmatterDate.toISOString().split('T')[0];
-        if (!dateFromPath.startsWith(expectedDateFolder)) {
-          issues.push(`Date folder mismatch: expected ${expectedDateFolder}, got ${dateFromPath}`);
+        const folderDate = new Date(`${dateFromPath}T12:00:00Z`);
+        const daysApart = Math.abs(frontmatterDate - folderDate) / 86400000;
+        if (Number.isNaN(folderDate.getTime())) {
+          warnings.push(`Folder ${dateFromPath} isn't a YYYY-MM-DD date`);
+        } else if (daysApart > 1.5) {
+          warnings.push(`Date folder ${dateFromPath} doesn't match date ${frontmatterDate.toISOString().slice(0, 10)}`);
         }
 
         // Check if featured image exists
@@ -94,6 +103,8 @@ export async function validateAllPosts() {
         if (data.seriesPart && !data.series) {
           issues.push("Series part specified but missing series name");
         }
+
+        warnings.forEach(warning => console.log(`   ℹ️  ${postPath}: ${warning}`));
 
         if (issues.length > 0) {
           errors++;

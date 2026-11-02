@@ -1,302 +1,183 @@
-/**
- * Simple client-side search for nightdogs.xyz
- * Minimal implementation to avoid conflicts with existing functionality
- */
-
+// Site search. The index (/search-index.json) is only downloaded the first
+// time someone opens search. Open with the Search button, "/" or Ctrl/⌘+K.
 (function () {
-	"use strict";
+	const triggers = document.querySelectorAll("[data-search-trigger]");
+	if (!triggers.length || typeof HTMLDialogElement === "undefined") return;
 
-	let searchData = [];
-	let isInitialized = false;
+	let index = null;
+	let opener = null;
 
-	// Simple search functionality
-	class SimpleSearch {
-		constructor() {
-			this.searchInput = null;
-			this.resultsContainer = null;
-			this.overlay = null;
-			this.currentQuery = "";
-			this.isOpen = false;
-		}
+	const dialog = document.createElement("dialog");
+	dialog.className = "search-dialog";
+	dialog.setAttribute("aria-label", "Search posts");
+	dialog.innerHTML = `
+		<div class="search-header">
+			<label>
+				<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+				<span class="visually-hidden">Search posts</span>
+				<input id="search-input" type="search" autocomplete="off" spellcheck="false"
+					placeholder="Search posts, authors, tags…" aria-controls="search-results">
+			</label>
+			<button type="button" class="search-close" aria-label="Close search">✕</button>
+		</div>
+		<p class="search-status" role="status" aria-live="polite"></p>
+		<ul id="search-results" class="search-results"></ul>
+		<div class="search-footer" aria-hidden="true">
+			<span><kbd>↑</kbd> <kbd>↓</kbd> move</span>
+			<span><kbd>Enter</kbd> open</span>
+			<span><kbd>Esc</kbd> close</span>
+		</div>`;
+	document.body.append(dialog);
 
-		async init() {
-			// Load search data
-			await this.loadSearchData();
+	const input = dialog.querySelector("#search-input");
+	const list = dialog.querySelector("#search-results");
+	const status = dialog.querySelector(".search-status");
 
-			// Set up UI
-			this.setupUI();
-			this.bindEvents();
-
-			isInitialized = true;
-		}
-
-		async loadSearchData() {
-			try {
-				const response = await fetch("/search-index.json");
-				if (response.ok) {
-					searchData = await response.json();
-				}
-			} catch (error) {
-				console.warn("Could not load search data:", error);
-				searchData = [];
-			}
-		}
-
-		setupUI() {
-			// Create search overlay if it doesn't exist
-			if (!document.getElementById("search-overlay")) {
-				this.createSearchOverlay();
-			}
-
-			this.searchInput = document.getElementById("search-input");
-			this.resultsContainer = document.getElementById("search-results");
-			this.overlay = document.getElementById("search-overlay");
-		}
-
-		createSearchOverlay() {
-			const overlay = document.createElement("div");
-			overlay.id = "search-overlay";
-			overlay.className = "search-overlay";
-			overlay.innerHTML = `
-        <div class="search-modal">
-          <div class="search-header">
-            <input type="search" id="search-input" placeholder="Search posts..." autocomplete="off">
-            <button class="search-close" aria-label="Close search">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-              </svg>
-            </button>
-          </div>
-          <div id="search-results" class="search-results"></div>
-          <div class="search-footer">
-            <kbd>↑↓</kbd> Navigate <kbd>Enter</kbd> Select <kbd>Esc</kbd> Close
-          </div>
-        </div>
-      `;
-			document.body.appendChild(overlay);
-		}
-
-		bindEvents() {
-			// Search trigger buttons
-			const triggers = document.querySelectorAll("[data-search-trigger]");
-			triggers.forEach((trigger) => {
-				trigger.addEventListener("click", (e) => {
-					e.preventDefault();
-					this.open();
-				});
-			});
-
-			// Keyboard shortcut (Ctrl/Cmd + K)
-			document.addEventListener("keydown", (e) => {
-				if ((e.ctrlKey || e.metaKey) && e.key === "k") {
-					e.preventDefault();
-					this.open();
-				}
-				if (e.key === "Escape" && this.isOpen) {
-					this.close();
-				}
-			});
-
-			if (this.searchInput) {
-				this.searchInput.addEventListener("input", (e) => {
-					this.search(e.target.value);
-				});
-			}
-
-			if (this.overlay) {
-				this.overlay.addEventListener("click", (e) => {
-					if (e.target === this.overlay) {
-						this.close();
-					}
-				});
-
-				const closeBtn = this.overlay.querySelector(".search-close");
-				if (closeBtn) {
-					closeBtn.addEventListener("click", () => this.close());
-				}
-			}
-		}
-
-		open() {
-			if (!this.overlay) return;
-
-			this.overlay.classList.add("active");
-			this.isOpen = true;
-
-			if (this.searchInput) {
-				this.searchInput.focus();
-				this.searchInput.value = "";
-			}
-
-			if (this.resultsContainer) {
-				this.resultsContainer.innerHTML = "";
-			}
-
-			document.body.style.overflow = "hidden";
-		}
-
-		close() {
-			if (!this.overlay) return;
-
-			this.overlay.classList.remove("active");
-			this.isOpen = false;
-			document.body.style.overflow = "";
-			this.currentQuery = "";
-		}
-
-		search(query) {
-			this.currentQuery = query.trim().toLowerCase();
-
-			if (this.currentQuery.length < 2) {
-				this.displayResults([]);
-				return;
-			}
-
-			const results = this.performSearch(this.currentQuery);
-			this.displayResults(results);
-		}
-
-		performSearch(query) {
-			if (!searchData || searchData.length === 0) return [];
-
-			const matches = searchData.filter((post) => {
-				const title = post.title.toLowerCase();
-				const content = (post.content || "").toLowerCase();
-				const author = post.author.toLowerCase();
-				const tags = post.tags.join(" ").toLowerCase();
-
-				return (
-					title.includes(query) ||
-					content.includes(query) ||
-					author.includes(query) ||
-					tags.includes(query)
-				);
-			});
-
-			// Sort by relevance (title matches first)
-			return matches
-				.sort((a, b) => {
-					const aTitle = a.title.toLowerCase();
-					const bTitle = b.title.toLowerCase();
-
-					if (aTitle.includes(query) && !bTitle.includes(query)) return -1;
-					if (!aTitle.includes(query) && bTitle.includes(query)) return 1;
-
-					return new Date(b.date) - new Date(a.date);
-				})
-				.slice(0, 5);
-		}
-
-		displayResults(results) {
-			if (!this.resultsContainer) return;
-
-			if (results.length === 0) {
-				this.resultsContainer.innerHTML =
-					'<div class="no-results">No posts found</div>';
-				return;
-			}
-
-			const html = results
-				.map((post) => {
-					const date = new Date(post.date).toLocaleDateString();
-					const title = this.highlightText(post.title, this.currentQuery);
-
-					return `
-          <div class="search-result" onclick="window.location.href='${post.url}'">
-            <h3 class="result-title">
-              <a href="${post.url}">${title}</a>
-            </h3>
-            <div class="result-meta">
-              <span class="result-author">${post.author}</span>
-              <span class="result-date">${date}</span>
-            </div>
-          </div>
-        `;
-				})
-				.join("");
-
-			this.resultsContainer.innerHTML = html;
-		}
-
-		highlightText(text, query) {
-			if (!query) return text;
-
-			const regex = new RegExp(
-				`(${query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`,
-				"gi",
-			);
-			return text.replace(regex, "<mark>$1</mark>");
-		}
-	}
-
-	// Error boundary for search functionality
-	function handleSearchError(error, context = "search") {
-		console.warn(`[Search Error] ${context}:`, error);
-
-		// Try to gracefully degrade - hide search UI if it breaks
-		const overlay = document.getElementById("search-overlay");
-		if (overlay) {
-			overlay.style.display = "none";
-		}
-
-		// Hide search triggers to prevent further errors
-		const triggers = document.querySelectorAll("[data-search-trigger]");
-		triggers.forEach((trigger) => {
-			trigger.style.display = "none";
-		});
-
-		// Optional: Show fallback message
-		const fallback = document.createElement("div");
-		fallback.className = "search-error-fallback";
-		fallback.innerHTML =
-			"<p><small>Search temporarily unavailable. Try refreshing the page.</small></p>";
-		fallback.style.display = "none"; // Hidden by default, can be shown if needed
-		document.body.appendChild(fallback);
-	}
-
-	// Graceful degradation - check for required features
-	function checkFeatureSupport() {
-		const required = {
-			fetch: typeof fetch !== "undefined",
-			localStorage:
-				typeof localStorage !== "undefined" && localStorage !== null,
-			querySelector: typeof document.querySelector !== "undefined",
-			addEventListener: typeof document.addEventListener !== "undefined",
-		};
-
-		const missing = Object.keys(required).filter(
-			(feature) => !required[feature],
-		);
-		if (missing.length > 0) {
-			console.warn("[Search] Missing required features:", missing);
-			return false;
-		}
-		return true;
-	}
-
-	// Initialize when DOM is ready
-	document.addEventListener("DOMContentLoaded", function () {
+	async function loadIndex() {
+		if (index) return index;
+		status.textContent = "Loading…";
 		try {
-			// Check if browser supports required features
-			if (!checkFeatureSupport()) {
-				handleSearchError("Browser lacks required features", "feature-check");
-				return;
-			}
+			const response = await fetch("/search-index.json");
+			index = response.ok ? await response.json() : [];
+		} catch {
+			index = [];
+		}
+		status.textContent = "";
+		return index;
+	}
 
-			// Only initialize if search triggers exist
-			if (document.querySelector("[data-search-trigger]")) {
-				const search = new SimpleSearch();
-				search
-					.init()
-					.then(() => {
-						window.nightdogsSearch = search;
-					})
-					.catch((error) => {
-						handleSearchError(error, "initialization");
-					});
-			}
-		} catch (error) {
-			handleSearchError(error, "dom-ready");
+	function escapeHtml(text) {
+		return String(text).replace(
+			/[&<>"']/g,
+			(c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c],
+		);
+	}
+
+	function highlight(text, words) {
+		let html = escapeHtml(text);
+		for (const word of words) {
+			const safe = escapeHtml(word).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+			html = html.replace(new RegExp(`(${safe})`, "gi"), "<mark>$1</mark>");
+		}
+		return html;
+	}
+
+	// Short excerpt around the first match in the post text
+	function snippet(post, words) {
+		const text = post.content || "";
+		const lower = text.toLowerCase();
+		const at = words.map((w) => lower.indexOf(w)).filter((i) => i >= 0).sort((a, b) => a - b)[0];
+		if (at === undefined) return post.excerpt || "";
+		const start = Math.max(0, at - 60);
+		return (start > 0 ? "…" : "") + text.slice(start, start + 170).trim() + "…";
+	}
+
+	function score(post, words) {
+		const title = post.title.toLowerCase();
+		const meta = `${post.authorName} ${post.author} ${(post.tags || []).join(" ")}`.toLowerCase();
+		const body = (post.content || "").toLowerCase();
+		let total = 0;
+		for (const word of words) {
+			if (title.includes(word)) total += 10;
+			else if (meta.includes(word)) total += 5;
+			else if (body.includes(word)) total += 1;
+			else return 0; // every word has to match somewhere
+		}
+		return total;
+	}
+
+	function render(query) {
+		const words = query.toLowerCase().split(/\s+/).filter((w) => w.length > 1);
+		list.innerHTML = "";
+		if (!words.length) {
+			status.textContent = "";
+			return;
+		}
+		const results = (index || [])
+			.map((post) => ({ post, score: score(post, words) }))
+			.filter((r) => r.score > 0)
+			.sort((a, b) => b.score - a.score || new Date(b.post.date) - new Date(a.post.date))
+			.slice(0, 12);
+
+		status.textContent = results.length
+			? `${results.length} post${results.length === 1 ? "" : "s"} found`
+			: `Nothing found for “${query}”`;
+
+		list.innerHTML = results
+			.map(({ post }) => {
+				const date = new Date(post.date).toLocaleDateString(undefined, {
+					year: "numeric",
+					month: "short",
+					day: "numeric",
+				});
+				return `<li class="search-result"><a href="${escapeHtml(post.url)}">
+					<span class="result-title">${highlight(post.title, words)}</span>
+					<span class="result-meta">${escapeHtml(post.authorName)} · ${date}</span>
+					<span class="result-excerpt">${highlight(snippet(post, words), words)}</span>
+				</a></li>`;
+			})
+			.join("");
+	}
+
+	async function open(from) {
+		opener = from || document.activeElement;
+		dialog.showModal();
+		input.focus();
+		input.select();
+		await loadIndex();
+		render(input.value);
+	}
+
+	function close() {
+		dialog.close();
+	}
+
+	dialog.addEventListener("close", () => {
+		if (opener && typeof opener.focus === "function") opener.focus();
+	});
+
+	triggers.forEach((trigger) =>
+		trigger.addEventListener("click", (event) => {
+			event.preventDefault();
+			open(trigger);
+		}),
+	);
+
+	let timer;
+	input.addEventListener("input", () => {
+		clearTimeout(timer);
+		timer = setTimeout(() => render(input.value), 120);
+	});
+
+	dialog.querySelector(".search-close").addEventListener("click", close);
+	dialog.addEventListener("click", (event) => {
+		if (event.target === dialog) close();
+	});
+
+	// Arrow keys move between the search box and results
+	dialog.addEventListener("keydown", (event) => {
+		const links = Array.from(list.querySelectorAll("a"));
+		const current = links.indexOf(document.activeElement);
+		if (event.key === "ArrowDown") {
+			event.preventDefault();
+			(links[current + 1] || links[0])?.focus();
+		} else if (event.key === "ArrowUp") {
+			event.preventDefault();
+			if (current <= 0) input.focus();
+			else links[current - 1].focus();
+		} else if (event.key === "Enter" && document.activeElement === input && links[0]) {
+			event.preventDefault();
+			links[0].click();
+		}
+	});
+
+	// Keyboard shortcuts to open search
+	document.addEventListener("keydown", (event) => {
+		if (dialog.open) return;
+		const typing = event.target.closest?.("input, textarea, select, [contenteditable]");
+		if ((event.key === "/" && !typing) || ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k")) {
+			event.preventDefault();
+			open();
 		}
 	});
 })();

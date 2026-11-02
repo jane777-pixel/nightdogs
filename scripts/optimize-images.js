@@ -1,121 +1,74 @@
 #!/usr/bin/env node
+// Shrinks oversized photos in content/blog so the repo and builds stay lean.
+// Safe to run repeatedly: images that already fit are left untouched, so
+// photos don't lose quality from being re-compressed on every run.
+//
+// Usage: node scripts/optimize-images.js [files...]
+//   With no arguments, scans every image under content/blog.
 
-import sharp from 'sharp';
-import { glob } from 'glob';
-import path from 'path';
-import fs from 'fs/promises';
+import sharp from "sharp";
+import { glob } from "glob";
+import path from "node:path";
+import fs from "node:fs/promises";
 
-const MAX_WIDTH = 2048;
-const MAX_HEIGHT = 2048;
-const JPEG_QUALITY = 85;
-const PNG_QUALITY = 90;
+const MAX_SIZE = 2400; // longest edge, in pixels
+const MAX_BYTES = 1.5 * 1024 * 1024; // re-encode anything bigger than this
+const JPEG_QUALITY = 82;
+
+const SUPPORTED = new Set([".jpg", ".jpeg", ".png", ".webp"]);
 
 async function optimizeImage(inputPath) {
-    try {
-        const stats = await fs.stat(inputPath);
-        const fileSizeKB = Math.round(stats.size / 1024);
+	const ext = path.extname(inputPath).toLowerCase();
+	if (!SUPPORTED.has(ext)) return false;
 
-        // Skip if file is already small enough (under 500KB)
-        if (fileSizeKB < 500) {
-            console.log(`⏭️  Skipping ${inputPath} (${fileSizeKB}KB - already optimized)`);
-            return;
-        }
+	const { size } = await fs.stat(inputPath);
+	const metadata = await sharp(inputPath).metadata();
+	// EXIF orientations 5-8 mean width/height are swapped on display
+	const rotated = (metadata.orientation ?? 1) >= 5;
+	const width = rotated ? metadata.height : metadata.width;
+	const height = rotated ? metadata.width : metadata.height;
+	const tooBig = Math.max(width, height) > MAX_SIZE;
 
-        console.log(`🔄 Processing ${inputPath} (${fileSizeKB}KB)`);
+	if (!tooBig && size <= MAX_BYTES) return false;
 
-        const ext = path.extname(inputPath).toLowerCase();
-        const tempPath = inputPath.replace(ext, `.temp${ext}`);
+	// .rotate() bakes the EXIF orientation into the pixels so phone photos
+	// don't end up sideways once the metadata is stripped.
+	let pipeline = sharp(inputPath).rotate();
+	if (tooBig) {
+		pipeline = pipeline.resize(MAX_SIZE, MAX_SIZE, { fit: "inside", withoutEnlargement: true });
+	}
+	if (ext === ".png") {
+		pipeline = pipeline.png({ compressionLevel: 9, palette: false });
+	} else if (ext === ".webp") {
+		pipeline = pipeline.webp({ quality: JPEG_QUALITY });
+	} else {
+		pipeline = pipeline.jpeg({ quality: JPEG_QUALITY, mozjpeg: true, progressive: true });
+	}
 
-        const image = sharp(inputPath);
-        const metadata = await image.metadata();
+	const output = await pipeline.toBuffer();
+	if (output.length >= size && !tooBig) return false;
 
-        // Check if image needs resizing
-        const needsResize = metadata.width > MAX_WIDTH || metadata.height > MAX_HEIGHT;
-
-        let pipeline = image;
-
-        if (needsResize) {
-            pipeline = pipeline.resize(MAX_WIDTH, MAX_HEIGHT, {
-                fit: 'inside',
-                withoutEnlargement: true
-            });
-        }
-
-        // Apply format-specific optimizations
-        if (ext === '.jpg' || ext === '.jpeg') {
-            pipeline = pipeline.jpeg({
-                quality: JPEG_QUALITY,
-                mozjpeg: true,
-                progressive: true
-            });
-        } else if (ext === '.png') {
-            pipeline = pipeline.png({
-                quality: PNG_QUALITY,
-                compressionLevel: 9,
-                progressive: true
-            });
-        } else if (ext === '.webp') {
-            pipeline = pipeline.webp({
-                quality: JPEG_QUALITY,
-                effort: 6
-            });
-        }
-
-        // Save to temp file first
-        await pipeline.toFile(tempPath);
-
-        // Check if optimization was effective
-        const newStats = await fs.stat(tempPath);
-        const newFileSizeKB = Math.round(newStats.size / 1024);
-        const savings = fileSizeKB - newFileSizeKB;
-        const savingsPercent = Math.round((savings / fileSizeKB) * 100);
-
-        if (savings > 0) {
-            // Replace original with optimized version
-            await fs.rename(tempPath, inputPath);
-            console.log(`✅ Optimized ${path.basename(inputPath)}: ${fileSizeKB}KB → ${newFileSizeKB}KB (${savingsPercent}% savings)`);
-        } else {
-            // Remove temp file if no improvement
-            await fs.unlink(tempPath);
-            console.log(`⏭️  No improvement for ${path.basename(inputPath)}`);
-        }
-
-    } catch (error) {
-        console.error(`❌ Error processing ${inputPath}:`, error.message);
-    }
+	await fs.writeFile(inputPath, output);
+	const kb = (n) => Math.round(n / 1024);
+	console.log(`✅ ${inputPath}: ${kb(size)}KB → ${kb(output.length)}KB`);
+	return true;
 }
 
 async function main() {
-    console.log('🚀 Starting image optimization...\n');
+	const args = process.argv.slice(2);
+	const files = args.length
+		? args
+		: await glob("content/blog/**/*.{jpg,jpeg,png,webp}", { nocase: true });
 
-    // Find all images in content/blog
-    const imagePatterns = [
-        'content/blog/**/*.jpg',
-        'content/blog/**/*.jpeg',
-        'content/blog/**/*.png',
-        'content/blog/**/*.webp'
-    ];
-
-    const allImages = [];
-    for (const pattern of imagePatterns) {
-        const files = await glob(pattern);
-        allImages.push(...files);
-    }
-
-    if (allImages.length === 0) {
-        console.log('No images found to optimize.');
-        return;
-    }
-
-    console.log(`Found ${allImages.length} images to process\n`);
-
-    // Process images one by one to avoid memory issues
-    for (const imagePath of allImages) {
-        await optimizeImage(imagePath);
-    }
-
-    console.log('\n✨ Image optimization complete!');
-    console.log('\n💡 Pro tip: Run this script whenever you add new large images to your blog posts.');
+	let changed = 0;
+	for (const file of files) {
+		try {
+			if (await optimizeImage(file)) changed++;
+		} catch (error) {
+			console.error(`❌ ${file}: ${error.message}`);
+		}
+	}
+	console.log(`Checked ${files.length} image(s), optimized ${changed}.`);
 }
 
-main().catch(console.error);
+main();

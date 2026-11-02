@@ -63,7 +63,7 @@ anyway, I also wanted to show you my favourite barn cat. He has a different name
 this is Jughead, but I call him thumbs due to his massive thumbs. he is known for his terrific purr. 
 
 <audio controls>
-  <source src="/blog/jane/2025-06-30/Fat barn cat purring.m4a" type="audio/mpeg">
+  <source src="/blog/jane/2025-06-30/fat-barn-cat-purring.m4a" type="audio/mp4">
   Your browser does not support the audio element.
 </audio>
 <img src="./thumbs.png" alt="thumbs" loading="lazy">

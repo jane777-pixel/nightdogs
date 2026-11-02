@@ -1,6 +1,16 @@
 import { DateTime } from "luxon";
+import fs from "node:fs";
 
 export default function (eleventyConfig) {
+	// Turn a site-relative URL into a full one, e.g. for link previews
+	eleventyConfig.addFilter("absoluteUrl", (url, base) => {
+		try {
+			return new URL(url, base).href;
+		} catch {
+			return url;
+		}
+	});
+
 	// Reading time estimation filter
 	eleventyConfig.addFilter("readingTime", function (content) {
 		if (!content || typeof content !== "string") {
@@ -217,7 +227,7 @@ export default function (eleventyConfig) {
 	});
 
 	eleventyConfig.addFilter("sortAlphabetically", (strings) =>
-		(strings || []).sort((b, a) => b.localeCompare(a)),
+		[...(strings || [])].sort((a, b) => a.localeCompare(b)),
 	);
 
 	// Webmentions
@@ -228,11 +238,9 @@ export default function (eleventyConfig) {
 				.replace(/\/+$/, "") // remove trailing slash(es)
 				.replace(/\/index$/, ""); // treat /foo/ and /foo/index as same
 		const normUrl = normalize(url);
-		console.log("Webmentions DEBUG: normUrl =", normUrl);
 		return mentions.filter((m) => {
 			if (!m.target) return false;
 			const targetNorm = normalize(m.target);
-			console.log("Webmentions DEBUG: comparing", targetNorm, "vs", normUrl);
 			return (
 				targetNorm === normUrl ||
 				targetNorm === normUrl.replace(/\/$/, "") ||
@@ -305,6 +313,54 @@ export default function (eleventyConfig) {
 		if (typeof num !== "number") return num;
 		return num.toLocaleString();
 	});
+
+	// Plain-text summary of a post's HTML: skips photos and captions, decodes
+	// entities, collapses whitespace and cuts at a word boundary.
+	eleventyConfig.addFilter("excerptText", (html, length = 160) => {
+		if (!html || typeof html !== "string") return "";
+		const text = html
+			.replace(/<(figure|figcaption|script|style|audio|video|picture)[\s\S]*?<\/\1>/gi, " ")
+			.replace(/<[^>]+>/g, " ")
+			.replace(/&nbsp;/g, " ")
+			.replace(/&amp;/g, "&")
+			.replace(/&quot;/g, '"')
+			.replace(/&#0?39;|&apos;/g, "'")
+			.replace(/&lt;/g, "<")
+			.replace(/&gt;/g, ">")
+			.replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
+			.replace(/\s+/g, " ")
+			.trim();
+		if (text.length <= length) return text;
+		const cut = text.slice(0, length);
+		return cut.slice(0, Math.max(cut.lastIndexOf(" "), length * 0.6)).replace(/[\s,.;:!-]+$/, "") + "…";
+	});
+
+	// Real word count of a list of posts, read from their Markdown files
+	const wordCache = new Map();
+	eleventyConfig.addFilter("wordsInPosts", (posts) => {
+		return (posts || []).reduce((sum, post) => {
+			const file = post.inputPath;
+			if (!wordCache.has(file)) {
+				let words = 0;
+				try {
+					words = fs
+						.readFileSync(file, "utf8")
+						.replace(/^---[\s\S]*?\n---/, "")
+						.replace(/!\[[^\]]*\]\([^)]*\)/g, " ")
+						.replace(/<[^>]+>/g, " ")
+						.split(/\s+/)
+						.filter((word) => /\w/.test(word)).length;
+				} catch {
+					/* ignore */
+				}
+				wordCache.set(file, words);
+			}
+			return sum + wordCache.get(file);
+		}, 0);
+	});
+
+	// "Jane Marie Bach" → "Jane"
+	eleventyConfig.addFilter("firstName", (name) => String(name || "").split(/\s+/)[0]);
 
 	// Get first character
 	eleventyConfig.addFilter("first", (str) => {

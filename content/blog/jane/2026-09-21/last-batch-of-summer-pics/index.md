@@ -3,6 +3,7 @@ title: last batch of summer pics
 slug: summerpics
 date: 2026-09-20T21:39:00.000-03:00
 author: jane
+photoLayout: grid
 tags:
   - pictures
   - posts
@@ -21,7 +22,7 @@ tags:
 
 ![](img_5383.jpg "rainbow in new minas!")
 
-![]()
+![](img_5403.jpg)
 
 ![](img_5431.jpg "office")
 
@@ -53,7 +54,7 @@ tags:
 
 ![](p1070688.jpg "cute community art project at grand pré museum")
 
-![]()
+![](p1070693-copy.jpg)
 
 ![](p1070702.jpg "nana looking at sunflowers")
 
