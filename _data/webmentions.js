@@ -1,4 +1,3 @@
-import axios from "axios";
 import EleventyFetch from "@11ty/eleventy-fetch";
 
 // Netlify injects env vars automatically
@@ -30,7 +29,6 @@ export default async function () {
 				},
 			},
 		});
-		console.log("Webmention API response:", response);
 
 		// Adjust parsing: use links array from API response
 		let mentions = [];

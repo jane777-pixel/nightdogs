@@ -1,40 +1,49 @@
 [build]
 publish = "_site"
-command = "npm ci && npm run build-fast"
+command = "npm run build"
 
 [build.environment]
 NODE_VERSION = "22"
-ELEVENTY_ENV = "development"
-# Skip installing optional dependencies for faster builds
-NPM_FLAGS = "--omit=optional"
 URL = "https://nightdogs.xyz"
 
+# Keep generated images and fetched data between builds so only new photos
+# are processed on each deploy.
 [[plugins]]
 package = "netlify-plugin-cache"
 
 [plugins.inputs]
-paths = [".cache"]
+paths = [".cache", "_site/img"]
+
+# Old listing pages now live on /explore/
+[[redirects]]
+from = "/blog/"
+to = "/explore/"
+status = 301
 
 [[redirects]]
-from = "/admin/*"
-to = "/admin/index.html"
-status = 200
+from = "/tags/"
+to = "/explore/"
+status = 301
 
-# Security headers for admin pages
-[[headers]]
-for = "/admin/*"
-[headers.values]
-X-Frame-Options = "DENY"
-X-XSS-Protection = "1; mode=block"
-X-Content-Type-Options = "nosniff"
-Referrer-Policy = "strict-origin-when-cross-origin"
-
-
+# Fediverse (Bridgy Fed)
 [[redirects]]
 from = "/.well-known/host-meta*"
 to = "https://fed.brid.gy/.well-known/host-meta:splat"
 status = 302
+
 [[redirects]]
 from = "/.well-known/webfinger*"
 to = "https://fed.brid.gy/.well-known/webfinger"
 status = 302
+
+[[headers]]
+for = "/*"
+[headers.values]
+X-Content-Type-Options = "nosniff"
+Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+for = "/admin/*"
+[headers.values]
+X-Frame-Options = "DENY"
+Cache-Control = "no-cache"

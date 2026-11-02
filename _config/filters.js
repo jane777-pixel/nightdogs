@@ -217,7 +217,7 @@ export default function (eleventyConfig) {
 	});
 
 	eleventyConfig.addFilter("sortAlphabetically", (strings) =>
-		(strings || []).sort((b, a) => b.localeCompare(a)),
+		[...(strings || [])].sort((a, b) => a.localeCompare(b)),
 	);
 
 	// Webmentions
@@ -228,11 +228,9 @@ export default function (eleventyConfig) {
 				.replace(/\/+$/, "") // remove trailing slash(es)
 				.replace(/\/index$/, ""); // treat /foo/ and /foo/index as same
 		const normUrl = normalize(url);
-		console.log("Webmentions DEBUG: normUrl =", normUrl);
 		return mentions.filter((m) => {
 			if (!m.target) return false;
 			const targetNorm = normalize(m.target);
-			console.log("Webmentions DEBUG: comparing", targetNorm, "vs", normUrl);
 			return (
 				targetNorm === normUrl ||
 				targetNorm === normUrl.replace(/\/$/, "") ||
