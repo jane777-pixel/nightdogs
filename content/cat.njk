@@ -84,13 +84,13 @@ const eleventyNavigation = {
   margin-bottom: 0.25rem;
 }
 
-.team-stat.current-team .stat-number {
+.team-stat.current-team .stat-number,
+.team-stat.current-team h4 {
   color: var(--background-color);
 }
 
 .stat-label {
   font-size: 1rem;
-  opacity: 0.9;
 }
 
 .animal-display {
@@ -369,13 +369,13 @@ document.addEventListener('DOMContentLoaded', function() {
     if (currentForceMode) {
       elements.preference.innerHTML = `
         You're currently viewing <strong>${currentForceMode}s</strong> regardless of author preference.
-        <br><small style="opacity: 0.7;">Switch back to see ${authorData?.name}'s natural preference!</small>
+        <br><small>Switch back to see ${authorData?.name}'s natural preference!</small>
       `;
     } else {
       const naturalPreference = authorData?.isDogPerson ? 'dogs' : 'cats';
       elements.preference.innerHTML = `
         ${authorData?.name} is naturally a <strong>${naturalPreference}</strong> person ${authorData?.note || ''}
-        <br><small style="opacity: 0.7;">The page automatically shows ${naturalPreference} based on their preference!</small>
+        <br><small>The page automatically shows ${naturalPreference} based on their preference!</small>
       `;
     }
 
@@ -491,7 +491,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Add keyboard shortcut help
   const shortcuts = document.createElement('div');
   shortcuts.innerHTML = `
-    <div style="position: fixed; bottom: 1rem; right: 1rem; background: var(--background-color); border: 1px solid var(--primary); border-radius: 8px; padding: 1rem; font-size: 0.8rem; opacity: 0.7; max-width: 200px;">
+    <div style="position: fixed; bottom: 1rem; right: 1rem; background: var(--background-color); border: 1px solid var(--primary); border-radius: 8px; padding: 1rem; font-size: 0.8rem; max-width: 200px;">
       <strong>Keyboard Shortcuts:</strong><br>
       <kbd>Space/N</kbd> - New animal<br>
       <kbd>S</kbd> - Switch teams<br>

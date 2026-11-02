@@ -1,3 +1,4 @@
+import fs from "node:fs";
 export default class AuthorPages {
 	data() {
 		return {
@@ -10,7 +11,7 @@ export default class AuthorPages {
 			permalink: (data) => `/authors/${data.authorKey}/`,
 			eleventyComputed: {
 				title: (data) =>
-					`${data.authors[data.authorKey].name} - Author Profile`,
+					data.authors[data.authorKey].name,
 				description: (data) =>
 					`Posts and profile for ${data.authors[data.authorKey].name}`,
 			},
@@ -23,8 +24,9 @@ export default class AuthorPages {
 		const authorPosts = collections.posts.filter(
 			(post) => post.data.author === authorKey,
 		);
-		const totalWords = authorPosts.length * 450;
-		const totalReadingTime = Math.round(totalWords / 200);
+		const wordsIn = (post) => this.countWords(post.inputPath);
+		const totalWords = authorPosts.reduce((sum, post) => sum + wordsIn(post), 0);
+		const totalReadingTime = Math.max(1, Math.ceil(totalWords / 200));
 
 		return `
 <style>
@@ -220,24 +222,10 @@ export default class AuthorPages {
   margin-bottom: 1rem;
 }
 
-.post-tag {
-  background: var(--primary);
-  color: var(--background-color);
-  padding: 0.2rem 0.6rem;
-  border-radius: 12px;
-  font-size: 0.8rem;
-  text-decoration: none;
-  transition: opacity 0.2s ease;
-}
-
-.post-tag:hover {
-  opacity: 0.8;
-}
 
 .post-excerpt {
   color: var(--color);
   line-height: 1.5;
-  opacity: 0.9;
 }
 
 .reading-time {
@@ -386,7 +374,7 @@ export default class AuthorPages {
               </span>
               <span class="reading-time">
                 <span aria-hidden="true">⏱️</span>
-                Estimated ${Math.round(450 / 200)} min read
+                ${Math.max(1, Math.ceil(wordsIn(post) / 200))} min read
               </span>
             </div>
 
@@ -444,35 +432,24 @@ export default class AuthorPages {
   </div>
 </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  // Add animation to post cards
-  const postCards = document.querySelectorAll('.post-card');
-  postCards.forEach((card, index) => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(20px)';
 
-    setTimeout(() => {
-      card.style.transition = 'all 0.4s ease';
-      card.style.opacity = '1';
-      card.style.transform = 'translateY(0)';
-    }, index * 100);
-  });
-
-  // Analytics tracking
-  if (window.analytics) {
-    window.analytics.track('author_profile_view', {
-      author: '${authorKey}',
-      post_count: ${authorPosts.length},
-      total_words: ${totalWords}
-    });
-  }
-});
-</script>
     `;
 	}
 
 	// Helper methods
+	countWords(inputPath) {
+		try {
+			const body = fs
+				.readFileSync(inputPath, "utf8")
+				.replace(/^---[\s\S]*?\n---/, "")
+				.replace(/!\[[^\]]*\]\([^)]*\)/g, " ")
+				.replace(/<[^>]+>/g, " ");
+			return body.split(/\s+/).filter((word) => /\w/.test(word)).length;
+		} catch {
+			return 0;
+		}
+	}
+
 	filterTagList(tags) {
 		return (tags || []).filter((tag) => !["all", "posts"].includes(tag));
 	}

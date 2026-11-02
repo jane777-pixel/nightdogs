@@ -1,7 +1,7 @@
 {
 	"name": "nightdogs",
 	"short_name": "nightdogs",
-	"description": "A blog by a few friends: music, art, cats, horses, swimming and life.",
+	"description": "Nightdogs are hotdogs that you eat in the middle of the night",
 	"start_url": "/",
 	"scope": "/",
 	"display": "standalone",

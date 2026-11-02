@@ -4,32 +4,14 @@ const eleventyNavigation = {
 	order: 1
 };
 
-const numberOfLatestPostsToShow = 5;
+const numberOfLatestPostsToShow = 8;
 ---
-
-{% set postsCount = collections.posts | length %} {% set latestPostsCount =
-postsCount | min(numberOfLatestPostsToShow) %}
-<h1>
-	Latest {{ latestPostsCount }} Post{% if latestPostsCount != 1 %}s{% endif %}
-</h1>
-
+<h1 class="visually-hidden">nightdogs</h1>
+<h2>Latest posts</h2>
 {% set postslist = collections.posts | head(-1 * numberOfLatestPostsToShow) %}
-{% set postslistCounter = postsCount %} {% include "postslist.njk" %} {% set
-morePosts = postsCount - numberOfLatestPostsToShow %} {% if morePosts > 0 %}
-<p>
-	{{ morePosts }} more post{% if morePosts != 1 %}s{% endif %} can be found by
-	<a href="/explore/">exploring our content</a>.
-</p>
-{% endif %}
+{% include "postslist.njk" %}
 
-{# List every content page in the project #} {#
-<ul>
-	{%- for entry in collections.all %}
-	<li>
-		<a href="{{ entry.url }}"
-			><code>{{ entry.url }}</code></a
-		>
-	</li>
-	{%- endfor %}
-</ul>
-#}
+{% set morePosts = (collections.posts | length) - numberOfLatestPostsToShow %}
+{% if morePosts > 0 %}
+<p><a class="more-link" href="/explore/">See all {{ collections.posts | length }} posts →</a></p>
+{% endif %}

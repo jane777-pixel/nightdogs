@@ -1,564 +1,217 @@
 <!doctype html>
-<html lang="{{ metadata.language }}"{% if author %} data-author="{{ author }}"{% endif %}>
+{#- The author whose colours this page uses: the post's author, or the author
+    whose profile this is. Other pages use the reader's chosen theme. -#}
+{%- set pageAuthor = author if (author and authors[author]) else (authorKey if authorKey else "") -%}
+{%- set isPost = layout == "layouts/post.njk" -%}
+{%- set pageTitle = (title ~ " · " ~ metadata.title) if (title and page.url != "/") else metadata.title -%}
+{%- set pageDescription = description or excerpt or metadata.description -%}
+{%- set canonicalUrl = page.url | absoluteUrl(metadata.url) -%}
+<html lang="{{ metadata.language }}"{% if pageAuthor %} data-author="{{ pageAuthor }}" data-page-author="{{ pageAuthor }}"{% endif %}>
 	<head>
- <script>
-        (function () {
-const THEME_KEY = "author-theme";
-const DEFAULT_THEME = "jane";
-if (document.documentElement.dataset.author) return;
-try {
-const savedTheme = localStorage.getItem(THEME_KEY) || DEFAULT_THEME;
-document.documentElement.setAttribute("data-author", savedTheme);
-} catch (e) {
-document.documentElement.setAttribute("data-author", DEFAULT_THEME);
-}
-        })();
-        </script>
-    <!-- <meta property="og:url" content="TODO" /> -->
-    <!-- <meta property="og:logo" content="TODO" /> -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="{{ title }}" />
-    <meta property="og:description" content="{{ description or metadata.description }}" />
-    {% if image %}
-        <meta property="og:image" content="{{ image | contentImgUrlFilter | absoluteUrl(metadata.url) }}" />
-    {% endif %}
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>{{ title or metadata.title }}</title>
-        <meta name="description" content="{{ description or metadata.description }}">
-        <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="{{ metadata.title }}">
-
-        <!-- Inline theme script to prevent FOUC -->
-
-        <!-- Load local fonts as a separate stylesheet -->
-        <link rel="stylesheet" href="/css/fonts.css">
-
-		{#- Render the CSS bundle using inlined CSS (for the fastest site performance in production) #}
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script>
-  window.AUTHORS_DOG_PERSON = {
-    {% for key, author in authors %}
-      "{{ key }}": {{ author.isDogPerson | default(false) | dump }}{% if not loop.last %},{% endif %}
-    {% endfor %}
-  };
-</script>
+			// Apply the saved theme before anything is drawn (no flash of the wrong colours)
+			(function () {
+				var root = document.documentElement;
+				try {
+					if (!root.dataset.author) root.dataset.author = localStorage.getItem("author-theme") || "jane";
+					var dark = localStorage.getItem("nightdogs-dark-mode");
+					if (dark === "true") root.dataset.theme = "dark";
+					else if (dark === "false") root.dataset.theme = "light";
+				} catch (e) {
+					if (!root.dataset.author) root.dataset.author = "jane";
+				}
+			})();
+		</script>
+		<title>{{ pageTitle }}</title>
+		<meta name="description" content="{{ pageDescription | striptags | truncate(200) }}">
+		<link rel="canonical" href="{{ canonicalUrl }}">
+
+		{#- Link previews (Open Graph / social) #}
+		<meta property="og:site_name" content="{{ metadata.title }}">
+		<meta property="og:title" content="{{ title or metadata.title }}">
+		<meta property="og:description" content="{{ pageDescription | striptags | truncate(200) }}">
+		<meta property="og:url" content="{{ canonicalUrl }}">
+		<meta property="og:locale" content="en_CA">
+		{%- if isPost %}
+		<meta property="og:type" content="article">
+		<meta property="article:published_time" content="{{ page.date | htmlDateString }}">
+		{%- if authors[author] %}<meta property="article:author" content="{{ authors[author].name }}">{% endif %}
+		{%- else %}
+		<meta property="og:type" content="website">
+		{%- endif %}
+		{%- set socialImage = "" %}
+		{%- if isPost %}{% set socialImage = page.inputPath | socialImage(featuredImage or image) %}{% endif %}
+		{%- if socialImage %}
+		<meta property="og:image" content="{{ socialImage | absoluteUrl(metadata.url) }}">
+		<meta name="twitter:card" content="summary_large_image">
+		{%- else %}
+		<meta property="og:image" content="{{ '/img/icon-512.png' | absoluteUrl(metadata.url) }}">
+		<meta name="twitter:card" content="summary">
+		{%- endif %}
+
+		{#- Icons, app manifest and browser colours #}
+		<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+		<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+		<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+		<link rel="manifest" href="/manifest.json">
+		{%- set themeAuthor = authors[pageAuthor] or authors.jane %}
+		<meta name="theme-color" content="{{ themeAuthor.theme.light.background }}" media="(prefers-color-scheme: light)">
+		<meta name="theme-color" content="{{ themeAuthor.theme.dark.background }}" media="(prefers-color-scheme: dark)">
+
+		{#- Feeds #}
+		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="{{ metadata.title }} — all posts">
+		{%- if pageAuthor %}
+		<link rel="alternate" href="/feed/{{ pageAuthor }}.xml" type="application/atom+xml" title="{{ metadata.title }} — posts by {{ authors[pageAuthor].name }}">
+		{%- endif %}
+
+		<link rel="stylesheet" href="/css/fonts.css">
+		<link rel="stylesheet" href="/css/print.css" media="print">
+		{%- if isPost %}
+		<link rel="stylesheet" href="/css/webmentions.css">
+		{%- endif %}
+
+		<script>
+			window.NIGHTDOGS_DOG_PEOPLE = {
+				{%- for key, person in authors %}
+				{{ key | dump | safe }}: {{ person.isDogPerson | default(false) | dump }}{% if not loop.last %},{% endif %}
+				{%- endfor %}
+			};
+		</script>
 
 		{% css %}
-
-{# --- 2. Root and author variables (before any CSS uses them) --- #}
-	:root {
-  	--font-family: "Bitcount Grid Single", "Segoe UI", "Roboto", "Helvetica Neue", Arial, "Liberation Sans", sans-serif;
-   	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
-    --syntax-tab-size: 2;
-  --background-color: #ffd6e0;
-  --color: #8b0020;
-  --primary: #b8002e;
-  --muted-color: #6d0015;
-  {%- for author, data in authors | dictsort %}
-    /* Author: {{ author }} */
-    --author-{{ author }}-background: {{ data.theme.light.background }};
-    --author-{{ author }}-color: {{ data.theme.light.color }};
-    --author-{{ author }}-primary: {{ data.theme.light.primary }};
-    --author-{{ author }}-muted: {{ data.theme.light.muted }};
-    --author-{{ author }}-font-body: {{ data.theme.fonts.body|default('inherit')|safe }};
-    --author-{{ author }}-font-header: {{ data.theme.fonts.header|default('inherit')|safe }};
-    {%- if data.theme.fonts.mono %}
-    --author-{{ author }}-font-mono: {{ data.theme.fonts.mono|safe }};
-    {%- endif %}
-  {%- endfor %}
+/* ---- Author themes, generated from _data/authors.json ---------------- */
+:root {
+{%- for key, person in authors | dictsort %}
+	--author-{{ key }}-background: {{ person.theme.light.background }};
+	--author-{{ key }}-color: {{ person.theme.light.color }};
+	--author-{{ key }}-primary: {{ person.theme.light.primary }};
+	--author-{{ key }}-muted: {{ person.theme.light.muted }};
+	--{{ key }}-primary: var(--author-{{ key }}-primary);
+{%- endfor %}
 }
-/* Dark mode support for each author */
-{%- for author, data in authors | dictsort %}
-[data-author="{{ author }}"][data-theme="dark"] {
-  --author-{{ author }}-background: {{ data.theme.dark.background }};
-  --author-{{ author }}-color: {{ data.theme.dark.color }};
-  --author-{{ author }}-primary: {{ data.theme.dark.primary }};
-  --author-{{ author }}-muted: {{ data.theme.dark.muted }};
+{%- for key, person in authors | dictsort %}
+:root[data-author="{{ key }}"] {
+	--background-color: {{ person.theme.light.background }};
+	--color: {{ person.theme.light.color }};
+	--primary: {{ person.theme.light.primary }};
+	--muted-color: {{ person.theme.light.muted }};
+	--font-body: {{ person.theme.fonts.body | default("inherit") | safe }};
+	--font-heading: {{ person.theme.fonts.header | default(person.theme.fonts.body) | default("inherit") | safe }};
+	{%- if person.theme.fonts.mono %}
+	--font-mono: {{ person.theme.fonts.mono | safe }};
+	{%- endif %}
+	color-scheme: light;
 }
 {%- endfor %}
-
+{%- macro darkTheme(authors) %}
+	{%- for key, person in authors | dictsort %}
+	:root[data-author="{{ key }}"]SELECTOR {
+		--background-color: {{ person.theme.dark.background }};
+		--color: {{ person.theme.dark.color }};
+		--primary: {{ person.theme.dark.primary }};
+		--muted-color: {{ person.theme.dark.muted }};
+		color-scheme: dark;
+	}
+	{%- endfor %}
+	:rootSELECTOR {
+	{%- for key, person in authors | dictsort %}
+		--author-{{ key }}-background: {{ person.theme.dark.background }};
+		--author-{{ key }}-color: {{ person.theme.dark.color }};
+		--author-{{ key }}-primary: {{ person.theme.dark.primary }};
+		--author-{{ key }}-muted: {{ person.theme.dark.muted }};
+	{%- endfor %}
+	}
+{%- endmacro %}
+/* Dark mode: follows the device unless the reader picked light or dark */
 @media (prefers-color-scheme: dark) {
-  :root {
-    {%- for author, data in authors | dictsort %}
-      /* Author: {{ author }} */
-      --author-{{ author }}-background: {{ data.theme.dark.background }};
-      --author-{{ author }}-color: {{ data.theme.dark.color }};
-      --author-{{ author }}-primary: {{ data.theme.dark.primary }};
-      --author-{{ author }}-muted: {{ data.theme.dark.muted }};
-    {%- endfor %}
-  }
+{{ darkTheme(authors) | replace("SELECTOR", ':not([data-theme="light"])') | safe }}
 }
+{{ darkTheme(authors) | replace("SELECTOR", '[data-theme="dark"]') | safe }}
 
-{# --- 3. Pico and your main CSS (these will now use the variables above) --- #}
 {% include "css/index.css" %}
+		{% endcss %}
+		<style>{% getBundle "css" %}</style>
 
-/* Search functionality styles */
-.search-overlay {
-	display: none;
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
-	background: rgba(0, 0, 0, 0.8);
-	z-index: 10000;
-	backdrop-filter: blur(4px);
-}
-
-.search-overlay.active {
-	display: flex !important;
-	align-items: flex-start;
-	justify-content: center;
-	padding-top: 10vh;
-}
-
-.search-modal {
-	background: var(--background-color);
-	border: 2px solid var(--primary);
-	border-radius: 8px;
-	width: 90%;
-	max-width: 600px;
-	max-height: 70vh;
-	overflow: hidden;
-	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-}
-
-.search-header {
-	display: flex;
-	align-items: center;
-	padding: 1rem;
-	border-bottom: 1px solid var(--primary);
-}
-
-#search-input {
-	flex: 1;
-	border: none;
-	background: transparent;
-	font-size: 1.2rem;
-	color: var(--color);
-	outline: none;
-	font-family: var(--font-family);
-}
-
-#search-input::placeholder {
-	color: var(--muted-color);
-	opacity: 0.7;
-}
-
-.search-close {
-	background: none;
-	border: none;
-	color: var(--color);
-	cursor: pointer;
-	padding: 0.5rem;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	border-radius: 4px;
-}
-
-.search-close:hover {
-	background-color: var(--primary);
-	color: var(--background-color);
-}
-
-.search-results {
-	max-height: 400px;
-	overflow-y: auto;
-	padding: 0;
-}
-
-.search-result {
-	padding: 1rem;
-	border-bottom: 1px solid var(--muted-color);
-	cursor: pointer;
-	transition: background-color 0.2s ease;
-}
-
-.search-result:hover {
-	background-color: var(--primary);
-	color: var(--background-color);
-}
-
-.search-result:hover * {
-	color: inherit;
-}
-
-.result-title {
-	margin: 0 0 0.5rem 0;
-	font-size: 1.1rem;
-	font-family: var(--font-family);
-}
-
-.result-title a {
-	color: inherit;
-	text-decoration: none;
-}
-
-.result-meta {
-	display: flex;
-	gap: 1rem;
-	align-items: center;
-	font-size: 0.85rem;
-	opacity: 0.8;
-	margin-bottom: 0.5rem;
-}
-
-.search-footer {
-	padding: 0.75rem 1rem;
-	background: var(--muted-color);
-	color: var(--background-color);
-	font-size: 0.8rem;
-	display: flex;
-	gap: 1rem;
-	align-items: center;
-}
-
-.search-footer kbd {
-	background: rgba(255, 255, 255, 0.2);
-	padding: 0.2rem 0.4rem;
-	border-radius: 3px;
-	font-family: monospace;
-	font-size: 0.75rem;
-}
-
-.no-results {
-	padding: 2rem;
-	text-align: center;
-	opacity: 0.7;
-}
-
-.search-overlay mark {
-	background: var(--primary);
-	color: var(--background-color);
-	padding: 0.1rem 0.2rem;
-	border-radius: 2px;
-}
-
-/* Mobile Navigation Styles */
-.mobile-menu-toggle {
-	display: none;
-	background: none;
-	border: none;
-	color: var(--color);
-	cursor: pointer;
-	padding: 0.5rem;
-	flex-direction: column;
-	gap: 0.25rem;
-	border-radius: 4px;
-}
-
-.hamburger-line {
-	display: block;
-	width: 20px;
-	height: 2px;
-	background: var(--color);
-	transition: all 0.3s ease;
-	transform-origin: center;
-}
-
-.mobile-menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(1) {
-	transform: rotate(45deg) translate(5px, 5px);
-}
-
-.mobile-menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(2) {
-	opacity: 0;
-}
-
-.mobile-menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(3) {
-	transform: rotate(-45deg) translate(7px, -6px);
-}
-
-@media (max-width: 768px) {
-	.search-modal {
-		width: 95%;
-		max-height: 80vh;
-	}
-	.search-overlay.active {
-		padding-top: 5vh;
-	}
-
-	header {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		position: relative;
-	}
-
-	.mobile-menu-toggle {
-		display: flex;
-		z-index: 1000;
-	}
-
-	#main-nav {
-		position: absolute;
-		top: 100%;
-		left: 0;
-		right: 0;
-		background: var(--background-color);
-		border: 2px solid var(--primary);
-		border-radius: 8px;
-		margin-top: 0.5rem;
-		max-height: 0;
-		overflow: hidden;
-		opacity: 0;
-		transform: translateY(-10px);
-		transition: all 0.3s ease;
-		z-index: 999;
-	}
-
-	#main-nav.nav-open {
-		max-height: 400px;
-		opacity: 1;
-		transform: translateY(0);
-		box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-	}
-
-	.nav {
-		flex-direction: column;
-		padding: 1rem;
-		gap: 0.75rem;
-	}
-
-	.nav-item {
-		width: 100%;
-	}
-
-	.nav-item a, .nav-item button, .nav-item div {
-		width: 100%;
-		display: block;
-		text-align: center;
-		padding: 0.75rem;
-		border-radius: 4px;
-		transition: background-color 0.2s ease;
-	}
-
-	.nav-item a:hover, .nav-item button:hover {
-		background: var(--primary);
-		color: var(--background-color);
-	}
-
-	.nav-item div {
-		justify-content: center;
-		padding: 0.5rem;
-	}
-
-	#author-select {
-		width: auto;
-		min-width: 120px;
-	}
-}
-
-{% endcss %}
-<style>{% getBundle "css" %}</style>
-
-		{#- Add the heading-anchors web component to the JavaScript bundle #}
+		{#- Heading anchor links #}
 		<script type="module">{% include "node_modules/@zachleat/heading-anchors/heading-anchors.js" %}</script>
 
-        <!-- IndieAuth endpoints -->
-        <link rel="authorization_endpoint" href="https://indieauth.com/auth">
-        <link rel="token_endpoint" href="https://tokens.indieauth.com/token">
-
-        <!-- Identity verification -->
-        <link rel="me" href="https://github.com/jane777-pixel">
-        <link rel="me" href="mailto:haileebach@gmail.com">
+		{#- IndieWeb: sign-in, identity and webmentions #}
+		<link rel="authorization_endpoint" href="https://indieauth.com/auth">
+		<link rel="token_endpoint" href="https://tokens.indieauth.com/token">
+		<link rel="me" href="https://github.com/jane777-pixel">
+		<link rel="me" href="mailto:haileebach@gmail.com">
 		<link rel="me" href="mailto:orionlw@pm.me">
 		<link rel="me" href="https://github.com/orionlw">
+		<link rel="webmention" href="https://webmention.io/nightdogs.xyz/webmention">
+		<link rel="pingback" href="https://webmention.io/nightdogs.xyz/xmlrpc">
+	</head>
+	<body class="h-card">
+		<a href="#main" class="skip-link">Skip to content</a>
 
-        <!-- Webmention endpoints -->
-        <link rel="webmention" href="https://webmention.io/nightdogs.xyz/webmention">
-        <link rel="pingback" href="https://webmention.io/nightdogs.xyz/xmlrpc">
-    </head>
-    <body class="h-card" {% if layout == "layouts/post.njk" %}data-is-post="true"{% endif %}>
-        <div class="site-wrapper">
-        <a href="#main" id="skip-link" class="visually-hidden">Skip to main content</a>
+		<header class="site-header">
+			<div class="site-header__inner">
+				<a href="/" class="site-title p-name u-url" rel="home">nightdogs</a>
 
-		<header>
-			<a href="/" class="home-link p-name u-url">nightdogs</a>
+				<button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu">
+					<span class="menu-toggle__bars" aria-hidden="true"></span>
+					<span class="menu-toggle__label">Menu</span>
+				</button>
 
-			<button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
-				<span class="hamburger-line"></span>
-				<span class="hamburger-line"></span>
-				<span class="hamburger-line"></span>
-			</button>
+				<div class="site-menu" id="site-menu">
+					<nav class="site-nav" aria-label="Main">
+						<ul>
+						{%- for entry in collections.all | eleventyNavigation %}
+							<li><a href="{{ entry.url }}"{% if entry.url == page.url %} aria-current="page"{% endif %}{% if entry.url == "/cat/" %} data-cat-link{% endif %}>{{ entry.title }}</a></li>
+						{%- endfor %}
+						</ul>
+					</nav>
 
-			{#- Read more about `eleventy-navigation` at https://www.11ty.dev/docs/plugins/navigation/ #}
-			<nav id="main-nav">
-				<h2 class="visually-hidden">Top level navigation menu</h2>
-				<ul class="nav">
-				{%- for entry in collections.all | eleventyNavigation %}
-					<li class="nav-item"><a href="{{ entry.url }}"{% if entry.url == page.url %} aria-current="page"{% endif %}>{{ entry.title }}</a></li>
-				{%- endfor %}
-					<li class="nav-item">
-						<button data-search-trigger style="background:none;border:none;color:var(--color);cursor:pointer;padding:0.5rem;border-radius:4px;" aria-label="Search posts">
-							🔍 Search
+					<div class="site-tools">
+						<button type="button" class="tool-button" data-search-trigger>
+							<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+							<span>Search</span>
 						</button>
-					</li>
-					<li class="nav-item">
-						<div style="display:flex;align-items:center;gap:0.5em;">
-							<button id="dark-mode-toggle" style="background:none;border:none;color:var(--color);cursor:pointer;padding:0.25rem;border-radius:4px;font-size:1.2em;" aria-label="Toggle dark mode">
-								🌙
-							</button>
-							<select id="author-select" class="author-sync" name="author-select" style="background:none;border:1px solid var(--color);color:var(--color);min-width:6em;font-size:0.92em;padding:0.25em 0.5em;border-radius:4px;" aria-label="Select author theme">
-								<option value="jane">Jane</option>
-								<option value="orionlw">Orion</option>
-								<option value="adesse">Adèsse</option>
-								<option value="nic">Nic</option>
-								<option value="amelia">Amelia</option>
-								<option value="abby">Abby</option>
-								<option value="ewan">Ewan</option>
+						<button type="button" class="tool-button" id="dark-mode-toggle" aria-pressed="false">
+							<span data-icon aria-hidden="true">☾</span>
+							<span>Dark mode</span>
+						</button>
+						<label class="theme-picker">
+							<span>Colours</span>
+							<select id="author-select" class="author-sync" name="author-select">
+							{%- for key, person in authors %}
+								<option value="{{ key }}">{{ person.name | firstName }}</option>
+							{%- endfor %}
 							</select>
-						</div>
-					</li>
-				</ul>
-			</nav>
+						</label>
+					</div>
+				</div>
+			</div>
 		</header>
 
-		<main id="main" class="main-content">
+		<main id="main" class="site-main" tabindex="-1">
 			<heading-anchors>
 				{{ content | safe }}
 			</heading-anchors>
 		</main>
 
-		<footer class="p-note footer-site">
-  <p>
-    <em>Built with <a href="https://www.11ty.dev/">Eleventy v3.1.2</a></em>
-  </p>
-</footer>
-        </div>
-		<!-- This page `{{ page.url }}` was built on {% currentBuildDate %} -->
-		<script type="module" src="{% getBundleFileUrl "js" %}"></script>
+		<footer class="site-footer">
+			<nav aria-label="Footer">
+				<ul>
+					<li><a href="/explore/">All posts</a></li>
+					<li><a href="/authors/">Authors</a></li>
+					<li><a href="/feeds/">RSS feeds</a></li>
+					<li><a href="/admin/">Write</a></li>
+				</ul>
+			</nav>
+			<p class="site-footer__note">nightdogs are hotdogs you eat in the middle of the night.</p>
+		</footer>
 
-		<!-- Load search functionality -->
+		<script src="/js/site.js" defer></script>
 		<script src="/js/search.js" defer></script>
-
-        <!-- Dark mode functionality -->
-        <script eleventy:ignore>
-        document.addEventListener('DOMContentLoaded', function() {
-          const toggle = document.getElementById('dark-mode-toggle');
-          if (!toggle) return;
-
-          let isDark = false;
-          try {
-            const saved = localStorage.getItem('nightdogs-dark-mode');
-            isDark = saved === 'true' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches);
-          } catch(e) {}
-
-          function updateToggle() {
-            toggle.innerHTML = isDark ? '☀️' : '🌙';
-            document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
-            try { localStorage.setItem('nightdogs-dark-mode', isDark); } catch(e) {}
-          }
-
-          toggle.addEventListener('click', function() {
-            isDark = !isDark;
-            updateToggle();
-          });
-
-          updateToggle();
-        });
-
-        // Mobile navigation toggle
-        const mobileToggle = document.querySelector('.mobile-menu-toggle');
-        const mainNav = document.getElementById('main-nav');
-
-        if (mobileToggle && mainNav) {
-          mobileToggle.addEventListener('click', function() {
-            const isOpen = mainNav.classList.contains('nav-open');
-            const newState = !isOpen;
-
-            mainNav.classList.toggle('nav-open', newState);
-            mobileToggle.setAttribute('aria-expanded', newState.toString());
-
-            // Close menu when clicking outside
-            if (newState) {
-              setTimeout(() => {
-                document.addEventListener('click', function closeMenu(e) {
-                  if (!mainNav.contains(e.target) && !mobileToggle.contains(e.target)) {
-                    mainNav.classList.remove('nav-open');
-                    mobileToggle.setAttribute('aria-expanded', 'false');
-                    document.removeEventListener('click', closeMenu);
-                  }
-                });
-              }, 100);
-            }
-          });
-
-          // Close mobile menu when window is resized to desktop
-          window.addEventListener('resize', function() {
-            if (window.innerWidth > 768) {
-              mainNav.classList.remove('nav-open');
-              mobileToggle.setAttribute('aria-expanded', 'false');
-            }
-          });
-        }
-        </script>
-
-        <script eleventy:ignore>
-        // Sync all author selectors and theme
-        (function() {
-          const authorSelectors = document.querySelectorAll('.author-sync');
-          const siteWrapper = document.querySelector('.site-wrapper');
-          const html = document.documentElement;
-
-          function setThemeByAuthor(author) {
-            document.body.classList.remove(...Array.from(document.body.classList).filter(c => c.startsWith('author-selected-')));
-            if (author && author !== "all") {
-              document.body.classList.add(`author-selected-${author}`);
-              document.body.setAttribute('data-author', author);
-              if (siteWrapper) siteWrapper.setAttribute('data-author', author);
-              html.setAttribute('data-author', author);
-              try { localStorage.setItem('author-theme', author); } catch(e){}
-            } else {
-              document.body.setAttribute('data-author', 'jane');
-              if (siteWrapper) siteWrapper.setAttribute('data-author', 'jane');
-              html.setAttribute('data-author', 'jane');
-              try { localStorage.setItem('author-theme', 'jane'); } catch(e){}
-            }
-          }
-
-          function syncAuthorSelectors(author) {
-            authorSelectors.forEach(sel => {
-              if (sel.value !== author) sel.value = author;
-            });
-            setThemeByAuthor(author);
-            // If on blog archive, trigger post filtering
-            if (typeof filterPosts === "function") filterPosts();
-          }
-
-          authorSelectors.forEach(sel => {
-            sel.addEventListener('change', function() {
-              syncAuthorSelectors(this.value);
-            });
-          });
-
-          // On page load, sync selectors to localStorage or default
-          let initialAuthor = "jane";
-          try {
-            const saved = localStorage.getItem('author-theme');
-            if (saved) initialAuthor = saved;
-          } catch(e){}
-          syncAuthorSelectors(initialAuthor);
-        })();
-        </script>
-        <script eleventy:ignore>
-        function updateCatNavText() {
-          const author = document.documentElement.getAttribute('data-author');
-          // Find the nav link for the Cat page (assumes href contains 'cat')
-          const navLinks = document.querySelectorAll('.nav-item a');
-          navLinks.forEach(link => {
-            if (link.getAttribute('href') && link.getAttribute('href').includes('cat')) {
-            link.textContent = window.AUTHORS_DOG_PERSON?.[author] === true ? 'Dog' : 'Cat';
-            }
-          });
-        }
-
-        // Run on page load
-        updateCatNavText();
-
-        // Listen for author changes
-        const navObserver = new MutationObserver(updateCatNavText);
-        navObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-author'] });
-        </script>
-
-    </body>
+		{%- if isPost %}
+		<script src="/js/lightbox.js" defer></script>
+		{%- endif %}
+	</body>
 </html>

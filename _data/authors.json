@@ -35,7 +35,7 @@
 				"muted": "#ffd6e0"
 			},
 			"fonts": {
-				"body": "\"Bitcount Grid Single\", \"Segoe UI\", sans-serif",
+				"body": "\"Fira Sans\", system-ui, sans-serif",
 				"header": "\"Bitcount Grid Single\", \"Segoe UI\", sans-serif"
 			}
 		}
@@ -50,7 +50,7 @@
 			"light": {
 				"background": "#e6ffe6",
 				"color": "#0d3a0d",
-				"primary": "#1e7e1e",
+				"primary": "#1d7a1d",
 				"muted": "#0a2a0a"
 			},
 			"dark": {
@@ -75,7 +75,7 @@
 			"light": {
 				"background": "#624f4c",
 				"color": "#ffffff",
-				"primary": "#deb8c4",
+				"primary": "#e7cbd4",
 				"muted": "#f0e6e7"
 			},
 			"dark": {
@@ -138,9 +138,9 @@
 			},
 			"dark": {
 				"background": "#2b59c4",
-				"color": "#dced5a",
-				"primary": "#2db1b5",
-				"muted": "#b6e37c"
+				"color": "#e1f071",
+				"primary": "#c2eff0",
+				"muted": "#d5efb4"
 			},
 			"fonts": {
 				"body": "\"Fira Sans\", sans-serif",
@@ -170,8 +170,8 @@
 			"light": {
 				"background": "#faf0e6",
 				"color": "#1c343c",
-				"primary": "#2563eb",
-				"muted": "#64748b"
+				"primary": "#1759ea",
+				"muted": "#59677b"
 			},
 			"dark": {
 				"background": "#1c343c",
@@ -199,7 +199,7 @@
 			"light": {
 				"background": "#92cbff",
 				"color": "#0a1a2a",
-				"primary": "#2563eb",
+				"primary": "#1042ae",
 				"muted": "#1e3a8a"
 			},
 			"dark": {

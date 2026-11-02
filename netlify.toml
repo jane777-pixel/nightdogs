@@ -20,6 +20,12 @@ from = "/blog/"
 to = "/explore/"
 status = 301
 
+# Explore used to be split across pages; it's one page now
+[[redirects]]
+from = "/explore/:page/"
+to = "/explore/"
+status = 301
+
 [[redirects]]
 from = "/tags/"
 to = "/explore/"

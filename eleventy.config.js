@@ -11,8 +11,8 @@ import { DateTime } from "luxon";
 import pluginFilters from "./_config/filters.js";
 import pluginRelatedPosts from "./_config/related-posts.js";
 import markdownPhotos from "./_config/markdown.js";
-import path from "node:path";
-import Image from "@11ty/eleventy-img";
+import pluginImages from "./_config/images.js";
+import tagDescriptions from "./_data/tag-descriptions.json" with { type: "json" };
 
 /** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
 export default async function (eleventyConfig) {
@@ -59,13 +59,6 @@ export default async function (eleventyConfig) {
 		bundleHtmlContentFromSelector: "style",
 	});
 
-	// Bundle <script> content and adds a {% js %} paired shortcode
-	eleventyConfig.addBundle("js", {
-		toFileDirectory: "dist",
-		// Add all <script> content to the `js` bundle (use <script eleventy:ignore> to opt-out)
-		// Supported selectors: https://www.npmjs.com/package/posthtml-match-helper
-		bundleHtmlContentFromSelector: "script",
-	});
 
 	// Official plugins
 	eleventyConfig.addPlugin(pluginSyntaxHighlight, {
@@ -79,12 +72,6 @@ export default async function (eleventyConfig) {
 		type: "atom", // or "rss", "json"
 		outputPath: "/feed/feed.xml",
 		stylesheet: "pretty-atom-feed.xsl",
-		templateData: {
-			eleventyNavigation: {
-				key: "Feed",
-				order: 5,
-			},
-		},
 		collection: {
 			name: "posts",
 			limit: 10,
@@ -136,9 +123,13 @@ export default async function (eleventyConfig) {
 		});
 	}
 
+	// _data/tag-descriptions.json, under a name templates can use
+	eleventyConfig.addGlobalData("tagDescriptions", tagDescriptions);
+
 	// Filters
 	eleventyConfig.addPlugin(pluginFilters);
 	eleventyConfig.addPlugin(pluginRelatedPosts);
+	eleventyConfig.addPlugin(pluginImages);
 
 	eleventyConfig.addPlugin(IdAttributePlugin, {
 		// by default we use Eleventy’s built-in `slugify` filter:
@@ -150,7 +141,6 @@ export default async function (eleventyConfig) {
 		return new Date().toISOString();
 	});
 
-	eleventyConfig.addFilter("contentImgUrlFilter", contentImgUrlFilter);
 
 	// Add dateToFormat filter
 	eleventyConfig.addFilter("dateToFormat", (dateObj, format) => {
@@ -230,19 +220,3 @@ export const config = {
 
 	// pathPrefix: "/",
 };
-
-// Builds a 1200px JPEG for Open Graph previews from an image path that is
-// relative to the current page. See https://github.com/11ty/eleventy-img/issues/278
-async function contentImgUrlFilter(src) {
-	if (!src) return "";
-	if (/^https?:\/\//.test(src)) return src;
-	const inputDir = path.dirname(this.page.inputPath);
-	const stats = await Image(path.resolve(inputDir, src), {
-		widths: [1200],
-		formats: ["jpeg"],
-		outputDir: path.dirname(this.page.outputPath),
-		urlPath: this.page.url,
-		filenameFormat: (hash, src, width, format) => `${hash}-${width}.${format}`,
-	});
-	return stats.jpeg[0].url;
-}
