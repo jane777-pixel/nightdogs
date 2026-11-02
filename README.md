@@ -1,6 +1,5 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/9b93ae7e-e489-4786-b348-7f45b2325627/deploy-status)](https://app.netlify.com/projects/nightdogs/deploys)
 
-a
 
 # nightdogs.xyz
 
@@ -8,20 +7,21 @@ The source code for the blog at nightdogs.xyz. Built with [Eleventy](https://www
 
 This project was originally forked from [eleventy-base-blog](https://github.com/11ty/eleventy-base-blog).
 
-## Developer Workflows
+## Writing posts
 
-- **Build:** `npm run build` (or `npx eleventy`)
-- **Serve locally:** `npm start` (or `npx eleventy --serve`)
-- **Deploy:** Push to main; Netlify auto-deploy.
-- **Add author:** Update `_data/authors.json` and add theme CSS if needed.
-- **Add post:** Place markdown/Nunjucks file in `content/blog/<author>/<date>/<slug>/`.
+Use the editor at **https://nightdogs.xyz/admin/** (sign in with GitHub).
+See [docs/CMS.md](docs/CMS.md) for how photos, captions and layouts work.
 
-## Project-Specific Conventions
+## Developer workflows
 
-- **Author slugs** must match those in `authors.json` and theme selectors.
-- **Custom filters**: Add to `_config/filters.js` and register in `eleventy.config.js`.
-- **Webmentions:** Data and templates in `_data/webmentions.js` and `_includes/webmentions.njk`.
-- **No direct edits** in `_site/`—always edit source files.
+- **Serve locally:** `npm start` (http://localhost:8080)
+- **Build:** `npm run build`
+- **Test:** `npm test` (build + content validation)
+- **Deploy:** push to `main`; Netlify builds automatically.
+- **Add author:** add them to `_data/authors.json` and the Author list in
+  `public/admin/config.yml`. Their colours are generated from the JSON.
+
+More detail for developers is in [CLAUDE.md](CLAUDE.md).
 
 ## Blog Post Folder Structure & Content Guidelines
 
@@ -48,33 +48,33 @@ Each post must have a YAML frontmatter block at the top of `index.md`:
 ```yaml
 ---
 title: Post Title
-slug: post-title
-date: YYYY-MM-DDTHH:MM:SS.000Z # ISO format, matches folder date
+date: YYYY-MM-DDTHH:MM:SS.000-03:00 # ISO format, matches folder date
 author: author-slug # Must match an entry in authors.json
-tags:
-  - posts # Always include 'posts' tag
-  # ...other tags as needed
+photoLayout: grid # optional: column (default) or grid
+tags: # optional; 'posts' is added automatically
+  - pictures
 ---
 ```
 
 - `title`: The title of the post.
-- `slug`: The URL slug (should match the folder name).
 - `date`: Publish date/time in ISO format (should match folder date).
 - `author`: Author slug (must match `_data/authors.json`).
-- `tags`: List of tags. Must include `posts`.
+- `photoLayout`: `grid` shows photos as thumbnails; `column` (default) shows them full width.
+- `tags`: Optional list of tags.
 
 ### Tags
 
-- Every post must have the `posts` tag.
-- Add additional tags as needed (e.g., `knitting`, `music`, `swimming`).
+- The `posts` tag is added automatically.
+- Add tags as needed (e.g., `knitting`, `music`, `swimming`).
 - Tags are used for filtering and tag pages.
 
 ### Images
 
 - Place all images for a post in the same folder as the post's `index.md`.
 - Reference images in markdown using relative paths:
-  - `![alt text](./my-image.jpg)`
-- Images are published to `/img/` via the Netlify CMS media settings.
+  - `![alt text](./my-image.jpg "optional caption")`
+- The text in quotes becomes a caption under the photo.
+- Photos are resized and converted to WebP automatically when the site builds.
 
 ### Example Post Folder
 
@@ -87,25 +87,18 @@ content/blog/jane/2025-07-22/first-post/
 
 ### Additional Notes
 
-- The folder and frontmatter structure is enforced by Netlify CMS (`public/admin/config.yml`).
-- Only use author slugs and tags defined in the config and `_data/authors.json`.
-- For more, see the [Netlify CMS config](public/admin/config.yml) and [authors.json](_data/authors.json).
+- The folder and front matter structure is set by the CMS (`public/admin/config.yml`).
+- Only use author slugs defined in `_data/authors.json`.
 
 ## Fonts
 
-The following fonts are available for use in this project (see `public/css/fonts.css`):
-
-- **Bellefair**
-- **Bitcount Grid Single**
-- **Jacquard 12**
-- **EB Garamond** (weights: 400, 500, 600, 700, 800; styles: normal, italic)
-- **Fira Sans** (weights: 100, 200, 300, 500; styles: normal, italic)
-
-To use a font in your templates or CSS, reference its `font-family` name as listed above.
-
+Self-hosted in `public/fonts` and declared in `public/css/fonts.css`:
+Bellefair, Bitcount Grid Single, Jacquard 12, Quicksand, EB Garamond
+(400, 600, 700), Fira Sans (400, 600, 700) and Montserrat (400, 600, 700).
+Authors pick their fonts in `_data/authors.json`.
 
 ## TODO
 
 - [x] Make Nic an author
-- [x] Fix CMS authentication
+- [x] Fix CMS authentication (moved to Sveltia CMS + GitHub sign-in)
 - [ ] Add Dog page for Adesse

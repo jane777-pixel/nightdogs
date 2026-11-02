@@ -28,10 +28,13 @@ export function testBuildProcess() {
     // Verify essential files exist
     const requiredFiles = [
       '_site/index.html',
-      '_site/blog/index.html',
+      '_site/explore/index.html',
+      '_site/authors/index.html',
       '_site/feed/feed.xml',
-      '_site/feeds.html',
-      '_site/search-index.json'
+      '_site/feeds/index.html',
+      '_site/search-index.json',
+      '_site/admin/index.html',
+      '_site/admin/config.yml'
     ];
 
     console.log('   Checking required files...');

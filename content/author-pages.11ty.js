@@ -116,7 +116,7 @@ export default class AuthorPages {
 .author-stat {
   text-align: center;
   padding: 1rem;
-  background: rgba(255, 255, 255, 0.8);
+  background: var(--surface);
   border: 1px solid var(--primary);
   border-radius: 8px;
   backdrop-filter: blur(10px);
