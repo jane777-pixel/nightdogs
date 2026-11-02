@@ -25,6 +25,17 @@ from = "/tags/"
 to = "/explore/"
 status = 301
 
+# Posts that moved when their files were tidied up
+[[redirects]]
+from = "/blog/jane/2026-03-06/sundogs/index-1/"
+to = "/blog/jane/2026-03-06/sundogs/"
+status = 301
+
+[[redirects]]
+from = "/blog/nic/2025-08-07/poisoned-by-my-enemies/index-1/"
+to = "/blog/nic/2025-08-07/poisoned-by-my-enemies/"
+status = 301
+
 # Fediverse (Bridgy Fed)
 [[redirects]]
 from = "/.well-known/host-meta*"

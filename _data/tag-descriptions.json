@@ -1,104 +1,119 @@
 {
   "tags": {
-    "technology": {
-      "description": "Posts about programming, web development, software, and digital innovation",
-      "icon": "💻",
-      "color": "#007acc"
-    },
     "music": {
-      "description": "Musical thoughts, album reviews, artist spotlights, and sonic explorations",
+      "description": "Songs, records, and sounds we've been making or listening to",
       "icon": "🎵",
-      "color": "#ff6b6b"
+      "color": "#c2185b"
     },
-    "life": {
-      "description": "Personal reflections, life experiences, and philosophical musings",
-      "icon": "🌱",
-      "color": "#4ecdc4"
+    "pictures": {
+      "description": "Mostly photos, light on words",
+      "icon": "📷",
+      "color": "#5e35b1"
     },
-    "creative": {
-      "description": "Art, design, creativity, and artistic processes and inspirations",
+    "fibre arts": {
+      "description": "Knitting, crochet, mending, weaving and other yarn business",
+      "icon": "🧶",
+      "color": "#ad1457"
+    },
+    "concrete": {
+      "description": "Casting, building and admiring concrete",
+      "icon": "🧱",
+      "color": "#546e7a"
+    },
+    "swimming": {
+      "description": "Lakes, oceans, pools and the joy of being in water",
+      "icon": "🏊",
+      "color": "#0277bd"
+    },
+    "cats": {
+      "description": "Cats, kittens, and the occasional barn cat",
+      "icon": "🐈",
+      "color": "#6d4c41"
+    },
+    "horses": {
+      "description": "Horses and the people who love them",
+      "icon": "🐎",
+      "color": "#8d6e63"
+    },
+    "farm animals": {
+      "description": "Sheep, goats, chickens and friends",
+      "icon": "🐑",
+      "color": "#558b2f"
+    },
+    "complaints": {
+      "description": "Things that are bugging us",
+      "icon": "😤",
+      "color": "#c62828"
+    },
+    "politics": {
+      "description": "The state of things",
+      "icon": "✊",
+      "color": "#b71c1c"
+    },
+    "capitalism": {
+      "description": "Notes from late capitalism",
+      "icon": "💸",
+      "color": "#4e342e"
+    },
+    "birthday": {
+      "description": "Birthdays and the celebrations around them",
+      "icon": "🎂",
+      "color": "#d81b60"
+    },
+    "art": {
+      "description": "Art we've made or seen",
       "icon": "🎨",
-      "color": "#ffe66d"
+      "color": "#6a1b9a"
     },
-    "personal": {
-      "description": "Individual stories, personal experiences, and intimate thoughts",
-      "icon": "💭",
-      "color": "#a8e6cf"
+    "painting": {
+      "description": "Paintings in progress and finished",
+      "icon": "🖌️",
+      "color": "#7b1fa2"
     },
-    "tutorial": {
-      "description": "Step-by-step guides, how-to articles, and educational content",
+    "folkart": {
+      "description": "Folk art, crafts and traditions",
+      "icon": "🪆",
+      "color": "#bf360c"
+    },
+    "reading": {
+      "description": "Books, zines and audiobooks",
       "icon": "📚",
-      "color": "#ffd93d"
+      "color": "#283593"
     },
-    "review": {
-      "description": "Reviews of books, movies, music, games, and other media",
-      "icon": "⭐",
-      "color": "#ff8b94"
+    "gardening": {
+      "description": "Things growing in the dirt",
+      "icon": "🌱",
+      "color": "#2e7d32"
     },
-    "travel": {
-      "description": "Adventures, destinations, and stories from around the world",
-      "icon": "✈️",
-      "color": "#74c0fc"
+    "baking": {
+      "description": "Bread, cakes and other oven projects",
+      "icon": "🥖",
+      "color": "#a1887f"
     },
-    "food": {
-      "description": "Culinary adventures, recipes, restaurant reviews, and food culture",
-      "icon": "🍽️",
-      "color": "#ffa94d"
+    "video": {
+      "description": "Posts with video",
+      "icon": "🎬",
+      "color": "#37474f"
     },
-    "gaming": {
-      "description": "Video games, board games, gaming culture, and interactive experiences",
-      "icon": "🎮",
-      "color": "#51cf66"
+    "trips": {
+      "description": "Going places",
+      "icon": "🧭",
+      "color": "#00695c"
     },
-    "books": {
-      "description": "Literary discussions, book reviews, reading recommendations, and bookish thoughts",
-      "icon": "📖",
-      "color": "#845ef7"
+    "friends": {
+      "description": "Hanging out with our people",
+      "icon": "🫶",
+      "color": "#e64a19"
     },
-    "photography": {
-      "description": "Visual storytelling, photo techniques, and captured moments",
-      "icon": "📸",
-      "color": "#fd7e14"
+    "eggs": {
+      "description": "Eggs, in all forms",
+      "icon": "🥚",
+      "color": "#f9a825"
     },
-    "nature": {
-      "description": "The outdoors, environmental topics, wildlife, and natural beauty",
-      "icon": "🌿",
-      "color": "#40c057"
-    },
-    "wellness": {
-      "description": "Mental health, self-care, fitness, and overall well-being",
-      "icon": "🧘",
-      "color": "#fab005"
-    },
-    "community": {
-      "description": "Social connections, group activities, and collective experiences",
-      "icon": "👥",
-      "color": "#339af0"
-    },
-    "thoughts": {
-      "description": "Random musings, shower thoughts, and spontaneous reflections",
-      "icon": "💡",
-      "color": "#f783ac"
-    },
-    "nightdogs": {
-      "description": "Meta posts about the nightdogs community and blog itself",
-      "icon": "🐕",
-      "color": "#495057"
-    },
-    "humor": {
-      "description": "Funny observations, jokes, and lighthearted content",
-      "icon": "😄",
-      "color": "#ffd43b"
-    },
-    "culture": {
-      "description": "Cultural commentary, social observations, and societal reflections",
-      "icon": "🏛️",
-      "color": "#e599f7"
-    },
-    "science": {
-      "description": "Scientific discoveries, research, and STEM-related discussions",
-      "icon": "🔬",
-      "color": "#20c997"
+    "baskets": {
+      "description": "Basket weaving and basket appreciation",
+      "icon": "🧺",
+      "color": "#8d6e63"
     }
   }
 }
